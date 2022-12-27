@@ -14,6 +14,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@hookform/resolvers": "^2.9.10",
+    "@types/react-slick": "^0.23.10",
     "antd": "^5.1.1",
     "apollo-upload-client": "^17.0.0",
     "axios": "^1.1.3",
