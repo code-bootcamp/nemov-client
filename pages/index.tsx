@@ -1,8 +1,17 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+// import { useRecoilState } from "recoil";
+// import { isOpenState } from "../src/commons/stores";
+// import OpenModalButton01 from "../src/components/commons/buttons/OpenModalButton01";
+// import CommonModal01 from "../src/components/commons/modals/CommonModal01";
 
 export default function Home() {
+  // const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+
+  // const OnToggleModal = () => {
+  //   setIsOpen((prev) => !prev);
+  // };
   return (
     <div className={styles.container}>
       <Head>
@@ -12,12 +21,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        {/* <CommonModal01
+          isOpen={isOpen}
+          OnToggleModal={OnToggleModal}
+        ></CommonModal01> */}
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
+        {/* <OpenModalButton01 title="열기" onClick={OnToggleModal} /> */}
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -60,12 +73,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
