@@ -15,8 +15,7 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  margin: 0 auto;
-  width: 80%;
+  width: 60%;
   display: flex;
   padding: 5rem;
   flex-direction: column;
