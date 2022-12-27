@@ -5,11 +5,10 @@ import { colorBase02 } from "../../../commons/styles/colorBases";
 interface IStyledModal01Props {
   isOpen: boolean;
   children: JSX.Element;
-  OnToggleModal: () => void;
+  onCancel: () => void;
 }
 
 const StyledModal01 = styled(Modal)`
-  width: 1000;
   .ant-modal-content {
     ${colorBase02}
     border-radius: 8px;
@@ -27,7 +26,7 @@ export default function CommonModal01(props: IStyledModal01Props) {
     <StyledModal01
       open={props.isOpen}
       destroyOnClose={false}
-      onCancel={props.OnToggleModal}
+      onCancel={props.onCancel}
     >
       {props.children}
     </StyledModal01>
