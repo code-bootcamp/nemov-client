@@ -1,34 +1,46 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
 import ReviewList from "../../src/components/units/restaurant-review/list/ReviewList.index";
 
 export default function RestaurantPage() {
   return (
-    <>
-      <MapWrapper>지도지도지도</MapWrapper>
-      <InfoWrapper>식당정보</InfoWrapper>
-      <ReviewWrapper>
-        <Title>식당 후기</Title>
-        <Link href="/restaurant/reviews/new">
-          <ReviewBtn>후기작성</ReviewBtn>
-        </Link>
-      </ReviewWrapper>
-      <ReviewList />
-    </>
+    <GlobalWrapper>
+      <InnerWrapper>
+        <MapWrapper>지도지도지도</MapWrapper>
+        <InfoWrapper>식당정보</InfoWrapper>
+        <ReviewWrapper>
+          <Title>식당 후기</Title>
+          <Link href="/restaurant/reviews/new">
+            <ReviewBtn>후기작성</ReviewBtn>
+          </Link>
+        </ReviewWrapper>
+        <ReviewList />
+      </InnerWrapper>
+    </GlobalWrapper>
   );
 }
 
+const InnerWrapper = styled.div`
+  width: 100%;
+  padding: 8rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const MapWrapper = styled.section`
-  width: 70%;
+  width: 100%;
   height: 40rem;
   border: 1px solid green;
   border-radius: 50px;
 `;
 
 const InfoWrapper = styled.section`
-  width: 70%;
-  height: 15rem;
+  width: 100%;
+  height: 12rem;
   border: 1px solid red;
+  margin: 2.5rem 0;
 `;
 
 const Title = styled.h3`
@@ -36,11 +48,12 @@ const Title = styled.h3`
 `;
 
 const ReviewWrapper = styled.section`
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2.5rem;
 `;
 
 const ReviewBtn = styled.a`
