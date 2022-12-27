@@ -1,27 +1,23 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
+  width: 1300px;
   display: flex;
   flex-direction: row;
 `;
 
 export const ImgWrapper = styled.div`
-  width: 55%;
+  width: 40%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("signup.jpg");
   background-size: cover;
   background-position: bottom;
 `;
 
-export const InnerWrapper = styled.div`
-  width: 50%;
-`;
-
 export const Form = styled.form`
-  margin: 0 auto;
-  width: 80%;
+  width: 60%;
   display: flex;
-  padding: 3rem 1.5rem;
+  padding: 5rem;
   flex-direction: column;
 `;
 
@@ -43,14 +39,13 @@ export const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-between;
   margin-top: 40px;
 `;
 
 export const Label = styled.p`
   width: 15%;
-  margin-top: 15px;
 `;
 
 export const Input = styled.input`
