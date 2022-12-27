@@ -12,6 +12,7 @@ export default function Home() {
   // const OnToggleModal = () => {
   //   setIsOpen((prev) => !prev);
   // };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,14 +22,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {/* <CommonModal01
-          isOpen={isOpen}
-          OnToggleModal={OnToggleModal}
-        ></CommonModal01> */}
+        {/* <CommonModal01 isOpen={isOpen} onCancel={OnToggleModal}></CommonModal01> */}
+
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        {/* <OpenModalButton01 title="열기" onClick={OnToggleModal} /> */}
+        {/* <OpenModalButton01 title="등록" onClick={OnToggleModal} /> */}
         <p className={styles.description}>
           Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>

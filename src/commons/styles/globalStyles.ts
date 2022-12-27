@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import styled from "@emotion/styled";
 
 export const globalStyles = css`
   * {
@@ -14,6 +15,11 @@ export const globalStyles = css`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  ul,
+  li {
+    list-style: none;
   }
 
   @font-face {
@@ -60,4 +66,9 @@ export const globalStyles = css`
     font-family: "SUIT-Thin";
     src: url("/fonts/SUIT-Thin.ttf");
   }
+`;
+
+export const GlobalWrapper = styled.div`
+  width: 100%;
+  max-width: 1300px;
 `;
