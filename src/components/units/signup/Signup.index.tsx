@@ -8,7 +8,7 @@ export default function Signup() {
       <S.InnerWrapper>
         <S.Form>
           <S.Title>회원가입</S.Title>
-          <S.Text>네가 찾는 모든 비건, 네모비에 가입해주세요.</S.Text>
+          <S.Text>네가 찾는 모든 비건, 네모비에 가입해주세요!</S.Text>
           <S.InputWrapper>
             <S.Label>아이디</S.Label>
             <S.Input
