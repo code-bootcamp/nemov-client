@@ -1,21 +1,25 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1300px;
+  width: 100%;
   display: flex;
   flex-direction: row;
 `;
 
 export const ImgWrapper = styled.div`
-  width: 40%;
+  width: 55%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("signup.jpg");
   background-size: cover;
   background-position: bottom;
 `;
 
+export const InnerWrapper = styled.div`
+  width: 45%;
+`;
+
 export const Form = styled.form`
-  width: 60%;
+  width: 100%;
   display: flex;
   padding: 5rem;
   flex-direction: column;
@@ -118,7 +122,7 @@ export const AddInput = styled.input`
 export const SignupBtn = styled.button`
   width: 100%;
   padding: 18px;
-  margin-top: 50px;
+  margin-top: 80px;
   font-weight: 500;
   border-radius: 10px;
   border: none;
