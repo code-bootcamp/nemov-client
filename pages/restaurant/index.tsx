@@ -5,7 +5,7 @@ import ReviewList from "../../src/components/units/restaurant-review/list/Review
 export default function RestaurantPage() {
   return (
     <>
-      <MapWrapper>지도지도</MapWrapper>
+      <MapWrapper>지도지도지도</MapWrapper>
       <InfoWrapper>식당정보</InfoWrapper>
       <ReviewWrapper>
         <Title>식당 후기</Title>
