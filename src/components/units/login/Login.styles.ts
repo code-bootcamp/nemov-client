@@ -1,15 +1,21 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1300px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 `;
 
-export const LeftWrapper = styled.div`
-  width: 600px;
+export const ImgWrapper = styled.div`
+  width: 55%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("login.jpg");
+  background-size: cover;
+  background-position: center;
 `;
 
-export const InnerWrapper = styled.form`
-  width: 700px;
+export const RightWrapper = styled.form`
+  width: 45%;
   display: flex;
   padding: 5rem;
   flex-direction: column;
