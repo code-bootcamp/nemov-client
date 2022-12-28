@@ -12,6 +12,12 @@ export const globalStyles = css`
     font-family: "SUIT-Regular";
   }
 
+  @media (max-width: 1300px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -20,6 +26,10 @@ export const globalStyles = css`
   ul,
   li {
     list-style: none;
+  }
+
+  button {
+    cursor: pointer;
   }
 
   @font-face {
