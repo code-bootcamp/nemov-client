@@ -1,26 +1,10 @@
 import * as S from "./Orderlist.styles";
-import { DatePicker, Space } from "antd";
+import SearchDate from "../../../commons/search-date/SearchDate";
 
 export default function MypageOrderlist() {
-  const { RangePicker } = DatePicker;
-
   return (
     <S.ContentsMain>
-      <S.ShoppingLookup>
-        <S.SelectTerm>
-          <S.SelectTermItem>전체</S.SelectTermItem>
-          <S.SelectTermItem>1개월</S.SelectTermItem>
-          <S.SelectTermItem>3개월</S.SelectTermItem>
-          <S.SelectTermItem>6개월</S.SelectTermItem>
-          <S.SelectTermItem>12개월</S.SelectTermItem>
-        </S.SelectTerm>
-        <div>
-          <Space direction="vertical" size={12} style={{ marginRight: "10px" }}>
-            <RangePicker />
-          </Space>
-          <S.ManageBtn>조회</S.ManageBtn>
-        </div>
-      </S.ShoppingLookup>
+      <SearchDate />
       <S.MenuSelectWrap>
         <S.MenuSelect>전체</S.MenuSelect>
         <S.MenuSelect>주문내역</S.MenuSelect>
