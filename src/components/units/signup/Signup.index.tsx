@@ -29,7 +29,11 @@ export default function Signup() {
           </S.InputWrapper>
           <S.InputWrapper>
             <S.Label>이름</S.Label>
-            <S.Input type="text" placeholder="이름을 입력해주세요." />
+            <S.Input
+              type="text"
+              pattern="[0-9]+"
+              placeholder="이름을 입력해주세요."
+            />
           </S.InputWrapper>
           <S.InputWrapper>
             <S.Label>휴대폰 번호</S.Label>
@@ -38,7 +42,10 @@ export default function Signup() {
                 type="tel"
                 placeholder="휴대폰 번호를 입력해주세요."
               />
-              <S.PhoneBtn>인증요청</S.PhoneBtn>
+              <S.ConfirmWrapper>
+                <S.ConfirmPhone type="text" placeholder="인증번호" />
+                <S.PhoneBtn>인증요청</S.PhoneBtn>
+              </S.ConfirmWrapper>
             </S.PhoneWrapper>
           </S.InputWrapper>
           <S.InputWrapper>
@@ -57,11 +64,45 @@ export default function Signup() {
           <S.InputWrapper>
             <S.Label>주소</S.Label>
             <S.AddWrapper>
-              <S.AddBtn>우편번호 검색</S.AddBtn>
+              <S.ZipcodeWrapper>
+                <S.Zipcode type="text" placeholder="우편번호" />
+                <S.AddBtn>우편번호 검색</S.AddBtn>
+              </S.ZipcodeWrapper>
               <S.AddInput type="text" />
               <S.AddInput type="text" placeholder="상세 주소를 입력해주세요." />
             </S.AddWrapper>
           </S.InputWrapper>
+          <S.InfoWrapper>
+            <S.InfoTitle>개인정보 이용약관</S.InfoTitle>
+            <S.InfoTextWrapper>
+              <p>[ 네모비 이용 약관 ]</p>
+              <p>
+                제1장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
+                않습니다.
+              </p>
+              <p>
+                제2장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
+                않습니다.
+              </p>
+              <p>
+                제3장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
+                않습니다.
+              </p>
+              <p>
+                제4장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
+                않습니다.
+              </p>
+              <p>
+                제5장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
+                않습니다.
+              </p>
+            </S.InfoTextWrapper>
+
+            <S.CheckboxWrapper>
+              <S.Checkbox type="checkbox" />
+              <p>이용약관에 동의합니다.</p>
+            </S.CheckboxWrapper>
+          </S.InfoWrapper>
           <S.SignupBtn>회원가입</S.SignupBtn>
           <Link href="/login">
             <S.Login>로그인 하기</S.Login>

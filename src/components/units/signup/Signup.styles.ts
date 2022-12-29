@@ -74,6 +74,23 @@ export const PhoneInput = styled.input`
   outline: none;
 `;
 
+export const ConfirmWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ConfirmPhone = styled.input`
+  width: 25%;
+  padding: 14px 0;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 1px solid #1f3d31;
+  text-align: center;
+  outline: none;
+  margin-right: 20px;
+`;
+
 export const PhoneBtn = styled.button`
   width: 20%;
   padding: 14px;
@@ -99,6 +116,23 @@ export const AddWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const ZipcodeWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Zipcode = styled.input`
+  width: 20%;
+  padding: 14px 0;
+  border-radius: 10px;
+  border: 1px solid #1f3d31;
+  text-align: center;
+  outline: none;
+  margin-right: 20px;
+`;
+
 export const AddBtn = styled.button`
   width: 25%;
   border: none;
@@ -119,6 +153,36 @@ export const AddInput = styled.input`
   margin-top: 10px;
 `;
 
+export const InfoWrapper = styled.section`
+  width: 100%;
+  border: 1px solid #1f3d31;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 40px;
+`;
+
+export const InfoTitle = styled.label`
+  font-size: 1.25rem;
+`;
+
+export const InfoTextWrapper = styled.div`
+  width: 100%;
+  height: 80px;
+  overflow-y: scroll;
+  margin: 20px 0;
+`;
+
+export const CheckboxWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Checkbox = styled.input`
+  margin-right: 10px;
+`;
+
 export const SignupBtn = styled.button`
   width: 100%;
   padding: 18px;
@@ -132,7 +196,7 @@ export const SignupBtn = styled.button`
 `;
 
 export const Login = styled.a`
-  margin: 80px auto 0;
+  margin: 40px auto 0;
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
