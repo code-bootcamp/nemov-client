@@ -2,13 +2,13 @@ import { css } from "@emotion/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
+import { deepGreen } from "./colorPalettes";
 
 export const globalStyles = css`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 16px;
     font-family: "SUIT-Regular";
   }
 
@@ -28,7 +28,16 @@ export const globalStyles = css`
     list-style: none;
   }
 
+  input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid ${deepGreen};
+  }
+
   button {
+    text-align: center;
+    border-radius: 5vmax;
+    border: none;
     cursor: pointer;
   }
 
@@ -78,7 +87,8 @@ export const globalStyles = css`
   }
 `;
 
-export const GlobalWrapper = styled.div`
+export const GlobalWrapper = styled.main`
   width: 100%;
+  padding: 3% 0;
   max-width: 1300px;
 `;

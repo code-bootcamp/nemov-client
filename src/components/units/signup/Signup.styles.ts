@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const ImgWrapper = styled.div`
   width: 55%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("signup.jpg");
+    url("/images/signup.jpg");
   background-size: cover;
   background-position: bottom;
 `;

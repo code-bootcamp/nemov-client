@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { mobile } from "../../../../commons/styles/breakPoints";
 import {
   black,
   deepGreen,
@@ -9,16 +10,19 @@ import {
 
 export const PageLine = styled.div`
   position: absolute;
-  top: 653px;
+  @media ${mobile} {
+    top: 40rem;
+    height: 60vmax;
+  }
+  top: 50rem;
   left: 0px;
   z-index: -1;
-  width: 100%;
-  height: 400px;
+  width: 100vmax;
+  height: 22vmax;
   background-color: ${deepGreen};
 `;
 
 export const InnerWrapper = styled.div`
-  padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +38,22 @@ export const MarketMainSection = styled.section`
   margin-bottom: 2rem;
 `;
 
-export const ItemsWrapper = styled.section`
+export const ItemsWrapper01 = styled.section`
+  @media ${mobile} {
+    flex-wrap: nowrap;
+  }
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 1rem;
+`;
+
+export const ItemsWrapper02 = styled.section`
+  @media ${mobile} {
+    gap: 1rem;
+  }
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -48,11 +67,9 @@ export const ItemsWrapper = styled.section`
 export const ItemDisplay = styled.div`
   display: flex;
   flex-direction: column;
-  width: 21vmax;
-  height: 28vmax;
+  width: 30%;
   padding: 2vmax;
   background-color: white;
-  /* border: 1px solid black; */
   border-radius: 8px;
   gap: 20px;
 `;
@@ -195,7 +212,7 @@ export const StyledBasketIcon = styled.object`
 `;
 
 export const IconWrappedCircle = styled.div`
-  padding: 10px;
+  padding: 2%;
   border: none;
   border-radius: 50px;
   :hover {

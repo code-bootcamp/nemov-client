@@ -9,17 +9,17 @@ export const CategoryWrapper = styled.section`
 `;
 
 export const Category = styled.div`
-  padding: 1.2rem 2.5rem;
+  padding: 1% 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   gap: 0.8rem;
-  opacity: 30%;
+  opacity: 70%;
   :hover {
     opacity: 100%;
-    background-color: rgba(212, 217, 74, 0.3);
+    background-color: rgba(153, 153, 153, 0.1);
     transition: 300ms linear;
   }
   cursor: pointer;
@@ -30,4 +30,10 @@ export const CategoryTitle = styled.span`
   font-size: 1rem;
 `;
 
-export const StyledCategoryIcon = styled.object``;
+export const StyledCategoryIcon = styled.img`
+  width: 100%;
+`;
+
+export const StyledCategoryIcon02 = styled.img`
+  /* background-image: ; */
+`;
