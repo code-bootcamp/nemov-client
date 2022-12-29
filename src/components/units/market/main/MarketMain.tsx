@@ -10,7 +10,7 @@ export default function MarketMain() {
         <MarketCategory></MarketCategory>
         <S.MarketMainSection>
           <S.MarketMainSectionHeader>추천상품</S.MarketMainSectionHeader>
-          <S.ItemsWrapper>
+          <S.ItemsWrapper01>
             {new Array(3).fill(1).map((_, index) => (
               <S.ItemDisplay key={index}>
                 <S.ItemImage />
@@ -21,21 +21,22 @@ export default function MarketMain() {
                       <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
                       <S.ItemOriginPrice>14,000원</S.ItemOriginPrice>
                     </S.ItemPrices>
-                    <S.IconWrappedCircle>
+                    {/* ERROR: Uncaught TypeError: Cannot read properties of null (reading 'dataset') */}
+                    {/* <S.IconWrappedCircle>
                       <S.StyledBasketIcon
                         type="image/svg+xml"
                         data="/icons/bag-shopping-solid.svg"
                       />
-                    </S.IconWrappedCircle>
+                    </S.IconWrappedCircle> */}
                   </S.ItemDetailFooter>
                 </S.ItemDetail>
               </S.ItemDisplay>
             ))}
-          </S.ItemsWrapper>
+          </S.ItemsWrapper01>
         </S.MarketMainSection>
         <S.MarketMainSection>
           <S.MarketMainSectionHeader>베스트상품</S.MarketMainSectionHeader>
-          <S.ItemsWrapper>
+          <S.ItemsWrapper02>
             {new Array(8).fill(1).map((_, index) => (
               <S.ItemDisplay02 key={index}>
                 <S.ItemDetail02>
@@ -43,16 +44,11 @@ export default function MarketMain() {
                   <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
                   <S.ItemOriginPrice02>14,000원</S.ItemOriginPrice02>
                 </S.ItemDetail02>
-                <S.IconWrappedCircle02>
-                  <S.StyledBasketIcon
-                    type="image/svg+xml"
-                    data="/icons/bag-shopping-solid.svg"
-                  />
-                </S.IconWrappedCircle02>
+
                 <S.ItemImage02 />
               </S.ItemDisplay02>
             ))}
-          </S.ItemsWrapper>
+          </S.ItemsWrapper02>
         </S.MarketMainSection>
       </S.InnerWrapper>
     </GlobalWrapper>

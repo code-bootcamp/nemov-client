@@ -4,38 +4,23 @@ export default function MarketCategory() {
   return (
     <S.CategoryWrapper>
       <S.Category>
-        <S.StyledCategoryIcon
-          type="image/svg+xml"
-          data="/icons/pagelines.svg"
-        />
+        <S.StyledCategoryIcon src="/icons/all-icon.png" />
         <S.CategoryTitle>전체</S.CategoryTitle>
       </S.Category>
       <S.Category>
-        <S.StyledCategoryIcon
-          type="image/svg+xml"
-          data="/icons/plate-wheat-solid.svg"
-        />
+        <S.StyledCategoryIcon src="/icons/food-icon.png" />
         <S.CategoryTitle>식품</S.CategoryTitle>
       </S.Category>
       <S.Category>
-        <S.StyledCategoryIcon
-          type="image/svg+xml"
-          data="/icons/bottle-droplet-solid.svg"
-        />
+        <S.StyledCategoryIcon src="/icons/drink-icon.png" />
         <S.CategoryTitle>음료</S.CategoryTitle>
       </S.Category>
       <S.Category>
-        <S.StyledCategoryIcon
-          type="image/svg+xml"
-          data="/icons/spray-can-sparkles-solid.svg"
-        />
+        <S.StyledCategoryIcon src="/icons/cosmetic-icon.png" />
         <S.CategoryTitle>뷰티</S.CategoryTitle>
       </S.Category>
       <S.Category>
-        <S.StyledCategoryIcon
-          type="image/svg+xml"
-          data="/icons/bath-solid.svg"
-        />
+        <S.StyledCategoryIcon src="/icons/phone-icon.png" />
         <S.CategoryTitle>생활</S.CategoryTitle>
       </S.Category>
     </S.CategoryWrapper>
