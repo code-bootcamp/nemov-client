@@ -17,7 +17,7 @@ interface ILayoutProps {
 
 const HIDDEN_HEADER = [""];
 const HIDDEN_NAV = [""];
-const HIDDEN_BANNER = [""];
+const HIDDEN_BANNER = ["/", "/login", "/signup"];
 const HIDDEN_FOOTER = [""];
 
 export default function Layout(props: ILayoutProps) {
