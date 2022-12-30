@@ -35,7 +35,10 @@
     "slick-carousel": "^1.8.1",
     "typescript": "*",
     "uuid": "^9.0.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
+    "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
+    "@toast-ui/react-editor": "^3.2.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.13.11",
