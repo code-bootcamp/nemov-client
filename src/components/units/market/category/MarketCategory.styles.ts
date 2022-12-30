@@ -1,21 +1,19 @@
 import styled from "@emotion/styled";
 
 export const CategoryWrapper = styled.section`
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  /* gap: 20px; */
+  padding-top: 2rem;
 `;
 
 export const Category = styled.div`
-  padding: 1% 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  gap: 0.8rem;
+  gap: 0.2rem;
   opacity: 70%;
   :hover {
     opacity: 100%;
@@ -28,10 +26,11 @@ export const Category = styled.div`
 export const CategoryTitle = styled.span`
   font-family: "SUIT-SemiBold";
   font-size: 1rem;
+  margin-bottom: 1rem;
 `;
 
 export const StyledCategoryIcon = styled.img`
-  width: 100%;
+  width: 80%;
 `;
 
 export const StyledCategoryIcon02 = styled.img`

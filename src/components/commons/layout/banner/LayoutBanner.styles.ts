@@ -3,8 +3,7 @@ import Slider from "react-slick";
 
 export const Wrapper = styled.section`
   width: 100%;
-  height: 100px;
-  background-color: blueviolet;
+  height: auto;
 `;
 
 export const StyleSlider = styled(Slider)`
@@ -18,14 +17,14 @@ export const StyleSlider = styled(Slider)`
     right: 30px;
   }
   .slick-dots {
-    top: 20px;
+    bottom: 20px;
     color: rgba(255, 255, 255, 0.5);
   }
 `;
 
 export const BannerImg = styled.img`
   width: 100%;
-  height: 100px;
+  height: auto;
   vertical-align: center;
   object-fit: cover;
   object-position: center;

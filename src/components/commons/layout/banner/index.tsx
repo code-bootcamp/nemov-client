@@ -12,9 +12,9 @@ export default function LayoutBanner() {
   return (
     <S.Wrapper>
       <S.StyleSlider {...settings}>
-        <S.BannerImg src="#" alt="bannerImg1" />
-        <S.BannerImg src="#" alt="bannerImg2" />
-        <S.BannerImg src="#" alt="bannerImg3" />
+        <S.BannerImg src="/images/banner/slide3.png" alt="bannerImg3" />
+        <S.BannerImg src="/images/banner/slide1.jpg" alt="bannerImg2" />
+        <S.BannerImg src="/images/banner/slide2.jpg" alt="bannerImg1" />
       </S.StyleSlider>
     </S.Wrapper>
   );
