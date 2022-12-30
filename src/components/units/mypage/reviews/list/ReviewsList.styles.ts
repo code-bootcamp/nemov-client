@@ -24,6 +24,7 @@ export const ReviewLi = styled.li`
 
 export const ReviewImg = styled.img`
   width: 10%;
+  aspect-ratio: 5/5;
   border: 1px solid blue;
 `;
 
@@ -38,12 +39,13 @@ export const ReviewCenterWrapper = styled.div`
 export const ReviewItemName = styled.p`
   font-size: 1.25rem;
   font-weight: 600;
+  margin-bottom: 0.4rem;
 `;
 
 export const ReviewDate = styled.p`
   font-size: 0.9rem;
   color: #666;
-  margin: 10px 0;
+  margin-bottom: 0.4rem;
 `;
 
 export const ReviewContent = styled.p``;
@@ -59,10 +61,13 @@ export const ReviewEditBtn = styled.button`
   padding: 12px;
   ${colorBase01}
   margin-bottom: 10px;
+  border-radius: 5vmax;
 `;
 
 export const ReviewDeleteBtn = styled.button`
   width: 100px;
   padding: 12px 10px;
   ${colorBase02}
+  border: 1px solid #ddd;
+  border-radius: 5vmax;
 `;

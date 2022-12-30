@@ -11,7 +11,7 @@ export const ContentsMain = styled.section`
 export const Title = styled.h2`
   font-size: 1.6rem;
   line-height: 1.4;
-  padding-bottom: 20px;
+  padding-bottom: 2.5rem;
 `;
 
 export const TabWrapper = styled.div`
@@ -25,14 +25,14 @@ export const Tabs = styled.ul`
   align-items: center;
   border-bottom: 1px solid #666;
   padding-bottom: 15px;
-  margin: 60px 0 10px;
+  margin-bottom: 0;
 `;
 
 export const Line = styled.div`
-  width: 186px;
+  width: 188px;
   position: absolute;
   left: 0px;
-  top: 10px;
+  top: 8px;
   height: 3px;
   margin: 27px 0 0 0;
   background: black;
@@ -43,7 +43,9 @@ export const Line = styled.div`
 `;
 
 export const Tab = styled.li`
+  width: 187px;
   padding: 0 30px;
+  text-align: center;
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;

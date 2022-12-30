@@ -32,6 +32,7 @@ export const PagePrevBtn = styled.button`
   height: 34px;
   border: 1px solid rgba(221, 221, 221);
   background-color: #fff;
+  border-radius: 0;
 `;
 
 export const PageNextBtn = styled.button`
@@ -47,4 +48,5 @@ export const PageNextBtn = styled.button`
   border-top-color: rgb(221, 221, 221);
   border-right-color: rgb(221, 221, 221);
   border-bottom-color: rgb(221, 221, 221);
+  border-radius: 0;
 `;

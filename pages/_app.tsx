@@ -6,6 +6,7 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 import Layout from "../src/components/commons/layout";
 import MypageLayout from "../src/components/commons/layout/mypageLayout";
 import { useRouter } from "next/router";
+import "antd/dist/reset.css";
 
 const MYPAGE_LAYOUT = [
   "/mypage",
@@ -14,6 +15,9 @@ const MYPAGE_LAYOUT = [
   "/mypage/picked",
   "/mypage/point",
   "/mypage/reviews",
+  "/mypage/myinfo",
+  "/mypage/myinfo/changepw",
+  "/mypage/myinfo/modify",
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
