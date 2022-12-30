@@ -1,41 +1,71 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { mobile } from "../../../../commons/styles/breakPoints";
+import { colorBase03 } from "../../../../commons/styles/colorBases";
 import {
-  black,
   deepGreen,
   gray,
   white,
 } from "../../../../commons/styles/colorPalettes";
+import { flexColumn, flexRow } from "../../../../commons/styles/globalStyles";
 
-export const PageLine = styled.div`
+interface IMarketDetailHeadProps {
+  image: string;
+  // content: string;
+}
+
+const ItemDisplayBefore01 = css`
+  top: 0;
+  left: 0;
   position: absolute;
-  @media ${mobile} {
-    top: 40rem;
-    height: 60vmax;
-  }
-  top: 50rem;
-  left: 0px;
-  z-index: -1;
-  width: 100vmax;
-  height: 22vmax;
-  background-color: ${deepGreen};
+  color: ${white};
+  width: 100%;
+  height: 100%;
 `;
 
-export const InnerWrapper = styled.div`
+export const MarketMainContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  margin-bottom: 3%;
 `;
 
-export const MarketMainSection = styled.section`
+export const MainItemsWrapper = styled.section`
+  height: 100%;
+  margin-top: 10%;
+  /* background: linear-gradient(180deg, ${deepGreen} 30%, #fff 30%); */
+`;
+
+export const PageLine = styled.div`
+  position: absolute;
+  @media ${mobile} {
+  }
+  top: 75rem;
+  left: 0px;
+  z-index: -1;
+  width: 100vmax;
+  height: 750px;
+  /* background-color: ${deepGreen}; */
+  background: url(/images/bg-line.jpg) no-repeat center;
+  background-size: cover;
+`;
+
+export const MainMarketSection01 = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 2rem;
+  margin: 15% 0 10% 0;
+`;
+
+export const RecommendItemSection01 = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 5%;
+  margin-bottom: 10%;
 `;
 
 export const ItemsWrapper01 = styled.section`
@@ -43,11 +73,13 @@ export const ItemsWrapper01 = styled.section`
     flex-wrap: nowrap;
   }
   width: 100%;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding-top: 1rem;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 8px;
 `;
 
 export const ItemsWrapper02 = styled.section`
@@ -68,23 +100,51 @@ export const ItemDisplay = styled.div`
   display: flex;
   flex-direction: column;
   width: 30%;
-  padding: 2vmax;
-  background-color: white;
-  border-radius: 8px;
+  background-color: transparent;
   gap: 20px;
+`;
+
+export const RecommendItemImg01 = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props: IMarketDetailHeadProps) => props.image});
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  display: inline-block;
+  position: relative;
+  ::after {
+    content: "19%";
+    width: 10%;
+    height: 7%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px 10px 8px 10px;
+    border-radius: 4px;
+    z-index: 1;
+    text-align: center;
+
+    ${colorBase03}
+  }
+  aspect-ratio: 1/1;
 `;
 
 export const ItemImage = styled.img`
   width: 100%;
-  height: 18rem;
-  background-color: gray;
-  border: 1px solid blue;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  ::before {
+    content: "";
+    width: 100%;
+    ${colorBase03}
+  }
 `;
 
 export const ItemDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  ${flexColumn}
+  gap: 0.9rem;
 `;
 
 export const ItemName = styled.span`
@@ -92,8 +152,7 @@ export const ItemName = styled.span`
 `;
 
 export const ItemDetailFooter = styled.section`
-  display: flex;
-  flex-direction: row;
+  ${flexRow}
   justify-content: space-between;
 `;
 
@@ -108,8 +167,7 @@ export const ItemOriginPrice = styled.span`
 `;
 
 export const ItemPrices = styled.div`
-  display: flex;
-  flex-direction: row;
+  ${flexRow}
   align-items: center;
   gap: 10px;
 `;
@@ -136,8 +194,13 @@ export const ItemName02 = styled.span`
 export const ItemImage02 = styled.img`
   width: 100%;
   aspect-ratio: 1/1;
-  background-color: ivory;
+  object-fit: cover;
   border: none;
+  overflow: hidden;
+  :hover {
+    transform: scale(1.3);
+    transition: all 0.3s ease-in-out;
+  }
 `;
 export const ItemDiscountPrice02 = styled.span`
   font-size: 1rem;
@@ -147,15 +210,6 @@ export const ItemOriginPrice02 = styled.span`
   color: ${gray};
   font-size: 0.8rem;
   text-decoration: line-through;
-`;
-
-const ItemDisplayBefore01 = css`
-  top: 0;
-  left: 0;
-  position: absolute;
-  color: ${white};
-  width: 100%;
-  height: 100%;
 `;
 
 export const IconWrappedCircle02 = styled.div`
@@ -174,8 +228,7 @@ export const IconWrappedCircle02 = styled.div`
 
 export const ItemDisplay02 = styled.div`
   width: 22%;
-  display: flex;
-  flex-direction: column;
+  ${flexColumn}
   background-color: white;
   border-radius: 8px;
   position: relative;
@@ -184,13 +237,11 @@ export const ItemDisplay02 = styled.div`
     content: "";
     ${ItemDisplayBefore01}
     transition: all 1s;
-    transform: translateY(100%);
   }
   :hover {
     ::before {
       ${ItemDisplayBefore01}
       background-color: rgba(0, 0, 0, 0.3);
-      transform: translateY(0);
     }
     ${ItemDetail02} {
       display: flex;
@@ -202,8 +253,9 @@ export const ItemDisplay02 = styled.div`
 `;
 
 export const MarketMainSectionHeader = styled.header`
-  font-size: 1.5rem;
-  border-bottom: 2px solid ${black};
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
   padding-bottom: 1rem;
 `;
 

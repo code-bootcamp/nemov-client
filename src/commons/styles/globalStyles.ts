@@ -28,6 +28,13 @@ export const globalStyles = css`
     list-style: none;
   }
 
+  ul,
+  li,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
   input {
     border: none;
     outline: none;
@@ -36,9 +43,13 @@ export const globalStyles = css`
 
   button {
     text-align: center;
-    border-radius: 5vmax;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
+  }
+
+  img {
+    object-fit: cover;
   }
 
   @font-face {
@@ -91,4 +102,20 @@ export const GlobalWrapper = styled.main`
   width: 100%;
   padding: 3% 0;
   max-width: 1300px;
+`;
+
+export const flexRow = css`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const flexColumn = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

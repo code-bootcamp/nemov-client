@@ -1,17 +1,9 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { colorBase01 } from "../../../../../commons/styles/colorBases";
 import { gray, pastelGray } from "../../../../../commons/styles/colorPalettes";
-
-const flexRow = css`
-  display: flex;
-  flex-direction: row;
-`;
-
-const flexColumn = css`
-  display: flex;
-  flex-direction: column;
-`;
+import {
+  flexColumn,
+  flexRow,
+} from "../../../../../commons/styles/globalStyles";
 
 export const MarketDetailPageHead = styled.section`
   width: 100%;
@@ -22,12 +14,12 @@ export const MarketDetailPageHead = styled.section`
 export const ProductDetailImage01 = styled.img`
   width: 40%;
   aspect-ratio: 1/1;
+  object-fit: cover;
 `;
 
 export const ProductDetailAside01 = styled.aside`
   width: 50%;
   ${flexColumn}
-  justify-content: space-between;
 `;
 
 export const ProductDetailHeader01 = styled.header`
@@ -37,31 +29,21 @@ export const ProductDetailHeader01 = styled.header`
 export const ProductBrandName01 = styled.span`
   font-size: 1rem;
   color: ${gray};
+  margin-bottom: 0.5rem;
 `;
 
 export const ProductName01 = styled.h2`
-  font-size: 3rem;
+  font-size: 2rem;
 `;
 
 export const ProductDetailLevelSection = styled.section`
   ${flexRow}
-`;
-
-export const ProductVeganLevel01 = styled.div`
-  margin-top: 1rem;
-  font-family: "SUIT-Light";
-  font-size: 0.5rem;
-  text-align: center;
-  padding: 0.8rem;
-  border-radius: 2rem;
-  ${colorBase01}
+  margin: 0.7rem 0;
 `;
 
 export const ProductPriceDetail01 = styled.section`
-  margin: 1rem 0;
-  ${flexRow}
-  gap: 3vmax;
-  align-items: center;
+  margin-bottom: 1rem;
+  ${flexColumn}
   font-size: 1.5rem;
   font-weight: 700;
 `;
@@ -76,27 +58,58 @@ export const ProductOriginalPrice01 = styled.span`
   text-decoration: line-through;
 `;
 
-export const DeliveryFeeSection = styled.section`
-  margin: 1rem 0;
+export const PriceDetailSection01 = styled.section`
+  margin: 0.8rem 0;
   ${flexRow}
-  gap: 3vmax;
+  gap: 0.7rem;
+  align-items: center;
 `;
 
 export const DetailInfoTitle01 = styled.span`
+  font-size: 0.9rem;
   font-weight: 700;
 `;
 
+export const DetailInfoContent01 = styled.span`
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
+
 export const PQuantitySelectSection = styled.section`
-  margin: 2rem 0;
+  padding: 1.5rem 0;
   ${flexRow}
-  gap: 3vmax;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e6e0e0;
 `;
 
 export const PQRightButtons = styled.div`
   ${flexRow}
   gap: 1vmax;
+  align-items: center;
+`;
+
+export const PriceSumSection01 = styled.section`
+  ${flexRow}
+  gap: 2rem;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.7rem 0;
+`;
+
+export const PriceSumDetail01 = styled.span`
+  font-size: 1.5rem;
+  font-weight: 700;
 `;
 
 export const ProductDetailFooter01 = styled.footer`
+  ${flexColumn}
+  margin-top: auto;
+  gap: 0.7rem;
+`;
+
+export const ButtonsWrapper01 = styled.section`
+  width: 100%;
   ${flexRow}
+  gap: 0.7rem;
 `;
