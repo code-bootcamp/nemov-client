@@ -6,6 +6,7 @@ interface IStyledModal01Props {
   isOpen: boolean;
   children: JSX.Element;
   onCancel: () => void;
+  width: number;
 }
 
 const StyledModal01 = styled(Modal)`
@@ -27,6 +28,8 @@ export default function CommonModal01(props: IStyledModal01Props) {
       open={props.isOpen}
       destroyOnClose={false}
       onCancel={props.onCancel}
+      centered
+      width={props.width}
     >
       {props.children}
     </StyledModal01>

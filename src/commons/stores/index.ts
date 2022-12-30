@@ -5,7 +5,7 @@ export const isOpenState = atom({
   default: false,
 });
 
-export const isSelectedState = atom({
-  key: "isSelected",
-  default: [true, false, false, false, false],
+export const isEditState = atom({
+  key: "isEditState",
+  default: false,
 });

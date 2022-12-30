@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colorBase01 } from "../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -53,7 +54,7 @@ export const PickBtn = styled.button`
   line-height: 34px;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 5vmax;
 `;
 
 export const BasketBtn = styled.button`
@@ -62,9 +63,9 @@ export const BasketBtn = styled.button`
   padding: 0 35px;
   font-size: 1rem;
   line-height: 34px;
-  background-color: #255941;
+  ${colorBase01}
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 5vmax;
   color: white;
   margin-top: 10px;
 `;
@@ -113,6 +114,7 @@ export const PlusBtn = styled.button`
   height: 28px;
   border: 1px solid #ddd;
   background-color: transparent;
+  border-radius: 0;
 `;
 
 export const MinusBtn = styled.button`
@@ -120,6 +122,7 @@ export const MinusBtn = styled.button`
   height: 28px;
   border: 1px solid #ddd;
   background-color: transparent;
+  border-radius: 0;
 `;
 
 export const QuantityWrapper = styled.div`
@@ -184,6 +187,7 @@ export const SelectBtn = styled.button`
   line-height: 34px;
   background-color: #fff;
   border: 1px solid #666;
+  border-radius: 5vmax;
   margin: 0 20px;
 `;
 
@@ -196,8 +200,9 @@ export const TotalBtn = styled.button`
   padding: 10px 35px;
   font-size: 1rem;
   line-height: 34px;
-  background-color: #255941;
+  ${colorBase01}
   color: white;
+  border-radius: 5vmax;
 `;
 
 export const CalculateIcon = styled.div`
@@ -207,6 +212,6 @@ export const CalculateIcon = styled.div`
   font-weight: 700;
   background-color: black;
   text-align: center;
-  line-height: 22px;
+  line-height: 25px;
   border-radius: 50%;
 `;

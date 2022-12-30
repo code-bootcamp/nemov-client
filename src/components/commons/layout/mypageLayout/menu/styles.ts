@@ -51,7 +51,9 @@ export const Option = styled.a`
 
 export const MyShoppingList = styled.article``;
 
-export const Management = styled.div``;
+export const ManageList = styled.article`
+  margin-top: 3rem;
+`;
 
 export const ManageBtn = styled.button`
   background-color: rgba(38, 90, 65, 0.3);
@@ -59,4 +61,12 @@ export const ManageBtn = styled.button`
   padding: 0.5rem 1rem;
   border: none;
   font-size: 0.8rem;
+`;
+
+export const ManageOptions = styled.a`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  cursor: pointer;
 `;

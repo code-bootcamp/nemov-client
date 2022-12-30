@@ -35,11 +35,18 @@ export default function MypageLayoutMenu() {
           </Link>
         </S.MyShoppingList>
       </S.MenuContents>
-      <S.Management>
-        <S.Options>회원 정보</S.Options>
-        <S.Options>고객센터</S.Options>
-        <S.Options>로그아웃</S.Options>
-      </S.Management>
+
+      <S.Options>내 정보 관리</S.Options>
+      <Link href="/mypage/myinfo">
+        <S.Option>비밀번호 변경</S.Option>
+      </Link>
+      <Link href="/mypage/myinfo">
+        <S.Option>회원 정보 수정</S.Option>
+      </Link>
+      <S.ManageList>
+        <S.ManageOptions>고객센터</S.ManageOptions>
+        <S.ManageOptions>로그아웃</S.ManageOptions>
+      </S.ManageList>
     </S.MyPageMenu>
   );
 }
