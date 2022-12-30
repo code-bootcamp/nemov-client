@@ -41,7 +41,8 @@ export const Options = styled.h3`
   margin-bottom: 20px;
 `;
 
-export const Option = styled.p`
+export const Option = styled.a`
+  display: block;
   font-size: 1.2rem;
   margin-left: 0.625rem;
   margin-bottom: 1rem;

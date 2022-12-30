@@ -12,7 +12,8 @@ export const ShoppingLookup = styled.article`
 `;
 
 export const ManageBtn = styled.button`
-  background-color: rgba(38, 90, 65, 0.3);
+  background-color: black;
+  color: #fff;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   border: none;
@@ -26,8 +27,9 @@ export const SelectTerm = styled.ul`
 
 export const SelectTermItem = styled.li`
   font-size: 0.9rem;
-  margin-right: 0.5rem;
   color: #555;
+  border: 1px solid #eee;
+  padding: 14px;
 `;
 
 export const MenuSelectWrap = styled.div`
@@ -36,7 +38,6 @@ export const MenuSelectWrap = styled.div`
 
 export const MenuSelect = styled.button`
   border: none;
-
   background-color: #fff;
   padding: 0.5rem 1rem;
   color: #555;

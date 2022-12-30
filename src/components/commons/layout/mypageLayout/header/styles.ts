@@ -8,8 +8,8 @@ export const MyPageContents = styled.section`
 export const ContentsHeader = styled.header`
   width: 100%;
   height: 180px;
-  border: 1px solid rgba(38, 90, 65, 0.5);
-  border-radius: 15px;
+  box-shadow: 2px 4px 10px rgb(85 116 149 / 25%);
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   padding: 4% 6%;
