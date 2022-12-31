@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 export const Wrapper = styled.nav`
   width: 100%;
@@ -26,12 +27,27 @@ export default function LayoutNav() {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Menu>ABOUT</Menu>
-        <Menu>ALL</Menu>
-        <Menu>FOOD</Menu>
-        <Menu>DRINK</Menu>
-        <Menu>BEAUTY</Menu>
-        <Menu>LIFE</Menu>
+        <Link href={"/"}>
+          <Menu>ABOUT</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>BEST</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>ALL</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>FOOD</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>DRINK</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>BEAUTY</Menu>
+        </Link>
+        <Link href={"/market"}>
+          <Menu>LIFE</Menu>
+        </Link>
       </InnerWrapper>
     </Wrapper>
   );
