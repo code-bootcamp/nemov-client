@@ -12,10 +12,10 @@ export default function Login() {
         <S.Input type="password" placeholder="비밀번호를 입력해주세요." />
         <S.LoginBtn>로그인</S.LoginBtn>
         <S.FindWrapper>
-          <Link href="">
+          <Link href="/login/findid">
             <S.FindId>아이디 찾기</S.FindId>
           </Link>
-          <Link href="">
+          <Link href="/login/findpassword">
             <S.FindPw>비밀번호 찾기</S.FindPw>
           </Link>
         </S.FindWrapper>
