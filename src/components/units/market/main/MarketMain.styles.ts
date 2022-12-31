@@ -41,12 +41,10 @@ export const PageLine = styled.div`
   position: absolute;
   @media ${mobile} {
   }
-  top: 75rem;
   left: 0px;
   z-index: -1;
-  width: 100vmax;
-  height: 750px;
-  /* background-color: ${deepGreen}; */
+  width: 100%;
+  height: 46.875rem;
   background: url(/images/bg-line.jpg) no-repeat center;
   background-size: cover;
 `;
@@ -116,12 +114,11 @@ export const RecommendItemImg01 = styled.div`
   ::after {
     content: "19%";
     width: 10%;
-    height: 7%;
+    padding: 0.5rem 2.5rem 0.5rem 0.5rem;
     display: inline-block;
     position: absolute;
     left: 0;
     top: 0;
-    padding: 10px 10px 8px 10px;
     border-radius: 4px;
     z-index: 1;
     text-align: center;

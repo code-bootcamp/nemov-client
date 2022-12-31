@@ -9,3 +9,8 @@ export const isEditState = atom({
   key: "isEditState",
   default: false,
 });
+
+export const isHiddenState = atom({
+  key: "isHiddenState",
+  default: false,
+});
