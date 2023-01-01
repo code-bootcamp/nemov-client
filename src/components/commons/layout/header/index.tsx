@@ -4,7 +4,7 @@ import * as S from "./LayoutHeader.styles";
 export default function LayoutHeader() {
   return (
     <S.Wrapper>
-      <Link href="/">
+      <Link href="/market">
         <S.Logo>
           <S.LogoImg src="/logo/logo1.png" />
           {/* <S.LogoImg src="/logo/logo2.png" /> */}

@@ -20,7 +20,7 @@ export const InnerWrapper = styled.footer`
 
 export const Menu = styled.span`
   font-size: 1rem;
-  margin-right: 40px;
+  margin-right: 3%;
 `;
 
 export default function LayoutNav() {
@@ -29,9 +29,6 @@ export default function LayoutNav() {
       <InnerWrapper>
         <Link href={"/"}>
           <Menu>ABOUT</Menu>
-        </Link>
-        <Link href={"/market"}>
-          <Menu>BEST</Menu>
         </Link>
         <Link href={"/market"}>
           <Menu>ALL</Menu>
