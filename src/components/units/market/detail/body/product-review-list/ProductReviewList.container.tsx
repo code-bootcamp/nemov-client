@@ -8,31 +8,38 @@ import * as CS from "../MarketDetailBody.styles";
 export default function ProductReviewList() {
   return (
     <CS.TabContentMain01>
-      <S.PRHeadTitle>구매후기</S.PRHeadTitle>
-      <S.PRListWrapper>
+      <CS.TabContentHeader01>
+        <CS.TabContentTitle01>구매후기</CS.TabContentTitle01>
+        <CS.TabContentSubTitle01>
+          해당 상품을 구매한 구매자들의 후기입니다.
+        </CS.TabContentSubTitle01>
+      </CS.TabContentHeader01>
+      <CS.TabContentInnerWrapper>
         {new Array(5).fill(1).map((reviews, index) => (
-          <S.PRList key={index}>
-            <S.PRListHeader>
-              <S.PRCreateInfo01>
-                <S.PRTitle>후기 제목</S.PRTitle>
+          <CS.TabContentList01 key={index}>
+            <CS.ContentListHeader01>
+              <CS.HeaderInfo01>
+                <CS.ContentTitle>후기 제목</CS.ContentTitle>
                 <S.PRRating value={5} disabled />
-              </S.PRCreateInfo01>
-              <S.PRCreateInfo02>
-                <S.CreateInfo01>닉네임</S.CreateInfo01>
-                <S.CreateInfo01>2022.12.07</S.CreateInfo01>
-              </S.PRCreateInfo02>
-            </S.PRListHeader>
-            <S.PRContent>
+              </CS.HeaderInfo01>
+              <CS.HeaderInfo02>
+                <CS.Info02Detail>
+                  <span>닉네임</span>
+                  <span>2022.12.07</span>
+                </CS.Info02Detail>
+              </CS.HeaderInfo02>
+            </CS.ContentListHeader01>
+            <CS.ContentDetail01>
               너무 맛있어서 10개 묶음으로 샀어요!! 다음에 또 사고 싶어요~
-            </S.PRContent>
+            </CS.ContentDetail01>
             <S.PRImages>
               <S.PRImage01 width="10%" src="/icons/best-icon.png" />
               <S.PRImage01 width="10%" src="/icons/best-icon.png" />
               <S.PRImage01 width="10%" src="/icons/best-icon.png" />
             </S.PRImages>
-          </S.PRList>
+          </CS.TabContentList01>
         ))}
-      </S.PRListWrapper>
+      </CS.TabContentInnerWrapper>
     </CS.TabContentMain01>
   );
 }
