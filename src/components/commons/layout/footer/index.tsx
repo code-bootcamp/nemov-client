@@ -82,7 +82,7 @@ export default function LayoutFooter() {
     <Wrapper>
       <InnerWrapper>
         <FooterLeft>
-          <Link href="/">
+          <Link href="/market">
             <FooterLogo>
               <img src="/logo/logo1.png" style={{ width: "120px" }} />
             </FooterLogo>

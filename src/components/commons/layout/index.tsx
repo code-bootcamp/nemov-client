@@ -28,6 +28,8 @@ const HIDDEN_BANNER = [
   "/mypage/picked",
   "/mypage/point",
   "/mypage/reviews",
+  "/seller",
+  "/seller/new",
 ];
 const HIDDEN_SCROLLTOTOP = ["/", "/login", "/signup"];
 const HIDDEN_FOOTER = ["/"];
