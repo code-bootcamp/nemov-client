@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
+import MarketDetailBody from "./body/MarketDetailBody";
 import MarketDetailHead from "./head/MarketDetailHead";
 
 const InnerWrapper = styled.div`
-  padding: 5vmax;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +15,7 @@ export default function MarketDetail() {
     <GlobalWrapper>
       <InnerWrapper>
         <MarketDetailHead />
+        <MarketDetailBody />
       </InnerWrapper>
     </GlobalWrapper>
   );

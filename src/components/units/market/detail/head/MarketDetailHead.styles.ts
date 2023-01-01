@@ -8,17 +8,20 @@ import {
 export const MarketDetailPageHead = styled.section`
   width: 100%;
   ${flexRow}
-  gap: 10%;
+  justify-content: space-evenly;
+  padding-bottom: 6.25rem;
+  margin-bottom: 6.25rem;
+  border-bottom: 2px solid #e6e0e0;
 `;
 
 export const ProductDetailImage01 = styled.img`
-  width: 40%;
+  width: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
 `;
 
 export const ProductDetailAside01 = styled.aside`
-  width: 50%;
+  width: 40%;
   ${flexColumn}
 `;
 
