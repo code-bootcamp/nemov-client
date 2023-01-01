@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../commons/styles/breakPoints";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -7,22 +8,28 @@ export const Wrapper = styled.div`
 `;
 
 export const ImgWrapper = styled.div`
-  width: 55%;
+  width: 40%;
+  aspect-ratio: 1/1;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("/images/signup.jpg");
   background-size: cover;
   background-position: bottom;
-`;
 
-export const InnerWrapper = styled.div`
-  width: 45%;
+  @media ${mobile} {
+    display: none;
+  }
 `;
 
 export const Form = styled.form`
-  width: 100%;
+  width: 45%;
+  padding: 8rem;
+  margin: 0 auto;
   display: flex;
-  padding: 5rem;
   flex-direction: column;
+
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h2`
@@ -76,14 +83,15 @@ export const PhoneInput = styled.input`
 
 export const ConfirmWrapper = styled.div`
   width: 80%;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 export const ConfirmPhone = styled.input`
-  width: 25%;
+  width: 100px;
   padding: 14px 0;
-  margin-top: 20px;
   border-radius: 10px;
   border: 1px solid #1f3d31;
   text-align: center;
@@ -91,10 +99,16 @@ export const ConfirmPhone = styled.input`
   margin-right: 20px;
 `;
 
+export const ConfirmTime = styled.span`
+  margin-right: 20px;
+  font-size: 1rem;
+  color: #436f59;
+  font-weight: bold;
+`;
+
 export const PhoneBtn = styled.button`
-  width: 20%;
+  width: 130px;
   padding: 14px;
-  margin-top: 20px;
   border: none;
   font-weight: 500;
   border-radius: 10px;
@@ -124,7 +138,7 @@ export const ZipcodeWrapper = styled.div`
 `;
 
 export const Zipcode = styled.input`
-  width: 20%;
+  width: 100px;
   padding: 14px 0;
   border-radius: 10px;
   border: 1px solid #1f3d31;
@@ -134,7 +148,7 @@ export const Zipcode = styled.input`
 `;
 
 export const AddBtn = styled.button`
-  width: 25%;
+  width: 130px;
   border: none;
   padding: 14px;
   font-weight: 500;

@@ -14,3 +14,8 @@ export const isHiddenState = atom({
   key: "isHiddenState",
   default: false,
 });
+
+export const isSellerState = atom({
+  key: "isSellerState",
+  default: false,
+});
