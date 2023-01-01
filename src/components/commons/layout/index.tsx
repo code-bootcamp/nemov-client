@@ -16,8 +16,8 @@ interface ILayoutProps {
   children: JSX.Element;
 }
 
-const HIDDEN_HEADER = [""];
-const HIDDEN_NAV = [""];
+const HIDDEN_HEADER = ["/"];
+const HIDDEN_NAV = ["/"];
 const HIDDEN_BANNER = [
   "/",
   "/login",
@@ -30,7 +30,7 @@ const HIDDEN_BANNER = [
   "/mypage/reviews",
 ];
 const HIDDEN_SCROLLTOTOP = ["/", "/login", "/signup"];
-const HIDDEN_FOOTER = [""];
+const HIDDEN_FOOTER = ["/"];
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
