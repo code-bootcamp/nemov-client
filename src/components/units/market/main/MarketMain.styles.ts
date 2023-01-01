@@ -166,7 +166,7 @@ export const ItemOriginPrice = styled.span`
 export const ItemPrices = styled.div`
   ${flexRow}
   align-items: center;
-  gap: 10px;
+  gap: 0.8rem;
 `;
 
 // 아이템 디테일 디스플레이2
