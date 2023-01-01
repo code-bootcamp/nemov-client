@@ -1,24 +1,38 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../commons/styles/breakPoints";
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: row;
 `;
 
 export const ImgWrapper = styled.div`
-  width: 55%;
+  width: 40%;
+  aspect-ratio: 5/5;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("/images/login.jpg");
   background-size: cover;
   background-position: center;
+
+  @media ${mobile} {
+    display: none;
+  }
 `;
 
 export const RightWrapper = styled.form`
   width: 45%;
+  padding: 9rem;
+  margin: 0 auto;
   display: flex;
-  padding: 5rem;
   flex-direction: column;
+  justify-content: space-around;
+
+  @media ${mobile} {
+    width: 100%;
+    padding: 6rem;
+  }
 `;
 
 export const Title = styled.h2`
