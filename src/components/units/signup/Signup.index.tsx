@@ -18,9 +18,10 @@ import { UseMutationGetToken } from "../../commons/hooks/useMutations/signup/Use
 
 export default function Signup() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-  const [time, setTime] = useState(false);
   const [isSeller] = useRecoilState(isSellerState);
+  const [time, setTime] = useState(false);
   const [tokenInput, setTokenInput] = useState("");
+  const [getConfrimToken, setGetConfirmToken] = useState("");
 
   // 인증번호 요청
   const [getToken] = UseMutationGetToken();
@@ -39,15 +40,20 @@ export default function Signup() {
           setTime(false);
         }, 180000);
         console.log(result.data.getToken);
+        setGetConfirmToken(result.data.getToken);
       } catch (error) {
         if (error instanceof Error)
-          Modal.error({ content: "휴대폰 번호를 입력해주세요." });
+          Modal.error({ content: "휴대폰 번호를 확인해주세요." });
       }
     } else {
       Modal.error({
         content: "이미 인증번호 받기를 누르셨습니다. 휴대폰을 확인해주세요.",
       });
     }
+  };
+
+  const onChangeTokenInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setTokenInput(e.currentTarget.value);
   };
 
   const onClickConfirmToken = async () => {
@@ -58,39 +64,21 @@ export default function Signup() {
           token: tokenInput,
         },
       });
-      if (result.data.checkValidToken) {
+      if (result.data.checkValidToken && tokenInput === getConfrimToken) {
         setTime(false);
         Modal.success({ content: "인증에 성공하였습니다." });
+      } else {
+        Modal.error({ content: "인증번호가 일치하지 않습니다." });
       }
     } catch (error) {
-      if (error instanceof Error)
-        Modal.error({ content: "인증번호를 입력해주세요." });
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
-  };
-
-  const onChangeTokenInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setTokenInput(e.currentTarget.value);
   };
 
   // 이메일 중복확인
-  const [checkEmailExist] = UseMutationCheckEmailExist();
-
-  const onClickConfirmEmail = async () => {
-    try {
-      const result = await checkEmailExist({
-        variables: {
-          email: getValues("email"),
-        },
-      });
-      if (result.data.checkEmailExist) {
-        Modal.success({ content: "중복된 이메일이 없습니다." });
-      } else {
-        Modal.error({ content: "이미 중복된 이메일이 존재합니다." });
-      }
-    } catch (error) {
-      if (error instanceof Error)
-        Modal.error({ content: "이메일을 입력해주세요." });
-    }
+  const { checkEmail } = UseMutationCheckEmailExist();
+  const onClickConfirmEmail = () => {
+    void checkEmail(getValues("email"));
   };
 
   // Form
@@ -109,9 +97,8 @@ export default function Signup() {
   const { createUserSubmit } = UseMutationCreateUser();
 
   const onSubmitForm = (data: IFormSignupData) => {
-    const { passwordCheck, veganLevel, ...value } = data;
+    const { passwordCheck, veganLevel, checkbox, ...value } = data;
     void createUserSubmit(value);
-    console.log(data);
   };
 
   // 휴대폰 번호 형식 변환
@@ -235,24 +222,28 @@ export default function Signup() {
             <>
               <S.InputWrapper>
                 <S.Label>비건 단계</S.Label>
-                <S.Select
-                  {...register("veganLevel")}
-                  defaultValue="none"
-                  placeholder="비건 레벨"
-                >
-                  <option value="none" disabled={true}>
-                    단계를 선택해주세요.
-                  </option>
-                  <option value="FLEX">0단계: 플렉시테리언</option>
-                  <option value="POLO">1단계: 폴로 베지테리언</option>
-                  <option value="PESCO">2단계: 페스코 베지테리언</option>
-                  <option value="LACTOOVO">3단계: 락토 오보 베지테리언</option>
-                  <option value="OVO">4단계: 오보 베지테리언</option>
-                  <option value="LACTO">5단계: 락토 베지테리언</option>
-                  <option value="VEGAN">6단계: 비건</option>
-                </S.Select>
+                <S.InputErrorWrapper>
+                  <S.Select
+                    {...register("veganLevel")}
+                    defaultValue="none"
+                    placeholder="비건 단계"
+                  >
+                    <option value="none" disabled={true}>
+                      단계를 선택해주세요.
+                    </option>
+                    <option value="FLEX">0단계: 플렉시테리언</option>
+                    <option value="POLO">1단계: 폴로 베지테리언</option>
+                    <option value="PESCO">2단계: 페스코 베지테리언</option>
+                    <option value="LACTOOVO">
+                      3단계: 락토 오보 베지테리언
+                    </option>
+                    <option value="OVO">4단계: 오보 베지테리언</option>
+                    <option value="LACTO">5단계: 락토 베지테리언</option>
+                    <option value="VEGAN">6단계: 비건</option>
+                  </S.Select>
+                  <S.Error>{formState.errors.veganLevel?.message}</S.Error>
+                </S.InputErrorWrapper>
               </S.InputWrapper>
-              <S.Error>{formState.errors.veganLevel?.message}</S.Error>
             </>
           )}
 
@@ -318,7 +309,9 @@ export default function Signup() {
               <p style={{ marginBottom: "0" }}>이용약관에 동의합니다.</p>
             </S.CheckboxWrapper>
           </S.InfoWrapper>
-          <S.Error>{formState.errors.checkbox?.message}</S.Error>
+          <S.Error style={{ textAlign: "center" }}>
+            {formState.errors.checkbox?.message}
+          </S.Error>
           <S.SignupBtn>회원가입</S.SignupBtn>
           <Link href="/login">
             <S.Login>로그인 하기</S.Login>

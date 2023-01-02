@@ -19,6 +19,7 @@ const MYPAGE_LAYOUT = [
   "/mypage/myinfo",
   "/mypage/myinfo/changepw",
   "/mypage/myinfo/modify",
+  "/mypage/qna",
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
