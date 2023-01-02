@@ -6,6 +6,7 @@ import {
 } from "../../../commons/tags/CommonTags.Styles";
 import MarketCategory from "../category/MarketCategory";
 import * as MS from "../main/MarketMain.styles";
+import ListSearch from "./ListSearch";
 import * as S from "./MarketList.styles";
 
 interface IMarketListProps {
@@ -18,6 +19,7 @@ export default function MarketList(props: IMarketListProps) {
       <MS.MarketMainContainer>
         <MarketCategory />
         <S.ListTitle>{props.header}</S.ListTitle>
+        <ListSearch />
         <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
           {new Array(9).fill(1).map((_, index) => (
             <S.ItemDisplay03 key={index}>

@@ -1,7 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { amazon } from "../../../../commons/styles/colorPalettes";
+import { amazon, gray } from "../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../commons/styles/globalStyles";
+import SearchIcon from "@mui/icons-material/Search";
+import { Select } from "antd";
+import { mobile } from "../../../../commons/styles/breakPoints";
 
 const FontStyle02 = css`
   font-family: "SUIT-ExtraBold";
@@ -43,6 +46,8 @@ export const ItemImageBox01 = styled.div`
 export const ItemDetailFooter02 = styled.footer`
   ${flexRow}
   justify-content: space-between;
+  @media ${mobile} {
+  }
 `;
 
 export const DetailFooterLeft = styled.div`
@@ -70,4 +75,36 @@ export const ItemOriginPrice03 = styled.span`
   color: rgb(181, 181, 181);
   font-size: 0.9rem;
   text-decoration: line-through;
+`;
+
+// 검색창, 셀렉트박스 스타일
+
+export const ListSearchSection = styled.section`
+  width: 100%;
+  ${flexRow}
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 4rem;
+  margin: 2rem 0 1rem;
+  gap: 1rem;
+`;
+
+export const SearchSection = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+export const SearchInputBox = styled.input`
+  padding: 0.5rem;
+  border-bottom: 2px solid ${gray};
+`;
+
+export const StyledSearchIcon = styled(SearchIcon)`
+  color: ${amazon};
+  margin-left: 0.2rem;
+  cursor: pointer;
+`;
+
+export const SelectBox = styled(Select)`
+  width: 10rem;
 `;
