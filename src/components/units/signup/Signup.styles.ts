@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { mobile } from "../../../commons/styles/breakPoints";
+import { colorBase01 } from "../../../commons/styles/colorBases";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -22,7 +23,7 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 8rem;
+  padding: 6rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -51,20 +52,36 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   margin-top: 40px;
 `;
 
 export const Label = styled.p`
   width: 15%;
+  margin-right: 10px;
 `;
 
 export const Input = styled.input`
-  width: 80%;
+  width: 75%;
   height: 3rem;
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: white;
+  }
+`;
+
+export const CheckEmailBtn = styled.button`
+  width: 100px;
+  padding: 14px;
+  font-weight: 500;
+  margin-left: 20px;
+  ${colorBase01}
 `;
 
 export const PhoneWrapper = styled.div`
@@ -81,12 +98,19 @@ export const PhoneInput = styled.input`
   outline: none;
 `;
 
-export const ConfirmWrapper = styled.div`
-  width: 80%;
-  margin-top: 20px;
+export const InputBtnWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+export const ConfirmWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
 `;
 
 export const ConfirmPhone = styled.input`
@@ -104,28 +128,29 @@ export const ConfirmTime = styled.span`
   font-size: 1rem;
   color: #436f59;
   font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 120px;
 `;
 
 export const PhoneBtn = styled.button`
   width: 130px;
   padding: 14px;
-  border: none;
   font-weight: 500;
-  border-radius: 10px;
+  margin-left: 20px;
   color: white;
-  background-color: #1f3d31;
-  cursor: pointer;
+  ${colorBase01}
 `;
 
 export const Select = styled.select`
-  width: 80%;
+  width: 60%;
   height: 2.5rem;
   outline: none;
   background-color: white;
 `;
 
 export const AddWrapper = styled.div`
-  width: 80%;
+  width: 60%;
   display: flex;
   flex-direction: column;
 `;
@@ -202,11 +227,7 @@ export const SignupBtn = styled.button`
   padding: 18px;
   margin-top: 80px;
   font-weight: 500;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  background-color: #1f3d31;
-  cursor: pointer;
+  ${colorBase01}
 `;
 
 export const Login = styled.a`
@@ -216,4 +237,20 @@ export const Login = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+export const InputErrorWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Error = styled.div`
+  margin-top: 8px;
+  color: red;
+`;
+
+export const PhoneError = styled.div`
+  margin-top: 8px;
+  color: red;
 `;
