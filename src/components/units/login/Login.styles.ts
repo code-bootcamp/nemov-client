@@ -21,7 +21,7 @@ export const ImgWrapper = styled.div`
   }
 `;
 
-export const RightWrapper = styled.form`
+export const Form = styled.form`
   width: 45%;
   padding: 9rem;
   margin: 0 auto;
@@ -100,4 +100,15 @@ export const Signup = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+export const InputErrorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Error = styled.div`
+  margin-top: 8px;
+  color: red;
 `;

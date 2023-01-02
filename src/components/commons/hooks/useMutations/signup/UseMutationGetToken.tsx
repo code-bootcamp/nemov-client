@@ -6,7 +6,7 @@ export const GET_TOKEN = gql`
   }
 `;
 
-export const UseMutationCheckValidToken = () => {
+export const UseMutationGetToken = () => {
   const mutation = useMutation(GET_TOKEN);
 
   return mutation;
