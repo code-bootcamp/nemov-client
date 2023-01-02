@@ -9,6 +9,7 @@ import {
   colorBase04,
 } from "../../../../../../commons/styles/colorBases";
 import { flexColumn } from "../../../../../../commons/styles/globalStyles";
+// import { IProductAskStylesProps } from "../../../Market.types";
 
 export const IconStyleSet01 = css`
   ${colorBase04}
@@ -68,6 +69,7 @@ export const OpenAnswerButton01 = styled(KeyboardArrowDownIcon)`
   width: 2rem;
   height: 2rem;
   margin: 0 1rem;
+  cursor: pointer;
 `;
 
 export const QNAContentsSection = styled.footer`

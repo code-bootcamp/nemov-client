@@ -18,7 +18,7 @@ export const MarketDetailPageBody = styled.main`
   ${flexColumn}
 `;
 
-export const TabContentMain01 = styled.main`
+export const TabContentMain01 = styled.section`
   width: 100%;
   margin-top: 1rem;
   padding: 1rem;

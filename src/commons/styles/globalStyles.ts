@@ -9,7 +9,7 @@ export const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Arita-dotum-Medium";
+    font-family: "Arita-Medium";
   }
 
   @media (max-width: 1300px) {
@@ -52,64 +52,52 @@ export const globalStyles = css`
     object-fit: cover;
   }
 
+  // bold
   @font-face {
-    font-family: "Arita-dotum-Medium";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
+    font-family: "Arita-Bold";
+    src: url("/fonts/arita-dotum-Bold.woff");
   }
 
+  // semi-bold
   @font-face {
-    font-family: "SUIT-Bold";
-    src: url("/fonts/SUIT-Bold.ttf");
+    font-family: "Arita-SemiBold";
+    src: url("/fonts/arita-dotum-SemiBold.woff");
   }
 
+  // medium
   @font-face {
-    font-family: "SUIT-ExtraBold";
-    src: url("/fonts/SUIT-ExtraBold.ttf");
+    font-family: "Arita-Medium";
+    src: url("/fonts/arita-dotum-Medium.woff");
   }
 
+  // light
   @font-face {
-    font-family: "SUIT-ExtraLight";
-    src: url("/fonts/SUIT-ExtraLight.ttf");
+    font-family: "Arita-Light";
+    src: url("/fonts/arita-dotum-Light.woff");
   }
 
+  // thin
   @font-face {
-    font-family: "SUIT-Heavy";
-    src: url("/fonts/SUIT-Heavy.ttf");
-  }
-
-  @font-face {
-    font-family: "SUIT-Light";
-    src: url("/fonts/SUIT-Light.ttf");
-  }
-
-  @font-face {
-    font-family: "SUIT-Medium";
-    src: url("/fonts/SUIT-Medium.ttf");
-  }
-
-  @font-face {
-    font-family: "SUIT-Regular";
-    src: url("/fonts/SUIT-Regular.ttf");
-  }
-
-  @font-face {
-    font-family: "SUIT-SemiBold";
-    src: url("/fonts/SUIT-SemiBold.ttf");
-  }
-
-  @font-face {
-    font-family: "SUIT-Thin";
-    src: url("/fonts/SUIT-Thin.ttf");
+    font-family: "Arita-Thin";
+    src: url("/fonts/arita-dotum-Thin.woff");
   }
 `;
 
-export const GlobalWrapper = styled.main`
-  width: 100%;
-  padding: 3%;
-  max-width: 1300px;
+// 글로벌 css
+export const bold = css`
+  font-family: "Arita-Bold";
+`;
+
+export const semiBold = css`
+  font-family: "Arita-SemiBold";
+`;
+
+export const light = css`
+  font-family: "Arita-Light";
+`;
+
+export const thin = css`
+  font-family: "Arita-Thin";
 `;
 
 export const flexRow = css`
@@ -126,4 +114,11 @@ export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+// 글로벌 style
+export const GlobalWrapper = styled.main`
+  width: 100%;
+  padding: 3%;
+  max-width: 1300px;
 `;
