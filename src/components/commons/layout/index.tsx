@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import LayoutBanner from "./banner";
 import LayoutFooter from "./footer";
 import LayoutHeader from "./header";
-import LayoutNav from "./nav";
 import ScrollToTop from "./scrollToTop";
 
 const LayoutBody = styled.div`
@@ -21,17 +20,23 @@ export default function Layout(props: ILayoutProps) {
   const router = useRouter();
 
   const HIDDEN_HEADER = ["/"];
-  const HIDDEN_NAV = ["/"];
   const HIDDEN_BANNER = [
     "/",
     "/login",
     "/signup",
+    "/signup/user",
     "/mypage",
     "/mypage/basket",
     "/mypage/orderlist",
     "/mypage/picked",
     "/mypage/point",
     "/mypage/reviews",
+    "/market/categories",
+    "/market/categories/all",
+    "/market/categories/food",
+    "/market/categories/drink",
+    "/market/categories/beauty",
+    "/market/categories/life",
     "/seller",
     "/seller/new",
     `/market/${router.query.productId}`,
@@ -40,7 +45,6 @@ export default function Layout(props: ILayoutProps) {
   const HIDDEN_FOOTER = ["/"];
 
   const isHiddenHeader = HIDDEN_HEADER.includes(router.asPath);
-  const isHiddenNav = HIDDEN_NAV.includes(router.asPath);
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
   const isHiddenScrollToTop = HIDDEN_SCROLLTOTOP.includes(router.asPath);
   const isHiddenFooter = HIDDEN_FOOTER.includes(router.asPath);
@@ -48,7 +52,6 @@ export default function Layout(props: ILayoutProps) {
   return (
     <>
       {!isHiddenHeader && <LayoutHeader />}
-      {!isHiddenNav && <LayoutNav />}
       {!isHiddenBanner && <LayoutBanner />}
       <LayoutBody>{props.children}</LayoutBody>
       {!isHiddenScrollToTop && <ScrollToTop />}
