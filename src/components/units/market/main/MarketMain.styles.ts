@@ -1,7 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { mobile } from "../../../../commons/styles/breakPoints";
-import { colorBase03 } from "../../../../commons/styles/colorBases";
+import {
+  colorBase03,
+  colorBase04,
+} from "../../../../commons/styles/colorBases";
 import {
   deepGreen,
   gray,
@@ -45,7 +48,8 @@ export const PageLine = styled.div`
   z-index: -1;
   width: 100%;
   height: 46.875rem;
-  background: url(/images/bg-line.jpg) no-repeat center;
+  background-color: #d8e9c8;
+  /* background: url(/images/bg-line.jpg) no-repeat center; */
   background-size: cover;
 `;
 
@@ -64,6 +68,9 @@ export const RecommendItemSection01 = styled.section`
   gap: 20px;
   margin-top: 5%;
   margin-bottom: 10%;
+  @media ${mobile} {
+    /* padding: 0 1rem; */
+  }
 `;
 
 export const ItemsWrapper01 = styled.section`
@@ -100,6 +107,7 @@ export const ItemDisplay = styled.div`
   width: 30%;
   background-color: transparent;
   gap: 20px;
+  cursor: pointer;
 `;
 
 export const RecommendItemImg01 = styled.div`
@@ -167,6 +175,9 @@ export const ItemPrices = styled.div`
   ${flexRow}
   align-items: center;
   gap: 0.8rem;
+
+  @media ${mobile} {
+  }
 `;
 
 // 아이템 디테일 디스플레이2
@@ -181,11 +192,6 @@ export const ItemDetail02 = styled.div`
   transform: translateX(-50%);
   color: white;
   transition: 0.3s ease-in-out;
-`;
-
-export const ItemName02 = styled.span`
-  /* color: white; */
-  font-size: 1.25rem;
 `;
 
 export const ItemImage02 = styled.img`
@@ -247,13 +253,42 @@ export const ItemDisplay02 = styled.div`
       align-items: center;
     }
   }
+  cursor: pointer;
 `;
 
-export const MarketMainSectionHeader = styled.header`
+const HeaderStyle = css`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 2rem;
   padding-bottom: 1rem;
+  font-weight: 900;
+`;
+
+export const MarketMainHeader01 = styled.header`
+  ${HeaderStyle}
+  color: white;
+`;
+
+export const MarketMainHeader02 = styled.header`
+  ${HeaderStyle}
+  color: black;
+`;
+
+export const HeaderSpan = styled.span`
+  margin-right: 1rem;
+  color: ${deepGreen};
+  font-weight: 900;
+`;
+
+export const HeaderDiv = styled.div`
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  ${colorBase04}
+  padding: 0.5rem;
+  border-radius: 2rem;
+  border: none;
 `;
 
 export const StyledBasketIcon = styled.object`

@@ -15,7 +15,10 @@ export default function MarketMain() {
         <S.MainItemsWrapper>
           <S.PageLine />
           <S.RecommendItemSection01>
-            <S.MarketMainSectionHeader>추천상품</S.MarketMainSectionHeader>
+            <S.MarketMainHeader01>
+              네모비 회원이 선택한 상품
+              <S.HeaderDiv>추천상품</S.HeaderDiv>
+            </S.MarketMainHeader01>
             <S.ItemsWrapper01>
               {new Array(3).fill(1).map((_, index) => (
                 <S.ItemDisplay key={index}>
@@ -43,12 +46,12 @@ export default function MarketMain() {
             </S.ItemsWrapper01>
           </S.RecommendItemSection01>
           <S.MainMarketSection01>
-            <S.MarketMainSectionHeader>베스트상품</S.MarketMainSectionHeader>
+            <S.MarketMainHeader02>베스트상품</S.MarketMainHeader02>
             <S.ItemsWrapper02>
               {new Array(8).fill(1).map((_, index) => (
                 <S.ItemDisplay02 key={index}>
                   <S.ItemDetail02>
-                    <S.ItemName02>자연 허브 비누</S.ItemName02>
+                    <S.ItemName>자연 허브 비누</S.ItemName>
                     <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
                     <S.ItemOriginPrice02>14,000원</S.ItemOriginPrice02>
                   </S.ItemDetail02>

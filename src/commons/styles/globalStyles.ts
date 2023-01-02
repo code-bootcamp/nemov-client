@@ -9,7 +9,7 @@ export const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "SUIT-Regular";
+    font-family: "Arita-dotum-Medium";
   }
 
   @media (max-width: 1300px) {
@@ -50,6 +50,14 @@ export const globalStyles = css`
 
   img {
     object-fit: cover;
+  }
+
+  @font-face {
+    font-family: "Arita-dotum-Medium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
   }
 
   @font-face {
@@ -100,7 +108,7 @@ export const globalStyles = css`
 
 export const GlobalWrapper = styled.main`
   width: 100%;
-  padding: 3% 0;
+  padding: 3%;
   max-width: 1300px;
 `;
 
