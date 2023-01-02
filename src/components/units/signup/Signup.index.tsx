@@ -6,40 +6,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SignupSchema } from "./Signup.validation";
 import { IFormSignupData } from "./Signup.types";
 import CommonModal01 from "../../commons/modals/CommonModal01";
-import { isOpenState } from "../../../commons/stores";
+import { isOpenState, isSellerState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
-import { gql, useMutation } from "@apollo/client";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Modal } from "antd";
 import CountDown from "../../commons/count/Conut.index";
-
-const GET_TOKEN = gql`
-  mutation getToken($phone: Phone!) {
-    getToken(phone: $phone)
-  }
-`;
-
-const CHECK_VALID_TOKEN = gql`
-  mutation checkValidToken($phone: Phone!, $token: String!) {
-    checkValidToken(phone: $phone, token: $token)
-  }
-`;
-
-const CHECK_EMAIL_EXIST = gql`
-  mutation checkEmailExist($email: Email!) {
-    checkEmailExist(email: $email)
-  }
-`;
+import { UseMutationCheckValidToken } from "../../commons/hooks/useMutations/signup/UseMutationCheckValidToken";
+import { UseMutationCheckEmailExist } from "../../commons/hooks/useMutations/signup/UseMutationCheckEmailExist";
+import { UseMutationGetToken } from "../../commons/hooks/useMutations/signup/UseMutationGetToken";
 
 export default function Signup() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [time, setTime] = useState(false);
+  const [isSeller] = useRecoilState(isSellerState);
   const [tokenInput, setTokenInput] = useState("");
 
   // 인증번호 요청
-  const [getToken] = useMutation(GET_TOKEN);
-  const [checkValidToken] = useMutation(CHECK_VALID_TOKEN);
+  const [getToken] = UseMutationGetToken();
+  const [checkValidToken] = UseMutationCheckValidToken();
 
   const onClickGetToken = async () => {
     if (!time) {
@@ -88,7 +73,7 @@ export default function Signup() {
   };
 
   // 이메일 중복확인
-  const [checkEmailExist] = useMutation(CHECK_EMAIL_EXIST);
+  const [checkEmailExist] = UseMutationCheckEmailExist();
 
   const onClickConfirmEmail = async () => {
     try {
@@ -246,26 +231,31 @@ export default function Signup() {
               </S.ConfirmWrapper>
             </S.PhoneWrapper>
           </S.InputWrapper>
-          <S.InputWrapper>
-            <S.Label>비건 단계</S.Label>
-            <S.Select
-              {...register("veganLevel")}
-              defaultValue="none"
-              placeholder="비건 레벨"
-            >
-              <option value="none" disabled={true}>
-                단계를 선택해주세요.
-              </option>
-              <option value="FLEX">0단계: 플렉시테리언</option>
-              <option value="POLO">1단계: 폴로 베지테리언</option>
-              <option value="PESCO">2단계: 페스코 베지테리언</option>
-              <option value="LACTOOVO">3단계: 락토 오보 베지테리언</option>
-              <option value="OVO">4단계: 오보 베지테리언</option>
-              <option value="LACTO">5단계: 락토 베지테리언</option>
-              <option value="VEGAN">6단계: 비건</option>
-            </S.Select>
-          </S.InputWrapper>
-          <S.Error>{formState.errors.veganLevel?.message}</S.Error>
+          {!isSeller && (
+            <>
+              <S.InputWrapper>
+                <S.Label>비건 단계</S.Label>
+                <S.Select
+                  {...register("veganLevel")}
+                  defaultValue="none"
+                  placeholder="비건 레벨"
+                >
+                  <option value="none" disabled={true}>
+                    단계를 선택해주세요.
+                  </option>
+                  <option value="FLEX">0단계: 플렉시테리언</option>
+                  <option value="POLO">1단계: 폴로 베지테리언</option>
+                  <option value="PESCO">2단계: 페스코 베지테리언</option>
+                  <option value="LACTOOVO">3단계: 락토 오보 베지테리언</option>
+                  <option value="OVO">4단계: 오보 베지테리언</option>
+                  <option value="LACTO">5단계: 락토 베지테리언</option>
+                  <option value="VEGAN">6단계: 비건</option>
+                </S.Select>
+              </S.InputWrapper>
+              <S.Error>{formState.errors.veganLevel?.message}</S.Error>
+            </>
+          )}
+
           <S.InputWrapper>
             <S.Label>주소</S.Label>
             <S.AddWrapper>

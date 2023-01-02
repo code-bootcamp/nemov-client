@@ -1,18 +1,26 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { mobile } from "../../src/commons/styles/breakPoints";
 import { colorBase01 } from "../../src/commons/styles/colorBases";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRecoilState } from "recoil";
 import { isSellerState } from "../../src/commons/stores";
+import { UseMutationCheckBusinessLicenseNumber } from "../../src/components/commons/hooks/useMutations/signup/UseMutationCheckBusinessLicenseNumber";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 
 export default function SignupPage() {
+  const router = useRouter();
+
   const [isSeller, setIsSeller] = useRecoilState(isSellerState);
   const [isSelected, setIsSelected] = useState([true, false]);
+  const [bln, setBln] = useState("");
 
-  const onClickGeneral = () => {
+  const [checkBusinessLicenseNumber] = UseMutationCheckBusinessLicenseNumber();
+
+  const onClickUser = () => {
     setIsSeller(false);
     setIsSelected([true, false]);
   };
@@ -20,6 +28,27 @@ export default function SignupPage() {
   const onClickSeller = () => {
     setIsSeller(true);
     setIsSelected([false, true]);
+  };
+
+  const onChangeBusinessLN = (e: ChangeEvent<HTMLInputElement>) => {
+    setBln(e.currentTarget.value);
+  };
+
+  const onClickCheckBl = async () => {
+    try {
+      const result = await checkBusinessLicenseNumber({
+        variables: {
+          bln,
+        },
+      });
+      console.log(result);
+      if (result.data.checkBusinessLicenseNumber) {
+        Modal.success({ content: "사업자 등록번호 인증에 성공했습니다." });
+        void router.push("/signup/seller");
+      }
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
   };
 
   return (
@@ -30,7 +59,7 @@ export default function SignupPage() {
           <Article>
             <TitleWrapper>
               <TitleGeneral
-                onClick={onClickGeneral}
+                onClick={onClickUser}
                 style={{
                   backgroundColor: isSelected[0] ? "#1f3d31" : "white",
                   color: isSelected[0] ? "white" : "black",
@@ -71,13 +100,13 @@ export default function SignupPage() {
                   <SellerNumsText>
                     사업자 등록번호를 인증해주세요.
                   </SellerNumsText>
-                  <SellerNumsInput type="text" />
+                  <SellerNumsInput type="text" onChange={onChangeBusinessLN} />
                 </>
               )}
               {isSeller ? (
-                <SignupBtn>인증</SignupBtn>
+                <SignupBtn onClick={onClickCheckBl}>인증</SignupBtn>
               ) : (
-                <Link href="/signup/general">
+                <Link href="/signup/user">
                   <SignupBtn>
                     <a>가입하기</a>
                   </SignupBtn>
