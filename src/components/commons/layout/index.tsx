@@ -14,28 +14,30 @@ const LayoutBody = styled.div`
 
 interface ILayoutProps {
   children: JSX.Element;
+  productId: string | string[] | undefined;
 }
-
-const HIDDEN_HEADER = ["/"];
-const HIDDEN_NAV = ["/"];
-const HIDDEN_BANNER = [
-  "/",
-  "/login",
-  "/signup",
-  "/mypage",
-  "/mypage/basket",
-  "/mypage/orderlist",
-  "/mypage/picked",
-  "/mypage/point",
-  "/mypage/reviews",
-  "/seller",
-  "/seller/new",
-];
-const HIDDEN_SCROLLTOTOP = ["/", "/login", "/signup"];
-const HIDDEN_FOOTER = ["/"];
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
+
+  const HIDDEN_HEADER = ["/"];
+  const HIDDEN_NAV = ["/"];
+  const HIDDEN_BANNER = [
+    "/",
+    "/login",
+    "/signup",
+    "/mypage",
+    "/mypage/basket",
+    "/mypage/orderlist",
+    "/mypage/picked",
+    "/mypage/point",
+    "/mypage/reviews",
+    "/seller",
+    "/seller/new",
+    `/market/${router.query.productId}`,
+  ];
+  const HIDDEN_SCROLLTOTOP = ["/", "/login", "/signup"];
+  const HIDDEN_FOOTER = ["/"];
 
   const isHiddenHeader = HIDDEN_HEADER.includes(router.asPath);
   const isHiddenNav = HIDDEN_NAV.includes(router.asPath);
