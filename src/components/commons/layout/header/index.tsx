@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LayoutNav from "./nav";
 import * as S from "./LayoutHeader.styles";
 
 export default function LayoutHeader() {
@@ -7,13 +8,12 @@ export default function LayoutHeader() {
       <Link href="/market">
         <S.Logo>
           <S.LogoImg src="/logo/logo1.png" />
-          {/* <S.LogoImg src="/logo/logo2.png" /> */}
-          {/* <S.LogoImg src="/logo/logo3.png" /> */}
         </S.Logo>
       </Link>
+      <LayoutNav />
       <S.HeaderMenu>
         <Link href="/mypage/basket">
-          <S.HeaderMenuItem>장바구니</S.HeaderMenuItem>
+          <S.Basket />
         </Link>
         <Link href="/login">
           <S.HeaderMenuItem>LOGIN</S.HeaderMenuItem>
