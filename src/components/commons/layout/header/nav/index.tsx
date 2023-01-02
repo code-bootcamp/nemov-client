@@ -1,31 +1,32 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { mobile } from "../../../../../commons/styles/breakPoints";
+import { tablet } from "../../../../../commons/styles/breakPoints";
 
-export const Wrapper = styled.nav`
+export const NavWrapper = styled.nav`
   width: 100%;
-  width: 50%;
+  height: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 20%;
+  top: 0;
   left: 50%;
   transform: translate(-50%);
-
-  @media ${mobile} {
+  z-index: -1;
+  @media ${tablet} {
     display: none;
   }
 `;
 
 export const Menu = styled.span`
-  font-size: 1rem;
-  margin: 2% 3%;
+  font-size: 1.2rem;
+  margin: 2%;
   cursor: pointer;
+  color: #fff;
 `;
 
 export default function LayoutNav() {
   return (
-    <Wrapper>
+    <NavWrapper>
       <Link href={"/"}>
         <Menu>ABOUT</Menu>
       </Link>
@@ -44,6 +45,6 @@ export default function LayoutNav() {
       <Link href={"/market"}>
         <Menu>LIFE</Menu>
       </Link>
-    </Wrapper>
+    </NavWrapper>
   );
 }

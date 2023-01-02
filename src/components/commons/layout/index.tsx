@@ -32,7 +32,6 @@ export default function Layout(props: ILayoutProps) {
     "/mypage/point",
     "/mypage/reviews",
     "/market/categories",
-    "/market/categories/all",
     "/market/categories/food",
     "/market/categories/drink",
     "/market/categories/beauty",
