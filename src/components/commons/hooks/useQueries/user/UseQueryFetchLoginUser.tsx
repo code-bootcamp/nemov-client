@@ -18,7 +18,6 @@ export const FETCH_LOGIN_USER = gql`
   }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
 export const UseQueryFetchLoginUser = () => {
   const query = useQuery(FETCH_LOGIN_USER);
   return query;

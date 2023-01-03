@@ -1,10 +1,9 @@
-import { useRecoilState } from "recoil";
-import { isOpenState } from "../../../../commons/stores";
+import { useState } from "react";
 import Paginations01 from "../../../commons/paginations/01/Paginations01.index";
 import * as S from "./Qna.styles";
 
 export default function MypageQna() {
-  const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onClickShowAnswer = () => {
     setIsOpen((prev) => !prev);

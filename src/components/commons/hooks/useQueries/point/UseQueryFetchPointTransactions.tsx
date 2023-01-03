@@ -1,4 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
+import {
+  IQuery,
+  IQueryFetchPointTransactionsArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const FETCH_POINT_TRANSACTIONS = gql`
   query fetchPointTransactions($startDate: DateTime, $endDate: DateTime, $page: Int!) {
@@ -7,6 +11,7 @@ export const FETCH_POINT_TRANSACTIONS = gql`
       impUid
       amount
       status
+      createdAt
       user {
         id
         name
@@ -24,9 +29,11 @@ export const FETCH_POINT_TRANSACTIONS = gql`
   }
 `;
 
-// 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
 export const UseQueryFetchPointTransactions = (variables: IQueryFetchPointTransactionsArgs) => {
-  const query = useQuery(FETCH_POINT_TRANSACTIONS, { variables });
+  const query = useQuery<Pick<IQuery, "fetchPointTransactions">, IQueryFetchPointTransactionsArgs>(
+    FETCH_POINT_TRANSACTIONS,
+    { variables }
+  );
 
   return query;
 };
