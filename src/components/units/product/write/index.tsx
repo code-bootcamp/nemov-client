@@ -4,31 +4,78 @@ import * as S from "./write.styles";
 
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { ChangeEvent, useRef, useState } from "react";
+import { UseMutationCreateProduct } from "../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
+import { useForm } from "react-hook-form";
 import { Editor } from "@toast-ui/react-editor";
+import {
+  ICreateProductInput,
+  IProduct_Category_Type,
+} from "../../../../commons/types/generated/types";
+import { UseMutationUploadFile } from "../../../commons/hooks/useMutations/UseMutationUploadFile";
 
 export default function ProductWrite() {
   const router = useRouter();
-  const [fileUrl, setFileUrl] = useState("");
-
   const editorRef = useRef();
-
   const { onClickMoveToPage } = useMoveToPage();
+  const [imageUrl, setImageUrl] = useState("");
+  const [, setFiles] = useState<File>();
+  const [category, setCategory] = useState<string>("");
+
+  const [createProduct] = UseMutationCreateProduct();
+  const [uploadFile] = UseMutationUploadFile();
+
+  const { register, handleSubmit, setValue } = useForm<ICreateProductInput>({
+    mode: "onChange",
+  });
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // 배열로 들어오는 이유: <input type="file" multiple /> 일 때, 여러개 드래그 가능
+    const file = event.target.files?.[0];
     if (file === undefined) return;
-    console.log(file);
 
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
       if (typeof event.target?.result === "string") {
-        setFileUrl(event.target?.result);
+        // setFile(event.target?.result);
+        // console.log(event.target?.result);
+
+        setImageUrl(event.target.result);
+        setFiles(file);
       }
     };
   };
 
-  const onClickSubmit = () => {
+  const onclickGetValue = (event: any) => {
+    // console.log(event.target.id);
+    setCategory(event.target.id);
+  };
+
+  const onClickRadio = (event: any) => {
+    console.log(Number(event.target.id));
+    setValue("veganLevel", Number(event.target.id));
+  };
+
+  const onClickSubmit = async (data: ICreateProductInput) => {
+    const resultFile = await uploadFile({ variables: { file: data.image } });
+    const url = resultFile.data?.uploadFile.url;
+
+    const result = await createProduct({
+      variables: {
+        createProductInput: {
+          name: data.name,
+          category: IProduct_Category_Type[category],
+          description: data.description,
+          discount: data.discount,
+          deliveryFee: data.deliveryFee,
+          price: data.price,
+          quantity: data.quantity,
+          image: url,
+          veganLevel: data.veganLevel,
+        },
+      },
+    });
+    console.log("result:", result);
+
     Editor.prototype.getInstance().getHTML();
     void router.push("/seller");
   };
@@ -36,35 +83,51 @@ export default function ProductWrite() {
   return (
     <S.Wrapper>
       <S.Title>판매자 상품 등록 페이지</S.Title>
-      <S.InnerWrap onSubmit={onClickSubmit}>
+      <S.InnerWrap onSubmit={handleSubmit(onClickSubmit)}>
         <S.Row>
-          <S.SubTitle>상품이름</S.SubTitle>{" "}
-          <S.InputBox type="text" placeholder="상품이름을 입력하세요" />
+          <S.SubTitle>상품이름</S.SubTitle>
+          <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
-          <S.InputBox type="number" placeholder="상품기격을 입력하세요" />
+          <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>할인율</S.SubTitle>
-          <S.InputBox type="number" placeholder="할인율을 입력하세요" />
+          <S.InputBox
+            type="number"
+            placeholder="할인율을 입력하세요"
+            {...register("description")}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>배송비</S.SubTitle>{" "}
-          <S.InputBox type="text" placeholder="배송비를 입력하세요" />
+          <S.InputBox type="text" placeholder="배송비를 입력하세요" {...register("deliveryFee")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>재고수량</S.SubTitle>{" "}
-          <S.InputBox type="number" placeholder="총 재고수량을 입력하세요" />
+          <S.InputBox
+            type="number"
+            placeholder="총 재고수량을 입력하세요"
+            {...register("quantity")}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
-          <select>
-            <option value={0}>FOOD</option>
-            <option value={1}>DRINK</option>
-            <option value={2}>BEAUTY</option>
-            <option value={3}>LIFE</option>
-          </select>
+          <div>
+            <button type="button" onClick={onclickGetValue} id="Beauty">
+              BEAUTY
+            </button>
+            <button type="button" onClick={onclickGetValue} id="Food">
+              FOOD
+            </button>
+            <button type="button" onClick={onclickGetValue} id="Drink">
+              DRINK
+            </button>
+            <button type="button" onClick={onclickGetValue} id="Life">
+              LIFE
+            </button>
+          </div>
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 고시 정보</S.SubTitle>
@@ -83,31 +146,31 @@ export default function ProductWrite() {
           <S.SubTitle>비건 유형</S.SubTitle>
           <S.Category>
             <S.Label>
-              <input type="radio" id="0" value="FLEX" name="level" />
+              <input type="radio" id="1" value="FLEX" name="level" onClick={onClickRadio} />
               <S.Radio>FLEX</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="1" value="POLO" name="level" />
+              <input type="radio" id="2" value="POLO" name="level" onClick={onClickRadio} />
               <S.Radio>POLO</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="2" value="PESCO" name="level" />
+              <input type="radio" id="3" value="PESCO" name="level" onClick={onClickRadio} />
               <S.Radio>PESCO</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="3" value="LACTOOVO" name="level" />
+              <input type="radio" id="4" value="LACTOOVO" name="level" onClick={onClickRadio} />
               <S.Radio>LACTOOVO</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="4" value="OVO" name="level" />
+              <input type="radio" id="5" value="OVO" name="level" onClick={onClickRadio} />
               <S.Radio>OVO</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="5" value="LACTO" name="level" />
+              <input type="radio" id="6" value="LACTO" name="level" onClick={onClickRadio} />
               <S.Radio>LACTO</S.Radio>
             </S.Label>
             <S.Label>
-              <input type="radio" id="6" value="VEGAN" name="level" />
+              <input type="radio" id="7" value="VEGAN" name="level" onClick={onClickRadio} />
               <S.Radio>VEGAN</S.Radio>
             </S.Label>
           </S.Category>
@@ -120,7 +183,7 @@ export default function ProductWrite() {
               onChange={onChangeFile}
               placeholder="상품 대표 이미지를 등록하세요"
             />
-            <S.ThumbnailImg src={fileUrl} />
+            <S.ThumbnailImg src={imageUrl} />
           </S.ThumbnailImgWrap>
         </S.Row>
         <S.Row>
@@ -129,11 +192,10 @@ export default function ProductWrite() {
             <S.EditorArea
               ref={editorRef}
               placeholder="상품 상세설명을 입력해주세요."
-              previewStyle="vertical" // 미리보기 스타일 지정
-              height="500px" // 에디터 창 높이
-              initialEditType="markdown" // 초기 입력모드 설정(디폴트 markdown)
+              previewStyle="vertical"
+              height="500px"
+              initialEditType="markdown"
               toolbarItems={[
-                // 툴바 옵션 설정
                 ["heading", "bold", "italic", "strike"],
                 ["hr", "quote"],
                 ["ul", "ol", "task", "indent", "outdent"],

@@ -3,15 +3,23 @@ import LayoutNav from "./nav";
 import * as S from "./LayoutHeader.styles";
 import CommonModal01 from "../../modals/CommonModal01";
 import { useRecoilState } from "recoil";
-import { isEditState, isOpenState } from "../../../../commons/stores";
+import { accessTokenState, isEditState, isOpenState } from "../../../../commons/stores";
 import PaymentPage from "../../../units/paymentModal/payment";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
+import { gql, useMutation } from "@apollo/client";
+
+const LOGOUT = gql`
+  mutation {
+    logout
+  }
+`;
 
 export default function LayoutHeader() {
   const { data } = UseQueryFetchLoginUser();
   const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-
+  const [logout] = useMutation(LOGOUT);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
   console.log(data);
 
   const onClickPayment = () => {
@@ -23,6 +31,10 @@ export default function LayoutHeader() {
     setIsOpen((prev) => !prev);
   };
 
+  const onClickLogout = () => {
+    void logout();
+    setAccessToken("");
+  };
   return (
     <S.Wrapper>
       <Link href="/market">
@@ -51,7 +63,9 @@ export default function LayoutHeader() {
           <S.HeaderMenuItem>{data ? "MYPAGE" : "LOGIN"}</S.HeaderMenuItem>
         </Link>
         <Link href={data ? "market" : "/signup"}>
-          <S.HeaderMenuItem>{data ? "LOGOUT" : "SIGNUP"} </S.HeaderMenuItem>
+          <S.HeaderMenuItem onClick={data && onClickLogout}>
+            {data ? "LOGOUT" : "SIGNUP"}{" "}
+          </S.HeaderMenuItem>
         </Link>
       </S.HeaderMenu>
     </S.Wrapper>
