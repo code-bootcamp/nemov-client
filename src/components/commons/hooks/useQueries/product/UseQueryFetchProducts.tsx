@@ -20,7 +20,7 @@ export const FETCH_PRODUCTS = gql`
 
 // 추후 백엔드에서 받은 타입 추가해야함
 // 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
-export const UseQueryFetchProducts = (variables: IQueryFetchProductsArgs) => {
+export const UseQueryFetchProducts = (variables: any) => {
   const query = useQuery(FETCH_PRODUCTS, { variables });
 
   return query;
