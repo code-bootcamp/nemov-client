@@ -29,7 +29,7 @@ export default function MypageLayoutHeader(props: IMypageLayoutHeaderProps) {
           <S.HeaderItem>
             <S.ItemTitle>포인트</S.ItemTitle>
             <span>
-              <S.ItemValue>{props.data?.fetchLoginUser.balance}</S.ItemValue>P
+              <S.ItemValue>{props.data?.fetchLoginUser.point}</S.ItemValue>P
             </span>
           </S.HeaderItem>
         </Link>

@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  colorBase01,
-  colorBase02,
-} from "../../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -37,7 +34,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  width: 20%;
+  width: 22%;
 `;
 
 export const PwInput = styled.input`

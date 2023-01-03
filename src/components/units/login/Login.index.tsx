@@ -14,7 +14,6 @@ export default function Login() {
   const router = useRouter();
 
   const [login] = UseMutationLogin();
-
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   // Form
@@ -41,7 +40,7 @@ export default function Login() {
 
       setAccessToken(accessToken);
 
-      Modal.success({ content: "~~님 환영합니다!" });
+      Modal.success({ content: `~~ 님 안녕하세요!` });
       void router.push("/market");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
@@ -55,11 +54,7 @@ export default function Login() {
         <S.Title>로그인</S.Title>
         <S.Text>네가 찾는 모든 비건, 네모비에 오신 것을 환영합니다!</S.Text>
         <S.InputErrorWrapper>
-          <S.Input
-            type="text"
-            placeholder="아이디를 입력해주세요."
-            {...register("email")}
-          />
+          <S.Input type="text" placeholder="아이디를 입력해주세요." {...register("email")} />
           <S.Error>{formState.errors.email?.message}</S.Error>
         </S.InputErrorWrapper>
         <S.InputErrorWrapper>

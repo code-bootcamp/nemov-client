@@ -3,23 +3,14 @@ import MyPageMenu from "./menu/index";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
-import { gql, useQuery } from "@apollo/client";
+import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 
 interface MypageLayoutProps {
   children: ReactNode;
 }
 
-const FETCH_LOGIN_USER = gql`
-  query fetchLoginUser {
-    fetchLoginUser {
-      name
-      balance
-    }
-  }
-`;
-
 export default function MypageLayout({ children }: MypageLayoutProps) {
-  const { data } = useQuery(FETCH_LOGIN_USER);
+  const { data } = UseQueryFetchLoginUser();
 
   return (
     <GlobalWrapper>

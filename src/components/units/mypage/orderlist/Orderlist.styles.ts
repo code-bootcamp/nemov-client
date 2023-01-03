@@ -6,7 +6,7 @@ export const ContentsMain = styled.section`
 
 export const ShoppingLookup = styled.article`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 2.5rem;
 `;
@@ -32,9 +32,7 @@ export const SelectTermItem = styled.li`
   padding: 14px;
 `;
 
-export const MenuSelectWrap = styled.div`
-  margin-bottom: 2.5rem;
-`;
+export const MenuSelectWrap = styled.div``;
 
 export const MenuSelect = styled.button`
   border: none;
@@ -49,7 +47,7 @@ export const OrderHistory = styled.div``;
 export const Date = styled.p`
   font-size: 1rem;
   color: #555;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 `;
 export const OrderInfo = styled.div`
   width: 100%;
@@ -84,4 +82,10 @@ export const ItemNums = styled.p`
 
 export const ItemStatus = styled.p`
   color: #555;
+`;
+
+export const NoOrderText = styled.p`
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 40px;
 `;
