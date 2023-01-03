@@ -13,7 +13,7 @@ export const FETCH_LOGIN_USER = gql`
       addressDetail
       bln
       role
-      point
+      balance
     }
   }
 `;

@@ -9,6 +9,14 @@ export const Wrapper = styled.section`
   height: auto;
 `;
 
+// export const ArrowLeft = styled(ArrowBackIosNewIcon)`
+//   border: 1px solid red;
+//   width: 3.5rem;
+//   height: 3.5rem;
+//   color: red;
+//   z-index: 1;
+// `;
+
 export const StyleSlider = styled(Slider)`
   width: 100%;
   height: 100%;
@@ -21,6 +29,9 @@ export const StyleSlider = styled(Slider)`
   }
   .slick-next {
     right: 30px;
+  }
+  .slick-next:before {
+    /* content: ""; */
   }
   .slick-dots {
     bottom: 20px;
@@ -40,19 +51,37 @@ export const StyleSlider = styled(Slider)`
   }
 `;
 
-export const BannerImg = styled.div`
+const BannerImg = styled.div`
   width: 100%;
   height: 70vh;
-  vertical-align: center;
-  object-fit: cover;
-  object-position: center;
-  background: url("/images/banner/11.png") no-repeat center;
   background-size: cover;
   @media ${tablet} {
-    background: url("/images/banner/22.png") no-repeat center;
-    background-size: cover;
     width: 100%;
     height: 80vh;
+  }
+`;
+
+export const BannerImg1 = styled(BannerImg)`
+  background: url("/images/banner/1.png") no-repeat center;
+  @media ${tablet} {
+    background: url("/images/banner/11.png") no-repeat center;
+    background-size: cover;
+  }
+`;
+
+export const BannerImg2 = styled(BannerImg)`
+  background: url("/images/banner/2.jpg") no-repeat center;
+  @media ${tablet} {
+    background: url("/images/banner/22.jpg") no-repeat center;
+    background-size: cover;
+  }
+`;
+
+export const BannerImg3 = styled(BannerImg)`
+  background: url("/images/banner/3.jpg") no-repeat center;
+  @media ${tablet} {
+    background: url("/images/banner/33.jpg") no-repeat center;
+    background-size: cover;
   }
 `;
 

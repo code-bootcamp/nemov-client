@@ -34,7 +34,7 @@ export const FooterLogo = styled.span`
     width: 1px;
     height: 70px;
     background-color: rgb(152, 152, 152, 0.5);
-    top: -50%;
+    top: -8%;
     right: -2rem;
     display: block;
   }
@@ -84,7 +84,7 @@ export default function LayoutFooter() {
         <FooterLeft>
           <Link href="/market">
             <FooterLogo>
-              <img src="/logo/logo1.png" style={{ width: "120px" }} />
+              <img src="/logo/logo-01.png" style={{ width: "120px" }} />
             </FooterLogo>
           </Link>
           <hr />
