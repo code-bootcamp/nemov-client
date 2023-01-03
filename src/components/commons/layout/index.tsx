@@ -13,7 +13,7 @@ const LayoutBody = styled.div`
 
 interface ILayoutProps {
   children: JSX.Element;
-  productId: string | string[] | undefined;
+  productId?: string | string[] | undefined;
 }
 
 export default function Layout(props: ILayoutProps) {

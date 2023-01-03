@@ -4,7 +4,7 @@ import { mobile } from "../../../../commons/styles/breakPoints";
 import * as GS from "../../../../commons/styles/globalStyles";
 import * as CP from "../../../../commons/styles/colorPalettes";
 import * as CB from "../../../../commons/styles/colorBases";
-import { IMarketDetailHeadProps } from "../Market.types";
+import { IMarketDetailHeadStylesProps } from "../Market.types";
 
 import Slider from "react-slick";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -32,7 +32,7 @@ export const ItemDetailFooter02 = styled.footer`
 // 베스트 아이템 디스플레이
 export const BestItemImage = styled.div`
   width: 100%;
-  background-image: url(${(props: IMarketDetailHeadProps) => props.image});
+  background-image: url(${(props: IMarketDetailHeadStylesProps) => props.image});
   background-position: center;
   background-size: cover;
   object-fit: cover;
@@ -121,7 +121,7 @@ export const ItemDisplay = styled.div`
 export const RecommendItemImg01 = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url(${(props: IMarketDetailHeadProps) => props.image});
+  background-image: url(${(props: IMarketDetailHeadStylesProps) => props.image});
   background-position: center;
   background-size: cover;
   object-fit: cover;

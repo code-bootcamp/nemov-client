@@ -1,4 +1,8 @@
-export interface IMarketDetailHeadProps {
+export interface IMarketDetailProps {
+  data: any;
+}
+
+export interface IMarketDetailHeadStylesProps {
   image: string;
   // content: string;
 }

@@ -5,10 +5,11 @@ import {
 import { CommonHeartIcon01 } from "../../../../commons/icons/CommonIcons.styles";
 import { VeganLevelTag01 } from "../../../../commons/tags/CommonTags.Styles";
 import { MinusBtn, PlusBtn } from "../../../mypage/basket/Basket.styles";
+import { IMarketDetailProps } from "../../Market.types";
 import * as S from "./MarketDetailHead.styles";
 import MarketDetailHeadCrumbs from "./nav/MarketDetailHeadCrumbs";
 
-export default function MarketDetailHead() {
+export default function MarketDetailHead(props: IMarketDetailProps) {
   console.log("landing");
   return (
     <>

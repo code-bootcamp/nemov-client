@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IMarketDetailProps } from "../../Market.types";
 import * as S from "./MarketDetailBody.styles";
 import MarketDetailNav from "./nav/ProductDetailNav";
 import ProductAsk from "./product-ask/ProductAsk.container";
@@ -6,7 +7,7 @@ import ProductDetail from "./product-detail/ProductDetail.container";
 import ProductNoticeInfo from "./product-notice-info/ProductNoticeInfo";
 import ProductReviewList from "./product-review-list/ProductReviewList.container";
 
-export default function MarketDetailBody() {
+export default function MarketDetailBody(props: IMarketDetailProps) {
   const [isTabSelected, setIsTabSelected] = useState([true, false, false]);
 
   const onClickProductDetailTab = () => {
@@ -29,7 +30,7 @@ export default function MarketDetailBody() {
         onClickProductReviewListTab={onClickProductReviewListTab}
         onClickProductAskTab={onClickProductAskTab}
       />
-      {isTabSelected[0] && <ProductDetail />}
+      {isTabSelected[0] && <ProductDetail data={props.data} />}
       {isTabSelected[1] && <ProductReviewList />}
       {isTabSelected[2] && <ProductAsk />}
       <ProductNoticeInfo />
