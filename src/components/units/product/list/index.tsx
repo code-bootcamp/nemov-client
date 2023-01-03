@@ -5,7 +5,7 @@ import * as S from "./list.styles";
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
   return (
-    <GlobalWrapper>
+    <GlobalWrapper style={{ marginTop: "120px" }}>
       <S.Title>판매자 관리 페이지</S.Title>
       <section>
         <S.Table>
@@ -103,9 +103,7 @@ export default function ProductList() {
             </S.Tr>
           </S.Tbody>
         </S.Table>
-        <button onClick={onClickMoveToPage("/seller/new")}>
-          상품 등록하기
-        </button>
+        <button onClick={onClickMoveToPage("/seller/new")}>상품 등록하기</button>
       </section>
     </GlobalWrapper>
   );

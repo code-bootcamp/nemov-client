@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
-import {
-  colorBase01,
-  colorBase02,
-} from "../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { Editor } from "@toast-ui/react-editor";
 
 export const Wrapper = styled(GlobalWrapper)`
   display: flex;
   flex-direction: column;
+  margin-top: 120px;
 `;
 
 export const Title = styled.h1`
