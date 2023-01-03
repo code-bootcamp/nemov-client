@@ -1,7 +1,8 @@
 import { gql, useApolloClient, useQuery } from "@apollo/client";
+import { IQuery, IQueryFetchProductArgs } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCT = gql`
-  query fetchProduct($productId: String!) {
+  query fetchProduct($productId: ID!) {
     fetchProduct(productId: $productId) {
       id
       name
@@ -19,7 +20,9 @@ export const FETCH_PRODUCT = gql`
 
 // 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
 export const UseQueryFetchProduct = (variables: any) => {
-  const query = useQuery(FETCH_PRODUCT, { variables });
+  const query = useQuery<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>(FETCH_PRODUCT, {
+    variables,
+  });
   const client = useApolloClient();
 
   const prefetchProduct = (productId: string) => async () => {

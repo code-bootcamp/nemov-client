@@ -1,25 +1,17 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
-import MarketCategory from "../category/MarketCategory";
+// import MarketCategory from "../category/MarketCategory";
 import * as ID from "../item-display/ItemDisplay";
 import * as IDS from "../item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
 
-const NextArrow = ({
-  currentSlide,
-  slideCount,
-  ...props
-}: CustomArrowProps) => (
+const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
     <IDS.NextArrowIcon />
   </div>
 );
 
-const PrevArrow = ({
-  currentSlide,
-  slideCount,
-  ...props
-}: CustomArrowProps) => (
+const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
     <IDS.PrevArrowIcon />
   </div>
@@ -42,7 +34,7 @@ export default function MarketMain() {
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
-        <MarketCategory></MarketCategory>
+        {/* <MarketCategory></MarketCategory> */}
         <S.MainItemsWrapper>
           <S.PageLine />
           <S.RecommendItemSection01>

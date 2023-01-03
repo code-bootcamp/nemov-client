@@ -16,3 +16,15 @@ export const ProductDetailImg = styled.img`
   width: 100%;
   object-fit: cover;
 `;
+
+export const ProductDescription = styled.div`
+  width: 100%;
+  object-fit: cover;
+  @media ${mobile} {
+    height: 100%;
+    object-fit: cover;
+    font-size: 0.875rem;
+  }
+  font-size: 1rem;
+  line-height: 1.5rem;
+`;

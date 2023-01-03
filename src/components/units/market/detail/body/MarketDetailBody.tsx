@@ -31,7 +31,7 @@ export default function MarketDetailBody(props: IMarketDetailProps) {
         onClickProductAskTab={onClickProductAskTab}
       />
       {isTabSelected[0] && <ProductDetail data={props.data} />}
-      {isTabSelected[1] && <ProductReviewList />}
+      {isTabSelected[1] && <ProductReviewList data={props.data} />}
       {isTabSelected[2] && <ProductAsk />}
       <ProductNoticeInfo />
     </S.MarketDetailPageBody>
