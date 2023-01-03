@@ -69,6 +69,7 @@ export const PriceDateWrap = styled.div`
 export const PickedPrice = styled.p`
   font-weight: bold;
   width: 15%;
+  border-right: 1px solid black;
 `;
 
 export const PickedDate = styled.p`
@@ -86,7 +87,7 @@ export const BtnWrapper = styled.div`
 `;
 
 export const BasketBtn = styled.button`
-  min-width: 130px;
+  min-width: 133px;
   height: 36px;
   padding: 0 35px;
   font-size: 1rem;
@@ -94,11 +95,10 @@ export const BasketBtn = styled.button`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 18px;
-  margin-top: 10px;
 `;
 
 export const BuyBtn = styled.button`
-  min-width: 130px;
+  min-width: 133px;
   height: 36px;
   padding: 0 35px;
   font-size: 1rem;

@@ -23,9 +23,10 @@ export const HeaderItem = styled.article`
   padding: 0 5%;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 `;
 
-export const ItemTitle = styled.span`
+export const ItemTitle = styled.a`
   font-size: 1.1rem;
   font-weight: 100;
   color: #555;

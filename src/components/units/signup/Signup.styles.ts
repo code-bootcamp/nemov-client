@@ -23,8 +23,8 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 6rem;
-  margin: 0 auto;
+  padding: 4%;
+  margin: 80px auto 0 auto;
   display: flex;
   flex-direction: column;
 
@@ -58,6 +58,7 @@ export const InputWrapper = styled.div`
 export const Label = styled.p`
   width: 15%;
   margin-right: 10px;
+  margin-bottom: 0;
 `;
 
 export const Input = styled.input`
@@ -143,7 +144,7 @@ export const PhoneBtn = styled.button`
 `;
 
 export const Select = styled.select`
-  width: 60%;
+  width: 75%;
   height: 2.5rem;
   outline: none;
   background-color: white;

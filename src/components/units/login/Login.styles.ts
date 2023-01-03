@@ -56,6 +56,14 @@ export const Input = styled.input`
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: white;
+  }
 `;
 
 export const LoginBtn = styled.button`

@@ -29,7 +29,7 @@ export const Tabs = styled.ul`
 `;
 
 export const Line = styled.div`
-  width: 188px;
+  width: 193px;
   position: absolute;
   left: 0px;
   top: 8px;
@@ -43,7 +43,7 @@ export const Line = styled.div`
 `;
 
 export const Tab = styled.li`
-  width: 187px;
+  width: 191px;
   padding: 0 30px;
   text-align: center;
   font-size: 1.2rem;

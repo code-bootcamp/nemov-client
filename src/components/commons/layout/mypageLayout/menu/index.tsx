@@ -1,13 +1,17 @@
 import Link from "next/link";
 import * as S from "./styles";
 
-export default function MypageLayoutMenu() {
+interface IMypageLayoutMenuProps {
+  data: any;
+}
+
+export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
   return (
     <S.MyPageMenu>
       <S.MenuHeader>
         <S.Title>마이페이지</S.Title>
         <S.User>
-          <S.UserName>name</S.UserName>님 <br />
+          <S.UserName>{props.data?.fetchLoginUser.name}</S.UserName>님 <br />
           안녕하세요!
         </S.User>
       </S.MenuHeader>
@@ -44,8 +48,10 @@ export default function MypageLayoutMenu() {
         <S.Option>회원 정보 수정</S.Option>
       </Link>
       <S.ManageList>
-        <S.ManageOptions>고객센터</S.ManageOptions>
-        <S.ManageOptions>로그아웃</S.ManageOptions>
+        <Link href="/mypage/qna">
+          <S.ManageOptions>나의 문의내역</S.ManageOptions>
+        </Link>
+        <S.ManageOptions>회원탈퇴</S.ManageOptions>
       </S.ManageList>
     </S.MyPageMenu>
   );

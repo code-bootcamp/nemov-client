@@ -3,6 +3,8 @@ import { Modal } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/stores";
 import { UseMutationLogin } from "../../commons/hooks/useMutations/login/UseMutationLogin";
 import * as S from "./Login.styles";
 import { IFormLoginData } from "./Login.types";
@@ -13,6 +15,8 @@ export default function Login() {
 
   const [login] = UseMutationLogin();
 
+  const [, setAccessToken] = useRecoilState(accessTokenState);
+
   // Form
   const { register, handleSubmit, formState } = useForm<IFormLoginData>({
     resolver: yupResolver(LoginSchema),
@@ -21,12 +25,22 @@ export default function Login() {
 
   const onSubmitForm = async (data: IFormLoginData) => {
     try {
-      await login({
+      const result = await login({
         variables: {
           email: data.email,
           password: data.password,
         },
       });
+
+      const accessToken = result.data.login;
+
+      if (accessToken === undefined) {
+        Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요." });
+        return;
+      }
+
+      setAccessToken(accessToken);
+
       Modal.success({ content: "~~님 환영합니다!" });
       void router.push("/market");
     } catch (error) {

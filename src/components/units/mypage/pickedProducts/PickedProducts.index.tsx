@@ -13,7 +13,6 @@ export default function MypagePicked() {
             <S.PickedName>상품 이름</S.PickedName>
             <S.PriceDateWrap>
               <S.PickedPrice>10000 원</S.PickedPrice>
-              <span>|</span>
               <S.PickedDate>22.12.29</S.PickedDate>
             </S.PriceDateWrap>
           </S.PickedCenterWrapper>
@@ -30,7 +29,6 @@ export default function MypagePicked() {
             <S.PickedName>상품 이름</S.PickedName>
             <S.PriceDateWrap>
               <S.PickedPrice>10000 원</S.PickedPrice>
-              <span>|</span>
               <S.PickedDate>22.12.29</S.PickedDate>
             </S.PriceDateWrap>
           </S.PickedCenterWrapper>

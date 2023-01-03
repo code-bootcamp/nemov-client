@@ -12,6 +12,7 @@ export const ReviewUl = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 export const ReviewLi = styled.li`
@@ -48,7 +49,9 @@ export const ReviewDate = styled.p`
   margin-bottom: 0.4rem;
 `;
 
-export const ReviewContent = styled.p``;
+export const ReviewContent = styled.p`
+  margin-bottom: 0;
+`;
 
 export const ReviewBtnWrapper = styled.div`
   width: 10%;
