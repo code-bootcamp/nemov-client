@@ -1,18 +1,17 @@
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
+import { IMarketDetailProps } from "../../../Market.types";
 
 // export interface ITabContentsProps {
 //   isHidden: boolean;
 // }
 
-export default function ProductReviewList() {
+export default function ProductReviewList(props: IMarketDetailProps) {
   return (
     <CS.TabContentMain01>
       <CS.TabContentHeader01>
         <CS.TabContentTitle01>구매후기</CS.TabContentTitle01>
-        <CS.TabContentSubTitle01>
-          해당 상품을 구매한 구매자들의 후기입니다.
-        </CS.TabContentSubTitle01>
+        <CS.TabContentSubTitle01>해당 상품을 구매한 구매자들의 후기입니다.</CS.TabContentSubTitle01>
       </CS.TabContentHeader01>
       <CS.TabContentInnerWrapper>
         {new Array(5).fill(1).map((reviews, index) => (

@@ -1,5 +1,8 @@
+import { QueryResult } from "@apollo/client";
+import { IQuery, IQueryFetchProductArgs } from "../../../commons/types/generated/types";
+
 export interface IMarketDetailProps {
-  data: any;
+  data: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
 }
 
 export interface IMarketDetailHeadStylesProps {

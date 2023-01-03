@@ -14,13 +14,13 @@ const InnerWrapper = styled.div`
 
 export default function MarketDetail() {
   const router = useRouter();
-  const { data } = UseQueryFetchProduct({ productId: router.query.productId });
+  const { query } = UseQueryFetchProduct({ productId: router.query.productId });
 
   return (
     <GlobalWrapper>
       <InnerWrapper>
-        <MarketDetailHead data={data} />
-        <MarketDetailBody data={data} />
+        <MarketDetailHead data={query} />
+        <MarketDetailBody data={query} />
       </InnerWrapper>
     </GlobalWrapper>
   );
