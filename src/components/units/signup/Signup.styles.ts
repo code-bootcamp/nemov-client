@@ -23,8 +23,8 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 4%;
-  margin: 80px auto 0 auto;
+  padding: 3%;
+  margin: 80px auto 80px auto;
   display: flex;
   flex-direction: column;
 
@@ -92,7 +92,7 @@ export const PhoneWrapper = styled.div`
 `;
 
 export const PhoneInput = styled.input`
-  width: 100%;
+  width: 75%;
   height: 3rem;
   border: none;
   border-bottom: 1px solid #1f3d31;
@@ -135,7 +135,7 @@ export const ConfirmTime = styled.span`
 `;
 
 export const PhoneBtn = styled.button`
-  width: 130px;
+  width: 100px;
   padding: 14px;
   font-weight: 500;
   margin-left: 20px;

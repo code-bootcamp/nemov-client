@@ -4,9 +4,9 @@ import { UseMutationCreateUser } from "../../commons/hooks/useMutations/signup/U
 import * as S from "./Signup.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignupSchema } from "./Signup.validation";
-import { IFormSignupData } from "./Signup.types";
+import { IFormSignupData, ISignupProps } from "./Signup.types";
 import CommonModal01 from "../../commons/modals/CommonModal01";
-import { isOpenState, isSellerState } from "../../../commons/stores";
+import { isOpenState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -16,9 +16,8 @@ import { UseMutationCheckValidToken } from "../../commons/hooks/useMutations/sig
 import { UseMutationCheckEmailExist } from "../../commons/hooks/useMutations/signup/UseMutationCheckEmailExist";
 import { UseMutationGetToken } from "../../commons/hooks/useMutations/signup/UseMutationGetToken";
 
-export default function Signup() {
+export default function Signup(props: ISignupProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-  const [isSeller] = useRecoilState(isSellerState);
   const [time, setTime] = useState(false);
   const [tokenInput, setTokenInput] = useState("");
   const [getConfrimToken, setGetConfirmToken] = useState("");
@@ -42,8 +41,7 @@ export default function Signup() {
         console.log(result.data.getToken);
         setGetConfirmToken(result.data.getToken);
       } catch (error) {
-        if (error instanceof Error)
-          Modal.error({ content: "휴대폰 번호를 확인해주세요." });
+        if (error instanceof Error) Modal.error({ content: "휴대폰 번호를 확인해주세요." });
       }
     } else {
       Modal.error({
@@ -82,22 +80,15 @@ export default function Signup() {
   };
 
   // Form
-  const {
-    register,
-    handleSubmit,
-    formState,
-    setValue,
-    trigger,
-    getValues,
-    watch,
-  } = useForm<IFormSignupData>({
-    resolver: yupResolver(SignupSchema),
-    mode: "onChange",
-  });
+  const { register, handleSubmit, formState, setValue, trigger, getValues, watch } =
+    useForm<IFormSignupData>({
+      resolver: yupResolver(SignupSchema),
+      mode: "onChange",
+    });
   const { createUserSubmit } = UseMutationCreateUser();
 
   const onSubmitForm = (data: IFormSignupData) => {
-    const { passwordCheck, veganLevel, checkbox, ...value } = data;
+    const { veganLevel, checkbox, ...value } = data;
     void createUserSubmit(value);
   };
 
@@ -180,11 +171,7 @@ export default function Signup() {
           <S.InputWrapper>
             <S.Label>이름</S.Label>
             <S.InputErrorWrapper>
-              <S.Input
-                type="text"
-                placeholder="이름을 입력해주세요."
-                {...register("name")}
-              />
+              <S.Input type="text" placeholder="이름을 입력해주세요." {...register("name")} />
               <S.Error>{formState.errors.name?.message}</S.Error>
             </S.InputErrorWrapper>
           </S.InputWrapper>
@@ -203,14 +190,8 @@ export default function Signup() {
               </S.InputBtnWrapper>
               <S.PhoneError>{formState.errors.phone?.message}</S.PhoneError>
               <S.ConfirmWrapper>
-                <S.PhoneInput
-                  type="text"
-                  placeholder="인증번호"
-                  onChange={onChangeTokenInput}
-                />
-                <S.ConfirmTime>
-                  {time && <CountDown min={3} sec={0} />}
-                </S.ConfirmTime>
+                <S.PhoneInput type="text" placeholder="인증번호" onChange={onChangeTokenInput} />
+                <S.ConfirmTime>{time && <CountDown min={3} sec={0} />}</S.ConfirmTime>
 
                 <S.PhoneBtn type="button" onClick={onClickConfirmToken}>
                   인증확인
@@ -218,28 +199,22 @@ export default function Signup() {
               </S.ConfirmWrapper>
             </S.PhoneWrapper>
           </S.InputWrapper>
-          {!isSeller && (
+          {!props.isSeller && (
             <>
               <S.InputWrapper>
                 <S.Label>비건 단계</S.Label>
                 <S.InputErrorWrapper>
-                  <S.Select
-                    {...register("veganLevel")}
-                    defaultValue="none"
-                    placeholder="비건 단계"
-                  >
+                  <S.Select {...register("veganLevel")} defaultValue="none" placeholder="비건 단계">
                     <option value="none" disabled={true}>
                       단계를 선택해주세요.
                     </option>
-                    <option value="FLEX">0단계: 플렉시테리언</option>
-                    <option value="POLO">1단계: 폴로 베지테리언</option>
-                    <option value="PESCO">2단계: 페스코 베지테리언</option>
-                    <option value="LACTOOVO">
-                      3단계: 락토 오보 베지테리언
-                    </option>
-                    <option value="OVO">4단계: 오보 베지테리언</option>
-                    <option value="LACTO">5단계: 락토 베지테리언</option>
-                    <option value="VEGAN">6단계: 비건</option>
+                    <option value="1">1단계: 플렉시테리언</option>
+                    <option value="2">2단계: 폴로 베지테리언</option>
+                    <option value="3">3단계: 페스코 베지테리언</option>
+                    <option value="4">4단계: 락토 오보 베지테리언</option>
+                    <option value="5">5단계: 오보 베지테리언</option>
+                    <option value="6">6단계: 락토 베지테리언</option>
+                    <option value="7">7단계: 비건</option>
                   </S.Select>
                   <S.Error>{formState.errors.veganLevel?.message}</S.Error>
                 </S.InputErrorWrapper>
@@ -251,21 +226,12 @@ export default function Signup() {
             <S.Label>주소</S.Label>
             <S.AddWrapper>
               <S.ZipcodeWrapper>
-                <S.Zipcode
-                  type="text"
-                  placeholder="07250"
-                  readOnly
-                  {...register("zipCode")}
-                />
+                <S.Zipcode type="text" placeholder="07250" readOnly {...register("zipCode")} />
                 <S.AddBtn type="button" onClick={onToggleModal}>
                   우편번호 검색
                 </S.AddBtn>
               </S.ZipcodeWrapper>
-              <S.AddInput
-                type="text"
-                placeholder="주소를 검색해주세요."
-                {...register("address")}
-              />
+              <S.AddInput type="text" placeholder="주소를 검색해주세요." {...register("address")} />
               <S.AddInput
                 type="text"
                 placeholder="상세 주소를 입력해주세요."
@@ -278,41 +244,19 @@ export default function Signup() {
             <S.InfoTitle>개인정보 이용약관</S.InfoTitle>
             <S.InfoTextWrapper>
               <p>[ 네모비 이용 약관 ]</p>
-              <p>
-                제1장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
-                않습니다.
-              </p>
-              <p>
-                제2장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
-                않습니다.
-              </p>
-              <p>
-                제3장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
-                않습니다.
-              </p>
-              <p>
-                제4장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
-                않습니다.
-              </p>
-              <p>
-                제5장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지
-                않습니다.
-              </p>
+              <p>제1장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지 않습니다.</p>
+              <p>제2장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지 않습니다.</p>
+              <p>제3장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지 않습니다.</p>
+              <p>제4장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지 않습니다.</p>
+              <p>제5장 총칙 이 사이트는 포트폴리오용 사이트로 실제 운영하지 않습니다.</p>
             </S.InfoTextWrapper>
-
             <S.CheckboxWrapper>
-              <S.Checkbox
-                type="checkbox"
-                {...register("checkbox")}
-                onChange={onChangeChecked}
-              />
+              <S.Checkbox type="checkbox" {...register("checkbox")} onChange={onChangeChecked} />
               <p style={{ marginBottom: "0" }}>이용약관에 동의합니다.</p>
             </S.CheckboxWrapper>
           </S.InfoWrapper>
-          <S.Error style={{ textAlign: "center" }}>
-            {formState.errors.checkbox?.message}
-          </S.Error>
-          <S.SignupBtn>회원가입</S.SignupBtn>
+          <S.Error style={{ textAlign: "center" }}>{formState.errors.checkbox?.message}</S.Error>
+          <S.SignupBtn type="submit">회원가입</S.SignupBtn>
           <Link href="/login">
             <S.Login>로그인 하기</S.Login>
           </Link>

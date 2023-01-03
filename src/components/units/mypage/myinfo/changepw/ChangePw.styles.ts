@@ -17,7 +17,7 @@ export const SubTitle = styled.h3`
 
 export const InnerWrapper = styled.div`
   width: 80%;
-  padding: 2rem;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;

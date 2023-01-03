@@ -1,6 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import {
+  ICreateUserInput,
+  IMutation,
+  IMutationCreateUserArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
@@ -12,9 +17,11 @@ export const CREATE_USER = gql`
 
 export const UseMutationCreateUser = () => {
   const router = useRouter();
-  const [createUser] = useMutation(CREATE_USER);
+  const [createUser] = useMutation<Pick<IMutation, "createUser">, IMutationCreateUserArgs>(
+    CREATE_USER
+  );
 
-  const createUserSubmit = async (data: any) => {
+  const createUserSubmit = async (data: ICreateUserInput) => {
     try {
       await createUser({
         variables: {

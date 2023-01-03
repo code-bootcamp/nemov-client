@@ -16,11 +16,6 @@ export const isHiddenState = atom({
   default: false,
 });
 
-export const isSellerState = atom({
-  key: "isSellerState",
-  default: false,
-});
-
 export const accessTokenState = atom({
   key: "accessTokenState",
   default: "",

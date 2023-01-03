@@ -30,7 +30,7 @@ export const UseMutationCheckUserPassword = () => {
 
       if (result.data?.checkUserPassword) {
         Modal.success({ content: "비밀번호 인증에 성공하였습니다." });
-        void router.push("/mypage/myinfo/changepw");
+        void router.push("/mypage/myinfo/modify");
       } else {
         Modal.error({ content: "비밀번호가 다릅니다. 다시 시도해주세요." });
       }
