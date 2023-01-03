@@ -3,7 +3,7 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { amazon, pastelGray } from "../../../commons/styles/colorPalettes";
-import { colorBase04 } from "../../../commons/styles/colorBases";
+import { colorBase03, colorBase04 } from "../../../commons/styles/colorBases";
 
 // 장바구니 아이콘 공통 스타일
 export const CommonBasketIcon01 = styled(ShoppingBagIcon)`
@@ -19,8 +19,21 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
   ${colorBase04}
   border: none;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   :hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  }
+  cursor: pointer;
+`;
+
+export const CommonBasketIcon03 = styled(ShoppingBagOutlinedIcon)`
+  font-size: 2.5rem;
+  padding: 0.3rem;
+  border-radius: 50%;
+  ${colorBase04}
+  :hover {
+    transition: all 0.5s ease-in-out;
+    ${colorBase03}
   }
   cursor: pointer;
 `;

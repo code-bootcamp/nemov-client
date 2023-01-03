@@ -1,28 +1,14 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { amazon, gray } from "../../../../commons/styles/colorPalettes";
-import { flexColumn, flexRow } from "../../../../commons/styles/globalStyles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
 import { mobile } from "../../../../commons/styles/breakPoints";
-
-const FontStyle02 = css`
-  font-family: "SUIT-ExtraBold";
-  font-size: 1.25rem;
-`;
+import * as GS from "../../../../commons/styles/globalStyles";
+import * as S from "../main/MarketMain.styles";
 
 export const ListTitle = styled.h1`
   margin-top: 4rem;
-  font-family: "SUIT-Bold";
-`;
-
-export const ItemDisplay03 = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  background-color: transparent;
-  gap: 1.25rem;
-  padding: 1rem;
+  ${GS.bold}
 `;
 
 export const ItemImage03 = styled.img`
@@ -36,7 +22,7 @@ export const ItemImage03 = styled.img`
 
 export const ItemImageBox01 = styled.div`
   width: 100%;
-  ${flexColumn}
+  ${GS.flexColumn}
   overflow: hidden;
   :hover ${ItemImage03} {
     transform: scale(1.1);
@@ -44,31 +30,31 @@ export const ItemImageBox01 = styled.div`
 `;
 
 export const ItemDetailFooter02 = styled.footer`
-  ${flexRow}
+  ${GS.flexRow}
   justify-content: space-between;
   @media ${mobile} {
   }
 `;
 
 export const DetailFooterLeft = styled.div`
-  ${flexColumn}
+  ${GS.flexColumn}
   gap: 1rem;
 `;
 
 export const ItemName03 = styled.span`
-  font-family: "SUIT-Medium";
+  font-weight: 600;
   font-size: 1.25rem;
 `;
 
 export const ItemDescription = styled.span``;
 
 export const DiscountRate01 = styled.span`
-  ${FontStyle02}
+  ${S.FontStyle02}
   color: ${amazon};
 `;
 
 export const ItemDiscountPrice02 = styled.span`
-  ${FontStyle02}
+  ${S.FontStyle02}
 `;
 
 export const ItemOriginPrice03 = styled.span`
@@ -81,7 +67,7 @@ export const ItemOriginPrice03 = styled.span`
 
 export const ListSearchSection = styled.section`
   width: 100%;
-  ${flexRow}
+  ${GS.flexRow}
   justify-content: flex-end;
   align-items: center;
   padding: 0 4rem;

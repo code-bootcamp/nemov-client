@@ -8,6 +8,7 @@ import MarketCategory from "../category/MarketCategory";
 import * as MS from "../main/MarketMain.styles";
 import ListSearch from "./ListSearch";
 import * as S from "./MarketList.styles";
+import * as IDS from "../item-display/ItemDisplay.styles";
 
 interface IMarketListProps {
   header: string;
@@ -22,27 +23,27 @@ export default function MarketList(props: IMarketListProps) {
         <ListSearch />
         <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
           {new Array(9).fill(1).map((_, index) => (
-            <S.ItemDisplay03 key={index}>
+            <IDS.ItemDisplay03 key={index}>
               <S.ItemImageBox01>
                 <S.ItemImage03 src="/images/best2.jpg" />
               </S.ItemImageBox01>
-              <MS.ItemDetail>
+              <IDS.ItemDetail>
                 <TagsWrapper01>
                   <VeganLevelTag01>#옥토</VeganLevelTag01>
                 </TagsWrapper01>
                 <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
                   <S.DetailFooterLeft>
                     <S.ItemName03>행복 당근 주스</S.ItemName03>
-                    <MS.ItemPrices>
+                    <IDS.ItemPrices>
                       <S.DiscountRate01>19%</S.DiscountRate01>
                       <S.ItemDiscountPrice02>11,000원</S.ItemDiscountPrice02>
                       <S.ItemOriginPrice03>14,000원</S.ItemOriginPrice03>
-                    </MS.ItemPrices>
+                    </IDS.ItemPrices>
                   </S.DetailFooterLeft>
                   <CommonBasketIcon02 />
                 </S.ItemDetailFooter02>
-              </MS.ItemDetail>
-            </S.ItemDisplay03>
+              </IDS.ItemDetail>
+            </IDS.ItemDisplay03>
           ))}
         </MS.ItemsWrapper01>
       </MS.MarketMainContainer>

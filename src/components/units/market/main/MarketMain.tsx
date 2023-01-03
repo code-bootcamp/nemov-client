@@ -1,13 +1,44 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
 import MarketCategory from "../category/MarketCategory";
-import {
-  TagsWrapper01,
-  VeganLevelTag01,
-} from "../../../commons/tags/CommonTags.Styles";
-import { CommonBasketIcon02 } from "../../../commons/icons/CommonIcons.styles";
+import * as ID from "../item-display/ItemDisplay";
+import * as IDS from "../item-display/ItemDisplay.styles";
+import { CustomArrowProps } from "react-slick";
+
+const NextArrow = ({
+  currentSlide,
+  slideCount,
+  ...props
+}: CustomArrowProps) => (
+  <div {...props}>
+    <IDS.NextArrowIcon />
+  </div>
+);
+
+const PrevArrow = ({
+  currentSlide,
+  slideCount,
+  ...props
+}: CustomArrowProps) => (
+  <div {...props}>
+    <IDS.PrevArrowIcon />
+  </div>
+);
 
 export default function MarketMain() {
+  const settings = {
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    cssEase: "ease-in-out",
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
@@ -16,48 +47,26 @@ export default function MarketMain() {
           <S.PageLine />
           <S.RecommendItemSection01>
             <S.MarketMainHeader01>
-              네모비 회원이 선택한 상품
-              <S.HeaderDiv>추천상품</S.HeaderDiv>
+              <S.HeaderSpan>name</S.HeaderSpan>님, 이런 상품은 어떠신가요?
+              <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>
               {new Array(3).fill(1).map((_, index) => (
-                <S.ItemDisplay key={index}>
-                  <S.RecommendItemImg01
-                    image={"/images/best2.jpg"}
-                  ></S.RecommendItemImg01>
-                  <S.ItemDetail>
-                    <TagsWrapper01>
-                      <VeganLevelTag01>#비건</VeganLevelTag01>
-                      <VeganLevelTag01>#플렉시테리언</VeganLevelTag01>
-                    </TagsWrapper01>
-                    <S.ItemDetailFooter>
-                      <div>
-                        <S.ItemName>자연 허브 비누</S.ItemName>
-                        <S.ItemPrices>
-                          <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
-                          <S.ItemOriginPrice>14,000원</S.ItemOriginPrice>
-                        </S.ItemPrices>
-                      </div>
-                      <CommonBasketIcon02 />
-                    </S.ItemDetailFooter>
-                  </S.ItemDetail>
-                </S.ItemDisplay>
+                <ID.ItemDisPlay02 key={index} />
               ))}
             </S.ItemsWrapper01>
           </S.RecommendItemSection01>
           <S.MainMarketSection01>
-            <S.MarketMainHeader02>베스트상품</S.MarketMainHeader02>
+            <S.MarketMainHeader02>
+              네모비 회원이 선택한 상품
+              <S.HeaderDiv02>베스트</S.HeaderDiv02>
+            </S.MarketMainHeader02>
             <S.ItemsWrapper02>
-              {new Array(8).fill(1).map((_, index) => (
-                <S.ItemDisplay02 key={index}>
-                  <S.ItemDetail02>
-                    <S.ItemName>자연 허브 비누</S.ItemName>
-                    <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
-                    <S.ItemOriginPrice02>14,000원</S.ItemOriginPrice02>
-                  </S.ItemDetail02>
-                  <S.ItemImage02 src="/images/best1.jpg" />
-                </S.ItemDisplay02>
-              ))}
+              <IDS.StyledSlider02 {...settings}>
+                {new Array(8).fill(1).map((_, index) => (
+                  <ID.ItemDisPlay01 key={index}></ID.ItemDisPlay01>
+                ))}
+              </IDS.StyledSlider02>
             </S.ItemsWrapper02>
           </S.MainMarketSection01>
         </S.MainItemsWrapper>

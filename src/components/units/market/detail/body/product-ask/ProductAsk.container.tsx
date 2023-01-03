@@ -6,9 +6,12 @@ import { useRecoilState } from "recoil";
 import { isOpenState } from "../../../../../../commons/stores";
 import CommonModal01 from "../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
+// import { MouseEventHandler, useState } from "react";
 
 export default function ProductAsk() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  // const [isAnswerOpen, setIsAnswerOpen] = useState(false);
+  // const [isAnswer, setIsAnswer] = useState("");
 
   const onClickQuestionWrite = () => {
     setIsOpen((prev) => !prev);
@@ -17,6 +20,12 @@ export default function ProductAsk() {
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
   };
+
+  // const onClickOpenAnswer: MouseEventHandler<Element> = (event) => {
+  //   console.log(event.currentTarget.id);
+  //   setIsAnswer(event.currentTarget.id);
+  //   setIsAnswerOpen((prev) => !prev);
+  // };
 
   return (
     <>
