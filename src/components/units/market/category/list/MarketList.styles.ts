@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { amazon, gray } from "../../../../commons/styles/colorPalettes";
+import { amazon, gray } from "../../../../../commons/styles/colorPalettes";
 import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
-import { mobile } from "../../../../commons/styles/breakPoints";
-import * as GS from "../../../../commons/styles/globalStyles";
-import * as S from "../main/MarketMain.styles";
+import { mobile } from "../../../../../commons/styles/breakPoints";
+import * as GS from "../../../../../commons/styles/globalStyles";
+import * as S from "../../main/MarketMain.styles";
 
 export const ListTitle = styled.h1`
   margin-top: 4rem;

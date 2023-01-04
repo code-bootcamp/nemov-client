@@ -39,3 +39,20 @@ export const StyledCommonButton02 = styled.button`
   width: 100%;
   height: 3rem;
 `;
+
+// 공통 +, - 버튼
+export const PlusBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 0;
+`;
+
+export const MinusBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 0;
+`;

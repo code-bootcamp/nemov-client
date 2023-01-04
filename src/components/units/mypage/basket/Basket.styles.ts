@@ -109,22 +109,6 @@ export const BtnWrapper = styled.div`
   text-align: center;
 `;
 
-export const PlusBtn = styled.button`
-  width: 28px;
-  height: 28px;
-  border: 1px solid #ddd;
-  background-color: transparent;
-  border-radius: 0;
-`;
-
-export const MinusBtn = styled.button`
-  width: 28px;
-  height: 28px;
-  border: 1px solid #ddd;
-  background-color: transparent;
-  border-radius: 0;
-`;
-
 export const QuantityWrapper = styled.div`
   width: 15%;
   padding: 1.7rem;

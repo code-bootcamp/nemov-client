@@ -2,11 +2,11 @@ import { Maybe } from "../types/generated/types";
 
 export const getDiscountPrice = (price?: number, discountRate?: number) => {
   if (price === undefined || discountRate === undefined) {
-    return price === 0;
+    return;
   }
   const discountPrice = (price * (100 - discountRate)) / 100;
 
-  return `${discountPrice}`;
+  return discountPrice;
 };
 
 export const getVeganName = (level: Maybe<number> | undefined) => {

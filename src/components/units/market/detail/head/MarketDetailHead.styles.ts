@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import { gray, pastelGray } from "../../../../../commons/styles/colorPalettes";
-import {
-  flexColumn,
-  flexRow,
-} from "../../../../../commons/styles/globalStyles";
+import { flexColumn, flexRow } from "../../../../../commons/styles/globalStyles";
 
 export const MarketDetailPageHead = styled.section`
   width: 100%;
@@ -105,7 +102,7 @@ export const PriceSumDetail01 = styled.span`
   font-weight: 700;
 `;
 
-export const ProductDetailFooter01 = styled.footer`
+export const ProductDetailFooter01 = styled.form`
   ${flexColumn}
   margin-top: auto;
   gap: 0.7rem;
