@@ -13,7 +13,7 @@ import {
 import { UseMutationUploadFile } from "../../../commons/hooks/useMutations/UseMutationUploadFile";
 import ToastUIEditor from "../../../commons/toast-ui-editor/toastUiEditor";
 
-export default function ProductWrite() {
+export default function ProductWrite(props) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");

@@ -39,7 +39,7 @@ export default function LayoutHeader() {
     <S.Wrapper>
       <Link href="/market">
         <S.Logo>
-          <S.LogoImg src="/logo/logo-01.png" />
+          <S.LogoImg src="/logo/logo_.png" />
         </S.Logo>
       </Link>
       <LayoutNav />

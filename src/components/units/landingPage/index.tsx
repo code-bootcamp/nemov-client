@@ -37,7 +37,7 @@ export default function LandingPage() {
             다른 회원들에게 솔직한 후기를 남겨주세요. 우리는 물건보다 경험을 팝니다.
           </S.Sentence2>
           <S.Btn>
-            <Link href="/market">비건상품 스토어 바로가기</Link>
+            <Link href="/market">네모비 비건제품 구경하기</Link>
             <EastIcon />
           </S.Btn>
         </S.Article2>

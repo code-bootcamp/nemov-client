@@ -62,9 +62,9 @@ const BannerImg = styled.div`
 `;
 
 export const BannerImg1 = styled(BannerImg)`
-  background: url("/images/banner/1.png") no-repeat center;
+  background: url("/images/banner/1.jpg") no-repeat center;
   @media ${tablet} {
-    background: url("/images/banner/11.png") no-repeat center;
+    background: url("/images/banner/11.jpg") no-repeat center;
     background-size: cover;
   }
 `;
