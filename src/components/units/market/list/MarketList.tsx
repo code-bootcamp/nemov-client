@@ -6,32 +6,32 @@ import * as MS from "../main/MarketMain.styles";
 import ListSearch from "./ListSearch";
 import * as S from "./MarketList.styles";
 import * as IDS from "../item-display/ItemDisplay.styles";
-import { getDiscountPrice } from "../../../../commons/libraries/utilies";
+import { getDiscountPrice, getVeganName } from "../../../../commons/libraries/utilies";
 
-import { IQuery } from "../../../../commons/types/generated/types";
+import { IQuery, IQueryFetchProductsArgs } from "../../../../commons/types/generated/types";
+import { QueryResult } from "@apollo/client";
 
 interface IMarketListProps {
-  category: string;
-  data: Pick<IQuery, "fetchProducts"> | undefined;
-  onClickMoveTo: (category: string) => () => Promise<void>;
+  category?: string;
+  data?: QueryResult<Pick<IQuery, "fetchProducts">, IQueryFetchProductsArgs>;
 }
 
 export default function MarketList(props: IMarketListProps) {
   return (
     <GlobalWrapper>
       <MS.MarketMainContainer>
-        <MarketCategory category={props.category} onClickMoveTo={props.onClickMoveTo} />
+        <MarketCategory />
         <S.ListTitle>{props.category}</S.ListTitle>
         <ListSearch />
         <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
-          {props.data?.fetchProducts.map((products) => (
+          {props.data?.data?.fetchProducts.map((products) => (
             <IDS.ItemDisplay03 key={products.id}>
               <S.ItemImageBox01>
                 <S.ItemImage03 src={products.image} />
               </S.ItemImageBox01>
               <IDS.ItemDetail>
                 <TagsWrapper01>
-                  <VeganLevelTag01>{products.veganLevel}</VeganLevelTag01>
+                  <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
                 </TagsWrapper01>
                 <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
                   <S.DetailFooterLeft>

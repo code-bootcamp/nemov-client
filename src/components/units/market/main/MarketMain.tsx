@@ -4,6 +4,7 @@ import * as S from "./MarketMain.styles";
 import * as ID from "../item-display/ItemDisplay";
 import * as IDS from "../item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
+import MarketCategory from "../category/MarketCategory";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -34,7 +35,7 @@ export default function MarketMain() {
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
-        {/* <MarketCategory></MarketCategory> */}
+        <MarketCategory></MarketCategory>
         <S.MainItemsWrapper>
           <S.PageLine />
           <S.RecommendItemSection01>

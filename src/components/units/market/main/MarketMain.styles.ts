@@ -1,10 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { mobile } from "../../../../commons/styles/breakPoints";
-import {
-  colorBase03,
-  colorBase04,
-} from "../../../../commons/styles/colorBases";
+import { colorBase03, colorBase04 } from "../../../../commons/styles/colorBases";
 import { deepGreen } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
 
@@ -27,7 +24,7 @@ export const MarketMainContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3%;
+  margin: 0 0 3% 0;
 `;
 
 const HeaderStyle = css`
