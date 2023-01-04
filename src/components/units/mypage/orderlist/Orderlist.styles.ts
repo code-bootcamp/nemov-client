@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colorBase01 } from "../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -70,18 +71,23 @@ export const ItemImg = styled.img`
 export const ItemName = styled.p`
   font-size: 1.3rem;
   font-weight: bold;
+  margin-bottom: 0;
 `;
 
-export const ItemPrice = styled.p`
+export const ItemInfo = styled.p`
   color: #555;
+  margin-bottom: 0;
 `;
 
-export const ItemNums = styled.p`
-  color: #555;
+export const CancelBtn = styled.button`
+  width: 80px;
+  padding: 12px 8px;
+  border-radius: 50px;
+  ${colorBase01}
 `;
 
-export const ItemStatus = styled.p`
-  color: #555;
+export const Area = styled.div`
+  width: 80px;
 `;
 
 export const NoOrderText = styled.p`

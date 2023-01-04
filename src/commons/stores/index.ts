@@ -28,3 +28,8 @@ export const restoreAccessTokenLoadable = selector({
     return newAccessToken;
   },
 });
+
+export const IsPasswordChange = atom({
+  key: "isPasswordChange",
+  default: true,
+});

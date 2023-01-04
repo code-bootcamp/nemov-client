@@ -19,18 +19,18 @@ export const UseMutationUpdateUserPassword = () => {
     IMutationUpdateUserPasswordArgs
   >(UPDATE_USER_PASSWORD);
 
-  const updateUserPasswordFunction = async (password: string) => {
+  const updateUserPasswordSubmit = async (password: IMutationUpdateUserPasswordArgs) => {
     try {
       await updateUserPassword({
         variables: { password },
       });
-      // Modal.success({ content: "비밀번호가 변경되었습니다." });
+      Modal.success({ content: "비밀번호가 변경되었습니다." });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
   return {
-    updateUserPasswordFunction,
+    updateUserPasswordSubmit,
   };
 };

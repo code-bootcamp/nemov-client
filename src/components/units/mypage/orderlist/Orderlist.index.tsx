@@ -41,24 +41,30 @@ export default function MypageOrderlist() {
           <S.OrderInfo>
             <S.ItemImg src="" />
             <S.ItemName>상품이름</S.ItemName>
-            <S.ItemPrice>30000 원</S.ItemPrice>
-            <S.ItemNums>1개</S.ItemNums>
-            <S.ItemStatus>주문완료</S.ItemStatus>
+            <S.ItemInfo>30000 원</S.ItemInfo>
+            <S.ItemInfo>1개</S.ItemInfo>
+            <S.ItemInfo>주문완료</S.ItemInfo>
+            <S.CancelBtn>주문취소</S.CancelBtn>
           </S.OrderInfo>
         </S.OrderHistory>
       </article>
       <article>
         {data?.fetchProductOrdersByBuyer.length !== 0 ? (
           <>
-            {data?.fetchProductOrdersByBuyer.map((el, index) => (
+            {data?.fetchProductOrdersByBuyer.map((order, index) => (
               <S.OrderHistory key={index}>
-                <S.Date>{el.createdAt}</S.Date>
+                <S.Date>{order.createdAt}</S.Date>
                 <S.OrderInfo>
                   <S.ItemImg src="" />
-                  <S.ItemName>{el.product.name}</S.ItemName>
-                  <S.ItemPrice>{el.product.price} 원</S.ItemPrice>
-                  <S.ItemNums>{el.quantity}개</S.ItemNums>
-                  <S.ItemStatus>{el.status}</S.ItemStatus>
+                  <S.ItemName>{order.product.name}</S.ItemName>
+                  <S.ItemInfo>{order.product.price} 원</S.ItemInfo>
+                  <S.ItemInfo>{order.quantity}개</S.ItemInfo>
+                  <S.ItemInfo>{order.status}</S.ItemInfo>
+                  {order.status === "BOUGHT" ? (
+                    <S.CancelBtn>주문취소</S.CancelBtn>
+                  ) : (
+                    <S.Area></S.Area>
+                  )}
                 </S.OrderInfo>
               </S.OrderHistory>
             ))}

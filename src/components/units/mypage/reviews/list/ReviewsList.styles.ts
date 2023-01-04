@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  colorBase01,
-  colorBase02,
-} from "../../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ReviewWrapper = styled.div`
   width: 100%;
@@ -73,4 +70,10 @@ export const ReviewDeleteBtn = styled.button`
   ${colorBase02}
   border: 1px solid #ddd;
   border-radius: 5vmax;
+`;
+
+export const NoReviewText = styled.p`
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 40px;
 `;

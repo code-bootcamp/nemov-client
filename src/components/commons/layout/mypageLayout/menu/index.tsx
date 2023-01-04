@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { IsPasswordChange } from "../../../../../commons/stores";
 import * as S from "./styles";
 
 interface IMypageLayoutMenuProps {
@@ -6,6 +8,16 @@ interface IMypageLayoutMenuProps {
 }
 
 export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
+  const [, setIsPasswordChange] = useRecoilState(IsPasswordChange);
+
+  const onClickPwChange = () => {
+    setIsPasswordChange(true);
+  };
+
+  const onClickInfoChange = () => {
+    setIsPasswordChange(false);
+  };
+
   return (
     <S.MyPageMenu>
       <S.MenuHeader>
@@ -42,10 +54,10 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
 
       <S.Options>내 정보 관리</S.Options>
       <Link href="/mypage/myinfo">
-        <S.Option>비밀번호 변경</S.Option>
+        <S.Option onClick={onClickPwChange}>비밀번호 변경</S.Option>
       </Link>
       <Link href="/mypage/myinfo">
-        <S.Option>회원 정보 수정</S.Option>
+        <S.Option onClick={onClickInfoChange}>회원 정보 수정</S.Option>
       </Link>
       <S.ManageList>
         <Link href="/mypage/qna">

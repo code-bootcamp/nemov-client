@@ -52,6 +52,16 @@ export const globalStyles = css`
     object-fit: cover;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+
   // bold
   @font-face {
     font-family: "Arita-Bold";
@@ -120,5 +130,5 @@ export const flexCenter = css`
 export const GlobalWrapper = styled.main`
   width: 100%;
   padding: 3%;
-  max-width: 1300px;
+  max-width: 1200px;
 `;

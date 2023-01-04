@@ -71,11 +71,11 @@ export default function MypagePoint() {
           <S.NopointText>포인트 충전내역이 없습니다.</S.NopointText>
         )}
       </section>
-      {data?.fetchPointTransactions.length !== 0 && (
-        <section>
-          <Paginations01 />
-        </section>
-      )}
+      {/* {data?.fetchPointTransactions.length !== 0 && ( */}
+      <section>
+        <Paginations01 />
+      </section>
+      {/* )} */}
     </S.ContentsMain>
   );
 }

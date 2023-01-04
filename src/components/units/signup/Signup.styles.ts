@@ -23,7 +23,7 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 3%;
+  padding: 1%;
   margin: 80px auto 80px auto;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.p`
-  width: 15%;
+  width: 20%;
   margin-right: 10px;
   margin-bottom: 0;
 `;

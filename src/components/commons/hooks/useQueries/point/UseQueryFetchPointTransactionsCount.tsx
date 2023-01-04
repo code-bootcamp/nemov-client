@@ -1,4 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
+import {
+  IQuery,
+  IQueryFetchPointTransactionsCountArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const FETCH_POINT_TRANSACTIONS_COUNT = gql`
     query fetchPointTransactions($startDate:DateTime $endDate:DateTime){
@@ -8,11 +12,13 @@ export const FETCH_POINT_TRANSACTIONS_COUNT = gql`
 
 `;
 
-// 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
 export const UseQueryFetchPointTransactionsCount = (
   variables: IQueryFetchPointTransactionsCountArgs
 ) => {
-  const query = useQuery(FETCH_POINT_TRANSACTIONS_COUNT, { variables });
+  const query = useQuery<
+    Pick<IQuery, "fetchPointTransactionsCount">,
+    IQueryFetchPointTransactionsCountArgs
+  >(FETCH_POINT_TRANSACTIONS_COUNT, { variables });
 
   return query;
 };
