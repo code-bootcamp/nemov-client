@@ -5,6 +5,9 @@ export const FETCH_CART = gql`
   query fetchCart {
     fetchCart {
       id
+      image
+      name
+      price
     }
   }
 `;
