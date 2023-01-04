@@ -42,7 +42,7 @@ export const ItemWrapper = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-bottom: 20px;
+  padding: 20px 0;
 `;
 
 export const PickBtn = styled.button`
@@ -81,7 +81,6 @@ export const ItemCheckbox = styled.input`
 export const ItemImg = styled.img`
   width: 10%;
   aspect-ratio: 5/5;
-  border: 1px solid green;
   margin: 0 20px;
   margin-left: 20px;
 `;
@@ -90,18 +89,21 @@ export const ItemName = styled.p`
   width: 30%;
   font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 0;
 `;
 
 export const ItemPrice = styled.p`
   text-align: center;
   font-weight: bold;
-  width: 15%;
+  width: 20%;
+  margin-bottom: 0;
 `;
 
 export const DeliveryPrice = styled.p`
   width: 15%;
   text-align: center;
   color: #555;
+  margin-bottom: 0;
 `;
 
 export const BtnWrapper = styled.div`
@@ -116,6 +118,11 @@ export const QuantityWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const QuantitySpan = styled.span`
+  width: 30px;
+  text-align: center;
 `;
 
 export const NumWrapper = styled.article`
@@ -137,6 +144,7 @@ export const Num = styled.p`
   font-size: 2rem;
   font-weight: bold;
   margin-top: 16px;
+  margin-bottom: 0;
 `;
 
 export const NumSpan = styled.span`
@@ -150,6 +158,7 @@ export const TotalNum = styled.p`
   font-weight: bold;
   color: #255941;
   margin-top: 20px;
+  margin-bottom: 0;
 `;
 
 export const BottomBtnWrapper = styled.div`
@@ -205,6 +214,7 @@ export const NoBasketText = styled.p`
   font-size: 1.6rem;
   text-align: center;
   margin-top: 40px;
+  margin-bottom: 0;
 `;
 
 export const MoveBtnWrap = styled.div`

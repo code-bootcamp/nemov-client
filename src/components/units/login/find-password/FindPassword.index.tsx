@@ -5,16 +5,20 @@ import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 export default function FindPassword() {
   return (
     <Global>
-      <InnerWrapper>
+      <Form>
         <Line>
           <H2>비밀번호 찾기</H2>
         </Line>
         <InputWrapper>
           <Label>아이디</Label>
           <Input type="text" placeholder="아이디를 입력해주세요." />
+          <Label>휴대폰 번호</Label>
+          <Input type="text" placeholder="휴대폰 번호를 입력해주세요." />
+          <Label>인증번호</Label>
+          <ConfirmInput type="text" placeholder="인증번호를 입력해주세요." />
           <FindBtn>비밀번호 찾기</FindBtn>
         </InputWrapper>
-      </InnerWrapper>
+      </Form>
     </Global>
   );
 }
@@ -33,7 +37,7 @@ const H2 = styled.h2`
   margin-bottom: 0.3rem;
 `;
 
-const InnerWrapper = styled.div`
+const Form = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
@@ -56,6 +60,14 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
+  width: 100%;
+  height: 46px;
+  padding: 0px 11px 1px 15px;
+  border: 1px solid #ddd;
+  margin: 1rem 0 3rem 0;
+`;
+
+const ConfirmInput = styled.input`
   width: 100%;
   height: 46px;
   padding: 0px 11px 1px 15px;

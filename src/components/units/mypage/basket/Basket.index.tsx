@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
 import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
 import * as S from "./Basket.styles";
 
@@ -10,6 +11,8 @@ interface IData {
 
 export default function MypageBasket() {
   const { data } = UseQueryFetchCart();
+
+  console.log(data);
 
   const checkData: IData[] = [
     { id: 0, title: "선택 1" },
@@ -41,6 +44,10 @@ export default function MypageBasket() {
       setCheckItems([]);
     }
   };
+
+  const onClickCountUp = () => {};
+
+  const onClickCountDown = () => {};
 
   return (
     <S.ContentsMain>
@@ -78,16 +85,14 @@ export default function MypageBasket() {
                     onChange={(e) => handleSingleCheck(e.target.checked, checkData[index].id)}
                     checked={checkItems.includes(checkData[index].id)}
                   />
-                  <S.ItemImg src="" />
-                  <S.ItemName>상품이름</S.ItemName>
+                  <S.ItemImg src={cart.image} />
+                  <S.ItemName>{cart.name}</S.ItemName>
                   <S.QuantityWrapper>
-                    <S.MinusBtn>－</S.MinusBtn>1<S.PlusBtn>＋</S.PlusBtn>
+                    <CountDownBtn onClick={onClickCountDown} />
+                    <S.QuantitySpan>1</S.QuantitySpan>
+                    <CountUpBtn onClick={onClickCountUp} />
                   </S.QuantityWrapper>
-                  <S.ItemPrice>10000 원</S.ItemPrice>
-                  <S.DeliveryPrice>
-                    배송비 <br />
-                    3000 원
-                  </S.DeliveryPrice>
+                  <S.ItemPrice>{cart.price} 원</S.ItemPrice>
                   <S.BtnWrapper>
                     <S.PickBtn>찜하기</S.PickBtn>
                     <S.BasketBtn>구매하기</S.BasketBtn>
