@@ -14,6 +14,9 @@ export const FETCH_PRODUCT = gql`
       price
       discount
       isOutOfStock
+      user {
+        name
+      }
     }
   }
 `;

@@ -15,6 +15,7 @@ const InnerWrapper = styled.div`
 export default function MarketDetail() {
   const router = useRouter();
   const { query } = UseQueryFetchProduct({ productId: router.query.productId });
+  console.log("부모 컴포넌트가 랜더링됩니다.");
 
   return (
     <GlobalWrapper>

@@ -14,3 +14,8 @@ export interface IMarketDetailHeadStylesProps {
 //   isAnswer: string;
 //   isAnswerOpen: boolean;
 // }
+
+export interface IProductOrderData {
+  amount: number;
+  quantity: number;
+}

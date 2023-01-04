@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { IMarketDetailProps } from "../../Market.types";
 import * as S from "./MarketDetailBody.styles";
 import MarketDetailNav from "./nav/ProductDetailNav";
@@ -7,7 +7,7 @@ import ProductDetail from "./product-detail/ProductDetail.container";
 import ProductNoticeInfo from "./product-notice-info/ProductNoticeInfo";
 import ProductReviewList from "./product-review-list/ProductReviewList.container";
 
-export default function MarketDetailBody(props: IMarketDetailProps) {
+function MarketDetailBody(props: IMarketDetailProps) {
   const [isTabSelected, setIsTabSelected] = useState([true, false, false]);
 
   const onClickProductDetailTab = () => {
@@ -37,3 +37,5 @@ export default function MarketDetailBody(props: IMarketDetailProps) {
     </S.MarketDetailPageBody>
   );
 }
+
+export default memo(MarketDetailBody);

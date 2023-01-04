@@ -8,6 +8,7 @@ import MypageLayout from "../src/components/commons/layout/mypageLayout";
 import { useRouter } from "next/router";
 import "antd/dist/reset.css";
 import ApolloSetting from "../src/components/commons/apollo";
+// import { theme } from "../src/commons/styles/themes";
 
 const MYPAGE_LAYOUT = [
   "/mypage",
@@ -30,6 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <ApolloSetting>
         <>
+          {/* <ThemeProvider theme={theme}> */}
+
           <Global styles={globalStyles} />
           <Layout>
             {isMypage ? (
@@ -40,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             )}
           </Layout>
+          {/* </ThemeProvider> */}
         </>
       </ApolloSetting>
     </RecoilRoot>
