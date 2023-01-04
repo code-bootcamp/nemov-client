@@ -34,14 +34,14 @@ export default function MypagePicked() {
 
         {data?.fetchProductsIPicked.length !== 0 ? (
           <>
-            {data?.fetchProductsIPicked.map((el, index) => (
+            {data?.fetchProductsIPicked.map((pick, index) => (
               <S.PickedItem key={index}>
                 <S.PickedImg src="" />
                 <S.PickedCenterWrapper>
-                  <S.Tags>비건</S.Tags>
-                  <S.PickedName>상품 이름</S.PickedName>
+                  <S.Tags>{pick.veganLevel}</S.Tags>
+                  <S.PickedName>{pick.name}</S.PickedName>
                   <S.PriceDateWrap>
-                    <S.PickedPrice>10000 원</S.PickedPrice>
+                    <S.PickedPrice>{pick.price} 원</S.PickedPrice>
                     <S.PickedDate>22.12.29</S.PickedDate>
                   </S.PriceDateWrap>
                 </S.PickedCenterWrapper>

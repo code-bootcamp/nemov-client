@@ -88,7 +88,8 @@ export default function Signup(props: ISignupProps) {
   const { createUserSubmit } = UseMutationCreateUser();
 
   const onSubmitForm = (data: IFormSignupData) => {
-    const { veganLevel, checkbox, ...value } = data;
+    const { passwordCheck, checkbox, ...value } = data;
+    value.veganLevel = Number(value.veganLevel);
     void createUserSubmit(value);
   };
 
@@ -169,7 +170,7 @@ export default function Signup(props: ISignupProps) {
             </S.InputErrorWrapper>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.Label>이름</S.Label>
+            <S.Label>{props.isSeller ? "브랜드명" : "이름"}</S.Label>
             <S.InputErrorWrapper>
               <S.Input type="text" placeholder="이름을 입력해주세요." {...register("name")} />
               <S.Error>{formState.errors.name?.message}</S.Error>

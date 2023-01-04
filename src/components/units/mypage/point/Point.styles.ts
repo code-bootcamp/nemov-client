@@ -55,7 +55,7 @@ export const TableBottomLi = styled.li`
 
 export const RefundBtn = styled.button`
   width: 50px;
-  padding: 8px 12px;
+  padding: 8px;
   border-radius: 50px;
   ${colorBase01}
 `;

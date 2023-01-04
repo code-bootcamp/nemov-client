@@ -1,6 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { IsPasswordChange } from "../../../../../commons/stores";
 import {
   IMutation,
   IMutationCheckUserPasswordArgs,
@@ -13,6 +15,8 @@ export const CHECK_USER_PASSWORD = gql`
 `;
 
 export const UseMutationCheckUserPassword = () => {
+  const [isPasswordChange] = useRecoilState(IsPasswordChange);
+
   const router = useRouter();
 
   const [checkUserPassword] = useMutation<
@@ -30,7 +34,11 @@ export const UseMutationCheckUserPassword = () => {
 
       if (result.data?.checkUserPassword) {
         Modal.success({ content: "비밀번호 인증에 성공하였습니다." });
-        void router.push("/mypage/myinfo/modify");
+        if (isPasswordChange) {
+          void router.push("/mypage/myinfo/changepw");
+        } else {
+          void router.push("/mypage/myinfo/modify");
+        }
       } else {
         Modal.error({ content: "비밀번호가 다릅니다. 다시 시도해주세요." });
       }

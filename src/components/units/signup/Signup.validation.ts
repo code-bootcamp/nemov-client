@@ -18,13 +18,7 @@ export const SignupSchema = yup.object({
     .required("비밀번호를 확인해주세요."),
   name: yup.string().required("이름을 입력해주세요."),
   phone: yup.string().required("휴대폰 번호를 입력해주세요."),
-  veganLevel: yup
-    .string()
-    .required("비건 단계를 선택해주세요.")
-    .oneOf(
-      ["FLEX", "POLO", "PESCO", "LACTOOVO", "OVO", "LACTO", "VEGAN"],
-      "비건 단계를 선택해주세요."
-    ),
+  veganLevel: yup.string().oneOf(["1", "2", "3", "4", "5", "6", "7"], "비건 단계를 선택해주세요."),
   address: yup.string().required("주소를 입력해주세요."),
   checkbox: yup.bool().oneOf([true], "이용약관에 동의해주세요."),
 });

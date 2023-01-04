@@ -4,7 +4,7 @@ import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 
 export default function FindPassword() {
   return (
-    <GlobalWrapper>
+    <Global>
       <InnerWrapper>
         <Line>
           <H2>비밀번호 찾기</H2>
@@ -15,9 +15,13 @@ export default function FindPassword() {
           <FindBtn>비밀번호 찾기</FindBtn>
         </InputWrapper>
       </InnerWrapper>
-    </GlobalWrapper>
+    </Global>
   );
 }
+
+const Global = styled(GlobalWrapper)`
+  height: 86vh;
+`;
 
 const Line = styled.div`
   width: 150px;
@@ -31,10 +35,11 @@ const H2 = styled.h2`
 
 const InnerWrapper = styled.div`
   width: 100%;
-  padding-top: 3rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.div`

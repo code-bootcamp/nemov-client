@@ -15,8 +15,8 @@ export const SubTitle = styled.h3`
   font-size: 1.4rem;
 `;
 
-export const InnerWrapper = styled.div`
-  width: 80%;
+export const Form = styled.form`
+  width: 90%;
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  width: 22%;
+  width: 25%;
 `;
 
 export const PwInput = styled.input`
@@ -70,4 +70,15 @@ export const EditBtn = styled.button`
   font-weight: 500;
   color: white;
   ${colorBase01}
+`;
+
+export const InputErrorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Error = styled.div`
+  margin-top: 8px;
+  color: red;
 `;

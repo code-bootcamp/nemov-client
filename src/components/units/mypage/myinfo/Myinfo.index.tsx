@@ -6,6 +6,7 @@ export default function MypageMyinfo() {
   const [password, setPassword] = useState("");
 
   const { CheckUserPasswordFunction } = UseMutationCheckUserPassword();
+
   const onClickConfirm = async () => {
     void CheckUserPasswordFunction(password);
   };

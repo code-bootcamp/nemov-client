@@ -1,33 +1,114 @@
+import Link from "next/link";
+import { useState } from "react";
+import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
 import * as S from "./Basket.styles";
 
+interface IData {
+  id: number;
+  title: string;
+}
+
 export default function MypageBasket() {
+  const { data } = UseQueryFetchCart();
+
+  const checkData: IData[] = [
+    { id: 0, title: "선택 1" },
+    { id: 1, title: "선택 2" },
+    { id: 2, title: "선택 3" },
+  ];
+
+  // 체크박스 기능
+  const [checkItems, setCheckItems] = useState<number[]>([]);
+
+  const handleSingleCheck = (checked: boolean, id: number) => {
+    if (checked) {
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckItems((prev: number[]) => [...prev, id]);
+    } else {
+      // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+      setCheckItems(checkItems.filter((el: number) => el !== id));
+    }
+  };
+
+  const handleAllCheck = (checked: boolean) => {
+    if (checked) {
+      // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
+      const idArray: number[] = [];
+      checkData.forEach((el) => idArray.push(el.id));
+      setCheckItems(idArray);
+    } else {
+      // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
+      setCheckItems([]);
+    }
+  };
+
   return (
     <S.ContentsMain>
       <S.Title>장바구니</S.Title>
-      {/* map 뿌려주면 됨 */}
       <S.OrderArticle>
         <S.CheckboxWrapper>
-          <S.AllCheckbox type="checkbox" />
+          <S.AllCheckbox
+            type="checkbox"
+            name="select-all"
+            onChange={(e) => handleAllCheck(e.target.checked)}
+            checked={checkItems.length === checkData.length}
+          />
           전체 선택
         </S.CheckboxWrapper>
+        {/* <S.ItemCheckbox
+          type="checkbox"
+          name={`select-${checkData[1].id}`}
+          onChange={(e) => handleSingleCheck(e.target.checked, checkData[1].id)}
+          checked={checkItems.includes(checkData[1].id)}
+        />
+        <S.ItemCheckbox
+          type="checkbox"
+          name={`select-${checkData[2].id}`}
+          onChange={(e) => handleSingleCheck(e.target.checked, checkData[2].id)}
+          checked={checkItems.includes(checkData[2].id)}
+        /> */}
         <S.ItemUl>
-          <S.ItemWrapper>
-            <S.ItemCheckbox type="checkbox" />
-            <S.ItemImg src="" />
-            <S.ItemName>상품이름</S.ItemName>
-            <S.QuantityWrapper>
-              <S.MinusBtn>－</S.MinusBtn>1<S.PlusBtn>＋</S.PlusBtn>
-            </S.QuantityWrapper>
-            <S.ItemPrice>10000 원</S.ItemPrice>
-            <S.DeliveryPrice>
-              배송비 <br />
-              3000 원
-            </S.DeliveryPrice>
-            <S.BtnWrapper>
-              <S.PickBtn>찜하기</S.PickBtn>
-              <S.BasketBtn>구매하기</S.BasketBtn>
-            </S.BtnWrapper>
-          </S.ItemWrapper>
+          {data?.fetchCart.length !== 0 ? (
+            <>
+              {data?.fetchCart.map((cart, index) => (
+                <S.ItemWrapper key={index}>
+                  <S.ItemCheckbox
+                    type="checkbox"
+                    name={`select-${checkData[index].id}`}
+                    onChange={(e) => handleSingleCheck(e.target.checked, checkData[index].id)}
+                    checked={checkItems.includes(checkData[index].id)}
+                  />
+                  <S.ItemImg src="" />
+                  <S.ItemName>상품이름</S.ItemName>
+                  <S.QuantityWrapper>
+                    <S.MinusBtn>－</S.MinusBtn>1<S.PlusBtn>＋</S.PlusBtn>
+                  </S.QuantityWrapper>
+                  <S.ItemPrice>10000 원</S.ItemPrice>
+                  <S.DeliveryPrice>
+                    배송비 <br />
+                    3000 원
+                  </S.DeliveryPrice>
+                  <S.BtnWrapper>
+                    <S.PickBtn>찜하기</S.PickBtn>
+                    <S.BasketBtn>구매하기</S.BasketBtn>
+                  </S.BtnWrapper>
+                </S.ItemWrapper>
+              ))}
+            </>
+          ) : (
+            <>
+              <S.NoBasketText>
+                현재 장바구니에 담긴 상품이 없습니다. 추천 상품을 보러 가시겠어요?
+              </S.NoBasketText>
+              <S.MoveBtnWrap>
+                <Link href="/market">
+                  <a>
+                    <S.MoveBtn>추천 상품 보러가기</S.MoveBtn>
+                  </a>
+                </Link>
+              </S.MoveBtnWrap>
+            </>
+          )}
         </S.ItemUl>
       </S.OrderArticle>
       <S.NumWrapper>

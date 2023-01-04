@@ -38,23 +38,20 @@ export const Line = styled.div`
   background: black;
   transition: all 0.4s ease;
 
-  opacity: ${(props: IReviewsListStylesProps) =>
-    props.isSelected ? "1" : "0"};
+  opacity: ${(props: IReviewsListStylesProps) => (props.isSelected ? "1" : "0")};
 `;
 
 export const Tab = styled.li`
-  width: 191px;
+  width: 193px;
   padding: 0 30px;
   text-align: center;
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;
 
-  font-weight: ${(props: IReviewsListStylesProps) =>
-    props.isSelected ? "600" : "300"};
+  font-weight: ${(props: IReviewsListStylesProps) => (props.isSelected ? "600" : "300")};
 
-  color: ${(props: IReviewsListStylesProps) =>
-    props.isSelected ? "black" : "#666"};
+  color: ${(props: IReviewsListStylesProps) => (props.isSelected ? "black" : "#666")};
 
   :hover {
     ${Line} {

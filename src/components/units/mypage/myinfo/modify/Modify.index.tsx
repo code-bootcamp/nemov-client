@@ -1,34 +1,29 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { isOpenState } from "../../../../../commons/stores";
 import { UseMutationUpdateUser } from "../../../../commons/hooks/useMutations/user/UseMutationUpdateUser";
-import { UseMutationUpdateUserPassword } from "../../../../commons/hooks/useMutations/user/UseMutationUpdateUserPassword";
 import { UseQueryFetchLoginUser } from "../../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import * as S from "./Modify.styles";
 import { IFormUpdateData } from "./Modify.types";
-import { UpdateSchema } from "./Modify.validation";
 
 export default function MypageMyinfoModify() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
-  const { updateUserPasswordFunction } = UseMutationUpdateUserPassword();
   const { updateUserFunction } = UseMutationUpdateUser();
-  const { data: loginUserData } = UseQueryFetchLoginUser();
+  const { data: loginUserData, refetch } = UseQueryFetchLoginUser();
+
+  console.log(loginUserData);
 
   // Form
-  const { register, handleSubmit, formState, getValues, setValue, trigger } = useForm({
-    resolver: yupResolver(UpdateSchema),
-    mode: "onChange",
-  });
+  const { register, handleSubmit, setValue, trigger } = useForm({});
 
-  const onSubmitUpdate: SubmitHandler<IFormUpdateData> = (data: IFormUpdateData) => {
-    const { password, newPassword, ...value } = data;
+  const onSubmitUpdate: SubmitHandler<IFormUpdateData> = async (data: IFormUpdateData) => {
+    const { ...value } = data;
     value.veganLevel = Number(value.veganLevel);
     void updateUserFunction(value);
-    void updateUserPasswordFunction(getValues("password"));
+    await refetch();
   };
 
   // 주소 모달
@@ -64,20 +59,6 @@ export default function MypageMyinfoModify() {
               />
             </S.InputWrapper>
             <S.InputWrapper>
-              <S.Label>기존 비밀번호</S.Label>
-              <S.InputErrorWrapper>
-                <S.EditPasswordInput type="password" {...register("password")} />
-                <S.Error>{formState.errors.password?.message}</S.Error>
-              </S.InputErrorWrapper>
-            </S.InputWrapper>
-            <S.InputWrapper>
-              <S.Label>새로운 비밀번호</S.Label>
-              <S.InputErrorWrapper>
-                <S.EditPasswordInput type="password" {...register("newPassword")} />
-                <S.Error>{formState.errors.newPassword?.message}</S.Error>
-              </S.InputErrorWrapper>
-            </S.InputWrapper>
-            <S.InputWrapper>
               <S.Label>이름</S.Label>
               <S.EditInput
                 type="text"
@@ -87,16 +68,22 @@ export default function MypageMyinfoModify() {
             </S.InputWrapper>
             <S.InputWrapper>
               <S.Label>휴대폰 번호</S.Label>
-              <S.EditInput type="text" defaultValue={loginUserData?.fetchLoginUser.phone} />
+              <S.EditInput
+                type="text"
+                defaultValue={loginUserData?.fetchLoginUser.phone}
+                disabled={true}
+              />
             </S.InputWrapper>
             <S.InputWrapper>
               <S.Label>비건 단계</S.Label>
               <S.Select
-                placeholder="비건 레벨"
-                defaultValue={loginUserData?.fetchLoginUser.veganLevel}
+                placeholder="비건 단계"
+                defaultValue={loginUserData?.fetchLoginUser.veganLevel ?? ""}
                 {...register("veganLevel")}
               >
-                <option value="">단계를 선택해주세요.</option>
+                <option value="none" disabled={true}>
+                  단계를 선택해주세요.
+                </option>
                 <option value="1">1단계: 플렉시테리언</option>
                 <option value="2">2단계: 폴로 베지테리언</option>
                 <option value="3">3단계: 페스코 베지테리언</option>
@@ -122,12 +109,12 @@ export default function MypageMyinfoModify() {
                 </S.ZipcodeWrapper>
                 <S.AddInput
                   type="text"
-                  defaultValue={loginUserData?.fetchLoginUser.address}
+                  defaultValue={loginUserData?.fetchLoginUser.address ?? ""}
                   {...register("address")}
                 />
                 <S.AddInput
                   type="text"
-                  defaultValue={loginUserData?.fetchLoginUser.addressDetail}
+                  defaultValue={loginUserData?.fetchLoginUser.addressDetail ?? ""}
                   {...register("addressDetail")}
                 />
               </S.AddWrapper>
