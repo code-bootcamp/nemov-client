@@ -84,15 +84,13 @@ export default function LayoutFooter() {
         <FooterLeft>
           <Link href="/market">
             <FooterLogo>
-              <img src="/logo/logo-01.png" style={{ width: "120px" }} />
+              <img src="/logo/logo_hover.png" style={{ width: "120px" }} />
             </FooterLogo>
           </Link>
           <hr />
           <div>
             <FooterDetail>상호명:네가 찾는 모든 비건, 네모비</FooterDetail>
-            <FooterDetail>
-              서울특별시 구로구 디지털로 300(구로동, 지밸리비즈플라자)
-            </FooterDetail>
+            <FooterDetail>서울특별시 구로구 디지털로 300(구로동, 지밸리비즈플라자)</FooterDetail>
             <FooterDetail>Email:help@nemov.com</FooterDetail>
             <FooterDetail>사업자 등록번호:111-99-33333</FooterDetail>
           </div>

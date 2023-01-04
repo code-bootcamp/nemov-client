@@ -2,23 +2,52 @@ import { Modal } from "antd";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { UseMutationDeleteProduct } from "../../../commons/hooks/useMutations/product/UseMutationDeleteProduct";
-import { UseQueryFetchProductsBySeller } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import {
+  FETCH_PRODUCTS_BY_SELLER,
+  UseQueryFetchProductsBySeller,
+} from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
+import React, { useState } from "react";
 
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
+  const [, setIsOpen] = useState(false);
   const { data } = UseQueryFetchProductsBySeller({
     page: 1,
   });
   const [deleteProduct] = UseMutationDeleteProduct();
 
-  console.log(deleteProduct);
-
-  const onClickDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onClickDelete = async (id: string) => {
+    console.log(id);
     await deleteProduct({
-      variables: { productId: e.currentTarget.id },
+      variables: { productId: id },
+      refetchQueries: [
+        {
+          query: FETCH_PRODUCTS_BY_SELLER,
+          variables: {
+            page: 1,
+          },
+        },
+      ],
     });
     Modal.success({ content: "삭제가 완료되었습니다." });
+  };
+
+  const { confirm } = Modal;
+
+  const showConfirm = (e: React.MouseEvent) => {
+    const clickEvent = e.currentTarget.id;
+    setIsOpen(true);
+    confirm({
+      title: "상품 삭제하기",
+      content: "상품을 삭제하시겠습니까? ",
+      onOk() {
+        void onClickDelete(clickEvent);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
 
   return (
@@ -57,7 +86,7 @@ export default function ProductList() {
                   </S.Btn1>
                 </S.Td>
                 <S.Td>
-                  <S.Btn1 id={el.id} onClick={onClickDelete}>
+                  <S.Btn1 id={el.id} onClick={showConfirm}>
                     삭제
                   </S.Btn1>
                 </S.Td>
