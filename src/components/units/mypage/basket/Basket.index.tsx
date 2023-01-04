@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
+import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
 import * as S from "./Basket.styles";
 
@@ -11,6 +12,7 @@ interface IData {
 
 export default function MypageBasket() {
   const { data } = UseQueryFetchCart();
+  const { productToCart } = UseMutationToggleProductToCart();
 
   console.log(data);
 
@@ -18,6 +20,7 @@ export default function MypageBasket() {
     { id: 0, title: "선택 1" },
     { id: 1, title: "선택 2" },
     { id: 2, title: "선택 3" },
+    { id: 3, title: "선택 4" },
   ];
 
   // 체크박스 기능
@@ -48,6 +51,10 @@ export default function MypageBasket() {
   const onClickCountUp = () => {};
 
   const onClickCountDown = () => {};
+
+  const onClickDelete = async (e: React.MouseEvent) => {
+    await productToCart(e.currentTarget.id);
+  };
 
   return (
     <S.ContentsMain>
@@ -93,10 +100,15 @@ export default function MypageBasket() {
                     <CountUpBtn onClick={onClickCountUp} />
                   </S.QuantityWrapper>
                   <S.ItemPrice>{cart.price} 원</S.ItemPrice>
-                  <S.BtnWrapper>
-                    <S.PickBtn>찜하기</S.PickBtn>
-                    <S.BasketBtn>구매하기</S.BasketBtn>
-                  </S.BtnWrapper>
+                  <S.IconBtnWrap>
+                    <S.CancelBtn onClick={onClickDelete}>
+                      <S.CancelIcon />
+                    </S.CancelBtn>
+                    <S.BtnWrapper>
+                      <S.PickBtn>찜하기</S.PickBtn>
+                      <S.BasketBtn>구매하기</S.BasketBtn>
+                    </S.BtnWrapper>
+                  </S.IconBtnWrap>
                 </S.ItemWrapper>
               ))}
             </>
