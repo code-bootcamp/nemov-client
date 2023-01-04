@@ -14,6 +14,17 @@ export const Payment = styled(AddCardOutlinedIcon)`
   cursor: pointer;
 `;
 
+export const Logo = styled.h1`
+  width: 200px;
+  cursor: pointer;
+  margin: 0;
+`;
+
+export const LogoImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Wrapper = styled.header`
   width: 100%;
   height: 100px;
@@ -33,17 +44,10 @@ export const Wrapper = styled.header`
     ${Menu}, ${Basket}, ${Payment} {
       color: #000;
     }
+    ${LogoImg} {
+      content: url("/logo/logo_hover.png");
+    }
   }
-`;
-
-export const Logo = styled.h1`
-  width: 200px;
-  cursor: pointer;
-`;
-
-export const LogoImg = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 export const HeaderMenu = styled.section`

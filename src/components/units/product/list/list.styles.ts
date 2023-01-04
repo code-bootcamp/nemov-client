@@ -22,8 +22,8 @@ export const Thead = styled.thead`
 export const Th = styled.th`
   padding: 0.35rem 0 0.35rem;
   font-weight: 400;
-  text-align: left;
   font-size: 1.2rem;
+  text-align: center;
 `;
 
 export const Tbody = styled.tbody`
@@ -36,6 +36,7 @@ export const Tr = styled.tr`
 
 export const Td = styled.td`
   padding: 0.75rem 0;
+  text-align: center;
 `;
 
 // export const Media = css`
@@ -57,3 +58,23 @@ export const Td = styled.td`
 //     }
 //   }
 // `;
+
+export const Btn1 = styled.button`
+  width: 4vmax;
+  height: 2vmax;
+  font-size: 0.9rem;
+  :hover {
+    background-color: #999;
+    color: #fff;
+  }
+`;
+
+export const Btn2 = styled.button`
+  width: 12vmax;
+  font-size: 1rem;
+  padding: 2%;
+  :hover {
+    background-color: #999;
+    color: #fff;
+  }
+`;
