@@ -20,7 +20,6 @@ export default function LayoutHeader() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [logout] = useMutation(LOGOUT);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-  console.log(data);
 
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
@@ -33,6 +32,7 @@ export default function LayoutHeader() {
 
   const onClickLogout = () => {
     void logout();
+    location.reload();
     setAccessToken("");
   };
   return (
@@ -59,10 +59,10 @@ export default function LayoutHeader() {
             </Link>
           </>
         )}
-        <Link href={data ? "/mypage" : "/login"}>
+        <Link href={data ? "/mypage/orderlist" : "/login"}>
           <S.HeaderMenuItem>{data ? "MYPAGE" : "LOGIN"}</S.HeaderMenuItem>
         </Link>
-        <Link href={data ? "market" : "/signup"}>
+        <Link href={data ? "/market" : "/signup"}>
           <S.HeaderMenuItem onClick={data && onClickLogout}>
             {data ? "LOGOUT" : "SIGNUP"}{" "}
           </S.HeaderMenuItem>
