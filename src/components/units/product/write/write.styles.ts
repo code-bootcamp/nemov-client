@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
-import { Editor } from "@toast-ui/react-editor";
 
 export const Wrapper = styled(GlobalWrapper)`
   display: flex;
@@ -99,4 +98,3 @@ export const Btn2 = styled.button`
 export const EditorWrap = styled.div`
   width: 80%;
 `;
-export const EditorArea = styled(Editor)``;

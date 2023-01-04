@@ -2,8 +2,7 @@ import { useRouter } from "next/router";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import * as S from "./write.styles";
 
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { UseMutationCreateProduct } from "../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
 import { useForm } from "react-hook-form";
 import { Editor } from "@toast-ui/react-editor";
@@ -12,24 +11,30 @@ import {
   IProduct_Category_Type,
 } from "../../../../commons/types/generated/types";
 import { UseMutationUploadFile } from "../../../commons/hooks/useMutations/UseMutationUploadFile";
+import ToastUIEditor from "../../../commons/toast-ui-editor/toastUiEditor";
 
 export default function ProductWrite() {
   const router = useRouter();
-  const editorRef = useRef();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
-  const [, setFiles] = useState<File>();
-  const [category, setCategory] = useState<string>("");
+  const [files, setFiles] = useState<File>();
+  // const [category, setCategory] = useState<string>("");
 
   const [createProduct] = UseMutationCreateProduct();
   const [uploadFile] = UseMutationUploadFile();
 
-  const { register, handleSubmit, setValue } = useForm<ICreateProductInput>({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm<ICreateProductInput>({
     mode: "onChange",
   });
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    console.log(file);
     if (file === undefined) return;
 
     const fileReader = new FileReader();
@@ -47,7 +52,7 @@ export default function ProductWrite() {
 
   const onclickGetValue = (event: any) => {
     // console.log(event.target.id);
-    setCategory(event.target.id);
+    setValue("category", event.target.id);
   };
 
   const onClickRadio = (event: any) => {
@@ -56,27 +61,29 @@ export default function ProductWrite() {
   };
 
   const onClickSubmit = async (data: ICreateProductInput) => {
-    const resultFile = await uploadFile({ variables: { file: data.image } });
-    const url = resultFile.data?.uploadFile.url;
+    // console.log(Editor.prototype.getInstance().getHTML());
+    const resultFile = await uploadFile({ variables: { file: files } });
+    const url = resultFile.data?.uploadFile;
+
+    // const context = Editor.prototype.getInstance().getHTML();
 
     const result = await createProduct({
       variables: {
         createProductInput: {
           name: data.name,
-          category: IProduct_Category_Type[category],
-          description: data.description,
-          discount: data.discount,
-          deliveryFee: data.deliveryFee,
-          price: data.price,
-          quantity: data.quantity,
-          image: url,
+          category: IProduct_Category_Type.Beauty,
+          description: "11111",
+          discount: Number(data.discount),
+          deliveryFee: Number(data.deliveryFee),
+          price: Number(data.price),
+          quantity: Number(data.quantity),
+          image: String(url),
           veganLevel: data.veganLevel,
         },
       },
     });
     console.log("result:", result);
 
-    Editor.prototype.getInstance().getHTML();
     void router.push("/seller");
   };
 
@@ -86,7 +93,13 @@ export default function ProductWrite() {
       <S.InnerWrap onSubmit={handleSubmit(onClickSubmit)}>
         <S.Row>
           <S.SubTitle>상품이름</S.SubTitle>
-          <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
+          <S.InputBox
+            type="text"
+            placeholder="상품이름을 입력하세요"
+            {...register("name", {
+              required: "상품이름을 입력해주세요",
+            })}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
@@ -94,11 +107,7 @@ export default function ProductWrite() {
         </S.Row>
         <S.Row>
           <S.SubTitle>할인율</S.SubTitle>
-          <S.InputBox
-            type="number"
-            placeholder="할인율을 입력하세요"
-            {...register("description")}
-          />
+          <S.InputBox type="number" placeholder="할인율을 입력하세요" {...register("discount")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>배송비</S.SubTitle>{" "}
@@ -131,16 +140,7 @@ export default function ProductWrite() {
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 고시 정보</S.SubTitle>
-          <div>
-            <ul style={{ display: "flex" }}>
-              <li>품명</li>
-              <li>모델명</li>
-              <li>품명</li>
-              <li>모델명</li>
-              <li>품명</li>
-              <li>모델명</li>
-            </ul>
-          </div>
+          <div>상품고시정보...</div>
         </S.Row>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>
@@ -189,32 +189,7 @@ export default function ProductWrite() {
         <S.Row>
           <S.SubTitle>상품 내용</S.SubTitle>
           <S.EditorWrap>
-            <S.EditorArea
-              ref={editorRef}
-              placeholder="상품 상세설명을 입력해주세요."
-              previewStyle="vertical"
-              height="500px"
-              initialEditType="markdown"
-              toolbarItems={[
-                ["heading", "bold", "italic", "strike"],
-                ["hr", "quote"],
-                ["ul", "ol", "task", "indent", "outdent"],
-                ["table", "image", "link"],
-                ["code", "codeblock"],
-              ]}
-              useCommandShortcut={false}
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  console.log(blob); // File {name: '카레유.png', ... }
-
-                  // 1. 첨부된 이미지 파일을 서버로 전송후, 이미지 경로 url을 받아온다.
-                  // const imgUrl = await .... 서버 전송 / 경로 수신 코드 ...
-
-                  // 2. 첨부된 이미지를 화면에 표시(경로는 임의로 넣었다.)
-                  callback();
-                },
-              }}
-            ></S.EditorArea>
+            <ToastUIEditor />
           </S.EditorWrap>
         </S.Row>
 

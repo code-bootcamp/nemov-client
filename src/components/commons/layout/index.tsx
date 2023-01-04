@@ -20,38 +20,19 @@ export default function Layout(props: ILayoutProps) {
   const router = useRouter();
 
   const HIDDEN_HEADER = ["/"];
-  const HIDDEN_BANNER = [
-    "/",
-    "/login",
-    "/signup",
-    "/signup/user",
-    "/mypage",
-    "/mypage/basket",
-    "/mypage/orderlist",
-    "/mypage/picked",
-    "/mypage/point",
-    "/mypage/reviews",
-    "/market/categories",
-    "/market/categories/food",
-    "/market/categories/drink",
-    "/market/categories/beauty",
-    "/market/categories/life",
-    "/seller",
-    "/seller/new",
-    `/market/${router.query.productId}`,
-  ];
+  const SHOW_BANNER = ["/market", "/market/categories"];
   const HIDDEN_SCROLLTOTOP = ["/", "/login", "/signup"];
   const HIDDEN_FOOTER = ["/"];
 
   const isHiddenHeader = HIDDEN_HEADER.includes(router.asPath);
-  const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath);
+  const isShowBanner = SHOW_BANNER.includes(router.asPath);
   const isHiddenScrollToTop = HIDDEN_SCROLLTOTOP.includes(router.asPath);
   const isHiddenFooter = HIDDEN_FOOTER.includes(router.asPath);
 
   return (
     <>
       {!isHiddenHeader && <LayoutHeader />}
-      {!isHiddenBanner && <LayoutBanner />}
+      {isShowBanner && <LayoutBanner />}
       <LayoutBody>{props.children}</LayoutBody>
       {!isHiddenScrollToTop && <ScrollToTop />}
       {!isHiddenFooter && <LayoutFooter />}
