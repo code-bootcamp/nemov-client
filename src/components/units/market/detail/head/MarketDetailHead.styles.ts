@@ -102,7 +102,7 @@ export const PriceSumDetail01 = styled.span`
   font-weight: 700;
 `;
 
-export const ProductDetailFooter01 = styled.form`
+export const ProductDetailFooter01 = styled.section`
   ${flexColumn}
   margin-top: auto;
   gap: 0.7rem;

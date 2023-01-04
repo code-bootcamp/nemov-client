@@ -16,6 +16,7 @@ export interface IMarketDetailHeadStylesProps {
 // }
 
 export interface IProductOrderData {
+  productId: string;
   amount: number;
   quantity: number;
 }

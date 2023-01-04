@@ -1,18 +1,28 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
-import { getDiscountPrice, getVeganName } from "../../../../../commons/libraries/utilies";
+import React, { memo, useCallback, useState } from "react";
+import {
+  getDiscountPrice,
+  getVeganName,
+  sumOfTotalAmount,
+} from "../../../../../commons/libraries/utilies";
 import {
   StyledCommonButton01,
   StyledCommonButton02,
 } from "../../../../commons/buttons/CommonButtons.styles";
-import { UseMutationCreateProductOrder } from "../../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
 import { CommonHeartIcon01 } from "../../../../commons/icons/CommonIcons.styles";
 import { VeganLevelTag01 } from "../../../../commons/tags/CommonTags.Styles";
 
-import { IMarketDetailProps, IProductOrderData } from "../../Market.types";
+import { IMarketDetailProps } from "../../Market.types";
 
 import * as S from "./MarketDetailHead.styles";
 import MarketDetailHeadCrumbs from "./nav/MarketDetailHeadCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../commons/buttons/CountDownUpButtons";
+import { useMutation } from "@apollo/client";
+import { CREATE_PRODUCT_ORDER } from "../../../../../components/commons/hooks/useMutations/product/UseMutationCreateProductOrder";
+import {
+  IMutation,
+  IMutationCreateProductOrderArgs,
+} from "../../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 function MarketDetailHead(props: IMarketDetailProps) {
   // 할인율 적용된 가격
@@ -20,12 +30,15 @@ function MarketDetailHead(props: IMarketDetailProps) {
     props.data.data?.fetchProduct.price,
     props.data.data?.fetchProduct.discount
   );
-  // console.log("자식 컴포넌트가 랜더링됩니다.");
+
+  const [createProductOrder] = useMutation<
+    Pick<IMutation, "createProductOrder">,
+    IMutationCreateProductOrderArgs
+  >(CREATE_PRODUCT_ORDER);
 
   const [quantity, setQuantity] = useState(1);
   const [totalAmount, setTotalAmountAmount] = useState(1);
   // const [isDisabled, setIsDisabled] = useState(false);
-  // console.log(amount);
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
@@ -64,14 +77,23 @@ function MarketDetailHead(props: IMarketDetailProps) {
   //   };
   // }, [onClickQuantityDown]);
 
-  // 구매하기 기능
-  const { buyProduct } = UseMutationCreateProductOrder();
+  // const { buyProduct } = UseMutationCreateProductOrder();
 
   // 구매 버튼 함수
-  const onClickBuyProduct = (data: IProductOrderData) => {
-    void buyProduct(data);
+  const onClickBuyProduct = async () => {
+    try {
+      await createProductOrder({
+        variables: {
+          productId: String(props.data.data?.fetchProduct.id),
+          amount: totalAmount,
+          quantity,
+        },
+      });
+      Modal.success({ content: "구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
   };
-
   return (
     <>
       <MarketDetailHeadCrumbs />
@@ -110,7 +132,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
             <S.PQuantitySelectSection>
               <S.DetailInfoTitle01>{props.data.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
-                <span>{productPrice * quantity}원</span>
+                <span>{(productPrice ?? 0) * quantity}원</span>
                 <CountDownBtn type="button" onClick={onClickQuantityDown} />
                 <span>{quantity}</span>
                 <CountUpBtn type="button" onClick={onClickQuantityUp} />
@@ -118,12 +140,18 @@ function MarketDetailHead(props: IMarketDetailProps) {
             </S.PQuantitySelectSection>
             <S.PriceSumSection01>
               <S.DetailInfoTitle01>총 상품 금액</S.DetailInfoTitle01>
-              <S.PriceSumDetail01>{totalAmount}원</S.PriceSumDetail01>
+              <S.PriceSumDetail01>
+                {sumOfTotalAmount(
+                  (productPrice ?? 0) * quantity,
+                  props.data.data?.fetchProduct.deliveryFee ?? 0
+                )}
+                원
+              </S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
               <CommonHeartIcon01 />
               <StyledCommonButton02>장바구니</StyledCommonButton02>
-              <StyledCommonButton01 type="submit">구매하기</StyledCommonButton01>
+              <StyledCommonButton01 onClick={onClickBuyProduct}>구매하기</StyledCommonButton01>
             </S.ButtonsWrapper01>
           </S.ProductDetailFooter01>
         </S.ProductDetailAside01>
