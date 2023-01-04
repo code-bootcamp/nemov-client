@@ -12,6 +12,7 @@ import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQ
 import { useRouter } from "next/router";
 import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import React from "react";
+import { Modal } from "antd";
 
 interface IMarketListProps {
   category?: string[];
@@ -23,17 +24,18 @@ export default function MarketList(props: IMarketListProps) {
   const client = useApolloClient();
   const { productToCart } = UseMutationToggleProductToCart();
 
-  const onClickToggleProductToCart = (productId: string) => () => {
+  const onClickToggleProductToCart = (productId: string) => (event: React.MouseEvent) => {
+    event?.stopPropagation();
     void productToCart(productId);
+    Modal.success({ content: "장바구니에 상품을 담았습니다." });
   };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
+    event?.preventDefault();
     const result = await client.query({
       query: FETCH_PRODUCT,
       variables: { productId },
     });
-    event?.stopPropagation();
-    event?.preventDefault();
     console.log(result.data);
     void router.push(`/market/product/${productId}`);
   };
@@ -43,6 +45,7 @@ export default function MarketList(props: IMarketListProps) {
       <ListSearch />
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
         {props.data?.data?.fetchProducts.map((products) => (
+          // isOutOfStock === true이면, 매진 상태 나타내기
           <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
             <S.ItemImageBox01>
               <S.ItemImage03 src={products.image} />

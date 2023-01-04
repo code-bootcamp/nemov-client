@@ -26,3 +26,9 @@ export const getVeganName = (level: Maybe<number> | undefined) => {
     return "비건";
   }
 };
+
+export const sumOfTotalAmount = (totalPrice: number, deliveryFee: number) => {
+  const sum = totalPrice + deliveryFee;
+
+  return sum;
+};
