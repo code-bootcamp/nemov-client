@@ -10,3 +10,7 @@ export interface IFormSignupData {
   addressDetail: string;
   checkbox: boolean;
 }
+
+export interface ISignupProps {
+  isSeller: boolean;
+}

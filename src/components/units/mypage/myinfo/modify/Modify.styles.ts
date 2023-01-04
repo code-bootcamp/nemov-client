@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  colorBase01,
-  colorBase02,
-} from "../../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -16,14 +13,14 @@ export const Title = styled.h4`
 
 export const Form = styled.form`
   width: 100%;
-  padding: 3rem;
+  padding: 3rem 0;
   border-top: 2px solid rgb(51, 51, 51);
   display: flex;
   justify-content: center;
 `;
 
 export const InnerWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,4 +121,24 @@ export const EditBtn = styled.button`
   font-weight: 500;
   color: white;
   ${colorBase01}
+`;
+
+export const InputErrorWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Error = styled.div`
+  margin-top: 8px;
+  color: red;
+`;
+
+export const EditPasswordInput = styled.input`
+  width: 100%;
+  height: 46px;
+  padding: 0px 11px 1px 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  color: rgb(51, 51, 51);
 `;

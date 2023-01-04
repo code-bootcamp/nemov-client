@@ -5,8 +5,6 @@ import { mobile } from "../../src/commons/styles/breakPoints";
 import { colorBase01 } from "../../src/commons/styles/colorBases";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useRecoilState } from "recoil";
-import { isSellerState } from "../../src/commons/stores";
 import { UseMutationCheckBusinessLicenseNumber } from "../../src/components/commons/hooks/useMutations/signup/UseMutationCheckBusinessLicenseNumber";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
@@ -14,7 +12,7 @@ import { useRouter } from "next/router";
 export default function SignupPage() {
   const router = useRouter();
 
-  const [isSeller, setIsSeller] = useRecoilState(isSellerState);
+  const [isSeller, setIsSeller] = useState(false);
   const [isSelected, setIsSelected] = useState([true, false]);
   const [bln, setBln] = useState("");
 
@@ -92,29 +90,21 @@ export default function SignupPage() {
               {isSeller ? (
                 <>
                   <ContentsText>
-                    판매자 회원가입 페이지 입니다. <br /> 일반 회원 가입을
-                    원하시는 분은 왼쪽의 일반 회원란을 클릭해주세요.
+                    판매자 회원가입 페이지 입니다. <br /> 일반 회원 가입을 원하시는 분은 왼쪽의 일반
+                    회원란을 클릭해주세요.
                   </ContentsText>
                 </>
               ) : (
                 <>
-                  <ContentsText>
-                    지금 회원 가입하신 후 네모비를 만나보세요!
-                  </ContentsText>
+                  <ContentsText>지금 회원 가입하신 후 네모비를 만나보세요!</ContentsText>
                   <AccountIcon></AccountIcon>
                 </>
               )}
               {isSeller && (
                 <>
                   <SellerNumsTitle>사업자 등록번호</SellerNumsTitle>
-                  <SellerNumsText>
-                    사업자 등록번호를 인증해주세요.
-                  </SellerNumsText>
-                  <SellerNumsInput
-                    value={bln}
-                    type="text"
-                    onChange={onChangeBusinessLN}
-                  />
+                  <SellerNumsText>사업자 등록번호를 인증해주세요.</SellerNumsText>
+                  <SellerNumsInput value={bln} type="text" onChange={onChangeBusinessLN} />
                 </>
               )}
               {isSeller ? (
