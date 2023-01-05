@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
-import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
+import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
+import { GlobalWrapper } from "../../../../../commons/styles/globalStyles";
 
 export const Wrapper = styled(GlobalWrapper)`
   display: flex;

@@ -1,11 +1,11 @@
 import { Modal } from "antd";
-import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
-import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-import { UseMutationDeleteProduct } from "../../../commons/hooks/useMutations/product/UseMutationDeleteProduct";
+import { GlobalWrapper } from "../../../../../commons/styles/globalStyles";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import { UseMutationDeleteProduct } from "../../../../commons/hooks/useMutations/product/UseMutationDeleteProduct";
 import {
   FETCH_PRODUCTS_BY_SELLER,
   UseQueryFetchProductsBySeller,
-} from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+} from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
 import React, { useState } from "react";
 

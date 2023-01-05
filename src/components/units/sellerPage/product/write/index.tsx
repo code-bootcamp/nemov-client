@@ -1,17 +1,29 @@
 import { useRouter } from "next/router";
-import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import * as S from "./write.styles";
-
-import React, { ChangeEvent, useState } from "react";
-import { UseMutationCreateProduct } from "../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { UseMutationCreateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
 import { useForm } from "react-hook-form";
-// import { Editor } from "@toast-ui/react-editor";
-import { ICreateProductInput } from "../../../../commons/types/generated/types";
-import { UseMutationUploadFile } from "../../../commons/hooks/useMutations/UseMutationUploadFile";
-// import ToastUIEditor from "../../../commons/toast-ui-editor/toastUiEditor";
+import { IProduct_Category_Type } from "../../../../../commons/types/generated/types";
+import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
+import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
+import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
+import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 
 interface ProductWriteProps {
   isEdit: boolean;
+}
+
+interface ProductInput {
+  name?: string;
+  category?: string;
+  deliveryFee?: number;
+  description?: string;
+  discount?: number;
+  image?: string;
+  price?: number;
+  quantity?: number;
+  veganLevel?: number;
 }
 
 export default function ProductWrite(props: ProductWriteProps) {
@@ -21,13 +33,14 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [files, setFiles] = useState<File>();
 
   const [createProduct] = UseMutationCreateProduct();
+  const [updateProduct] = UseMutationUpdateProduct();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
   console.log(data);
 
   const [uploadFile] = UseMutationUploadFile();
 
-  const { register, handleSubmit, setValue } = useForm<ICreateProductInput>({
+  const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
   });
 
@@ -55,7 +68,13 @@ export default function ProductWrite(props: ProductWriteProps) {
     setValue("veganLevel", Number(event.currentTarget.id));
   };
 
-  const onClickSubmit = async (data: ICreateProductInput) => {
+  useEffect(() => {
+    if (data?.image) {
+      setImageUrl(data.image);
+    }
+  }, [data]);
+
+  const onClickSubmit = async (data: ProductInput) => {
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
@@ -66,15 +85,15 @@ export default function ProductWrite(props: ProductWriteProps) {
     const result = await createProduct({
       variables: {
         createProductInput: {
-          name: data.name,
-          category: data.category,
+          name: String(data.name),
+          category: IProduct_Category_Type.Beauty,
           description: "11111",
           discount: Number(data.discount),
           deliveryFee: Number(data.deliveryFee),
           price: Number(data.price),
           quantity: Number(data.quantity),
           image: String(url),
-          veganLevel: data.veganLevel,
+          veganLevel: Number(data.veganLevel),
         },
       },
     });
@@ -82,18 +101,48 @@ export default function ProductWrite(props: ProductWriteProps) {
     void router.push("/seller");
   };
 
+  const onClickEdit = async (data: ProductInput) => {
+    const resultFile = await uploadFile({ variables: { file: files } });
+    const url = resultFile.data?.uploadFile;
+
+    console.log("3333333");
+    await updateProduct({
+      variables: {
+        productId: String(router.query.productId),
+        updateProductInput: {
+          name: String(data.name),
+          category: IProduct_Category_Type.Beauty,
+          description: "11111",
+          discount: Number(data.discount),
+          deliveryFee: Number(data.deliveryFee),
+          price: Number(data.price),
+          quantity: Number(data.quantity),
+          image: String(url),
+          veganLevel: Number(data.veganLevel),
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_PRODUCTS_BY_SELLER,
+          variables: {
+            page: 1,
+          },
+        },
+      ],
+    });
+    void router.push("/seller");
+  };
+
   return (
     <S.Wrapper>
       <S.Title>판매자 상품 {props.isEdit ? "수정" : "등록"} 페이지</S.Title>
-      <S.InnerWrap onSubmit={handleSubmit(onClickSubmit)}>
+      <S.InnerWrap onSubmit={handleSubmit(props.isEdit ? onClickEdit : onClickSubmit)}>
         <S.Row>
           <S.SubTitle>상품이름</S.SubTitle>
           <S.InputBox
             type="text"
             placeholder="상품이름을 입력하세요"
-            {...register("name", {
-              required: "상품이름을 입력해주세요",
-            })}
+            {...register("name")}
             defaultValue={data?.name}
           />
         </S.Row>
@@ -190,20 +239,18 @@ export default function ProductWrite(props: ProductWriteProps) {
               type="file"
               onChange={onChangeFile}
               placeholder="상품 대표 이미지를 등록하세요"
-              // defaultValue={data?.image}
+              defaultValue={data?.image}
             />
             <S.ThumbnailImg src={imageUrl} />
           </S.ThumbnailImgWrap>
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 내용</S.SubTitle>
-          <S.EditorWrap>
-            {/* <ToastUIEditor /> */}
-          </S.EditorWrap>
+          <S.EditorWrap>{/* <ToastUIEditor /> */}</S.EditorWrap>
         </S.Row>
 
         <S.ButtonWrap>
-          <S.Btn1 type="submit">상품 등록하기</S.Btn1>
+          <S.Btn1 type="submit">상품{props.isEdit ? "수정" : "등록"}하기</S.Btn1>
           <S.Btn2 type="button" onClick={onClickMoveToPage("/seller")}>
             취소
           </S.Btn2>
