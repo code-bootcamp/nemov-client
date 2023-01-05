@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Slider from "react-slick";
 import { tablet } from "../../../../commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+// import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export const Wrapper = styled.section`
   width: 100%;
