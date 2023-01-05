@@ -1,23 +1,9 @@
-import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import Head from "next/head";
 import { ChangeEvent, useState } from "react";
 import { SetterOrUpdater } from "recoil";
+import { UseMutationCreatePointCharge } from "../../commons/hooks/useMutations/point/UseMutationCreatePointCharge";
 import * as S from "./payment.styles";
-
-const CREATE_POINT_CHARGE = gql`
-  mutation createPointCharge($impUid: ID!, $amount: Int!) {
-    createPointCharge(impUid: $impUid, amount: $amount) {
-      id
-      impUid
-      amount
-      user {
-        id
-        name
-      }
-    }
-  }
-`;
 
 declare const window: typeof globalThis & {
   IMP: any;
@@ -30,12 +16,7 @@ interface PaymentProps {
 export default function PaymentPage(props: PaymentProps) {
   const [point, setPoint] = useState(0);
 
-  //   const [createPointTransaction] = useMutation<
-  //     Pick<IMutation, "createPointTransactionOfLoading">,
-  //     IMutationCreatePointTransactionOfLoadingArgs
-  //   >(CREATE_POINT_TRANSACTION);
-
-  const [createPointCharge] = useMutation(CREATE_POINT_CHARGE);
+  const [createPointCharge] = UseMutationCreatePointCharge();
 
   const onClickPayment = () => {
     const IMP = window.IMP; // 생략 가능
@@ -94,10 +75,7 @@ export default function PaymentPage(props: PaymentProps) {
     <S.Wrapper>
       <h1>네모비 포인트 충전하기</h1>
       <Head>
-        <script
-          type="text/javascript"
-          src="https://code.jquery.com/jquery-1.12.4.min.js"
-        ></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script
           type="text/javascript"
           src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"

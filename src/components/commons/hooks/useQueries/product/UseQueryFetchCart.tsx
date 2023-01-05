@@ -13,7 +13,9 @@ export const FETCH_CART = gql`
 `;
 
 export const UseQueryFetchCart = () => {
-  const query = useQuery<Pick<IQuery, "fetchCart">>(FETCH_CART);
+  const query = useQuery<Pick<IQuery, "fetchCart">>(FETCH_CART, {
+    fetchPolicy: "cache-and-network",
+  });
 
   return query;
 };

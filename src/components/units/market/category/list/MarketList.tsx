@@ -24,9 +24,15 @@ export default function MarketList(props: IMarketListProps) {
   const client = useApolloClient();
   const { productToCart } = UseMutationToggleProductToCart();
 
-  const onClickToggleProductToCart = (productId: string) => (event: React.MouseEvent) => {
+  const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
-    void productToCart(productId);
+    const result = await productToCart(productId);
+    console.log(result?.data?.toggleProductToCart);
+    if (!result?.data?.toggleProductToCart) {
+      Modal.error({ content: "이미 장바구니에 담긴 상품입니다." });
+      return;
+    }
+
     Modal.success({ content: "장바구니에 상품을 담았습니다." });
   };
 

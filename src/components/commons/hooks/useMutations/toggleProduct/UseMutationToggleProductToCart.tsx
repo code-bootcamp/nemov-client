@@ -4,6 +4,7 @@ import {
   IMutation,
   IMutationToggleProductToCartArgs,
 } from "../../../../../commons/types/generated/types";
+import { FETCH_CART } from "../../useQueries/product/UseQueryFetchCart";
 
 export const TOGGLE_PRODUCT_TO_CART = gql`
   mutation toggleProductToCart($productId: ID!) {
@@ -15,11 +16,11 @@ export const UseMutationToggleProductToCart = () => {
   const [toggleProductToCart] = useMutation<
     Pick<IMutation, "toggleProductToCart">,
     IMutationToggleProductToCartArgs
-  >(TOGGLE_PRODUCT_TO_CART);
+  >(TOGGLE_PRODUCT_TO_CART, { refetchQueries: [{ query: FETCH_CART }] });
 
   const productToCart = async (productId: string) => {
     try {
-      await toggleProductToCart({
+      return await toggleProductToCart({
         variables: {
           productId,
         },
