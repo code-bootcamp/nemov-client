@@ -1,22 +1,22 @@
 import { DatePicker, Space } from "antd";
 import { useState } from "react";
+import { getDate } from "../../../../commons/libraries/utilies";
 import { UseQueryFetchPointTransactions } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
-import Paginations01 from "../../../commons/paginations/01/Paginations01.index";
 import * as S from "./Point.styles";
 
 export default function MypagePoint() {
   const { RangePicker } = DatePicker;
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const date = String(new Date());
+
+  const [startDate, setStartDate] = useState("2023-1-01");
+  const [endDate, setEndDate] = useState(getDate(date));
 
   const { data, refetch } = UseQueryFetchPointTransactions({
     startDate,
     endDate,
     page: 1,
   });
-
-  // console.log(data?.fetchPointTransactions);
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
     setStartDate(dateStrings[0]);
@@ -48,20 +48,18 @@ export default function MypagePoint() {
           <S.TableTopLi>잔액</S.TableTopLi>
           <S.TableTopSpan></S.TableTopSpan>
         </S.TableTop>
-        <S.TableBottom>
-          <S.TableBottomLi>23.01.03</S.TableBottomLi>
-          <S.TableBottomContent>충전</S.TableBottomContent>
-          <S.TableBottomLi>4000 원</S.TableBottomLi>
-          <S.TableBottomLi>4000 원</S.TableBottomLi>
-          <S.RefundBtn>환불</S.RefundBtn>
-        </S.TableBottom>
         {data?.fetchPointTransactions.length !== 0 ? (
           <>
             {data?.fetchPointTransactions.map((el, index) => (
               <S.TableBottom key={index}>
-                <S.TableBottomLi>{el.createdAt}</S.TableBottomLi>
-                <S.TableBottomContent>{el.status}</S.TableBottomContent>
-                <S.TableBottomLi>+ {el.balance} 원</S.TableBottomLi>
+                <S.TableBottomLi>{getDate(el.createdAt)}</S.TableBottomLi>
+                <S.TableBottomContent>
+                  {(el.status === "PAID" && "충전") ||
+                    (el.status === "CANCELLED" && "환불") ||
+                    (el.status === "BOUGHT" && "구매") ||
+                    (el.status === "REFUNDED" && "구매취소")}
+                </S.TableBottomContent>
+                <S.TableBottomLi>+ {el.amount} 원</S.TableBottomLi>
                 <S.TableBottomLi>{el.user.point} 원</S.TableBottomLi>
                 <S.RefundBtn>환불</S.RefundBtn>
               </S.TableBottom>
@@ -72,9 +70,7 @@ export default function MypagePoint() {
         )}
       </section>
       {/* {data?.fetchPointTransactions.length !== 0 && ( */}
-      <section>
-        <Paginations01 />
-      </section>
+      <section>{/* <Paginations02 /> */}</section>
       {/* )} */}
     </S.ContentsMain>
   );

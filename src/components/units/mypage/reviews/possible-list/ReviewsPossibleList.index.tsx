@@ -13,6 +13,8 @@ export default function ReviewsPossibleList() {
     page: 1,
   });
 
+  console.log(data);
+
   const onClickReviewsWrite = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
@@ -30,14 +32,14 @@ export default function ReviewsPossibleList() {
 
       <S.ReviewWrapper>
         <S.ReviewUl>
-          <S.ReviewLi>
+          {/* <S.ReviewLi>
             <S.ReviewImg src="" />
             <S.ReviewCenterWrapper>
               <S.ReviewItemName>[브랜드명] 상품명</S.ReviewItemName>
               <S.ReviewDate>구매 날짜</S.ReviewDate>
             </S.ReviewCenterWrapper>
             <S.ReviewWriteBtn onClick={onClickReviewsWrite}>후기 작성</S.ReviewWriteBtn>
-          </S.ReviewLi>
+          </S.ReviewLi> */}
 
           {data?.fetchProductOrdersWithoutReview.length !== 0 ? (
             <>
@@ -46,7 +48,7 @@ export default function ReviewsPossibleList() {
                   <S.ReviewImg src="" />
                   <S.ReviewCenterWrapper>
                     <S.ReviewItemName>
-                      {`[${review.seller.name}] ${review.product.name}`}
+                      {/* {`[${review.seller.name}] ${review.product.name}`} */}
                     </S.ReviewItemName>
                     <S.ReviewDate>{review.createdAt}</S.ReviewDate>
                   </S.ReviewCenterWrapper>

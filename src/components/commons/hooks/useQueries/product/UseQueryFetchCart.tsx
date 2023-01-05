@@ -8,6 +8,9 @@ export const FETCH_CART = gql`
       image
       name
       price
+      discount
+      quantity
+      deliveryFee
     }
   }
 `;

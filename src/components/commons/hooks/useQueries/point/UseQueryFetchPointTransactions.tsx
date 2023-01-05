@@ -32,7 +32,7 @@ export const FETCH_POINT_TRANSACTIONS = gql`
 export const UseQueryFetchPointTransactions = (variables: IQueryFetchPointTransactionsArgs) => {
   const query = useQuery<Pick<IQuery, "fetchPointTransactions">, IQueryFetchPointTransactionsArgs>(
     FETCH_POINT_TRANSACTIONS,
-    { variables }
+    { variables, fetchPolicy: "cache-and-network" }
   );
 
   return query;

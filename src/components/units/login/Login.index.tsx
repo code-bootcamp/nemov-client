@@ -40,7 +40,7 @@ export default function Login() {
 
       setAccessToken(accessToken);
 
-      Modal.success({ content: `~~ 님 안녕하세요!` });
+      Modal.success({ content: `로그인에 성공했습니다.` });
       void router.push("/market");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
