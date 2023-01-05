@@ -1,4 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
+import {
+  IMutation,
+  IMutationCheckValidTokenArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const CHECK_VALID_TOKEN = gql`
   mutation checkValidToken($phone: Phone!, $token: String!) {
@@ -7,7 +11,9 @@ export const CHECK_VALID_TOKEN = gql`
 `;
 
 export const UseMutationCheckValidToken = () => {
-  const mutation = useMutation(CHECK_VALID_TOKEN);
+  const mutation = useMutation<Pick<IMutation, "checkValidToken">, IMutationCheckValidTokenArgs>(
+    CHECK_VALID_TOKEN
+  );
 
   return mutation;
 };

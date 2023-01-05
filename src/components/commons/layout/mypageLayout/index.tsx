@@ -17,7 +17,7 @@ export default function MypageLayout({ children }: MypageLayoutProps) {
       <MypageWrapper>
         <MyPageMenu data={data} />
         <div style={{ width: "100%" }}>
-          <MypageLayoutHeader data={data} />
+          <MypageLayoutHeader />
           {children}
         </div>
       </MypageWrapper>

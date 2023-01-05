@@ -1,11 +1,7 @@
 import Link from "next/link";
 import * as S from "./styles";
 
-interface IMypageLayoutHeaderProps {
-  data: any;
-}
-
-export default function MypageLayoutHeader(props: IMypageLayoutHeaderProps) {
+export default function MypageLayoutHeader() {
   return (
     <>
       <S.ContentsHeader>
@@ -29,7 +25,7 @@ export default function MypageLayoutHeader(props: IMypageLayoutHeaderProps) {
           <S.HeaderItem>
             <S.ItemTitle>포인트</S.ItemTitle>
             <span>
-              <S.ItemValue>{props.data?.fetchLoginUser.point}</S.ItemValue>P
+              <S.ItemValue></S.ItemValue>P
             </span>
           </S.HeaderItem>
         </Link>

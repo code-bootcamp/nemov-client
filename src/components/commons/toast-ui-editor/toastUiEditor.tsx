@@ -3,7 +3,7 @@ import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import "@toast-ui/editor/dist/toastui-editor.css";
 // import { UseMutationUploadFile } from "../hooks/useMutations/UseMutationUploadFile";
-import { useRef } from "react";
+import { Ref, useRef } from "react";
 
 export const EditorArea = styled(Editor)``;
 
@@ -13,7 +13,7 @@ export const EditorArea = styled(Editor)``;
 // };
 
 export default function ToastUIEditor() {
-  const editorRef = useRef<Editor>();
+  const editorRef = useRef<Ref<Editor> | undefined>(null);
   //   const [uploadFile] = UseMutationUploadFile();
 
   //   const onUploadImage = async (blob: Blob | File, callback: HookCallback) => {
@@ -23,8 +23,8 @@ export default function ToastUIEditor() {
 
   return (
     <EditorArea
-      id="editor"
-      ref={editorRef}
+      // id="editor"
+      ref={editorRef && undefined}
       placeholder="상품 상세설명을 입력해주세요."
       previewStyle="vertical"
       height="500px"

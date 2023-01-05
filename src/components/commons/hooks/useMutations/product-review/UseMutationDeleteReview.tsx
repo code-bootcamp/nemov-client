@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { IMutation, IMutationDeleteReviewArgs } from "../../../../../commons/types/generated/types";
 
 export const DELETE_REVIEW = gql`
   mutation deleteReview(
@@ -10,9 +11,10 @@ export const DELETE_REVIEW = gql`
 }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
 export const UseMutationDeleteReview = () => {
-  const mutation = useMutation(DELETE_REVIEW);
+  const mutation = useMutation<Pick<IMutation, "deleteReview">, IMutationDeleteReviewArgs>(
+    DELETE_REVIEW
+  );
 
   return mutation;
 };
