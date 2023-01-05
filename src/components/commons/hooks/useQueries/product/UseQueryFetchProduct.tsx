@@ -21,8 +21,7 @@ export const FETCH_PRODUCT = gql`
   }
 `;
 
-// 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
-export const UseQueryFetchProduct = (variables: any) => {
+export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
   const query = useQuery<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>(FETCH_PRODUCT, {
     variables,
   });

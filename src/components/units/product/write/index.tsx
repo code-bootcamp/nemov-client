@@ -2,33 +2,28 @@ import { useRouter } from "next/router";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import * as S from "./write.styles";
 
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { UseMutationCreateProduct } from "../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
 import { useForm } from "react-hook-form";
-import { Editor } from "@toast-ui/react-editor";
-import {
-  ICreateProductInput,
-  IProduct_Category_Type,
-} from "../../../../commons/types/generated/types";
+// import { Editor } from "@toast-ui/react-editor";
+import { ICreateProductInput } from "../../../../commons/types/generated/types";
 import { UseMutationUploadFile } from "../../../commons/hooks/useMutations/UseMutationUploadFile";
 import ToastUIEditor from "../../../commons/toast-ui-editor/toastUiEditor";
 
-export default function ProductWrite(props) {
+interface ProductWriteProps {
+  isEdit: boolean;
+}
+
+export default function ProductWrite(props: ProductWriteProps) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
-  // const [category, setCategory] = useState<string>("");
 
   const [createProduct] = UseMutationCreateProduct();
   const [uploadFile] = UseMutationUploadFile();
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-  } = useForm<ICreateProductInput>({
+  const { register, handleSubmit, setValue } = useForm<ICreateProductInput>({
     mode: "onChange",
   });
 
@@ -41,23 +36,19 @@ export default function ProductWrite(props) {
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
       if (typeof event.target?.result === "string") {
-        // setFile(event.target?.result);
-        // console.log(event.target?.result);
-
         setImageUrl(event.target.result);
         setFiles(file);
       }
     };
   };
 
-  const onclickGetValue = (event: any) => {
-    // console.log(event.target.id);
+  const onClickGetValue = (event: any) => {
+    console.log(event.target.id);
     setValue("category", event.target.id);
   };
 
-  const onClickRadio = (event: any) => {
-    console.log(Number(event.target.id));
-    setValue("veganLevel", Number(event.target.id));
+  const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
+    setValue("veganLevel", Number(event.currentTarget.id));
   };
 
   const onClickSubmit = async (data: ICreateProductInput) => {
@@ -67,11 +58,12 @@ export default function ProductWrite(props) {
 
     // const context = Editor.prototype.getInstance().getHTML();
 
+    console.log(data.category);
     const result = await createProduct({
       variables: {
         createProductInput: {
           name: data.name,
-          category: IProduct_Category_Type.Beauty,
+          category: data.category,
           description: "11111",
           discount: Number(data.discount),
           deliveryFee: Number(data.deliveryFee),
@@ -83,7 +75,6 @@ export default function ProductWrite(props) {
       },
     });
     console.log("result:", result);
-
     void router.push("/seller");
   };
 
@@ -124,18 +115,14 @@ export default function ProductWrite(props) {
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
           <div>
-            <button type="button" onClick={onclickGetValue} id="Beauty">
-              BEAUTY
-            </button>
-            <button type="button" onClick={onclickGetValue} id="Food">
-              FOOD
-            </button>
-            <button type="button" onClick={onclickGetValue} id="Drink">
-              DRINK
-            </button>
-            <button type="button" onClick={onclickGetValue} id="Life">
-              LIFE
-            </button>
+            <input type="radio" id="BEAUTY" name="category" onClick={onClickGetValue} />
+            BEAUTY
+            <input type="radio" id="FOOD" name="category" onClick={onClickGetValue} />
+            FOOD
+            <input type="radio" id="DRINK" name="category" onClick={onClickGetValue} />
+            DRINK
+            <input type="radio" id="LIFE" name="category" onClick={onClickGetValue} />
+            LIFE
           </div>
         </S.Row>
         <S.Row>

@@ -1,16 +1,18 @@
 import { gql, useQuery } from "@apollo/client";
+import { IQuery } from "../../../../../commons/types/generated/types";
 
-export const FETCH_PRODUCTS_OF_BEST = gql`
-    query fetchProductsOfBest{
-      fetchProductsOfBest{
+export const FETCH_PRODUCTS_OF_BEST_SELLING = gql`
+    query fetchProductsOfBestSelling{
+      fetchProductsOfBestSelling{
         
       }
     }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
 export const UseQueryFetchProductsOfBest = () => {
-  const query = useQuery(FETCH_PRODUCTS_OF_BEST);
+  const query = useQuery<Pick<IQuery, "fetchProductsOfBestSelling">>(
+    FETCH_PRODUCTS_OF_BEST_SELLING
+  );
 
   return query;
 };

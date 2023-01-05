@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { IQuery, IQueryFetchReviewArgs } from "../../../../../commons/types/generated/types";
 
 export const FETCH_REVIEW = gql`
     query fetchReview($reviewId: ID!){
@@ -6,10 +7,10 @@ export const FETCH_REVIEW = gql`
     }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
-// 추후 백엔드에서 받은 타입이 있으면 에러 메세지 사라짐
-export const UseQueryFetchReview = (variables) => {
-  const query = useQuery(FETCH_REVIEW, { variables });
+export const UseQueryFetchReview = (variables: IQueryFetchReviewArgs) => {
+  const query = useQuery<Pick<IQuery, "fetchReview">, IQueryFetchReviewArgs>(FETCH_REVIEW, {
+    variables,
+  });
 
   return query;
 };
