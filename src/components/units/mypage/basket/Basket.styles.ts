@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -237,4 +238,23 @@ export const MoveBtn = styled.button`
   ${colorBase02}
   border-radius: 50px;
   border: 1px solid #ddd;
+`;
+
+export const IconBtnWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: none;
+`;
+
+export const CancelBtn = styled.button`
+  position: absolute;
+  right: 0;
+  top: -30px;
+`;
+
+export const CancelIcon = styled(CloseIcon)`
+  font-size: 20px;
+  cursor: pointer;
 `;
