@@ -81,9 +81,7 @@ export default function ProductList() {
                 <S.Td>{el.category}</S.Td>
                 <S.Td>{el.veganLevel}</S.Td>
                 <S.Td>
-                  <S.Btn1 onClick={onClickMoveToPage("/seller/[event.target.id]/edit]")}>
-                    수정
-                  </S.Btn1>
+                  <S.Btn1 onClick={onClickMoveToPage(`/seller/${el.id}/edit`)}>수정</S.Btn1>
                 </S.Td>
                 <S.Td>
                   <S.Btn1 id={el.id} onClick={showConfirm}>

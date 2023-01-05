@@ -21,6 +21,10 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [files, setFiles] = useState<File>();
 
   const [createProduct] = UseMutationCreateProduct();
+  const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
+  const data = query.data?.fetchProduct;
+  console.log(data);
+
   const [uploadFile] = UseMutationUploadFile();
 
   const { register, handleSubmit, setValue } = useForm<ICreateProductInput>({
@@ -80,7 +84,7 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   return (
     <S.Wrapper>
-      <S.Title>판매자 상품 등록 페이지</S.Title>
+      <S.Title>판매자 상품 {props.isEdit ? "수정" : "등록"} 페이지</S.Title>
       <S.InnerWrap onSubmit={handleSubmit(onClickSubmit)}>
         <S.Row>
           <S.SubTitle>상품이름</S.SubTitle>
@@ -90,19 +94,35 @@ export default function ProductWrite(props: ProductWriteProps) {
             {...register("name", {
               required: "상품이름을 입력해주세요",
             })}
+            defaultValue={data?.name}
           />
         </S.Row>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
-          <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
+          <S.InputBox
+            type="number"
+            placeholder="상품기격을 입력하세요"
+            {...register("price")}
+            defaultValue={data?.price}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>할인율</S.SubTitle>
-          <S.InputBox type="number" placeholder="할인율을 입력하세요" {...register("discount")} />
+          <S.InputBox
+            type="number"
+            placeholder="할인율을 입력하세요"
+            {...register("discount")}
+            defaultValue={data?.discount}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>배송비</S.SubTitle>{" "}
-          <S.InputBox type="text" placeholder="배송비를 입력하세요" {...register("deliveryFee")} />
+          <S.InputBox
+            type="text"
+            placeholder="배송비를 입력하세요"
+            {...register("deliveryFee")}
+            defaultValue={data?.deliveryFee}
+          />
         </S.Row>
         <S.Row>
           <S.SubTitle>재고수량</S.SubTitle>{" "}
@@ -110,6 +130,7 @@ export default function ProductWrite(props: ProductWriteProps) {
             type="number"
             placeholder="총 재고수량을 입력하세요"
             {...register("quantity")}
+            defaultValue={data?.quantity}
           />
         </S.Row>
         <S.Row>
@@ -169,6 +190,7 @@ export default function ProductWrite(props: ProductWriteProps) {
               type="file"
               onChange={onChangeFile}
               placeholder="상품 대표 이미지를 등록하세요"
+              // defaultValue={data?.image}
             />
             <S.ThumbnailImg src={imageUrl} />
           </S.ThumbnailImgWrap>
