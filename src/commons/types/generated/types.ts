@@ -21,7 +21,7 @@ export type Scalars = {
 
 export type IAnswer = {
   __typename?: 'Answer';
-  answers_contents: Scalars['String'];
+  contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
   deletedAt: Scalars['DateTime'];
   id: Scalars['ID'];
@@ -29,14 +29,19 @@ export type IAnswer = {
   user: IUser;
 };
 
+export type ICreateProductCategoryInput = {
+  image: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type ICreateProductInput = {
-  category: IProduct_Category_Type;
   deliveryFee: Scalars['Int'];
   description: Scalars['String'];
   discount: Scalars['Int'];
   image: Scalars['String'];
   name: Scalars['String'];
   price: Scalars['Int'];
+  productCategoryId: Scalars['String'];
   quantity: Scalars['Int'];
   veganLevel: Scalars['Int'];
 };
@@ -72,10 +77,11 @@ export type IMutation = {
   checkBusinessLicenseNumber: Scalars['Boolean'];
   checkEmailExist: Scalars['Boolean'];
   checkUserPassword: Scalars['Boolean'];
-  checkValidToken: Scalars['String'];
+  checkValidToken: Scalars['Boolean'];
   createAnswer: IAnswer;
   createPointCharge: IPoint;
   createProduct: IProduct;
+  createProductCategory: IProductCategory;
   createProductOrder: IProductOrder;
   createQuestion: IQuestion;
   createReview: IReview;
@@ -83,6 +89,7 @@ export type IMutation = {
   deleteAnswer: Scalars['Boolean'];
   deleteLoginUser: Scalars['Boolean'];
   deleteProduct: Scalars['Boolean'];
+  deleteProductCategory: Scalars['Boolean'];
   deleteQuestion: Scalars['Boolean'];
   deleteReview: Scalars['Boolean'];
   getToken: Scalars['String'];
@@ -93,7 +100,7 @@ export type IMutation = {
   toggleProductPick: Scalars['Boolean'];
   toggleProductToCart: Scalars['Boolean'];
   updateAnswer: IAnswer;
-  updateProduct: IProduct;
+  updateProduct: IProductCategory;
   updateQuestion: IQuestion;
   updateReview: IReview;
   updateUser: IUser;
@@ -134,8 +141,8 @@ export type IMutationCheckValidTokenArgs = {
 
 
 export type IMutationCreateAnswerArgs = {
-  answers_contents: Scalars['String'];
-  questionId: Scalars['String'];
+  contents: Scalars['String'];
+  questionId: Scalars['ID'];
 };
 
 
@@ -147,6 +154,11 @@ export type IMutationCreatePointChargeArgs = {
 
 export type IMutationCreateProductArgs = {
   createProductInput: ICreateProductInput;
+};
+
+
+export type IMutationCreateProductCategoryArgs = {
+  createProductCategoryInput: ICreateProductCategoryInput;
 };
 
 
@@ -175,11 +187,16 @@ export type IMutationCreateUserArgs = {
 
 
 export type IMutationDeleteAnswerArgs = {
-  answerId: Scalars['String'];
+  answerId: Scalars['ID'];
 };
 
 
 export type IMutationDeleteProductArgs = {
+  productId: Scalars['ID'];
+};
+
+
+export type IMutationDeleteProductCategoryArgs = {
   productId: Scalars['ID'];
 };
 
@@ -222,13 +239,13 @@ export type IMutationToggleProductToCartArgs = {
 
 export type IMutationUpdateAnswerArgs = {
   answerId: Scalars['ID'];
-  answers_contents: Scalars['String'];
+  contents: Scalars['String'];
 };
 
 
 export type IMutationUpdateProductArgs = {
-  productId: Scalars['ID'];
-  updateProductInput: IUpdateProductInput;
+  productCategoryId: Scalars['ID'];
+  updateProductCategoryInput: IUpdateProductCategoryInput;
 };
 
 
@@ -274,18 +291,6 @@ export enum IPoint_Transaction_Status_Enum {
   Sold = 'SOLD'
 }
 
-/** 물품 카테고리에 대한 타입 */
-export enum IProduct_Category_Type {
-  /** 화장품 카테고리 */
-  Beauty = 'BEAUTY',
-  /** 음료 카테고리 */
-  Drink = 'DRINK',
-  /** 식품 카테고리 */
-  Food = 'FOOD',
-  /** 생활용품 카테고리 */
-  Life = 'LIFE'
-}
-
 /** 상품 구매에 대한 타입 */
 export enum IProduct_Order_Status_Enum {
   /** 상품 구매 완료 */
@@ -307,7 +312,6 @@ export type IPoint = {
 
 export type IProduct = {
   __typename?: 'Product';
-  category: IProduct_Category_Type;
   deliveryFee: Scalars['Int'];
   description: Scalars['String'];
   discount: Scalars['Int'];
@@ -316,9 +320,17 @@ export type IProduct = {
   isOutOfStock: Scalars['Boolean'];
   name: Scalars['String'];
   price: Scalars['Int'];
+  productCategory: IProductCategory;
   quantity: Scalars['Int'];
   user: IUser;
   veganLevel?: Maybe<Scalars['Int']>;
+};
+
+export type IProductCategory = {
+  __typename?: 'ProductCategory';
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type IProductOrder = {
@@ -340,6 +352,7 @@ export type IQuery = {
   fetchAnswer: IAnswer;
   fetchAnswerByQuestion: IAnswer;
   fetchCart: Array<IProduct>;
+  fetchCartCount: Scalars['Int'];
   fetchIsInCart: Scalars['Boolean'];
   fetchIsPicked: Scalars['Boolean'];
   fetchLoginUser: IUser;
@@ -347,10 +360,12 @@ export type IQuery = {
   fetchPointTransactions: Array<IPoint>;
   fetchPointTransactionsCount: Scalars['Int'];
   fetchProduct: IProduct;
+  fetchProductCategories: Array<IProductCategory>;
   fetchProductOrdersByBuyer: Array<IProductOrder>;
   fetchProductOrdersBySeller: Array<IProductOrder>;
   fetchProductOrdersCountByBuyer: Scalars['Int'];
   fetchProductOrdersCountBySeller: Scalars['Int'];
+  fetchProductOrdersCountOfBought: Scalars['Int'];
   fetchProductOrdersCountWithoutReview: Scalars['Int'];
   fetchProductOrdersWithoutReview: Array<IProductOrder>;
   fetchProducts: Array<IProduct>;
@@ -361,13 +376,16 @@ export type IQuery = {
   fetchProductsOfBestSelling: Array<IProduct>;
   fetchProductsOfRecommend: Array<IProduct>;
   fetchQuestion: IQuestion;
+  fetchQuestionsByBuyer: Array<IQuestion>;
   fetchQuestionsByProduct: Array<IQuestion>;
+  fetchQuestionsCountByBuyer: Scalars['Int'];
   fetchQuestionsCountByProduct: Scalars['Int'];
   fetchReview: IReview;
   fetchReviewsByBuyer: Array<IReview>;
   fetchReviewsByProduct: Array<IReview>;
   fetchReviewsCountByBuyer: Scalars['Int'];
   fetchReviewsCountByProduct: Scalars['Int'];
+  fetchUserPoint: Scalars['Int'];
 };
 
 
@@ -446,7 +464,7 @@ export type IQueryFetchProductOrdersWithoutReviewArgs = {
 
 
 export type IQueryFetchProductsArgs = {
-  category: IProduct_Category_Type;
+  categoryId: Scalars['ID'];
   page: Scalars['Int'];
   veganLevel: Scalars['Int'];
 };
@@ -458,7 +476,7 @@ export type IQueryFetchProductsBySellerArgs = {
 
 
 export type IQueryFetchProductsCountArgs = {
-  category: IProduct_Category_Type;
+  categoryId: Scalars['ID'];
   veganLevel: Scalars['Int'];
 };
 
@@ -470,6 +488,11 @@ export type IQueryFetchProductsIPickedArgs = {
 
 export type IQueryFetchQuestionArgs = {
   questionId: Scalars['ID'];
+};
+
+
+export type IQueryFetchQuestionsByBuyerArgs = {
+  page: Scalars['Int'];
 };
 
 
@@ -506,7 +529,7 @@ export type IQueryFetchReviewsCountByProductArgs = {
 
 export type IQuestion = {
   __typename?: 'Question';
-  answer: IAnswer;
+  answer?: Maybe<IAnswer>;
   contents: Scalars['String'];
   id: Scalars['ID'];
   product: IProduct;
@@ -541,16 +564,9 @@ export type IReviewImage = {
   url: Scalars['String'];
 };
 
-export type IUpdateProductInput = {
-  category?: InputMaybe<IProduct_Category_Type>;
-  deliveryFee?: InputMaybe<Scalars['Int']>;
-  description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
+export type IUpdateProductCategoryInput = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Int']>;
-  quantity?: InputMaybe<Scalars['Int']>;
-  veganLevel?: InputMaybe<Scalars['Int']>;
 };
 
 export type IUpdateQuestionInput = {

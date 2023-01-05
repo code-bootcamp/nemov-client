@@ -5,6 +5,7 @@ import * as ID from "../item-display/ItemDisplay";
 import * as IDS from "../item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
 import MarketCategory from "../category/MarketCategory";
+import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -32,10 +33,13 @@ export default function MarketMain() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
+
+  const { data: categoryData } = UseQueryFetchCategories();
+
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
-        <MarketCategory></MarketCategory>
+        <MarketCategory categoryData={categoryData}></MarketCategory>
         <S.MainItemsWrapper>
           <S.PageLine />
           <S.RecommendItemSection01>
