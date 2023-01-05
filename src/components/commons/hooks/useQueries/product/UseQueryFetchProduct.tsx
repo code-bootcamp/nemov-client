@@ -27,7 +27,7 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
   });
   const client = useApolloClient();
 
-  const prefetchProduct = (productId: string) => async () => {
+  const prefetchProduct = (productId: String) => async () => {
     await client.query({
       query: FETCH_PRODUCT,
       variables: { productId },
