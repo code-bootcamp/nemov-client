@@ -6,8 +6,8 @@ import * as IDS from "../../item-display/ItemDisplay.styles";
 import ListSearch from "./ListSearch";
 import { getDiscountPrice, getVeganName } from "../../../../../commons/libraries/utilies";
 
-import { IQuery, IQueryFetchProductsArgs } from "../../../../../commons/types/generated/types";
-import { QueryResult, useApolloClient } from "@apollo/client";
+import { IQuery } from "../../../../../commons/types/generated/types";
+import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
 import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
@@ -15,8 +15,8 @@ import React from "react";
 import { Modal } from "antd";
 
 interface IMarketListProps {
-  category?: string[];
-  data?: QueryResult<Pick<IQuery, "fetchProducts">, IQueryFetchProductsArgs>;
+  categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
+  productsData?: Pick<IQuery, "fetchProducts"> | undefined;
 }
 
 export default function MarketList(props: IMarketListProps) {
@@ -45,12 +45,17 @@ export default function MarketList(props: IMarketListProps) {
     console.log(result.data);
     void router.push(`/market/product/${productId}`);
   };
+
+  // 카테고리 이름 데이터
+  const listTitle = props.categoryData?.fetchProductCategories.map((categories) => categories.name);
+  console.log(listTitle);
+
   return (
     <>
-      <S.ListTitle>{props.category}</S.ListTitle>
+      {/* <S.ListTitle>{listTitle}</S.ListTitle> */}
       <ListSearch />
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
-        {props.data?.data?.fetchProducts.map((products) => (
+        {props.productsData?.fetchProducts.map((products) => (
           // isOutOfStock === true이면, 매진 상태 나타내기
           <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
             <S.ItemImageBox01>

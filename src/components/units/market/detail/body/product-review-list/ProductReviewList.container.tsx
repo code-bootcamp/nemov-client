@@ -1,12 +1,22 @@
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
 import { IMarketDetailProps } from "../../../Market.types";
+import { UseQueryFetchReviewsByProduct } from "../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
+import { useRouter } from "next/router";
 
 // export interface ITabContentsProps {
 //   isHidden: boolean;
 // }
 
 export default function ProductReviewList(props: IMarketDetailProps) {
+  const router = useRouter();
+  const { data } = UseQueryFetchReviewsByProduct({
+    productId: String(router.query.productId),
+    page: 1,
+  });
+
+  console.log(data);
+
   return (
     <CS.TabContentMain01>
       <CS.TabContentHeader01>
