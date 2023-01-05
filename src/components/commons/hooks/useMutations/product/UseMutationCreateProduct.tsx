@@ -20,7 +20,6 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
 export const UseMutationCreateProduct = () => {
   const mutation = useMutation<Pick<IMutation, "createProduct">, IMutationCreateProductArgs>(
     CREATE_PRODUCT

@@ -22,10 +22,6 @@ export const UseMutationCreateProductOrder = () => {
     IMutationCreateProductOrderArgs
   >(CREATE_PRODUCT_ORDER);
 
-  //   const { query } = UseQueryFetchProduct({
-  //     productId: router.query.productId,
-  //   });
-
   const buyProduct = async (data: IProductOrderData) => {
     await createProductOrder({
       variables: {

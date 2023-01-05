@@ -1,4 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
+import {
+  IMutation,
+  IMutationCheckBusinessLicenseNumberArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const CHECK_BUSINESS_LICENSE_NUMBER = gql`
   mutation checkBusinessLicenseNumber($bln: BusinessLicenseNumber!) {
@@ -7,7 +11,10 @@ export const CHECK_BUSINESS_LICENSE_NUMBER = gql`
 `;
 
 export const UseMutationCheckBusinessLicenseNumber = () => {
-  const mutation = useMutation(CHECK_BUSINESS_LICENSE_NUMBER);
+  const mutation = useMutation<
+    Pick<IMutation, "checkBusinessLicenseNumber">,
+    IMutationCheckBusinessLicenseNumberArgs
+  >(CHECK_BUSINESS_LICENSE_NUMBER);
 
   return mutation;
 };

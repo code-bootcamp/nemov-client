@@ -1,5 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
+import {
+  IMutation,
+  IMutationCheckEmailExistArgs,
+} from "../../../../../commons/types/generated/types";
 
 export const CHECK_EMAIL_EXIST = gql`
   mutation checkEmailExist($email: Email!) {
@@ -8,7 +12,10 @@ export const CHECK_EMAIL_EXIST = gql`
 `;
 
 export const UseMutationCheckEmailExist = () => {
-  const [checkEmailExist] = useMutation(CHECK_EMAIL_EXIST);
+  const [checkEmailExist] = useMutation<
+    Pick<IMutation, "checkEmailExist">,
+    IMutationCheckEmailExistArgs
+  >(CHECK_EMAIL_EXIST);
 
   const checkEmail = async (email: string) => {
     try {
@@ -17,7 +24,7 @@ export const UseMutationCheckEmailExist = () => {
           email,
         },
       });
-      if (result.data.checkEmailExist) {
+      if (result.data?.checkEmailExist) {
         Modal.success({ content: "중복된 이메일이 없습니다." });
       } else {
         Modal.error({ content: "이미 중복된 이메일이 존재합니다." });
