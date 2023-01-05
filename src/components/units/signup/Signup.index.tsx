@@ -20,7 +20,7 @@ export default function Signup(props: ISignupProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [time, setTime] = useState(false);
   const [tokenInput, setTokenInput] = useState("");
-  const [getConfrimToken, setGetConfirmToken] = useState("");
+  const [getConfirmToken, setGetConfirmToken] = useState("");
 
   // 인증번호 요청
   const [getToken] = UseMutationGetToken();
@@ -38,8 +38,8 @@ export default function Signup(props: ISignupProps) {
         setTimeout(() => {
           setTime(false);
         }, 180000);
-        console.log(result.data.getToken);
-        setGetConfirmToken(result.data.getToken);
+        console.log(result.data?.getToken);
+        setGetConfirmToken(String(result.data?.getToken));
       } catch (error) {
         if (error instanceof Error) Modal.error({ content: "휴대폰 번호를 확인해주세요." });
       }
@@ -62,7 +62,7 @@ export default function Signup(props: ISignupProps) {
           token: tokenInput,
         },
       });
-      if (result.data.checkValidToken && tokenInput === getConfrimToken) {
+      if (result.data?.checkValidToken && tokenInput === getConfirmToken) {
         setTime(false);
         Modal.success({ content: "인증에 성공하였습니다." });
       } else {
