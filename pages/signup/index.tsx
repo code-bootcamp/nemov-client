@@ -50,7 +50,7 @@ export default function SignupPage() {
           bln,
         },
       });
-      if (result.data.checkBusinessLicenseNumber) {
+      if (result.data?.checkBusinessLicenseNumber) {
         Modal.success({ content: "사업자 등록번호 인증에 성공했습니다." });
         void router.push("/signup/seller");
       }
