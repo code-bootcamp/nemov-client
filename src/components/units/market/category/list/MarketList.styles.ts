@@ -6,6 +6,13 @@ import { mobile } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
 import * as S from "../../main/MarketMain.styles";
 
+export const CategoryMain = styled.main`
+  ${GS.flexColumn}
+  justify-content: center;
+  align-items: center;
+  margin: 10% 0 3% 0;
+`;
+
 export const ListTitle = styled.h1`
   margin-top: 4rem;
   ${GS.bold}
@@ -71,7 +78,7 @@ export const ListSearchSection = styled.section`
   justify-content: flex-end;
   align-items: center;
   padding: 0 4rem;
-  margin: 2rem 0 1rem;
+  margin: 5rem 0 1rem;
   gap: 1rem;
 `;
 

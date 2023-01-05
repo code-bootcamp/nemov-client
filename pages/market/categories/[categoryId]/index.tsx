@@ -4,8 +4,8 @@ import { GlobalWrapper } from "../../../../src/commons/styles/globalStyles";
 import { UseQueryFetchCategories } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchProducts } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProducts";
 import MarketList from "../../../../src/components/units/market/category/list/MarketList";
+import { CategoryMain } from "../../../../src/components/units/market/category/list/MarketList.styles";
 import MarketCategory from "../../../../src/components/units/market/category/MarketCategory";
-import * as MS from "../../../../src/components/units/market/main/MarketMain.styles";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
@@ -21,10 +21,10 @@ export default function MarketCategoriesPage() {
   return (
     <>
       <GlobalWrapper>
-        <MS.MarketMainContainer>
+        <CategoryMain>
           <MarketCategory categoryData={categoryData} />
           <MarketList categoryData={categoryData} productsData={productsData} />
-        </MS.MarketMainContainer>
+        </CategoryMain>
       </GlobalWrapper>
     </>
   );

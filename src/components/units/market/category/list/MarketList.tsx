@@ -1,4 +1,4 @@
-import { CommonBasketIcon02 } from "../../../../commons/icons/CommonIcons.styles";
+// import { CommonBasketIcon02 } from "../../../../commons/icons/CommonIcons.styles";
 import { TagsWrapper01, VeganLevelTag01 } from "../../../../commons/tags/CommonTags.Styles";
 import * as MS from "../../main/MarketMain.styles";
 import * as S from "./MarketList.styles";
@@ -11,8 +11,9 @@ import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
 import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "antd";
+import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
@@ -23,17 +24,24 @@ export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
   const client = useApolloClient();
   const { productToCart } = UseMutationToggleProductToCart();
+  const [isActive, setIsActive] = useState(false);
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
     const result = await productToCart(productId);
-    console.log(result?.data?.toggleProductToCart);
-    if (!result?.data?.toggleProductToCart) {
-      Modal.error({ content: "이미 장바구니에 담긴 상품입니다." });
+
+    const status = result?.data?.toggleProductToCart;
+    if (status === undefined) {
       return;
     }
+    setIsActive(status);
+    console.log(status);
 
-    Modal.success({ content: "장바구니에 상품을 담았습니다." });
+    if (!status) {
+      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+    } else {
+      Modal.success({ content: "장바구니에 상품을 담았습니다." });
+    }
   };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
@@ -76,7 +84,11 @@ export default function MarketList(props: IMarketListProps) {
                     <S.ItemOriginPrice03>{products.price}원</S.ItemOriginPrice03>
                   </IDS.ItemPrices>
                 </S.DetailFooterLeft>
-                <CommonBasketIcon02 onClick={onClickToggleProductToCart(products.id)} />
+                <BasketButton01
+                  id={products.id}
+                  isActive={isActive}
+                  onClick={onClickToggleProductToCart(products.id)}
+                />
               </S.ItemDetailFooter02>
             </IDS.ItemDetail>
           </IDS.ItemDisplay03>

@@ -6,16 +6,19 @@ export const FETCH_PRODUCT = gql`
     fetchProduct(productId: $productId) {
       id
       name
-      category
       description
       image
       veganLevel
       deliveryFee
       price
       discount
+      quantity
       isOutOfStock
       user {
         name
+      }
+      productCategory {
+        id
       }
     }
   }
