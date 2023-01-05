@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { IQuery, IQueryFetchProductsCountArgs } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCTS_COUNT = gql`
     query fetchProductsCount($search: String, $level:, $category:){
@@ -6,10 +7,11 @@ export const FETCH_PRODUCTS_COUNT = gql`
     }
 `;
 
-// 추후 백엔드에서 받은 타입 추가해야함
-// 추후 백엔드에서 받은 타입이 있으면 에러 메세지 없음
-export const UseQueryFetchProductsCount = (variables) => {
-  const query = useQuery(FETCH_PRODUCTS_COUNT, { variables });
+export const UseQueryFetchProductsCount = (variables: IQueryFetchProductsCountArgs) => {
+  const query = useQuery<Pick<IQuery, "fetchProductsCount">, IQueryFetchProductsCountArgs>(
+    FETCH_PRODUCTS_COUNT,
+    { variables }
+  );
 
   return query;
 };
