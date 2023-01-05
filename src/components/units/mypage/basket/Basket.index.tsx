@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
-import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
-import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
+import { getDiscountPrice } from "../../../../commons/libraries/utilies";
+// import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
+// import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
 import * as S from "./Basket.styles";
 
@@ -11,11 +12,64 @@ interface IData {
 }
 
 export default function MypageBasket() {
+  const [count, setCount] = useState(1);
+  // const [totalAmount, setTotalAmount] = useState(1);
+
   const { data } = UseQueryFetchCart();
-  const { productToCart } = UseMutationToggleProductToCart();
+  // const { productToCart } = UseMutationToggleProductToCart();
 
-  console.log(data);
+  // console.log(data);
 
+  // 할인율 적용된 가격
+  // const productPrice = getDiscountPrice(data?.fetchCart.price, data?.fetchCart.discount);
+  const productPrice = data?.fetchCart.map((cart, index) => {
+    return getDiscountPrice(cart.price, cart.discount);
+  });
+
+  // console.log(productPrice);
+
+  // 총 상품금액
+  let totalPrice = 0;
+
+  data?.fetchCart.map((cart) => {
+    totalPrice += cart.price;
+    return totalPrice;
+  });
+
+  // 총 할인금액
+  let totalDiscountPrice = 0;
+
+  data?.fetchCart.map((cart) => {
+    totalDiscountPrice += cart.price * (cart.discount / 100);
+    return totalDiscountPrice;
+  });
+
+  // 총 결제금액
+  // const totalSum = totalPrice - totalDiscountPrice + Number(data?.fetchCart[0].deliveryFee);
+
+  // 수량 버튼
+  const onClickCountUp = (cartId: string) => (e: React.MouseEvent) => {
+    if (count >= 1) {
+      console.log(cartId, e.currentTarget.id);
+      if (e.currentTarget.id === cartId) {
+        setCount((prev) => prev + 1);
+      }
+      // setTotalAmount(productPrice[0] * count);
+    }
+  };
+  // console.log(productPrice);
+
+  const onClickCountDown = (e: React.MouseEvent) => {
+    if (count > 1) {
+      if (productPrice === undefined) {
+        return;
+      }
+      setCount((prev) => prev - 1);
+      // setTotalAmount(productPrice * count);
+    }
+  };
+
+  // 체크박스 기능
   const checkData: IData[] = [
     { id: 0, title: "선택 1" },
     { id: 1, title: "선택 2" },
@@ -23,7 +77,6 @@ export default function MypageBasket() {
     { id: 3, title: "선택 4" },
   ];
 
-  // 체크박스 기능
   const [checkItems, setCheckItems] = useState<number[]>([]);
 
   const handleSingleCheck = (checked: boolean, id: number) => {
@@ -48,13 +101,9 @@ export default function MypageBasket() {
     }
   };
 
-  const onClickCountUp = () => {};
-
-  const onClickCountDown = () => {};
-
-  const onClickDelete = async (e: React.MouseEvent) => {
-    await productToCart(e.currentTarget.id);
-  };
+  // const onClickDelete = async (e: React.MouseEvent) => {
+  //   await productToCart(e.currentTarget.id);
+  // };
 
   return (
     <S.ContentsMain>
@@ -95,15 +144,24 @@ export default function MypageBasket() {
                   <S.ItemImg src={cart.image} />
                   <S.ItemName>{cart.name}</S.ItemName>
                   <S.QuantityWrapper>
-                    <CountDownBtn onClick={onClickCountDown} />
-                    <S.QuantitySpan>1</S.QuantitySpan>
-                    <CountUpBtn onClick={onClickCountUp} />
+                    <S.MinusBtn onClick={onClickCountDown}>-</S.MinusBtn>
+                    <S.QuantitySpan id={cart.id}>{count}</S.QuantitySpan>
+                    <S.PlusBtn onClick={onClickCountUp(cart.id)} id={cart.id}>
+                      +
+                    </S.PlusBtn>
                   </S.QuantityWrapper>
-                  <S.ItemPrice>{cart.price} 원</S.ItemPrice>
+                  <S.PriceWrap>
+                    <S.ItemPrice>
+                      {cart.price} <span>원</span>
+                    </S.ItemPrice>
+                    <S.DiscountPrice>
+                      {getDiscountPrice(cart.price, cart.discount)} 원
+                    </S.DiscountPrice>
+                  </S.PriceWrap>
                   <S.IconBtnWrap>
-                    <S.CancelBtn onClick={onClickDelete}>
+                    {/* <S.CancelBtn>
                       <S.CancelIcon />
-                    </S.CancelBtn>
+                    </S.CancelBtn> */}
                     <S.BtnWrapper>
                       <S.PickBtn>찜하기</S.PickBtn>
                       <S.BasketBtn>구매하기</S.BasketBtn>
@@ -132,28 +190,30 @@ export default function MypageBasket() {
         <section>
           <S.Label>총 상품금액</S.Label>
           <S.Num>
-            10000 <S.NumSpan>원</S.NumSpan>
+            {totalPrice} <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>－</S.CalculateIcon>
         <section>
           <S.Label>총 할인금액</S.Label>
           <S.Num>
-            0 <S.NumSpan>원</S.NumSpan>
+            {totalDiscountPrice} <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>＋</S.CalculateIcon>
         <section>
           <S.Label>총 배송비</S.Label>
           <S.Num>
-            3000 <S.NumSpan>원</S.NumSpan>
+            {/* {data?.fetchCart[0].deliveryFee}  */}
+            <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>=</S.CalculateIcon>
         <section>
           <S.Label>총 결제금액</S.Label>
           <S.TotalNum>
-            13000 <S.NumSpan>원</S.NumSpan>
+            {/* {totalSum}  */}
+            <S.NumSpan>원</S.NumSpan>
           </S.TotalNum>
         </section>
       </S.NumWrapper>

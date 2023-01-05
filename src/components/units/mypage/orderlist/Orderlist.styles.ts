@@ -43,7 +43,9 @@ export const MenuSelect = styled.button`
   margin-right: 1rem;
 `;
 
-export const OrderHistory = styled.div``;
+export const OrderHistory = styled.div`
+  margin-top: 10px;
+`;
 
 export const Date = styled.p`
   font-size: 1rem;
