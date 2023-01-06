@@ -7,6 +7,7 @@ export const FETCH_PRODUCTS = gql`
       id
       name
       image
+      veganLevel
       price
       discount
       isOutOfStock

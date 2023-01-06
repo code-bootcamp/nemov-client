@@ -6,6 +6,7 @@ import * as IDS from "../item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
 import MarketCategory from "../category/MarketCategory";
 import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
+import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -35,6 +36,7 @@ export default function MarketMain() {
   };
 
   const { data: categoryData } = UseQueryFetchCategories();
+  const { data: loginUserData } = UseQueryFetchLoginUser();
 
   return (
     <GlobalWrapper>
@@ -44,7 +46,8 @@ export default function MarketMain() {
           <S.PageLine />
           <S.RecommendItemSection01>
             <S.MarketMainHeader01>
-              <S.HeaderSpan>name</S.HeaderSpan>님, 이런 상품은 어떠신가요?
+              <S.HeaderSpan>{loginUserData?.fetchLoginUser.name}</S.HeaderSpan>님, 이런 상품은
+              어떠신가요?
               <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>
