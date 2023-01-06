@@ -8,6 +8,7 @@ import {
 } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
 import React, { useState } from "react";
+import { getVeganName } from "../../../../../commons/libraries/utilies";
 
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
@@ -15,6 +16,7 @@ export default function ProductList() {
   const { data } = UseQueryFetchProductsBySeller({
     page: 1,
   });
+  console.log(data);
   const [deleteProduct] = UseMutationDeleteProduct();
 
   const onClickDelete = async (id: string) => {
@@ -51,7 +53,7 @@ export default function ProductList() {
   };
 
   return (
-    <GlobalWrapper style={{ margin: "120px auto" }}>
+    <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>판매자 관리 페이지</S.Title>
       <section>
         <S.Table>
@@ -63,7 +65,7 @@ export default function ProductList() {
               <S.Th>할인률</S.Th>
               <S.Th>남은 수량</S.Th>
               <S.Th>판매 여부</S.Th>
-              <S.Th>상품 카테고리</S.Th>
+              {/* <S.Th>상품 카테고리</S.Th> */}
               <S.Th>비건 해당 유형</S.Th>
               <S.Th>수정</S.Th>
               <S.Th>삭제</S.Th>
@@ -78,8 +80,8 @@ export default function ProductList() {
                 <S.Td>{el.discount}%</S.Td>
                 <S.Td>{el.quantity}개</S.Td>
                 <S.Td>{el.quantity === 0 ? "매진" : "판매중"}</S.Td>
-                <S.Td>{el.category}</S.Td>
-                <S.Td>{el.veganLevel}</S.Td>
+                {/* <S.Td>{el.productCategory.name}</S.Td> */}
+                <S.Td>{getVeganName(el.veganLevel)}</S.Td>
                 <S.Td>
                   <S.Btn1 onClick={onClickMoveToPage(`/seller/${el.id}/edit`)}>수정</S.Btn1>
                 </S.Td>

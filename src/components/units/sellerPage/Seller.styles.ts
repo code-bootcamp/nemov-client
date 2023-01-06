@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-interface IReviewsListStylesProps {
+interface ISellerListStylesProps {
   isSelected: boolean;
 }
 
@@ -38,7 +38,7 @@ export const Line = styled.div`
   background: black;
   transition: all 0.4s ease;
 
-  opacity: ${(props: IReviewsListStylesProps) => (props.isSelected ? "1" : "0")};
+  opacity: ${(props: ISellerListStylesProps) => (props.isSelected ? "1" : "0")};
 `;
 
 export const Tab = styled.li`
@@ -49,9 +49,9 @@ export const Tab = styled.li`
   cursor: pointer;
   position: relative;
 
-  font-weight: ${(props: IReviewsListStylesProps) => (props.isSelected ? "600" : "300")};
+  font-weight: ${(props: ISellerListStylesProps) => (props.isSelected ? "600" : "300")};
 
-  color: ${(props: IReviewsListStylesProps) => (props.isSelected ? "black" : "#666")};
+  color: ${(props: ISellerListStylesProps) => (props.isSelected ? "black" : "#666")};
 
   :hover {
     ${Line} {

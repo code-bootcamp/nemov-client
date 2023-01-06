@@ -9,7 +9,11 @@ export const FETCH_PRODUCTS_BY_SELLER = gql`
     fetchProductsBySeller(page: $page) {
       id
       name
-      category
+      # productCategory {
+      #   id
+      #   name
+      #   image
+      # }
       description
       image
       veganLevel

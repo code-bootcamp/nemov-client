@@ -5,11 +5,21 @@ import {
 } from "../../../../../commons/types/generated/types";
 
 export const UPDATE_PRODUCT = gql`
-  mutation updateProduct($productId: ID!, $updateProductInput: UpdateProductInput!) {
-    updateProduct(productId: $productId, updateProductInput: $updateProductInput) {
+  mutation updateProduct(
+    $productCategoryId: ID!
+    $updateProductCategoryInput: UpdateProductInput!
+  ) {
+    updateProduct(
+      productCategoryId: $productCategoryId
+      updateProductCategoryInput: $updateProductCategoryInput
+    ) {
       id
       name
-      category
+      productCategory {
+        id
+        name
+        image
+      }
       description
       image
       veganLevel
