@@ -52,7 +52,7 @@ export default function MypageOrderlist() {
               <S.OrderHistory key={index}>
                 <S.Date>{getDate(order.createdAt)}</S.Date>
                 <S.OrderInfo>
-                  <S.ItemImg src="" alt="상품 이미지" />
+                  <S.ItemImg src={order.product.image} alt="상품 이미지" />
                   <S.ItemName>{order.product.name}</S.ItemName>
                   <S.ItemInfo>{order.product.price} 원</S.ItemInfo>
                   <S.ItemInfo>{order.quantity}개</S.ItemInfo>

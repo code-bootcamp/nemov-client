@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../commons/styles/breakPoints";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -19,11 +19,15 @@ export const ImgWrapper = styled.div`
   @media ${mobile} {
     display: none;
   }
+
+  @media ${tablet} {
+    display: none;
+  }
 `;
 
 export const Form = styled.form`
   width: 45%;
-  padding: 9rem;
+  padding: 8% 2% 2% 2%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -31,7 +35,12 @@ export const Form = styled.form`
 
   @media ${mobile} {
     width: 100%;
-    padding: 4rem;
+    padding: 25% 6% 6% 6%;
+  }
+
+  @media ${tablet} {
+    padding: 18% 6% 6% 6%;
+    width: 100%;
   }
 `;
 
