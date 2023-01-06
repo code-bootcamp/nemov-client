@@ -13,6 +13,7 @@ export const FETCH_POINT_TRANSACTIONS = gql`
       amount
       status
       createdAt
+      balance
       user {
         id
         name

@@ -19,6 +19,7 @@ export const FETCH_PRODUCT = gql`
       }
       productCategory {
         id
+        name
       }
     }
   }

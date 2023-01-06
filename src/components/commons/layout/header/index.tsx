@@ -34,9 +34,8 @@ export default function LayoutHeader() {
 
   const onClickLogout = () => {
     void logout();
-    location.reload();
-    setAccessToken("");
     void router.push("/market");
+    setAccessToken("");
   };
   return (
     <S.Wrapper>

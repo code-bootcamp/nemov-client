@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { UseQueryFetchProductsBySeller } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import PointList from "./pointList";
 import ProductList from "./product/list";
 import * as S from "./Seller.styles";
 
@@ -29,7 +30,7 @@ export default function SellerManagementPage() {
 
   return (
     <S.ContentsMain>
-      <S.Title>관리자 페이지</S.Title>
+      <S.Title>판매자 페이지</S.Title>
       <S.TabWrapper>
         <S.Tabs>
           <S.Tab onClick={onClickProductList} isSelected={isSelected[0]}>
@@ -53,8 +54,8 @@ export default function SellerManagementPage() {
       </S.TabWrapper>
       <section>{isSelected[0] && <ProductList />}</section>
       {/* <section>{isSelected[1] && <ProductOrderList />}</section> */}
-      {/* <section>{isSelected[2] && <QnAList />}</section>
-      <section>{isSelected[3] && <PointList />}</section> */}
+      {/* <section>{isSelected[2] && <QnAList />}</section> */}
+      <section>{isSelected[3] && <PointList />}</section>
     </S.ContentsMain>
   );
 }
