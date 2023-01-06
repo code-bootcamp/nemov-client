@@ -7,6 +7,7 @@ import {
 } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductOrdersByBuyer";
 import { getDate } from "../../../../commons/libraries/utilies";
 import Paginations01 from "../../../commons/paginations/Paginations01.index";
+import Link from "next/link";
 
 export default function MypageOrderlist() {
   const { RangePicker } = DatePicker;
@@ -26,17 +27,13 @@ export default function MypageOrderlist() {
     endDate,
   });
 
-  console.log(data);
-  console.log(dataCount);
-
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
     setStartDate(dateStrings[0]);
     setEndDate(dateStrings[1]);
   };
 
   const onClickSearchDate = () => {
-    // if (data === undefined) return;
-
+    if (data === undefined) return;
     void refetch({ startDate, endDate, page: 1 });
   };
 
@@ -73,7 +70,16 @@ export default function MypageOrderlist() {
             <Paginations01 count={dataCount} refetch={refetch} />
           </>
         ) : (
-          <S.NoOrderText>주문내역이 없습니다.</S.NoOrderText>
+          <>
+            <S.NoOrderText>주문내역이 없습니다. 상품을 주문하러 가시겠어요?</S.NoOrderText>
+            <S.MoveBtnWrap>
+              <Link href="/market">
+                <a>
+                  <S.MoveBtn>주문하러 가기</S.MoveBtn>
+                </a>
+              </Link>
+            </S.MoveBtnWrap>
+          </>
         )}
       </article>
     </S.ContentsMain>

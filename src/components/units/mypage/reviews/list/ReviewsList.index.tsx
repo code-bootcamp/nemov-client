@@ -30,7 +30,7 @@ export default function ReviewsList() {
 
       <S.ReviewWrapper>
         <S.ReviewUl>
-          <S.ReviewLi>
+          {/* <S.ReviewLi>
             <S.ReviewImg src="" />
             <S.ReviewCenterWrapper>
               <S.ReviewItemName>상품명</S.ReviewItemName>
@@ -41,7 +41,7 @@ export default function ReviewsList() {
               <S.ReviewEditBtn onClick={onClickReviewsEdit}>후기 수정</S.ReviewEditBtn>
               <S.ReviewDeleteBtn>후기 삭제</S.ReviewDeleteBtn>
             </S.ReviewBtnWrapper>
-          </S.ReviewLi>
+          </S.ReviewLi> */}
 
           {data?.fetchReviewsByBuyer.length !== 0 ? (
             <>

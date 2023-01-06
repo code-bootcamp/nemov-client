@@ -15,7 +15,7 @@ export const SubTitle = styled.h3`
   font-size: 1.4rem;
 `;
 
-export const ConfirmWrapper = styled.form`
+export const ConfirmWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

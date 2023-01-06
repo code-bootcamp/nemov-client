@@ -1,7 +1,11 @@
 import { DatePicker, Space } from "antd";
 import { useState } from "react";
 import { getDate } from "../../../../commons/libraries/utilies";
-import { UseQueryFetchPointTransactions } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
+import {
+  UseQueryFetchPointTransactions,
+  UseQueryFetchPointTransactionsCount,
+} from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
+import Paginations02 from "../../../commons/paginations/Paginations02.index";
 import * as S from "./Point.styles";
 
 export default function MypagePoint() {
@@ -16,6 +20,11 @@ export default function MypagePoint() {
     startDate,
     endDate,
     page: 1,
+  });
+
+  const { data: dataCount } = UseQueryFetchPointTransactionsCount({
+    startDate,
+    endDate,
   });
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
@@ -69,9 +78,11 @@ export default function MypagePoint() {
           <S.NopointText>포인트 충전내역이 없습니다.</S.NopointText>
         )}
       </section>
-      {/* {data?.fetchPointTransactions.length !== 0 && ( */}
-      <section>{/* <Paginations02 /> */}</section>
-      {/* )} */}
+      {data?.fetchPointTransactions.length !== 0 && (
+        <section>
+          <Paginations02 count={dataCount} refetch={refetch} />
+        </section>
+      )}
     </S.ContentsMain>
   );
 }
