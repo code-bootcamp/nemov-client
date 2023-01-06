@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { GlobalWrapper } from "../../../../src/commons/styles/globalStyles";
 import { UseQueryFetchCategories } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchProducts } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProducts";
-import MarketList from "../../../../src/components/units/market/category/list/MarketList";
-import { CategoryMain } from "../../../../src/components/units/market/category/list/MarketList.styles";
-import MarketCategory from "../../../../src/components/units/market/category/MarketCategory";
+import MarketList from "../../../../src/components/units/market/categories/list/MarketList";
+import { CategoryMain } from "../../../../src/components/units/market/categories/list/MarketList.styles";
+import MarketCategory from "../../../../src/components/units/market/categories/category/MarketCategory";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
