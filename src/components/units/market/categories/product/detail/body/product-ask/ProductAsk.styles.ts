@@ -5,7 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
-import { flexColumn } from "../../../../../../../../commons/styles/globalStyles";
+import { flexColumn, flexRow } from "../../../../../../../../commons/styles/globalStyles";
 // import { IProductAskStylesProps } from "../../../Market.types";
 
 export const IconStyleSet01 = css`
@@ -117,4 +117,10 @@ export const QuestionDetail = styled.textarea`
   border-radius: 0.5rem;
   padding-left: 0.6rem;
   padding-top: 0.6rem;
+`;
+
+export const QuestionButtonWrapper02 = styled.section`
+  margin-top: 2rem;
+  ${flexRow}
+  justify-content: flex-end;
 `;

@@ -10,8 +10,6 @@ import ProductQuestionWrite from "./ProductQuestionWrite";
 
 export default function ProductAsk() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-  // const [isAnswerOpen, setIsAnswerOpen] = useState(false);
-  // const [isAnswer, setIsAnswer] = useState("");
 
   const onClickQuestionWrite = () => {
     setIsOpen((prev) => !prev);
@@ -21,16 +19,10 @@ export default function ProductAsk() {
     setIsOpen((prev) => !prev);
   };
 
-  // const onClickOpenAnswer: MouseEventHandler<Element> = (event) => {
-  //   console.log(event.currentTarget.id);
-  //   setIsAnswer(event.currentTarget.id);
-  //   setIsAnswerOpen((prev) => !prev);
-  // };
-
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={700}>
-        <ProductQuestionWrite />
+        <ProductQuestionWrite setIsOpen={setIsOpen} />
       </CommonModal01>
 
       <CS.TabContentMain01>
