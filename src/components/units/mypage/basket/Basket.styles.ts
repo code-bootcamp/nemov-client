@@ -148,9 +148,10 @@ export const MinusBtn = styled.button`
   border-radius: 0;
 `;
 
-export const QuantitySpan = styled.span`
+export const QuantityInput = styled.input`
   width: 30px;
   text-align: center;
+  border: 0;
 `;
 
 export const NumWrapper = styled.article`
@@ -241,8 +242,7 @@ export const CalculateIcon = styled.div`
 export const NoBasketText = styled.p`
   font-size: 1.6rem;
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 0;
+  margin: 40px 0 20px 0;
 `;
 
 export const MoveBtnWrap = styled.div`

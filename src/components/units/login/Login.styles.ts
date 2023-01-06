@@ -31,7 +31,7 @@ export const Form = styled.form`
 
   @media ${mobile} {
     width: 100%;
-    padding: 6rem;
+    padding: 4rem;
   }
 `;
 

@@ -11,6 +11,11 @@ export const FETCH_REVIEWS_BY_BUYER = gql`
       product {
         name
       }
+      images {
+        id
+        url
+      }
+      rating
       contents
       createdAt
       updatedAt
