@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../../commons/styles/breakPoints";
-import * as GS from "../../../../commons/styles/globalStyles";
-import * as CP from "../../../../commons/styles/colorPalettes";
-import * as CB from "../../../../commons/styles/colorBases";
-import { IMarketDetailHeadStylesProps } from "../Market.types";
+import { mobile } from "../../../../../../commons/styles/breakPoints";
+import * as GS from "../../../../../../commons/styles/globalStyles";
+import * as CP from "../../../../../../commons/styles/colorPalettes";
+import * as CB from "../../../../../../commons/styles/colorBases";
+import { IMarketDetailHeadStylesProps } from "../../../Market.types";
 
 import Slider from "react-slick";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";

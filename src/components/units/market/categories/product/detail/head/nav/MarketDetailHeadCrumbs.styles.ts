@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { flexRow } from "../../../../../../commons/styles/globalStyles";
+import { flexRow } from "../../../../../../../../commons/styles/globalStyles";
 
 export const DetailHeadCrumbs = styled.nav`
   width: 100%;

@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  flexColumn,
-  flexRow,
-} from "../../../../../../commons/styles/globalStyles";
+import { flexColumn, flexRow } from "../../../../../../../../commons/styles/globalStyles";
 
 export const NoticeInfoTable = styled.table`
   display: flex;

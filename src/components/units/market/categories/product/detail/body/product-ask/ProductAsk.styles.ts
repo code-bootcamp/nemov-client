@@ -4,11 +4,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import {
-  colorBase03,
-  colorBase04,
-} from "../../../../../../commons/styles/colorBases";
-import { flexColumn } from "../../../../../../commons/styles/globalStyles";
+import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
+import { flexColumn } from "../../../../../../../../commons/styles/globalStyles";
 // import { IProductAskStylesProps } from "../../../Market.types";
 
 export const IconStyleSet01 = css`

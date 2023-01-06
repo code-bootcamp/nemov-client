@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
-import { colorBase04 } from "../../../../../../commons/styles/colorBases";
-import {
-  flexRow,
-  flexCenter,
-} from "../../../../../../commons/styles/globalStyles";
+import { colorBase04 } from "../../../../../../../../commons/styles/colorBases";
+import { flexRow, flexCenter } from "../../../../../../../../commons/styles/globalStyles";
 
 interface IProductDetailNavProps {
   isTabSelected: boolean;
@@ -33,6 +30,5 @@ export const DetailTab = styled.li`
 
   background-color: ${(props: IProductDetailNavProps) =>
     props.isTabSelected ? "white" : "#f6efef"};
-  font-weight: ${(props: IProductDetailNavProps) =>
-    props.isTabSelected ? "900" : "400"};
+  font-weight: ${(props: IProductDetailNavProps) => (props.isTabSelected ? "900" : "400")};
 `;

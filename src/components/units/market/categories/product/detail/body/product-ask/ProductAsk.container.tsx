@@ -1,10 +1,10 @@
 // import { ITabContentsProps } from "../product-review-list/ProductReviewList.container";
 import * as S from "./ProductAsk.styles";
 import * as CS from "../MarketDetailBody.styles";
-import OpenModalButton01 from "../../../../../commons/buttons/OpenModalButton01";
+import OpenModalButton01 from "../../../../../../../commons/buttons/OpenModalButton01";
 import { useRecoilState } from "recoil";
-import { isOpenState } from "../../../../../../commons/stores";
-import CommonModal01 from "../../../../../commons/modals/CommonModal01";
+import { isOpenState } from "../../../../../../../../commons/stores";
+import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
 // import { MouseEventHandler, useState } from "react";
 
@@ -42,10 +42,7 @@ export default function ProductAsk() {
             </CS.TabContentSubTitle01>
           </S.TitlesWrapper>
           <S.QuestionButtonWrapper>
-            <OpenModalButton01
-              onClick={onClickQuestionWrite}
-              title="문의하기"
-            ></OpenModalButton01>
+            <OpenModalButton01 onClick={onClickQuestionWrite} title="문의하기"></OpenModalButton01>
           </S.QuestionButtonWrapper>
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
@@ -67,10 +64,9 @@ export default function ProductAsk() {
               <S.QNAContentsSection>
                 <CS.ContentDetail01>언제 다시 입고되나요?</CS.ContentDetail01>
                 <S.AnswerSection>
-                  안녕하세요. 행복비건마켓 입니다. 오전 9시 까지 주문건은 당일
-                  출고됩니다. 금요일 오전 9시 이후 주문건은 월요일 출고되어
-                  화요일 받아보실 수 있습니다. 답변이 늦어 죄송합니다.
-                  감사합니다.
+                  안녕하세요. 행복비건마켓 입니다. 오전 9시 까지 주문건은 당일 출고됩니다. 금요일
+                  오전 9시 이후 주문건은 월요일 출고되어 화요일 받아보실 수 있습니다. 답변이 늦어
+                  죄송합니다. 감사합니다.
                 </S.AnswerSection>
               </S.QNAContentsSection>
             </CS.TabContentList02>

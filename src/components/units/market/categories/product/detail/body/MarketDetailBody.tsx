@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { IMarketDetailProps } from "../../Market.types";
+import { IMarketDetailProps } from "../../../../Market.types";
 import * as S from "./MarketDetailBody.styles";
 import MarketDetailNav from "./nav/ProductDetailNav";
 import ProductAsk from "./product-ask/ProductAsk.container";

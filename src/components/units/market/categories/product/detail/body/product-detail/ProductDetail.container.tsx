@@ -1,6 +1,6 @@
 import * as S from "./ProductDetail.styles";
 import * as CS from "../MarketDetailBody.styles";
-import { IMarketDetailProps } from "../../../Market.types";
+import { IMarketDetailProps } from "../../../../../Market.types";
 import Dompurify from "dompurify";
 
 export default function ProductDetail(props: IMarketDetailProps) {

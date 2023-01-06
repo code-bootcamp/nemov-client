@@ -1,10 +1,10 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
 // import MarketCategory from "../category/MarketCategory";
-import * as ID from "../item-display/ItemDisplay";
-import * as IDS from "../item-display/ItemDisplay.styles";
+import * as ID from "../categories/list/item-display/ItemDisplay";
+import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
-import MarketCategory from "../category/MarketCategory";
+import MarketCategory from "../categories/category/MarketCategory";
 import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 

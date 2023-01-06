@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Image, Rate } from "antd";
-import { flexRow } from "../../../../../../commons/styles/globalStyles";
+import { flexRow } from "../../../../../../../../commons/styles/globalStyles";
 
 export const PRRating = styled(Rate)`
   margin-bottom: 0.8rem;

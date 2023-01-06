@@ -2,7 +2,7 @@
 import { TagsWrapper01, VeganLevelTag01 } from "../../../../commons/tags/CommonTags.Styles";
 import * as MS from "../../main/MarketMain.styles";
 import * as S from "./MarketList.styles";
-import * as IDS from "../../item-display/ItemDisplay.styles";
+import * as IDS from "./item-display/ItemDisplay.styles";
 import ListSearch from "./ListSearch";
 import { getDiscountPrice, getVeganName } from "../../../../../commons/libraries/utilies";
 

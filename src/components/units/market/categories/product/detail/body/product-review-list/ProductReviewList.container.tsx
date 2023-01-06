@@ -1,7 +1,7 @@
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
-import { IMarketDetailProps } from "../../../Market.types";
-import { UseQueryFetchReviewsByProduct } from "../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
+import { IMarketDetailProps } from "../../../../../Market.types";
+import { UseQueryFetchReviewsByProduct } from "../../../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
 import { useRouter } from "next/router";
 
 // export interface ITabContentsProps {

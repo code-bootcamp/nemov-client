@@ -1,11 +1,8 @@
 import {
   CommonBasketIcon02,
   CommonBasketIcon03,
-} from "../../../commons/icons/CommonIcons.styles";
-import {
-  TagsWrapper01,
-  VeganLevelTag01,
-} from "../../../commons/tags/CommonTags.Styles";
+} from "../../../../../commons/icons/CommonIcons.styles";
+import { TagsWrapper01, VeganLevelTag01 } from "../../../../../commons/tags/CommonTags.Styles";
 import * as S from "./ItemDisplay.styles";
 
 // 베스트 상품 아이템 디스플레이

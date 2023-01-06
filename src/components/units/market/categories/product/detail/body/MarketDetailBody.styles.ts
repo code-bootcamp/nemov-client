@@ -1,10 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { gray, pastelGray } from "../../../../../commons/styles/colorPalettes";
-import {
-  flexColumn,
-  flexRow,
-} from "../../../../../commons/styles/globalStyles";
+import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
+import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
 // 헤더 폰트
 export const FontStyle01 = css`

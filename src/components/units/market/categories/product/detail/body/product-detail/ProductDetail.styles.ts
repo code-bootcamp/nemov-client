@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../../commons/styles/breakPoints";
-import { flexColumn } from "../../../../../../commons/styles/globalStyles";
+import { mobile } from "../../../../../../../../commons/styles/breakPoints";
+import { flexColumn } from "../../../../../../../../commons/styles/globalStyles";
 
 export const ProductDetailSection = styled.section`
   ${flexColumn}

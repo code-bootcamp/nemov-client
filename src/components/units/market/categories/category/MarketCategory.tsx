@@ -1,7 +1,7 @@
 import { useApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
-import { IQuery } from "../../../../commons/types/generated/types";
-import { FETCH_PRODUCTS } from "../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
+import { IQuery } from "../../../../../commons/types/generated/types";
+import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 import * as S from "./MarketCategory.styles";
 
 interface IMarketCategoryProps {
