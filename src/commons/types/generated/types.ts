@@ -77,7 +77,9 @@ export type IMutation = {
   checkBusinessLicenseNumber: Scalars['Boolean'];
   checkEmailExist: Scalars['Boolean'];
   checkUserPassword: Scalars['Boolean'];
-  checkValidToken: Scalars['Boolean'];
+  checkValidTokenForEmail: Scalars['Boolean'];
+  checkValidTokenForPassword: Scalars['Boolean'];
+  checkValidTokenForSignUp: Scalars['Boolean'];
   createAnswer: IAnswer;
   createPointCharge: IPoint;
   createProduct: IProduct;
@@ -92,7 +94,11 @@ export type IMutation = {
   deleteProductCategory: Scalars['Boolean'];
   deleteQuestion: Scalars['Boolean'];
   deleteReview: Scalars['Boolean'];
-  getToken: Scalars['String'];
+  findEmail: Scalars['Email'];
+  findPassword: Scalars['Boolean'];
+  getTokenForEmail: Scalars['String'];
+  getTokenForPassword: Scalars['String'];
+  getTokenForSignUp: Scalars['String'];
   login: Scalars['String'];
   logout: Scalars['String'];
   restoreAccessToken: Scalars['String'];
@@ -134,7 +140,19 @@ export type IMutationCheckUserPasswordArgs = {
 };
 
 
-export type IMutationCheckValidTokenArgs = {
+export type IMutationCheckValidTokenForEmailArgs = {
+  phone: Scalars['Phone'];
+  token: Scalars['String'];
+};
+
+
+export type IMutationCheckValidTokenForPasswordArgs = {
+  phone: Scalars['Phone'];
+  token: Scalars['String'];
+};
+
+
+export type IMutationCheckValidTokenForSignUpArgs = {
   phone: Scalars['Phone'];
   token: Scalars['String'];
 };
@@ -211,14 +229,36 @@ export type IMutationDeleteReviewArgs = {
 };
 
 
-export type IMutationGetTokenArgs = {
+export type IMutationFindEmailArgs = {
+  name: Scalars['String'];
+  phone: Scalars['Phone'];
+};
+
+
+export type IMutationFindPasswordArgs = {
+  email: Scalars['Email'];
+  password: Scalars['Password'];
+};
+
+
+export type IMutationGetTokenForEmailArgs = {
+  phone: Scalars['Phone'];
+};
+
+
+export type IMutationGetTokenForPasswordArgs = {
+  phone: Scalars['Phone'];
+};
+
+
+export type IMutationGetTokenForSignUpArgs = {
   phone: Scalars['Phone'];
 };
 
 
 export type IMutationLoginArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['Email'];
+  password: Scalars['Password'];
 };
 
 
@@ -371,6 +411,7 @@ export type IQuery = {
   fetchProducts: Array<IProduct>;
   fetchProductsBySeller: Array<IProduct>;
   fetchProductsCount: Scalars['Int'];
+  fetchProductsCountBySeller: Scalars['Int'];
   fetchProductsIPicked: Array<IProduct>;
   fetchProductsIPickedCount: Scalars['Int'];
   fetchProductsOfBestSelling: Array<IProduct>;
@@ -378,8 +419,10 @@ export type IQuery = {
   fetchQuestion: IQuestion;
   fetchQuestionsByBuyer: Array<IQuestion>;
   fetchQuestionsByProduct: Array<IQuestion>;
+  fetchQuestionsBySeller: Array<IQuestion>;
   fetchQuestionsCountByBuyer: Scalars['Int'];
   fetchQuestionsCountByProduct: Scalars['Int'];
+  fetchQuestionsCountBySeller: Scalars['Int'];
   fetchReview: IReview;
   fetchReviewsByBuyer: Array<IReview>;
   fetchReviewsByProduct: Array<IReview>;
@@ -499,6 +542,11 @@ export type IQueryFetchQuestionsByBuyerArgs = {
 export type IQueryFetchQuestionsByProductArgs = {
   page: Scalars['Int'];
   productId: Scalars['ID'];
+};
+
+
+export type IQueryFetchQuestionsBySellerArgs = {
+  page: Scalars['Int'];
 };
 
 
