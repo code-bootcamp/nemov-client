@@ -67,7 +67,6 @@ export const OrderInfo = styled.div`
 export const ItemImg = styled.img`
   width: 15%;
   aspect-ratio: 5/5;
-  border: 1px solid green;
 `;
 
 export const ItemName = styled.p`

@@ -8,13 +8,13 @@ export const FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW = gql`
   query fetchProductOrdersWithoutReview($page: Int!) {
     fetchProductOrdersWithoutReview(page: $page) {
       id
-      # product {
-      #   name
-      #   image
-      # }
-      seller {
+      product {
         name
+        image
       }
+      # seller {
+      #   name
+      # }
       createdAt
     }
   }
