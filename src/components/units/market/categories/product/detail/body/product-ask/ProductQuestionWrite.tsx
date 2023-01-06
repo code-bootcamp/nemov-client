@@ -15,7 +15,6 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     handleSubmit,
     reset,
     watch,
-
     formState: { isSubmitSuccessful },
   } = useForm<IFormQuestionData>({
     mode: "onSubmit",
@@ -49,15 +48,13 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     <S.QuestionWriteInnerWrapper>
       <S.QuestionWriteHeader>상품 문의하기</S.QuestionWriteHeader>
       <S.QuestionWriteForm onSubmit={handleSubmit(onSubmitQuestion)}>
-        <S.ProductName>{props.data.data?.fetchProduct.name}</S.ProductName>
+        <S.ProductName>{props.data?.data?.fetchProduct.name}</S.ProductName>
         <S.QuestionTitle
           {...register("title", { required: "제목을 입력해주세요.", minLength: 2 })}
-          {...watch(["title"])}
           placeholder="제목을 입력해주세요."
         />
         <S.QuestionDetail
           {...register("contents", { required: "내용을 입력해주세요.", maxLength: 100 })}
-          {...watch(["contents"])}
           placeholder="내용을 입력해주세요."
         />
         <S.QuestionButtonWrapper02>

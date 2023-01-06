@@ -20,6 +20,10 @@ export default function ProductAsk(props: IMarketDetailProps) {
     setIsOpen((prev) => !prev);
   };
 
+  console.log(
+    props.questionsData?.fetchQuestionsByProduct.map((questions) => questions.answer?.contents)
+  );
+
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={700}>
@@ -39,28 +43,31 @@ export default function ProductAsk(props: IMarketDetailProps) {
           </S.QuestionButtonWrapper>
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
-          {new Array(5).fill(1).map((questions, index) => (
+          {props.questionsData?.fetchQuestionsByProduct.map((questions, index) => (
             <CS.TabContentList02 key={index}>
               <CS.ContentListHeader02>
                 <S.QuestionInfoLeft>
                   <CS.ContentTitle>문의 제목</CS.ContentTitle>
                   <CS.Info02Detail>
-                    <span>이름</span>
+                    <span>{questions.user.name}</span>
                     <span>2023.01.01</span>
                   </CS.Info02Detail>
                 </S.QuestionInfoLeft>
                 <S.QuestionInfoRight>
-                  <span>답변 상태</span>
+                  {!questions.answer ? (
+                    <S.AnswerStatus data={questions.answer}>답변대기</S.AnswerStatus>
+                  ) : (
+                    <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
+                  )}
+
                   <S.OpenAnswerButton01 />
                 </S.QuestionInfoRight>
               </CS.ContentListHeader02>
               <S.QNAContentsSection>
-                <CS.ContentDetail01>언제 다시 입고되나요?</CS.ContentDetail01>
-                <S.AnswerSection>
-                  안녕하세요. 행복비건마켓 입니다. 오전 9시 까지 주문건은 당일 출고됩니다. 금요일
-                  오전 9시 이후 주문건은 월요일 출고되어 화요일 받아보실 수 있습니다. 답변이 늦어
-                  죄송합니다. 감사합니다.
-                </S.AnswerSection>
+                <CS.ContentDetail01>{questions.contents}</CS.ContentDetail01>
+                {questions.answer?.contents && (
+                  <S.AnswerSection>{questions.answer?.contents}</S.AnswerSection>
+                )}
               </S.QNAContentsSection>
             </CS.TabContentList02>
           ))}

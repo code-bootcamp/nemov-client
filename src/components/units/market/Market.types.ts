@@ -4,6 +4,7 @@ import { IQuery, IQueryFetchProductArgs } from "../../../commons/types/generated
 
 export interface IMarketDetailProps {
   data: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
+  questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
 }
 
 export interface IMarketDetailHeadStylesProps {
@@ -24,5 +25,6 @@ export interface IProductOrderData {
 
 export interface IProductAskProps {
   setIsOpen: SetterOrUpdater<boolean>;
-  data: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
+  data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
+  questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
 }

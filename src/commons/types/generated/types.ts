@@ -23,9 +23,9 @@ export type IAnswer = {
   __typename?: 'Answer';
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  deletedAt: Scalars['DateTime'];
   id: Scalars['ID'];
   question: IQuestion;
+  updatedAt: Scalars['DateTime'];
   user: IUser;
 };
 
@@ -106,7 +106,8 @@ export type IMutation = {
   toggleProductPick: Scalars['Boolean'];
   toggleProductToCart: Scalars['Boolean'];
   updateAnswer: IAnswer;
-  updateProduct: IProductCategory;
+  updateProduct: IProduct;
+  updateProductCategory: IProductCategory;
   updateQuestion: IQuestion;
   updateReview: IReview;
   updateUser: IUser;
@@ -284,6 +285,12 @@ export type IMutationUpdateAnswerArgs = {
 
 
 export type IMutationUpdateProductArgs = {
+  productId: Scalars['ID'];
+  updateProductInput: IUpdateProductInput;
+};
+
+
+export type IMutationUpdateProductCategoryArgs = {
   productCategoryId: Scalars['ID'];
   updateProductCategoryInput: IUpdateProductCategoryInput;
 };
@@ -464,12 +471,6 @@ export type IQueryFetchPointTransactionsArgs = {
 };
 
 
-export type IQueryFetchPointTransactionsCountArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
-};
-
-
 export type IQueryFetchProductArgs = {
   productId: Scalars['ID'];
 };
@@ -507,8 +508,8 @@ export type IQueryFetchProductOrdersWithoutReviewArgs = {
 
 
 export type IQueryFetchProductsArgs = {
-  categoryId: Scalars['ID'];
   page: Scalars['Int'];
+  productCategoryId: Scalars['ID'];
   veganLevel: Scalars['Int'];
 };
 
@@ -519,7 +520,7 @@ export type IQueryFetchProductsBySellerArgs = {
 
 
 export type IQueryFetchProductsCountArgs = {
-  categoryId: Scalars['ID'];
+  productCategoryId: Scalars['ID'];
   veganLevel: Scalars['Int'];
 };
 
@@ -579,9 +580,11 @@ export type IQuestion = {
   __typename?: 'Question';
   answer?: Maybe<IAnswer>;
   contents: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   product: IProduct;
   title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   user: IUser;
 };
 
@@ -615,6 +618,18 @@ export type IReviewImage = {
 export type IUpdateProductCategoryInput = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+};
+
+export type IUpdateProductInput = {
+  deliveryFee?: InputMaybe<Scalars['Int']>;
+  description?: InputMaybe<Scalars['String']>;
+  discount?: InputMaybe<Scalars['Int']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Int']>;
+  productCategoryId?: InputMaybe<Scalars['String']>;
+  quantity?: InputMaybe<Scalars['Int']>;
+  veganLevel?: InputMaybe<Scalars['Int']>;
 };
 
 export type IUpdateQuestionInput = {
