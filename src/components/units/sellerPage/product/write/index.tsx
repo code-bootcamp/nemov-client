@@ -6,18 +6,19 @@ import { UseMutationCreateProduct } from "../../../../commons/hooks/useMutations
 import { useForm } from "react-hook-form";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
-import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
-import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
-import { ICreateProductCategoryInput } from "../../../../../commons/types/generated/types";
-import { UseQueryFetchCategories } from "../../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
+// import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
+// import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 
 interface ProductWriteProps {
   isEdit: boolean;
 }
 
-interface IProductInput {
+interface ProductInput {
   name?: string;
-  productCategoryId?: string;
+  productCategoryId: {
+    id: string;
+    name: string;
+  };
   deliveryFee?: number;
   description?: string;
   discount?: number;
@@ -34,16 +35,14 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [files, setFiles] = useState<File>();
 
   const [createProduct] = UseMutationCreateProduct();
-  const [updateProduct] = UseMutationUpdateProduct();
+  // const [updateProduct] = UseMutationUpdateProduct();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
-  const { data: categoryData } = UseQueryFetchCategories();
   const data = query.data?.fetchProduct;
-  console.log("categoryData: ", categoryData);
-  console.log("fetchProduct data: ", data);
+  console.log(data);
 
   const [uploadFile] = UseMutationUploadFile();
 
-  const { register, handleSubmit, setValue } = useForm<IProductInput>({
+  const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
   });
 
@@ -77,12 +76,14 @@ export default function ProductWrite(props: ProductWriteProps) {
     }
   }, [data]);
 
-  const onClickSubmit = async (data: IProductInput) => {
+  const onClickSubmit = async (data: ProductInput) => {
+    console.log(data);
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
+
     // const context = Editor.prototype.getInstance().getHTML();
-    console.log(data.productCategoryId);
+
     const result = await createProduct({
       variables: {
         createProductInput: {
@@ -102,37 +103,37 @@ export default function ProductWrite(props: ProductWriteProps) {
     void router.push("/seller");
   };
 
-  // const onClickEdit = async (data: IProductInput) => {
-  //   const resultFile = await uploadFile({ variables: { file: files } });
-  //   const url = resultFile.data?.uploadFile;
+  const onClickEdit = async (data: ProductInput) => {
+    // const resultFile = await uploadFile({ variables: { file: files } });
+    // const url = resultFile.data?.uploadFile;
 
-  //   console.log("3333333");
-  //   await updateProduct({
-  //     variables: {
-  //       productCategoryId: String(router.query.productId),
-  //       updateProductCategoryInput: {
-  //         name: String(data.name),
-  //         productCategory: data.productCategoryId,
-  //         description: "11111",
-  //         discount: Number(data.discount),
-  //         deliveryFee: Number(data.deliveryFee),
-  //         price: Number(data.price),
-  //         quantity: Number(data.quantity),
-  //         image: String(url),
-  //         veganLevel: Number(data.veganLevel),
-  //       },
-  //     },
-  //     refetchQueries: [
-  //       {
-  //         query: FETCH_PRODUCTS_BY_SELLER,
-  //         variables: {
-  //           page: 1,
-  //         },
-  //       },
-  //     ],
-  //   });
-  //   void router.push("/seller");
-  // };
+    console.log("3333333");
+    // await updateProduct({
+    //   variables: {
+    //     productId: String(router.query.productId),
+    //     updateProductInput: {
+    //       name: String(data.name),
+    //       productCategory: IProduct_Category_Type.Beauty,
+    //       description: "11111",
+    //       discount: Number(data.discount),
+    //       deliveryFee: Number(data.deliveryFee),
+    //       price: Number(data.price),
+    //       quantity: Number(data.quantity),
+    //       image: String(url),
+    //       veganLevel: Number(data.veganLevel),
+    //     },
+    //   },
+    //   refetchQueries: [
+    //     {
+    //       query: FETCH_PRODUCTS_BY_SELLER,
+    //       variables: {
+    //         page: 1,
+    //       },
+    //     },
+    //   ],
+    // });
+    // void router.push("/seller");
+  };
 
   return (
     <S.Wrapper>
@@ -186,13 +187,33 @@ export default function ProductWrite(props: ProductWriteProps) {
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
           <div>
-            <input type="radio" id="BEAUTY" name="category" onClick={onClickGetValue} />
+            <input
+              type="radio"
+              id="e308aa69-e1f4-409a-b627-dcc690ab23e5"
+              name="category"
+              onClick={onClickGetValue}
+            />
             BEAUTY
-            <input type="radio" id="FOOD" name="category" onClick={onClickGetValue} />
+            <input
+              type="radio"
+              id="d2ad6919-f3cf-4e78-8463-65ec88f4d2c7"
+              name="category"
+              onClick={onClickGetValue}
+            />
             FOOD
-            <input type="radio" id="DRINK" name="category" onClick={onClickGetValue} />
+            <input
+              type="radio"
+              id="ba9751ba-45d2-47f8-a80e-9850ed490d2f"
+              name="category"
+              onClick={onClickGetValue}
+            />
             DRINK
-            <input type="radio" id="LIFE" name="category" onClick={onClickGetValue} />
+            <input
+              type="radio"
+              id="3bcbd43a-2ae1-41c9-a788-f3f86f3c2c56"
+              name="category"
+              onClick={onClickGetValue}
+            />
             LIFE
           </div>
         </S.Row>
