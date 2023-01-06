@@ -36,7 +36,6 @@ export const UseMutationCreateQuestion = () => {
           productId: String(router.query.productId),
         },
       });
-      Modal.success({ content: "문의 등록이 완료되었습니다." });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
