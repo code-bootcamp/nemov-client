@@ -25,7 +25,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
     void router.push(`/market/categories/${String(id)}`);
   };
 
-  console.log(props.categoryData?.fetchProductCategories);
+  // console.log(props.categoryData?.fetchProductCategories);
 
   return (
     <>
