@@ -1,4 +1,5 @@
 import { QueryResult } from "@apollo/client";
+import { SetterOrUpdater } from "recoil";
 import { IQuery, IQueryFetchProductArgs } from "../../../commons/types/generated/types";
 
 export interface IMarketDetailProps {
@@ -19,4 +20,9 @@ export interface IProductOrderData {
   productId: string;
   amount: number;
   quantity: number;
+}
+
+export interface IProductAskProps {
+  setIsOpen: SetterOrUpdater<boolean>;
+  data: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
 }

@@ -97,7 +97,7 @@ export const QuestionWriteHeader = styled.h2`
 export const QuestionWriteForm = styled.form``;
 
 export const ProductName = styled.header`
-  margin: 1rem 0;
+  margin: 1.3rem 0;
   font-weight: 800;
   font-size: 1.2rem;
   padding-left: 0.4rem;

@@ -32,7 +32,7 @@ function MarketDetailBody(props: IMarketDetailProps) {
       />
       {isTabSelected[0] && <ProductDetail data={props.data} />}
       {isTabSelected[1] && <ProductReviewList data={props.data} />}
-      {isTabSelected[2] && <ProductAsk />}
+      {isTabSelected[2] && <ProductAsk data={props.data} />}
       <ProductNoticeInfo />
     </S.MarketDetailPageBody>
   );

@@ -6,9 +6,10 @@ import { useRecoilState } from "recoil";
 import { isOpenState } from "../../../../../../../../commons/stores";
 import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
+import { IMarketDetailProps } from "../../../../../Market.types";
 // import { MouseEventHandler, useState } from "react";
 
-export default function ProductAsk() {
+export default function ProductAsk(props: IMarketDetailProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
   const onClickQuestionWrite = () => {
@@ -22,7 +23,7 @@ export default function ProductAsk() {
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={700}>
-        <ProductQuestionWrite setIsOpen={setIsOpen} />
+        <ProductQuestionWrite setIsOpen={setIsOpen} data={props.data} />
       </CommonModal01>
 
       <CS.TabContentMain01>
