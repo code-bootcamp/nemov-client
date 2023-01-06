@@ -4,19 +4,20 @@ import * as S from "./write.styles";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { UseMutationCreateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationCreateProduct";
 import { useForm } from "react-hook-form";
-import { IProduct_Category_Type } from "../../../../../commons/types/generated/types";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
 import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import { ICreateProductCategoryInput } from "../../../../../commons/types/generated/types";
+import { UseQueryFetchCategories } from "../../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 
 interface ProductWriteProps {
   isEdit: boolean;
 }
 
-interface ProductInput {
+interface IProductInput {
   name?: string;
-  category?: string;
+  productCategoryId?: string;
   deliveryFee?: number;
   description?: string;
   discount?: number;
@@ -35,12 +36,14 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [createProduct] = UseMutationCreateProduct();
   const [updateProduct] = UseMutationUpdateProduct();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
+  const { data: categoryData } = UseQueryFetchCategories();
   const data = query.data?.fetchProduct;
-  console.log(data);
+  console.log("categoryData: ", categoryData);
+  console.log("fetchProduct data: ", data);
 
   const [uploadFile] = UseMutationUploadFile();
 
-  const { register, handleSubmit, setValue } = useForm<ProductInput>({
+  const { register, handleSubmit, setValue } = useForm<IProductInput>({
     mode: "onChange",
   });
 
@@ -61,7 +64,7 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   const onClickGetValue = (event: any) => {
     console.log(event.target.id);
-    setValue("category", event.target.id);
+    setValue("productCategoryId", event.target.id);
   };
 
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -74,19 +77,17 @@ export default function ProductWrite(props: ProductWriteProps) {
     }
   }, [data]);
 
-  const onClickSubmit = async (data: ProductInput) => {
+  const onClickSubmit = async (data: IProductInput) => {
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
-
     // const context = Editor.prototype.getInstance().getHTML();
-
-    console.log(data.category);
+    console.log(data.productCategoryId);
     const result = await createProduct({
       variables: {
         createProductInput: {
           name: String(data.name),
-          category: IProduct_Category_Type.Beauty,
+          productCategoryId: String(data.productCategoryId),
           description: "11111",
           discount: Number(data.discount),
           deliveryFee: Number(data.deliveryFee),
@@ -101,37 +102,37 @@ export default function ProductWrite(props: ProductWriteProps) {
     void router.push("/seller");
   };
 
-  const onClickEdit = async (data: ProductInput) => {
-    const resultFile = await uploadFile({ variables: { file: files } });
-    const url = resultFile.data?.uploadFile;
+  // const onClickEdit = async (data: IProductInput) => {
+  //   const resultFile = await uploadFile({ variables: { file: files } });
+  //   const url = resultFile.data?.uploadFile;
 
-    console.log("3333333");
-    await updateProduct({
-      variables: {
-        productId: String(router.query.productId),
-        updateProductInput: {
-          name: String(data.name),
-          category: IProduct_Category_Type.Beauty,
-          description: "11111",
-          discount: Number(data.discount),
-          deliveryFee: Number(data.deliveryFee),
-          price: Number(data.price),
-          quantity: Number(data.quantity),
-          image: String(url),
-          veganLevel: Number(data.veganLevel),
-        },
-      },
-      refetchQueries: [
-        {
-          query: FETCH_PRODUCTS_BY_SELLER,
-          variables: {
-            page: 1,
-          },
-        },
-      ],
-    });
-    void router.push("/seller");
-  };
+  //   console.log("3333333");
+  //   await updateProduct({
+  //     variables: {
+  //       productCategoryId: String(router.query.productId),
+  //       updateProductCategoryInput: {
+  //         name: String(data.name),
+  //         productCategory: data.productCategoryId,
+  //         description: "11111",
+  //         discount: Number(data.discount),
+  //         deliveryFee: Number(data.deliveryFee),
+  //         price: Number(data.price),
+  //         quantity: Number(data.quantity),
+  //         image: String(url),
+  //         veganLevel: Number(data.veganLevel),
+  //       },
+  //     },
+  //     refetchQueries: [
+  //       {
+  //         query: FETCH_PRODUCTS_BY_SELLER,
+  //         variables: {
+  //           page: 1,
+  //         },
+  //       },
+  //     ],
+  //   });
+  //   void router.push("/seller");
+  // };
 
   return (
     <S.Wrapper>
