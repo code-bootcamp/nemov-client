@@ -6,7 +6,7 @@ import * as IDS from "./item-display/ItemDisplay.styles";
 import ListSearch from "./ListSearch";
 import { getDiscountPrice, getVeganName } from "../../../../../commons/libraries/utilies";
 
-import { IQuery } from "../../../../../commons/types/generated/types";
+import { IProduct, IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
@@ -24,11 +24,21 @@ export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
   const client = useApolloClient();
   const { productToCart } = UseMutationToggleProductToCart();
+  const [productItemVal, setProductItemVal] = useState<IProduct[]>();
   const [isActive, setIsActive] = useState(false);
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
     const result = await productToCart(productId);
+    const productItem = props.productsData?.fetchProducts.filter((cur) => {
+      if (cur.id === productId) {
+        return cur;
+      } else {
+        return undefined;
+      }
+    });
+    setProductItemVal(productItem);
+    console.log(productItemVal);
 
     const status = result?.data?.toggleProductToCart;
     if (status === undefined) {
@@ -59,12 +69,18 @@ export default function MarketList(props: IMarketListProps) {
   };
 
   // 카테고리 이름 데이터
-  const listTitle = props.categoryData?.fetchProductCategories.map((categories) => categories.name);
-  console.log(listTitle);
+  const listTitle = props.categoryData?.fetchProductCategories.filter((categories) => {
+    if (categories.id === router.query.categoryId) {
+      return categories;
+    } else {
+      return undefined;
+    }
+  });
+  console.log("타이틀", listTitle);
 
   return (
     <>
-      {/* <S.ListTitle>{listTitle}</S.ListTitle> */}
+      <S.ListTitle>{listTitle?.map((categories) => categories.name)}</S.ListTitle>
       <ListSearch />
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
         {props.productsData?.fetchProducts.map((products) => (

@@ -14,7 +14,7 @@ export const CategoryMain = styled.main`
 `;
 
 export const ListTitle = styled.h1`
-  margin-top: 4rem;
+  margin-top: 4.6rem;
   ${GS.bold}
 `;
 
