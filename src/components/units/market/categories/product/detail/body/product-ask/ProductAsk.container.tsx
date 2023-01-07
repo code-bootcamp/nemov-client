@@ -46,7 +46,10 @@ export default function ProductAsk(props: IMarketDetailProps) {
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
           {props.questionsData?.fetchQuestionsByProduct.length === 0 && (
-            <div>문의 내역이 없습니다.</div>
+            <S.ProductAskNone>
+              <S.StyledQuestionIcon />
+              상품 문의가 없습니다.
+            </S.ProductAskNone>
           )}
           {props.questionsData?.fetchQuestionsByProduct.map((questions, index) => (
             <CS.TabContentList02 key={index}>
