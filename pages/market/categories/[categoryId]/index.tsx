@@ -7,7 +7,6 @@ import MarketList from "../../../../src/components/units/market/categories/list/
 import { CategoryMain } from "../../../../src/components/units/market/categories/list/MarketList.styles";
 import MarketCategory from "../../../../src/components/units/market/categories/category/MarketCategory";
 import { UseQueryFetchIsInCart } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchIsInCart";
-import { string } from "yup";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
