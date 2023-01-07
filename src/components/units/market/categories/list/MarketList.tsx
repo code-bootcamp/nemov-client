@@ -99,9 +99,9 @@ export default function MarketList(props: IMarketListProps) {
                 <S.DetailFooterLeft>
                   <S.ItemName03>{products.name}</S.ItemName03>
                   <IDS.ItemPrices>
-                    <S.DiscountRate01>{products.discount}%</S.DiscountRate01>
+                    <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
                     <S.ItemDiscountPrice02>
-                      {getDiscountPrice(products.price, products.discount)}원
+                      {getDiscountPrice(products.price, products.discountedPrice)}원
                     </S.ItemDiscountPrice02>
                     <S.ItemOriginPrice03>{products.price}원</S.ItemOriginPrice03>
                   </IDS.ItemPrices>
