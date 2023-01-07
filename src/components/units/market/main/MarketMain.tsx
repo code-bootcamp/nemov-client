@@ -26,13 +26,17 @@ export default function MarketMain() {
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
 
-  console.log(
-    "베스트아이템 데이터",
-    bestItemData?.fetchProductsOfRecommend,
+  console.log("추천상품", recItemData);
 
-    "추천아이템 데이터",
-    recItemData?.fetchProductsOfRecommend
-  );
+  // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
+  //   if (!rec.isOutOfStock) {
+  //     return rec;
+  //   } else {
+  //     return undefined;
+  //   }
+  // });
+
+  // console.log("추천상품 중 매진 아닌것", curRecItemData);
 
   const settings = {
     centerMode: true,
@@ -69,6 +73,7 @@ export default function MarketMain() {
               {recItemData?.fetchProductsOfRecommend.map((rec) => (
                 <ID.ItemDisPlay02 key={rec.id} recData={rec} />
               ))}
+              {/* <ID.ItemDisPlay02 key={rec.id} recData={rec} />; */}
             </S.ItemsWrapper01>
           </S.RecommendItemSection01>
           <S.MainMarketSection01>
