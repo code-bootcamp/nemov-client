@@ -49,7 +49,7 @@ export const ModalContentWrapper = styled.div`
   width: 100%;
   padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 `;
@@ -62,6 +62,21 @@ export const ModalContentInnerWrap = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+`;
+
+export const InputWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;
+
+export const ModalContentTitle = styled.input`
+  width: 90%;
+  height: 30px;
+  padding: 12px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 4px;
 `;
 
 export const ModalContent = styled.textarea`

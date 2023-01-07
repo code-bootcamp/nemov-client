@@ -2,7 +2,7 @@
 // import { Modal } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
-import { getDiscountPrice } from "../../../../commons/libraries/utilies";
+// import { getDiscountPrice } from "../../../../commons/libraries/utilies";
 // import { IMutation, IMutationCreateProductOrderArgs } from "../../../../commons/types/generated/types";
 // import { CREATE_PRODUCT_ORDER, UseMutationCreateProductOrder } from "../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
 // import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
@@ -17,24 +17,24 @@ interface IData {
 }
 
 export default function MypageBasket() {
-  const [quantity, setQuantity] = useState(1);
-  const [totalAmount, setTotalAmount] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
+  // const [totalAmount, setTotalAmount] = useState(1);
 
   const { data } = UseQueryFetchCart();
-  const [itemList, setItemList] = useState([data?.fetchCart]);
-  console.log(itemList);
+  // const [itemList, setItemList] = useState([data?.fetchCart]);
+  // console.log(itemList);
 
-  const onChangeProps = (id: string, key, value) => {
-    setItemList((prevState) => {
-      return prevState.map((obj) => {
-        if (obj.id === id) {
-          return { ...obj, [key]: value };
-        } else {
-          return { ...obj };
-        }
-      });
-    });
-  };
+  // const onChangeProps = (id: string, key, value) => {
+  //   setItemList((prevState) => {
+  //     return prevState.map((obj) => {
+  //       if (obj.id === id) {
+  //         return { ...obj, [key]: value };
+  //       } else {
+  //         return { ...obj };
+  //       }
+  //     });
+  //   });
+  // };
 
   // const { productToCart } = UseMutationToggleProductToCart();
 
@@ -63,9 +63,9 @@ export default function MypageBasket() {
 
   // 할인율 적용된 가격
   // const productPrice = getDiscountPrice(data?.fetchCart.price, data?.fetchCart.discount);
-  const productPrice = data?.fetchCart.map((cart, index) => {
-    return getDiscountPrice(cart.price, cart.discount);
-  });
+  // const productPrice = data?.fetchCart.map((cart, index) => {
+  //   return getDiscountPrice(cart.price, cart.discount);
+  // });
 
   // console.log(productPrice);
 
@@ -117,15 +117,15 @@ export default function MypageBasket() {
 
   const [checkItems, setCheckItems] = useState<number[]>([]);
 
-  const handleSingleCheck = (checked: boolean, id: number) => {
-    if (checked) {
-      // 단일 선택 시 체크된 아이템을 배열에 추가
-      setCheckItems((prev: number[]) => [...prev, id]);
-    } else {
-      // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
-      setCheckItems(checkItems.filter((el: number) => el !== id));
-    }
-  };
+  // const handleSingleCheck = (checked: boolean, id: number) => {
+  //   if (checked) {
+  //     // 단일 선택 시 체크된 아이템을 배열에 추가
+  //     setCheckItems((prev: number[]) => [...prev, id]);
+  //   } else {
+  //     // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+  //     setCheckItems(checkItems.filter((el: number) => el !== id));
+  //   }
+  // };
 
   const handleAllCheck = (checked: boolean) => {
     if (checked) {
@@ -172,7 +172,7 @@ export default function MypageBasket() {
           {data?.fetchCart.length !== 0 ? (
             <>
               {data?.fetchCart.map((item, index) => (
-                <MypageBasketItem key={item.id} item={item} onChangeProps={onChangeProps} />
+                <MypageBasketItem key={item.id} item={item} />
                 // <S.ItemWrapper key={index}>
                 //   <S.ItemCheckbox
                 //     type="checkbox"

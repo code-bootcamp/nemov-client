@@ -6,22 +6,22 @@ import * as S from "./Basket.styles";
 interface IMypageBasketItemProps {
   key: string;
   item: IProduct;
-  onChangeProps: (id: string, key: any, value: any) => void;
+  // onChangeProps: (id: string, key: any, value: any) => void;
 }
 
 export default function MypageBasketItem(props: IMypageBasketItemProps) {
-  const amountInputHandler = (e) => {
-    props.onChangeProps(props.item.id, "amount", +e.target.value);
-  };
+  // const amountInputHandler = (e: React.MouseEvent) => {
+  //   props.onChangeProps(props.item.id, "amount", +e.target.value);
+  // };
 
   const onClickCountUp = (e: React.MouseEvent) => {
     e.preventDefault();
-    props.onChangeProps(props.item.id, "amount", props.item.amount + 1);
+    // props.onChangeProps(props.item.id, "amount", props.item.amount + 1);
   };
 
   const onClickCountDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    props.onChangeProps(props.item.id, "amount", props.item.amount - 1);
+    // props.onChangeProps(props.item.id, "amount", props.item.amount - 1);
   };
 
   return (
