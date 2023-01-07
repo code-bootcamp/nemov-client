@@ -8,11 +8,9 @@ import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/Us
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 // import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
 // import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
-
 interface ProductWriteProps {
   isEdit: boolean;
 }
-
 interface ProductInput {
   name?: string;
   productCategoryId: {
@@ -27,30 +25,24 @@ interface ProductInput {
   quantity?: number;
   veganLevel?: number;
 }
-
 export default function ProductWrite(props: ProductWriteProps) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
-
   const [createProduct] = UseMutationCreateProduct();
   // const [updateProduct] = UseMutationUpdateProduct();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
   console.log(data);
-
   const [uploadFile] = UseMutationUploadFile();
-
   const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
   });
-
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     console.log(file);
     if (file === undefined) return;
-
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
@@ -60,30 +52,24 @@ export default function ProductWrite(props: ProductWriteProps) {
       }
     };
   };
-
   const onClickGetValue = (event: any) => {
     console.log(event.target.id);
     setValue("productCategoryId", event.target.id);
   };
-
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
   };
-
   useEffect(() => {
     if (data?.image) {
       setImageUrl(data.image);
     }
   }, [data]);
-
   const onClickSubmit = async (data: ProductInput) => {
     console.log(data);
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
-
     // const context = Editor.prototype.getInstance().getHTML();
-
     const result = await createProduct({
       variables: {
         createProductInput: {
@@ -102,7 +88,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     console.log("result:", result);
     void router.push("/seller");
   };
-
   const onClickEdit = async (data: ProductInput) => {
     // const resultFile = await uploadFile({ variables: { file: files } });
     // const url = resultFile.data?.uploadFile;
@@ -133,7 +118,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     // });
     // void router.push("/seller");
   };
-
   return (
     <S.Wrapper>
       <S.Title>판매자 상품 {props.isEdit ? "수정" : "등록"} 페이지</S.Title>
@@ -269,7 +253,6 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>상품 내용</S.SubTitle>
           <S.EditorWrap>{/* <ToastUIEditor /> */}</S.EditorWrap>
         </S.Row>
-
         <S.ButtonWrap>
           <S.Btn1 type="submit">상품{props.isEdit ? "수정" : "등록"}하기</S.Btn1>
           <S.Btn2 type="button" onClick={onClickMoveToPage("/seller")}>
