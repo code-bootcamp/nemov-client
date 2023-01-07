@@ -9,7 +9,8 @@ export const FETCH_PRODUCTS = gql`
       image
       veganLevel
       price
-      discount
+      discountRate
+      discountedPrice
       isOutOfStock
       productCategory {
         id

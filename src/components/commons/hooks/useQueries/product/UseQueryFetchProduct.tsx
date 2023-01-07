@@ -11,7 +11,8 @@ export const FETCH_PRODUCT = gql`
       veganLevel
       deliveryFee
       price
-      discount
+      discountRate
+      discountedPrice
       quantity
       isOutOfStock
       user {

@@ -1,9 +1,5 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import {
-  getDiscountPrice,
-  getVeganName,
-  sumOfTotalAmount,
-} from "../../../../../../../commons/libraries/utilies";
+import { getVeganName } from "../../../../../../../commons/libraries/utilies";
 import {
   StyledCommonButton01,
   StyledCommonButton02,
@@ -26,12 +22,6 @@ import { Modal } from "antd";
 
 function MarketDetailHead(props: IMarketDetailProps) {
   // 할인율 적용된 가격
-  const productPrice = getDiscountPrice(
-    props.data.data?.fetchProduct.price,
-    props.data.data?.fetchProduct.discount
-  );
-
-  const deliveryFee = props.data.data?.fetchProduct.deliveryFee;
 
   const [createProductOrder] = useMutation<
     Pick<IMutation, "createProductOrder">,
@@ -41,10 +31,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const [quantity, setQuantity] = useState(1);
   const [totalAmount, setTotalAmountAmount] = useState(1);
 
-  const sum = sumOfTotalAmount(
-    (productPrice ?? 0) * quantity,
-    props.data.data?.fetchProduct.deliveryFee ?? 0
-  );
+  const sum = (props.data.data?.fetchProduct.discountedPrice ?? 0) * quantity;
 
   console.log(quantity, totalAmount);
 
@@ -52,12 +39,11 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const onClickQuantityDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      if (productPrice === undefined) {
-        return;
-      }
+      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+
       setQuantity((prev) => prev - 1);
-      if (productPrice === undefined || deliveryFee === undefined) return;
-      setTotalAmountAmount(sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0));
+
+      setTotalAmountAmount(sum);
     },
     [quantity]
   );
@@ -66,12 +52,10 @@ function MarketDetailHead(props: IMarketDetailProps) {
     (e: React.MouseEvent) => {
       console.log("클릭");
       e.preventDefault();
-      if (productPrice === undefined) {
-        return;
-      }
+      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+
       setQuantity((prev) => prev + 1);
-      if (productPrice === undefined || deliveryFee === undefined) return;
-      setTotalAmountAmount(sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0));
+      setTotalAmountAmount(sum);
     },
     [quantity]
   );
@@ -93,7 +77,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
   };
 
   useEffect(() => {
-    if (productPrice !== undefined) {
+    if (props.data.data?.fetchProduct.discountedPrice !== undefined) {
       setTotalAmountAmount(sum);
       setQuantity(quantity);
     }
@@ -120,24 +104,24 @@ function MarketDetailHead(props: IMarketDetailProps) {
           </S.ProductDetailLevelSection>
           <S.ProductPriceDetail01>
             <S.PriceDetailSection01>
-              <S.ProductDiscount01>{props.data.data?.fetchProduct.discount}%</S.ProductDiscount01>
-              <span>{productPrice}원</span>
+              <S.ProductDiscount01>
+                {props.data.data?.fetchProduct.discountRate}%
+              </S.ProductDiscount01>
+              <span>{props.data.data?.fetchProduct.discountedPrice}원</span>
               <S.ProductOriginalPrice01>
                 {props.data.data?.fetchProduct.price}원
               </S.ProductOriginalPrice01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
               <S.DetailInfoTitle01>배송비</S.DetailInfoTitle01>
-              <S.DetailInfoContent01>
-                {props.data.data?.fetchProduct.deliveryFee}원
-              </S.DetailInfoContent01>
+              <S.DetailInfoContent01>30000원 이상 구매시, 배송비 무료</S.DetailInfoContent01>
             </S.PriceDetailSection01>
           </S.ProductPriceDetail01>
           <S.ProductDetailFooter01>
             <S.PQuantitySelectSection>
               <S.DetailInfoTitle01>{props.data.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
-                <span>{(productPrice ?? 0) * quantity}원</span>
+                <span>{sum}원</span>
                 <CountDownBtn type="button" onClick={onClickQuantityDown} />
                 <span>{quantity}</span>
                 <CountUpBtn type="button" onClick={onClickQuantityUp} />
@@ -145,9 +129,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
             </S.PQuantitySelectSection>
             <S.PriceSumSection01>
               <S.DetailInfoTitle01>총 상품 금액</S.DetailInfoTitle01>
-              <S.PriceSumDetail01>
-                {sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0)}원
-              </S.PriceSumDetail01>
+              <S.PriceSumDetail01>{sum}원</S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
               <CommonHeartIcon01 />
