@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import { GlobalWrapper } from "../../../commons/styles/globalStyles";
 
 interface ISellerListStylesProps {
   isSelected: boolean;
 }
 
-export const ContentsMain = styled.section`
-  margin: 150px 0;
+export const ContentsMain = styled(GlobalWrapper)`
+  margin: 100px 0;
 `;
 
 export const Title = styled.h2`
@@ -29,7 +30,7 @@ export const Tabs = styled.ul`
 `;
 
 export const Line = styled.div`
-  width: 193px;
+  width: 100%;
   position: absolute;
   left: 0px;
   top: 8px;
@@ -42,7 +43,7 @@ export const Line = styled.div`
 `;
 
 export const Tab = styled.li`
-  width: 193px;
+  width: 25%;
   padding: 0 30px;
   text-align: center;
   font-size: 1.2rem;
