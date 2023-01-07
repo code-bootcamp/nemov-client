@@ -27,9 +27,7 @@ export const ItemImage03 = styled.img`
   cursor: pointer;
 `;
 
-export const SoldOut = styled.span`
-  transition: all 0.5s ease-in-out 0s;
-`;
+export const SoldOut = styled.span``;
 
 export const ItemSoldOutDisPlay = styled.div`
   width: 100%;
@@ -39,8 +37,7 @@ export const ItemSoldOutDisPlay = styled.div`
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
   aspect-ratio: 1/1;
-  transform: scale(1);
-  transition: all 0.5s ease-in-out 0s;
+  font-size: 2rem;
   color: white;
   cursor: pointer;
   :hover ${SoldOut} {
