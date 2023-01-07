@@ -66,8 +66,8 @@ export default function MarketMain() {
               <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>
-              {new Array(3).fill(1).map((_, index) => (
-                <ID.ItemDisPlay02 key={index} />
+              {recItemData?.fetchProductsOfRecommend.map((rec) => (
+                <ID.ItemDisPlay02 key={rec.id} recData={rec} />
               ))}
             </S.ItemsWrapper01>
           </S.RecommendItemSection01>

@@ -1,9 +1,15 @@
+import { getDiscountPrice, getVeganName } from "../../../../../../commons/libraries/utilies";
+import { IProduct } from "../../../../../../commons/types/generated/types";
 import {
   CommonBasketIcon02,
   CommonBasketIcon03,
 } from "../../../../../commons/icons/CommonIcons.styles";
 import { TagsWrapper01, VeganLevelTag01 } from "../../../../../commons/tags/CommonTags.Styles";
 import * as S from "./ItemDisplay.styles";
+
+interface IItemDisPlayProps {
+  recData?: IProduct;
+}
 
 // 베스트 상품 아이템 디스플레이
 export const ItemDisPlay01 = () => {
@@ -25,26 +31,35 @@ export const ItemDisPlay01 = () => {
 };
 
 // 추천 상품 아이템 디스플레이
-export const ItemDisPlay02 = () => {
+export const ItemDisPlay02 = (props: IItemDisPlayProps) => {
   return (
-    <S.ItemDisplay>
-      <S.RecommendItemImg01 image={"/images/best2.jpg"}></S.RecommendItemImg01>
-      <S.ItemDetail>
-        <TagsWrapper01>
-          <VeganLevelTag01>#비건</VeganLevelTag01>
-          <VeganLevelTag01>#플렉시테리언</VeganLevelTag01>
-        </TagsWrapper01>
-        <S.ItemDetailFooter>
-          <S.DetailFooterLeft>
-            <S.ItemName>자연 허브 비누</S.ItemName>
-            <S.ItemPrices>
-              <S.ItemDiscountPrice>11,000원</S.ItemDiscountPrice>
-              <S.ItemOriginPrice>14,000원</S.ItemOriginPrice>
-            </S.ItemPrices>
-          </S.DetailFooterLeft>
-          <CommonBasketIcon02 />
-        </S.ItemDetailFooter>
-      </S.ItemDetail>
-    </S.ItemDisplay>
+    <>
+      {props.recData ? (
+        <S.ItemDisplay>
+          <S.RecommendItemImg01 image={String(props.recData?.image)}>
+            <S.DiscountDisplay>{props.recData?.discount}%</S.DiscountDisplay>
+          </S.RecommendItemImg01>
+          <S.ItemDetail>
+            <TagsWrapper01>
+              <VeganLevelTag01>{getVeganName(props.recData?.veganLevel)}</VeganLevelTag01>
+            </TagsWrapper01>
+            <S.ItemDetailFooter>
+              <S.DetailFooterLeft>
+                <S.ItemName>{props.recData?.name}</S.ItemName>
+                <S.ItemPrices>
+                  <S.ItemDiscountPrice>
+                    {getDiscountPrice(props.recData?.price, props.recData?.discount)}원
+                  </S.ItemDiscountPrice>
+                  <S.ItemOriginPrice>{props.recData?.price}원</S.ItemOriginPrice>
+                </S.ItemPrices>
+              </S.DetailFooterLeft>
+              <CommonBasketIcon02 />
+            </S.ItemDetailFooter>
+          </S.ItemDetail>
+        </S.ItemDisplay>
+      ) : (
+        <div></div>
+      )}
+    </>
   );
 };
