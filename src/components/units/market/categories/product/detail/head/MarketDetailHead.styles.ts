@@ -2,6 +2,13 @@ import styled from "@emotion/styled";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
+export const MarketDetailCrumbsWrapper = styled.section`
+  margin-top: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
 export const MarketDetailPageHead = styled.section`
   width: 100%;
   ${flexRow}

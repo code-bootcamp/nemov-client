@@ -14,6 +14,7 @@ import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMut
 import React, { useState } from "react";
 import { Modal } from "antd";
 import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
+import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
@@ -66,7 +67,7 @@ export default function MarketList(props: IMarketListProps) {
   };
 
   // 카테고리 이름 데이터
-  const listTitle = props.categoryData?.fetchProductCategories.filter((categories) => {
+  const categoryData = props.categoryData?.fetchProductCategories.filter((categories) => {
     if (categories.id === router.query.categoryId) {
       return categories;
     } else {
@@ -77,7 +78,10 @@ export default function MarketList(props: IMarketListProps) {
 
   return (
     <>
-      <S.ListTitle>{listTitle?.map((categories) => categories.name)}</S.ListTitle>
+      <S.ListTitle>{categoryData?.map((categories) => categories.name)}</S.ListTitle>
+      {categoryData?.map((categories) => (
+        <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
+      ))}
       <ListSearch />
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
         {props.productsData?.fetchProducts.map((products) => (

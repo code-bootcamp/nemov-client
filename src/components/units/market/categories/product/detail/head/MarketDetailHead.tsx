@@ -10,7 +10,7 @@ import { VeganLevelTag01 } from "../../../../../../commons/tags/CommonTags.Style
 import { IMarketDetailProps } from "../../../../Market.types";
 
 import * as S from "./MarketDetailHead.styles";
-import MarketDetailHeadCrumbs from "./nav/MarketDetailHeadCrumbs";
+import Crumbs from "./nav/MarketCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/CountDownUpButtons";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT_ORDER } from "../../../../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
@@ -84,7 +84,12 @@ function MarketDetailHead(props: IMarketDetailProps) {
 
   return (
     <>
-      <MarketDetailHeadCrumbs />
+      <S.MarketDetailCrumbsWrapper>
+        <Crumbs
+          id={props.data.data?.fetchProduct.productCategory.id}
+          categoryName={props.data.data?.fetchProduct.productCategory.name}
+        />
+      </S.MarketDetailCrumbsWrapper>
       <S.MarketDetailPageHead>
         {props.data.data?.fetchProduct.image !== undefined ? (
           <S.ProductDetailImage01 src={`${props.data.data?.fetchProduct.image}`} />

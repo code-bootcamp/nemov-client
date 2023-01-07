@@ -3,8 +3,6 @@ import { flexRow } from "../../../../../../../../commons/styles/globalStyles";
 
 export const DetailHeadCrumbs = styled.nav`
   width: 100%;
-  margin: 0 auto;
-  padding: 4.375rem 0 0.5rem;
 `;
 
 export const CrumbsWrapper = styled.ol`
@@ -12,7 +10,9 @@ export const CrumbsWrapper = styled.ol`
   ${flexRow}
   align-items: center;
   gap: 1rem;
-  margin-left: 0.625rem;
+  /* margin-left: 0.625rem; */
+  margin-bottom: 0;
+  position: relative;
 `;
 
 export const Crumb01 = styled.li`
@@ -25,20 +25,14 @@ export const Crumb01 = styled.li`
 `;
 
 export const CrumbLink01 = styled.a`
-  display: inline-block;
-  font-size: 0.938rem;
-  position: relative;
+  position: absolute;
   padding-right: 0.875rem;
   margin-right: 0.375rem;
-  ::after {
-    content: ">";
-    font-size: 1rem;
-    height: 0.5rem;
-    color: #555;
-    position: absolute;
-    left: 2.5rem;
-    top: 0.64rem;
-  }
+  font-size: 1rem;
+  height: 0.5rem;
+  color: #555;
+  left: 2.5rem;
+  top: 0.64rem;
 `;
 
 export const Crumb02 = styled.li`

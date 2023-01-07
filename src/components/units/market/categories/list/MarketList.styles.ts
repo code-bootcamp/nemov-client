@@ -97,7 +97,7 @@ export const ListSearchSection = styled.section`
   justify-content: flex-end;
   align-items: center;
   padding: 0 4rem;
-  margin: 5rem 0 1rem;
+  margin: 1rem 0;
   gap: 1rem;
 `;
 
