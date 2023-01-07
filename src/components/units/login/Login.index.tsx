@@ -8,7 +8,7 @@ import { accessTokenState } from "../../../commons/stores";
 import { IMutationLoginArgs } from "../../../commons/types/generated/types";
 import { UseMutationLogin } from "../../commons/hooks/useMutations/login/UseMutationLogin";
 import * as S from "./Login.styles";
-import { IFormLoginData } from "./Login.types";
+// import { IFormLoginData } from "./Login.types";
 import { LoginSchema } from "./Login.validation";
 
 export default function Login() {
