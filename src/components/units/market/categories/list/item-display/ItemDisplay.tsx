@@ -37,7 +37,9 @@ export const ItemDisPlay02 = (props: IItemDisPlayProps) => {
       {props.recData ? (
         <S.ItemDisplay>
           <S.RecommendItemImg01 image={String(props.recData?.image)}>
-            <S.DiscountDisplay>{props.recData?.discountRate}%</S.DiscountDisplay>
+            {props.recData.discountRate !== 0 && (
+              <S.DiscountDisplay>{props.recData?.discountRate}%</S.DiscountDisplay>
+            )}
           </S.RecommendItemImg01>
           <S.ItemDetail>
             <TagsWrapper01>

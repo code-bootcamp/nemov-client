@@ -99,8 +99,9 @@ export default function MarketList(props: IMarketListProps) {
                 <S.DetailFooterLeft>
                   <S.ItemName03>{products.name}</S.ItemName03>
                   <IDS.ItemPrices>
-                    {products.discountRate === 0}
-                    <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                    {products.discountRate !== 0 && (
+                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                    )}
                     <S.ItemDiscountPrice02>
                       {products.discountedPrice.toLocaleString()}원
                     </S.ItemDiscountPrice02>
