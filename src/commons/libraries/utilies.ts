@@ -36,7 +36,7 @@ export const sumOfTotalAmount = (totalPrice: number, deliveryFee: number) => {
 export const getDate = (value: string) => {
   const date = new Date(value);
   const yyyy = date.getFullYear();
-  const mm = date.getMonth() + 1;
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
   const dd = String(date.getDate()).padStart(2, "0");
   return `${yyyy}.${mm}.${dd}`;
 };

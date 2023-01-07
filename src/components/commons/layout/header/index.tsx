@@ -32,10 +32,11 @@ export default function LayoutHeader() {
     setIsOpen((prev) => !prev);
   };
 
-  const onClickLogout = () => {
+  const onClickLogout = async () => {
     void logout();
-    void router.push("/market");
     setAccessToken("");
+    await router.push("/market");
+    location.reload();
   };
   return (
     <S.Wrapper>

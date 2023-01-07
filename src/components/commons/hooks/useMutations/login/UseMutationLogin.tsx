@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { IMutation, IMutationLoginArgs } from "../../../../../commons/types/generated/types";
 
 export const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
+  mutation login($email: Email!, $password: Password!) {
     login(email: $email, password: $password)
   }
 `;

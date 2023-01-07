@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { UseQueryFetchProductsBySeller } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import PointList from "./pointList";
 import ProductList from "./product/list";
+import ProductOrderList from "./productOrderList";
+import QnAList from "./qnaList";
 import * as S from "./Seller.styles";
 
 export default function SellerManagementPage() {
   const [isSelected, setIsSelected] = useState([true, false, false, false]);
-  const { data } = UseQueryFetchProductsBySeller({
-    page: 1,
-  });
-
-  console.log("data:", data);
 
   const onClickProductList = () => {
     setIsSelected([true, false, false, false]);
@@ -53,8 +49,8 @@ export default function SellerManagementPage() {
         </S.Tabs>
       </S.TabWrapper>
       <section>{isSelected[0] && <ProductList />}</section>
-      {/* <section>{isSelected[1] && <ProductOrderList />}</section> */}
-      {/* <section>{isSelected[2] && <QnAList />}</section> */}
+      <section>{isSelected[1] && <ProductOrderList />}</section>
+      <section>{isSelected[2] && <QnAList />}</section>
       <section>{isSelected[3] && <PointList />}</section>
     </S.ContentsMain>
   );
