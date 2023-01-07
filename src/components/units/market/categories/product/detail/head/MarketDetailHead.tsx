@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import {
   getDiscountPrice,
   getVeganName,
@@ -31,6 +31,8 @@ function MarketDetailHead(props: IMarketDetailProps) {
     props.data.data?.fetchProduct.discount
   );
 
+  const deliveryFee = props.data.data?.fetchProduct.deliveryFee;
+
   const [createProductOrder] = useMutation<
     Pick<IMutation, "createProductOrder">,
     IMutationCreateProductOrderArgs
@@ -38,7 +40,13 @@ function MarketDetailHead(props: IMarketDetailProps) {
 
   const [quantity, setQuantity] = useState(1);
   const [totalAmount, setTotalAmountAmount] = useState(1);
-  // const [isDisabled, setIsDisabled] = useState(false);
+
+  const sum = sumOfTotalAmount(
+    (productPrice ?? 0) * quantity,
+    props.data.data?.fetchProduct.deliveryFee ?? 0
+  );
+
+  console.log(quantity, totalAmount);
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
@@ -48,7 +56,8 @@ function MarketDetailHead(props: IMarketDetailProps) {
         return;
       }
       setQuantity((prev) => prev - 1);
-      setTotalAmountAmount(productPrice * quantity);
+      if (productPrice === undefined || deliveryFee === undefined) return;
+      setTotalAmountAmount(sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0));
     },
     [quantity]
   );
@@ -61,23 +70,11 @@ function MarketDetailHead(props: IMarketDetailProps) {
         return;
       }
       setQuantity((prev) => prev + 1);
-      setTotalAmountAmount(productPrice * quantity);
+      if (productPrice === undefined || deliveryFee === undefined) return;
+      setTotalAmountAmount(sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0));
     },
     [quantity]
   );
-
-  // 수량 버튼 누르면 금액 변경되는 함수
-  // useEffect(() => {
-  //   const onChangeProductPrice = () => {
-  //     if (productPrice === undefined) {
-  //       return;
-  //     }
-  //     const amountUp = productPrice * quantity;
-  //     setAmount(amountUp);
-  //   };
-  // }, [onClickQuantityDown]);
-
-  // const { buyProduct } = UseMutationCreateProductOrder();
 
   // 구매 버튼 함수
   const onClickBuyProduct = async () => {
@@ -94,6 +91,14 @@ function MarketDetailHead(props: IMarketDetailProps) {
       if (error instanceof Error) console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    if (productPrice !== undefined) {
+      setTotalAmountAmount(sum);
+      setQuantity(quantity);
+    }
+  }, [props.data]);
+
   return (
     <>
       <MarketDetailHeadCrumbs />
@@ -141,11 +146,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
             <S.PriceSumSection01>
               <S.DetailInfoTitle01>총 상품 금액</S.DetailInfoTitle01>
               <S.PriceSumDetail01>
-                {sumOfTotalAmount(
-                  (productPrice ?? 0) * quantity,
-                  props.data.data?.fetchProduct.deliveryFee ?? 0
-                )}
-                원
+                {sumOfTotalAmount((productPrice ?? 0) * quantity, deliveryFee ?? 0)}원
               </S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
