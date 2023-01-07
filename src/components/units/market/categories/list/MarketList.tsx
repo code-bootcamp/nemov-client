@@ -35,7 +35,7 @@ export default function MarketList(props: IMarketListProps) {
       return;
     }
     setIsActive(status);
-    console.log(status);
+    // console.log(status);
 
     if (!status) {
       Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
@@ -50,8 +50,12 @@ export default function MarketList(props: IMarketListProps) {
       query: FETCH_PRODUCT,
       variables: { productId },
     });
-    console.log(result.data);
-    void router.push(`/market/product/${productId}`);
+    console.log(result.data.fetchProduct.isOutOfStock);
+    if (result.data.fetchProduct.isOutOfStock !== true) {
+      void router.push(`/market/product/${productId}`);
+    } else {
+      Modal.error({ content: "매진된 상품입니다." });
+    }
   };
 
   // 카테고리 이름 데이터
@@ -67,6 +71,11 @@ export default function MarketList(props: IMarketListProps) {
           // isOutOfStock === true이면, 매진 상태 나타내기
           <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
             <S.ItemImageBox01>
+              {!!products.isOutOfStock && (
+                <S.ItemSoldOutDisPlay>
+                  <S.SoldOut>SOLD OUT</S.SoldOut>
+                </S.ItemSoldOutDisPlay>
+              )}
               <S.ItemImage03 src={products.image} />
             </S.ItemImageBox01>
             <IDS.ItemDetail>

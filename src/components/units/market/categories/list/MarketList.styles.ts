@@ -27,10 +27,32 @@ export const ItemImage03 = styled.img`
   cursor: pointer;
 `;
 
+export const SoldOut = styled.span`
+  transition: all 0.5s ease-in-out 0s;
+`;
+
+export const ItemSoldOutDisPlay = styled.div`
+  width: 100%;
+  ${GS.flexCenter}
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  aspect-ratio: 1/1;
+  transform: scale(1);
+  transition: all 0.5s ease-in-out 0s;
+  color: white;
+  cursor: pointer;
+  :hover ${SoldOut} {
+    display: block;
+  }
+`;
+
 export const ItemImageBox01 = styled.div`
   width: 100%;
   ${GS.flexColumn}
   overflow: hidden;
+  position: relative;
   :hover ${ItemImage03} {
     transform: scale(1.1);
   }
