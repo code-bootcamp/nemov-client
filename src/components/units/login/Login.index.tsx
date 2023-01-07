@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
+import { IMutationLoginArgs } from "../../../commons/types/generated/types";
 import { UseMutationLogin } from "../../commons/hooks/useMutations/login/UseMutationLogin";
 import * as S from "./Login.styles";
 import { IFormLoginData } from "./Login.types";
@@ -17,12 +18,12 @@ export default function Login() {
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   // Form
-  const { register, handleSubmit, formState } = useForm<IFormLoginData>({
+  const { register, handleSubmit, formState } = useForm<IMutationLoginArgs>({
     resolver: yupResolver(LoginSchema),
     mode: "onChange",
   });
 
-  const onSubmitForm = async (data: IFormLoginData) => {
+  const onSubmitForm = async (data: IMutationLoginArgs) => {
     try {
       const result = await login({
         variables: {

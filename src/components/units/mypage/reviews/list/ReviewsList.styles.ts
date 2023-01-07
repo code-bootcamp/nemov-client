@@ -21,9 +21,8 @@ export const ReviewLi = styled.li`
 `;
 
 export const ReviewImg = styled.img`
-  width: 10%;
+  width: 12%;
   aspect-ratio: 5/5;
-  border: 1px solid blue;
 `;
 
 export const ReviewCenterWrapper = styled.div`

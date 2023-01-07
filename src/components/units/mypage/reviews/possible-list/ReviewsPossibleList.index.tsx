@@ -14,8 +14,6 @@ export default function ReviewsPossibleList() {
     page: 1,
   });
 
-  console.log(data);
-
   const onClickReviewsWrite = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
@@ -29,30 +27,21 @@ export default function ReviewsPossibleList() {
     <>
       <S.ReviewWrapper>
         <S.ReviewUl>
-          {/* <S.ReviewLi>
-            <S.ReviewImg src="" />
-            <S.ReviewCenterWrapper>
-              <S.ReviewItemName>[브랜드명] 상품명</S.ReviewItemName>
-              <S.ReviewDate>구매 날짜</S.ReviewDate>
-            </S.ReviewCenterWrapper>
-            <S.ReviewWriteBtn onClick={onClickReviewsWrite}>후기 작성</S.ReviewWriteBtn>
-          </S.ReviewLi> */}
-
           {data?.fetchProductOrdersWithoutReview.length !== 0 ? (
             <>
               {data?.fetchProductOrdersWithoutReview.map((review, index) => (
                 <S.ReviewLi key={index}>
-                  <S.ReviewImg src="" />
+                  <S.ReviewImg src={review.product.image} alt="상품 이미지" />
                   <S.ReviewCenterWrapper>
                     <S.ReviewItemName>
-                      {/* {`[${review.seller.name}] ${review.product.name}`} */}
+                      {`[${review.seller.name}] ${review.product.name}`}
                     </S.ReviewItemName>
                     <S.ReviewDate>{getDate(review.createdAt)}</S.ReviewDate>
                   </S.ReviewCenterWrapper>
                   <S.ReviewWriteBtn onClick={onClickReviewsWrite}>후기 작성</S.ReviewWriteBtn>
 
                   <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
-                    <ReviewsWrite data={review} modalOnCancel={modalOnCancel} />
+                    <ReviewsWrite isEdit={false} data={review} modalOnCancel={modalOnCancel} />
                   </CommonModal01>
                 </S.ReviewLi>
               ))}

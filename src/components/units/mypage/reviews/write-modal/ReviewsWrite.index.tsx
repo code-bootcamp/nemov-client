@@ -1,32 +1,17 @@
 import { Rate } from "antd";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { isEditState } from "../../../../../commons/stores";
-import {
-  IMutationCreateReviewArgs,
-  IProductOrder,
-} from "../../../../../commons/types/generated/types";
+import { IMutationCreateReviewArgs } from "../../../../../commons/types/generated/types";
 import { UseMutationCreateReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationCreateReview";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import * as S from "./ReviewsWrite.styles";
-
-interface IReviewsWriteProps {
-  data: IProductOrder;
-  modalOnCancel: () => void;
-}
-
-export interface IFormData {
-  contents: string;
-  rating?: number;
-  images?: string[];
-}
+import { IReviewsWriteProps } from "./ReviewsWrite.types";
 
 export default function ReviewsWrite(props: IReviewsWriteProps) {
-  const [isEdit] = useRecoilState(isEditState);
+  console.log(props.review);
 
   // 이미지 업로드
-  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+  const [imageUrls, setImageUrls] = useState<string[]>(["", "", ""]);
   const [files, setFiles] = useState<File[]>([]);
 
   const [uploadFile] = UseMutationUploadFile();
@@ -53,14 +38,14 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
   // Form
   const { createReviewSubmit } = UseMutationCreateReview();
 
-  const { register, handleSubmit, setValue, getValues, watch } = useForm<IMutationCreateReviewArgs>(
-    {
-      mode: "onSubmit",
-      shouldUseNativeValidation: true,
-    }
-  );
+  const { register, handleSubmit, setValue } = useForm<IMutationCreateReviewArgs>({
+    mode: "onSubmit",
+    shouldUseNativeValidation: true,
+  });
 
-  const onSubmitForm = async (data: IFormData) => {
+  const onSubmitForm = async (data: IMutationCreateReviewArgs) => {
+    const productOrderId = props.data?.id;
+
     // 이미지
     const results = await Promise.all(
       files.map(async (el) =>
@@ -68,41 +53,68 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
       )
     );
     const resultUrls = results.map((el) => (el !== undefined ? el.data?.uploadFile : ""));
-    console.log(results);
 
     const { ...value } = data;
-    value.images = resultUrls;
+    value.productOrderId = String(productOrderId);
+    value.createReviewInput.images = resultUrls && undefined;
     void createReviewSubmit(value);
+    props.modalOnCancel();
   };
+
+  const newUrlArr = props.review?.images?.map((el) => el.url);
+
+  useEffect(() => {
+    if (props.review?.images?.length !== undefined) {
+      if (newUrlArr === undefined) return;
+      setImageUrls(newUrlArr);
+    }
+  }, [props.review]);
 
   const onChangeRate = (e: number) => {
     setValue("createReviewInput.rating", e);
   };
 
-  console.log(watch("createReviewInput.rating"));
-
   return (
     <S.Form onSubmit={handleSubmit(onSubmitForm)}>
-      <S.ModalTitle>후기 {isEdit ? "수정" : "작성"}</S.ModalTitle>
+      <S.ModalTitle>후기 {props.isEdit ? "수정" : "작성"}</S.ModalTitle>
       <S.ReviewLi>
-        <S.ReviewImg src={props.data?.product.image} />
+        <S.ReviewImg src={props.data ? props.data?.product.image : props.review?.product.image} />
         <S.ReviewCenterWrapper>
-          <S.ModalReviewName>[브랜드명] {props.data?.product.name}</S.ModalReviewName>
+          <S.ModalReviewName>
+            [{props.data?.seller.name}]{" "}
+            {props.data ? props.data?.product.name : props.review?.product?.name}
+          </S.ModalReviewName>
           <S.ModalReviewSubName>{props.data?.product.name}</S.ModalReviewSubName>
-          <Rate allowClear={false} onChange={onChangeRate} />
+          <Rate allowClear={false} onChange={onChangeRate} defaultValue={props.review?.rating} />
         </S.ReviewCenterWrapper>
       </S.ReviewLi>
       <S.ModalContentWrapper>
-        <S.ModalLabel>내용</S.ModalLabel>
-        <S.ModalContentInnerWrap>
-          <S.ModalContent
-            {...register("createReviewInput.contents", {
-              required: "내용을 입력해주세요.",
-              maxLength: 1000,
-            })}
-          ></S.ModalContent>
-          <S.ModalContentLength>0 / 1,000</S.ModalContentLength>
-        </S.ModalContentInnerWrap>
+        <S.InputWrap>
+          <S.ModalLabel>제목</S.ModalLabel>
+          <S.ModalContentTitle
+            type="text"
+            {...register("createReviewInput.title")}
+            defaultValue={props.review?.title}
+          />
+        </S.InputWrap>
+        <S.InputWrap>
+          <S.ModalLabel>내용</S.ModalLabel>
+          <S.ModalContentInnerWrap>
+            <S.ModalContent
+              {...register("createReviewInput.contents", {
+                required: "내용을 입력해주세요.",
+                maxLength: 1000,
+              })}
+              defaultValue={props.review?.contents}
+            ></S.ModalContent>
+            <S.ModalContentLength>
+              {props.review?.contents
+                ? props.review?.contents?.length
+                : props.data?.review?.contents ?? 0}
+              / 1,000
+            </S.ModalContentLength>
+          </S.ModalContentInnerWrap>
+        </S.InputWrap>
       </S.ModalContentWrapper>
       <S.ModalContentWrapper>
         <S.ModalLabel>사진 첨부</S.ModalLabel>
@@ -110,7 +122,7 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
           <S.ModalImgUploadWrapper>
             {imageUrls.map((image, index) => (
               <S.UploadBtnWrapper key={index}>
-                {image ? (
+                {image || newUrlArr ? (
                   <S.UploadImage src={image} />
                 ) : (
                   <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
@@ -139,7 +151,7 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
         <S.ModalCancelBtn type="button" onClick={props.modalOnCancel}>
           취소
         </S.ModalCancelBtn>
-        <S.ModalSubmitBtn type="submit">{isEdit ? "수정" : "등록"}</S.ModalSubmitBtn>
+        <S.ModalSubmitBtn type="submit">{props.isEdit ? "수정" : "등록"}</S.ModalSubmitBtn>
       </S.ModalBtnWrapper>
     </S.Form>
   );

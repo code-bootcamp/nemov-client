@@ -12,9 +12,9 @@ export const FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW = gql`
         name
         image
       }
-      # seller {
-      #   name
-      # }
+      seller {
+        name
+      }
       createdAt
     }
   }
@@ -26,7 +26,10 @@ export const UseQueryFetchProductOrdersWithoutReview = (
   const query = useQuery<
     Pick<IQuery, "fetchProductOrdersWithoutReview">,
     IQueryFetchProductOrdersWithoutReviewArgs
-  >(FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW, { variables, fetchPolicy: "cache-and-network" });
+  >(FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW, {
+    variables,
+    fetchPolicy: "cache-and-network",
+  });
 
   return query;
 };

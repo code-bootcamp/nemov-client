@@ -12,9 +12,9 @@ import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Modal } from "antd";
 import CountDown from "../../commons/count/Conut.index";
-import { UseMutationCheckValidToken } from "../../commons/hooks/useMutations/signup/UseMutationCheckValidToken";
+import { UseMutationCheckValidTokenForSignup } from "../../commons/hooks/useMutations/signup/UseMutationCheckValidToken";
 import { UseMutationCheckEmailExist } from "../../commons/hooks/useMutations/signup/UseMutationCheckEmailExist";
-import { UseMutationGetToken } from "../../commons/hooks/useMutations/signup/UseMutationGetToken";
+import { UseMutationGetTokenForSignup } from "../../commons/hooks/useMutations/signup/UseMutationGetToken";
 
 export default function Signup(props: ISignupProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
@@ -23,13 +23,13 @@ export default function Signup(props: ISignupProps) {
   const [getConfirmToken, setGetConfirmToken] = useState("");
 
   // 인증번호 요청
-  const [getToken] = UseMutationGetToken();
-  const [checkValidToken] = UseMutationCheckValidToken();
+  const [getTokenForSignup] = UseMutationGetTokenForSignup();
+  const [checkValidTokenForSignup] = UseMutationCheckValidTokenForSignup();
 
   const onClickGetToken = async () => {
     if (!time) {
       try {
-        const result = await getToken({
+        const result = await getTokenForSignup({
           variables: {
             phone: getValues("phone"),
           },
@@ -38,8 +38,8 @@ export default function Signup(props: ISignupProps) {
         setTimeout(() => {
           setTime(false);
         }, 180000);
-        console.log(result.data?.getToken);
-        setGetConfirmToken(String(result.data?.getToken));
+        console.log(result.data?.getTokenForSignUp);
+        setGetConfirmToken(String(result.data?.getTokenForSignUp));
       } catch (error) {
         if (error instanceof Error) Modal.error({ content: "휴대폰 번호를 확인해주세요." });
       }
@@ -56,13 +56,13 @@ export default function Signup(props: ISignupProps) {
 
   const onClickConfirmToken = async () => {
     try {
-      const result = await checkValidToken({
+      const result = await checkValidTokenForSignup({
         variables: {
           phone: getValues("phone"),
           token: tokenInput,
         },
       });
-      if (result.data?.checkValidToken && tokenInput === getConfirmToken) {
+      if (result.data?.checkValidTokenForSignUp && tokenInput === getConfirmToken) {
         setTime(false);
         Modal.success({ content: "인증에 성공하였습니다." });
       } else {
