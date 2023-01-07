@@ -2,8 +2,12 @@ import styled from "@emotion/styled";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { amazon, pastelGray } from "../../../commons/styles/colorPalettes";
+import { amazon, pastelGray, white } from "../../../commons/styles/colorPalettes";
 import { colorBase03, colorBase04 } from "../../../commons/styles/colorBases";
+
+interface ICommonBasketIconProps {
+  isActive?: boolean;
+}
 
 // 장바구니 아이콘 공통 스타일
 export const CommonBasketIcon01 = styled(ShoppingBagIcon)`
@@ -16,7 +20,9 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
   width: 2.6rem;
   height: 2.6rem;
   padding: 7px;
-  ${colorBase04}
+  color: ${(props: ICommonBasketIconProps) => (!props.isActive ? `${amazon}` : `${white}`)};
+  background-color: ${(props: ICommonBasketIconProps) =>
+    !props.isActive ? `${white}` : `${amazon}`};
   border: none;
   border-radius: 50%;
   :hover {

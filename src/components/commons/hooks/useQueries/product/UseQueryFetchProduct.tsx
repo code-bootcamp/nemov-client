@@ -6,15 +6,19 @@ export const FETCH_PRODUCT = gql`
     fetchProduct(productId: $productId) {
       id
       name
-      category
       description
       image
       veganLevel
       deliveryFee
       price
       discount
+      quantity
       isOutOfStock
       user {
+        name
+      }
+      productCategory {
+        id
         name
       }
     }
@@ -27,7 +31,7 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
   });
   const client = useApolloClient();
 
-  const prefetchProduct = (productId: string) => async () => {
+  const prefetchProduct = (productId: String) => async () => {
     await client.query({
       query: FETCH_PRODUCT,
       variables: { productId },

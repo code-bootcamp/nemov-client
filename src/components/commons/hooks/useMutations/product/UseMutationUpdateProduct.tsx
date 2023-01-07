@@ -5,9 +5,37 @@ import {
 } from "../../../../../commons/types/generated/types";
 
 export const UPDATE_PRODUCT = gql`
-  mutation updateProduct($productId: String!, $updateProductInput: UpdateProductInput!) {
-    updateProduct(productId: $productId, updateProductInput: $updateProductInput) {
+  mutation updateProduct(
+    $productCategoryId: ID!
+    $updateProductCategoryInput: UpdateProductInput!
+  ) {
+    updateProduct(
+      productCategoryId: $productCategoryId
+      updateProductCategoryInput: $updateProductCategoryInput
+    ) {
       id
+      name
+      productCategory {
+        id
+        name
+        image
+      }
+      description
+      image
+      veganLevel
+      deliveryFee
+      price
+      discount
+      quantity
+      isOutOfStock
+      user {
+        id
+        name
+        email
+        phone
+        role
+        point
+      }
     }
   }
 `;

@@ -93,10 +93,21 @@ export const ItemName = styled.p`
   margin-bottom: 0;
 `;
 
+export const PriceWrap = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ItemPrice = styled.p`
   text-align: center;
+  text-decoration: line-through;
+  margin-bottom: 10px;
+`;
+
+export const DiscountPrice = styled.p`
+  text-align: center;
   font-weight: bold;
-  width: 20%;
   margin-bottom: 0;
 `;
 
@@ -108,7 +119,7 @@ export const DeliveryPrice = styled.p`
 `;
 
 export const BtnWrapper = styled.div`
-  width: 15%;
+  width: 10%;
   text-align: center;
 `;
 
@@ -121,9 +132,26 @@ export const QuantityWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const QuantitySpan = styled.span`
+export const PlusBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 0;
+`;
+
+export const MinusBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 0;
+`;
+
+export const QuantityInput = styled.input`
   width: 30px;
   text-align: center;
+  border: 0;
 `;
 
 export const NumWrapper = styled.article`
@@ -214,8 +242,7 @@ export const CalculateIcon = styled.div`
 export const NoBasketText = styled.p`
   font-size: 1.6rem;
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 0;
+  margin: 40px 0 20px 0;
 `;
 
 export const MoveBtnWrap = styled.div`
@@ -250,11 +277,12 @@ export const IconBtnWrap = styled.div`
 
 export const CancelBtn = styled.button`
   position: absolute;
-  right: 0;
-  top: -30px;
+  right: -8px;
+  top: -40px;
+  padding: 0 10px;
+  background: none;
 `;
 
 export const CancelIcon = styled(CloseIcon)`
   font-size: 20px;
-  cursor: pointer;
 `;

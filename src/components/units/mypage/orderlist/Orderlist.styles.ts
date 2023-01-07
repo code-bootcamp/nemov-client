@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colorBase01 } from "../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -43,7 +43,9 @@ export const MenuSelect = styled.button`
   margin-right: 1rem;
 `;
 
-export const OrderHistory = styled.div``;
+export const OrderHistory = styled.div`
+  margin-top: 10px;
+`;
 
 export const Date = styled.p`
   font-size: 1rem;
@@ -65,7 +67,6 @@ export const OrderInfo = styled.div`
 export const ItemImg = styled.img`
   width: 15%;
   aspect-ratio: 5/5;
-  border: 1px solid green;
 `;
 
 export const ItemName = styled.p`
@@ -93,5 +94,27 @@ export const Area = styled.div`
 export const NoOrderText = styled.p`
   font-size: 1.6rem;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 80px;
+`;
+
+export const MoveBtnWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MoveBtn = styled.button`
+  min-width: 130px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 58px;
+  padding: 10px 35px;
+  font-size: 1rem;
+  line-height: 34px;
+  ${colorBase02}
+  border-radius: 50px;
+  border: 1px solid #ddd;
 `;

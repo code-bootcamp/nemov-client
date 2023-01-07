@@ -7,6 +7,7 @@ import { accessTokenState, isEditState, isOpenState } from "../../../../commons/
 import PaymentPage from "../../../units/paymentModal/payment";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const LOGOUT = gql`
   mutation {
@@ -15,6 +16,7 @@ const LOGOUT = gql`
 `;
 
 export default function LayoutHeader() {
+  const router = useRouter();
   const { data } = UseQueryFetchLoginUser();
   const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
@@ -30,10 +32,11 @@ export default function LayoutHeader() {
     setIsOpen((prev) => !prev);
   };
 
-  const onClickLogout = () => {
+  const onClickLogout = async () => {
     void logout();
-    location.reload();
     setAccessToken("");
+    await router.push("/market");
+    location.reload();
   };
   return (
     <S.Wrapper>

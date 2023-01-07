@@ -1,10 +1,14 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
 // import MarketCategory from "../category/MarketCategory";
-import * as ID from "../item-display/ItemDisplay";
-import * as IDS from "../item-display/ItemDisplay.styles";
+import * as ID from "../categories/list/item-display/ItemDisplay";
+import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
-import MarketCategory from "../category/MarketCategory";
+import MarketCategory from "../categories/category/MarketCategory";
+import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
+import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
+import { UseQueryFetchProductsOfBestSelling } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfBestSelling";
+import { UseQueryFetchProductsOfRecommend } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfRecommend";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -19,6 +23,17 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 );
 
 export default function MarketMain() {
+  const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
+  const { data: recItemData } = UseQueryFetchProductsOfRecommend();
+
+  console.log(
+    "베스트아이템 데이터",
+    bestItemData?.fetchProductsOfRecommend,
+
+    "추천아이템 데이터",
+    recItemData?.fetchProductsOfRecommend
+  );
+
   const settings = {
     centerMode: true,
     infinite: true,
@@ -32,15 +47,20 @@ export default function MarketMain() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
+
+  const { data: categoryData } = UseQueryFetchCategories();
+  const { data: loginUserData } = UseQueryFetchLoginUser();
+
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
-        <MarketCategory></MarketCategory>
+        <MarketCategory categoryData={categoryData}></MarketCategory>
         <S.MainItemsWrapper>
           <S.PageLine />
           <S.RecommendItemSection01>
             <S.MarketMainHeader01>
-              <S.HeaderSpan>name</S.HeaderSpan>님, 이런 상품은 어떠신가요?
+              <S.HeaderSpan>{loginUserData?.fetchLoginUser.name}</S.HeaderSpan>님, 이런 상품은
+              어떠신가요?
               <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>

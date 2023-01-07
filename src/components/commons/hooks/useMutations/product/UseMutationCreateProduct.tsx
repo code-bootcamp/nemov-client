@@ -8,7 +8,6 @@ export const CREATE_PRODUCT = gql`
   mutation createProduct($createProductInput: CreateProductInput!) {
     createProduct(createProductInput: $createProductInput) {
       name
-      category
       description
       image
       veganLevel
@@ -16,6 +15,19 @@ export const CREATE_PRODUCT = gql`
       price
       quantity
       discount
+      productCategory {
+        id
+        name
+        image
+      }
+      user {
+        id
+        name
+        email
+        phone
+        veganLevel
+      }
+      isOutOfStock
     }
   }
 `;

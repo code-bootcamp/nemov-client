@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { mobile } from "../../../../commons/styles/breakPoints";
-import { colorBase03, colorBase04 } from "../../../../commons/styles/colorBases";
-import { deepGreen } from "../../../../commons/styles/colorPalettes";
+import { colorBase03 } from "../../../../commons/styles/colorBases";
+import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
 
 // const ItemDisplayBefore01 = css`
@@ -49,7 +49,6 @@ const HeaderStyle02 = css`
 
 export const MarketMainHeader01 = styled.header`
   ${HeaderStyle}
-  color: white;
 `;
 
 export const MarketMainHeader02 = styled.header`
@@ -59,14 +58,14 @@ export const MarketMainHeader02 = styled.header`
 
 export const HeaderSpan = styled.span`
   margin-right: 1rem;
-  color: ${deepGreen};
+  color: ${amazon};
   ${GS.semiBold}
   font-weight: 900;
 `;
 
 export const HeaderDiv01 = styled.div`
   ${HeaderStyle02}
-  ${colorBase04}
+  ${colorBase03}
 `;
 
 export const HeaderDiv02 = styled.div`
@@ -89,7 +88,7 @@ export const PageLine = styled.div`
   z-index: -1;
   width: 100%;
   height: 46.875rem;
-  background-color: #d8e9c8;
+  /* background-color: #d8e9c8; */
   /* background: url(/images/bg-line.jpg) no-repeat center; */
   background-size: cover;
 `;

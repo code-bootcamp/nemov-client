@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
-import {
-  colorBase01,
-  colorBase02,
-} from "../../../../../commons/styles/colorBases";
+import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
-export const ModalWrapper = styled.div`
+export const Form = styled.form`
   width: 100%;
 `;
 
@@ -27,7 +24,6 @@ export const ReviewLi = styled.li`
 export const ReviewImg = styled.img`
   width: 10%;
   aspect-ratio: 5/5;
-  border: 1px solid blue;
 `;
 
 export const ReviewCenterWrapper = styled.div`
@@ -53,7 +49,7 @@ export const ModalContentWrapper = styled.div`
   width: 100%;
   padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 `;
@@ -68,10 +64,26 @@ export const ModalContentInnerWrap = styled.div`
   flex-direction: column;
 `;
 
+export const InputWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;
+
+export const ModalContentTitle = styled.input`
+  width: 90%;
+  height: 30px;
+  padding: 12px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 4px;
+`;
+
 export const ModalContent = styled.textarea`
   width: 100%;
   resize: none;
   height: 220px;
+  padding: 12px;
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(221, 221, 221);
   border-radius: 4px;
@@ -99,12 +111,38 @@ export const ModalImgUploadWrapper = styled.div`
   align-items: center;
 `;
 
-export const ModalImgBtn = styled.button`
+export const UploadBtnWrapper = styled.div`
   width: 12%;
+  height: 70px;
+  position: relative;
+  margin-right: 10px;
+`;
+
+export const UploadImage = styled.img`
+  width: 100%;
+  aspect-ratio: 5/5;
+  margin-right: 10px;
+`;
+
+export const ModalImgBtn = styled.button`
+  position: absolute;
+  width: 100%;
   aspect-ratio: 5/5;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 6px;
   margin-right: 10px;
+  top: 0;
+  cursor: pointer;
+`;
+
+export const UploadFileHidden = styled.input`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 `;
 
 export const ModalImgTextWrapper = styled.div`

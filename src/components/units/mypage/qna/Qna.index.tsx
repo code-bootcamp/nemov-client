@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Paginations01 from "../../../commons/paginations/01/Paginations01.index";
 import * as S from "./Qna.styles";
 
 export default function MypageQna() {
@@ -56,7 +55,6 @@ export default function MypageQna() {
           </S.AnswerWrapper>
         </S.QnaItem>
       </S.QnaWrapper>
-      <Paginations01 />
     </S.ContentsMain>
   );
 }

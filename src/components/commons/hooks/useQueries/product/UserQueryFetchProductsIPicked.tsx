@@ -8,6 +8,10 @@ export const FETCH_PRODUCTS_I_PICKED = gql`
   query fetchProductsIPicked($page: Int!) {
     fetchProductsIPicked(page: $page) {
       id
+      name
+      price
+      image
+      veganLevel
     }
   }
 `;

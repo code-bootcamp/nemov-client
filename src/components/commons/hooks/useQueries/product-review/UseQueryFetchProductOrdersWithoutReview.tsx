@@ -8,6 +8,14 @@ export const FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW = gql`
   query fetchProductOrdersWithoutReview($page: Int!) {
     fetchProductOrdersWithoutReview(page: $page) {
       id
+      product {
+        name
+        image
+      }
+      seller {
+        name
+      }
+      createdAt
     }
   }
 `;
@@ -18,7 +26,10 @@ export const UseQueryFetchProductOrdersWithoutReview = (
   const query = useQuery<
     Pick<IQuery, "fetchProductOrdersWithoutReview">,
     IQueryFetchProductOrdersWithoutReviewArgs
-  >(FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW, { variables });
+  >(FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW, {
+    variables,
+    fetchPolicy: "cache-and-network",
+  });
 
   return query;
 };

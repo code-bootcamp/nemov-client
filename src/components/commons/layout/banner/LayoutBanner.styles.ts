@@ -53,7 +53,7 @@ export const StyleSlider = styled(Slider)`
 
 const BannerImg = styled.div`
   width: 100%;
-  height: 70vh;
+  height: 60vh;
   background-size: cover;
   @media ${tablet} {
     width: 100%;

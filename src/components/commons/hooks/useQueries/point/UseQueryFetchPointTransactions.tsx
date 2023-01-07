@@ -12,6 +12,7 @@ export const FETCH_POINT_TRANSACTIONS = gql`
       amount
       status
       createdAt
+      balance
       user {
         id
         name
@@ -29,10 +30,25 @@ export const FETCH_POINT_TRANSACTIONS = gql`
   }
 `;
 
+export const FETCH_POINT_TRANSACTIONS_COUNT = gql`
+  query fetchPointTransactionsCount {
+    fetchPointTransactionsCount
+  }
+`;
+
 export const UseQueryFetchPointTransactions = (variables: IQueryFetchPointTransactionsArgs) => {
   const query = useQuery<Pick<IQuery, "fetchPointTransactions">, IQueryFetchPointTransactionsArgs>(
     FETCH_POINT_TRANSACTIONS,
-    { variables }
+    { variables, fetchPolicy: "cache-and-network" }
+  );
+
+  return query;
+};
+
+export const UseQueryFetchPointTransactionsCount = () => {
+  const query = useQuery<Pick<IQuery, "fetchPointTransactionsCount">>(
+    FETCH_POINT_TRANSACTIONS_COUNT,
+    { fetchPolicy: "cache-and-network" }
   );
 
   return query;

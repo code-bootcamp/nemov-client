@@ -1,21 +1,49 @@
 import * as S from "./ReviewsList.styles";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import ReviewsWrite from "../write-modal/ReviewsWrite.index";
-import { isEditState, isOpenState } from "../../../../../commons/stores";
+import { isOpenState } from "../../../../../commons/stores";
 import { useRecoilState } from "recoil";
 import { UseQueryFetchReviewsByBuyer } from "../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByBuyer";
+import { getDate } from "../../../../../commons/libraries/utilies";
+import { UseMutationDeleteReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationDeleteReview";
+import React, { useState } from "react";
+import { IReview } from "../../../../../commons/types/generated/types";
 
 export default function ReviewsList() {
-  const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
+  const [deleteReview] = UseMutationDeleteReview();
   const { data } = UseQueryFetchReviewsByBuyer({
     page: 1,
   });
 
-  const onClickReviewsEdit = () => {
+  const [reviewItemVal, setReviewItemVal] = useState<IReview>();
+
+  const onClickReviewEdit = (id: string) => (e: React.MouseEvent) => {
     setIsOpen((prev) => !prev);
-    setIsEdit(true);
+
+    const reviewItem = data?.fetchReviewsByBuyer.filter((cur) => {
+      if (cur.id === id) {
+        return cur;
+      } else {
+        return undefined;
+      }
+    });
+
+    if (reviewItem === undefined) return;
+    setReviewItemVal(reviewItem[0]);
+  };
+
+  const onClickReviewDelete = async (e: React.MouseEvent) => {
+    try {
+      await deleteReview({
+        variables: {
+          reviewId: String(e.currentTarget.id),
+        },
+      });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
   };
 
   const modalOnCancel = () => {
@@ -24,40 +52,38 @@ export default function ReviewsList() {
 
   return (
     <>
-      <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
-        <ReviewsWrite />
-      </CommonModal01>
-
       <S.ReviewWrapper>
         <S.ReviewUl>
-          <S.ReviewLi>
-            <S.ReviewImg src="" />
-            <S.ReviewCenterWrapper>
-              <S.ReviewItemName>상품명</S.ReviewItemName>
-              <S.ReviewDate>후기 작성 날짜</S.ReviewDate>
-              <S.ReviewContent>후기 내용</S.ReviewContent>
-            </S.ReviewCenterWrapper>
-            <S.ReviewBtnWrapper>
-              <S.ReviewEditBtn onClick={onClickReviewsEdit}>후기 수정</S.ReviewEditBtn>
-              <S.ReviewDeleteBtn>후기 삭제</S.ReviewDeleteBtn>
-            </S.ReviewBtnWrapper>
-          </S.ReviewLi>
-
           {data?.fetchReviewsByBuyer.length !== 0 ? (
             <>
               {data?.fetchReviewsByBuyer?.map((reviews, index) => (
-                <S.ReviewLi key={index}>
-                  <S.ReviewImg src="" />
-                  <S.ReviewCenterWrapper>
-                    <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
-                    <S.ReviewDate>{reviews.createdAt}</S.ReviewDate>
-                    <S.ReviewContent>{reviews.contents}</S.ReviewContent>
-                  </S.ReviewCenterWrapper>
-                  <S.ReviewBtnWrapper>
-                    <S.ReviewEditBtn onClick={onClickReviewsEdit}>후기 수정</S.ReviewEditBtn>
-                    <S.ReviewDeleteBtn>후기 삭제</S.ReviewDeleteBtn>
-                  </S.ReviewBtnWrapper>
-                </S.ReviewLi>
+                <>
+                  <S.ReviewLi key={index}>
+                    <S.ReviewImg src="" alt="후기 이미지" />
+                    <S.ReviewCenterWrapper>
+                      <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
+                      <S.ReviewDate>{getDate(reviews.createdAt)}</S.ReviewDate>
+                      <S.ReviewContent>{reviews.title}</S.ReviewContent>
+                      <S.ReviewContent>{reviews.contents}</S.ReviewContent>
+                    </S.ReviewCenterWrapper>
+                    <S.ReviewBtnWrapper>
+                      <S.ReviewEditBtn onClick={onClickReviewEdit(reviews.id)}>
+                        후기 수정
+                      </S.ReviewEditBtn>
+                      <S.ReviewDeleteBtn id={reviews.id} onClick={onClickReviewDelete}>
+                        후기 삭제
+                      </S.ReviewDeleteBtn>
+                    </S.ReviewBtnWrapper>
+                  </S.ReviewLi>
+
+                  <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
+                    <ReviewsWrite
+                      isEdit={true}
+                      review={reviewItemVal}
+                      modalOnCancel={modalOnCancel}
+                    />
+                  </CommonModal01>
+                </>
               ))}
             </>
           ) : (
