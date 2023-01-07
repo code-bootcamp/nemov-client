@@ -59,8 +59,10 @@ export default function MarketMain() {
           <S.PageLine />
           <S.RecommendItemSection01>
             <S.MarketMainHeader01>
-              <S.HeaderSpan>{loginUserData?.fetchLoginUser.name}</S.HeaderSpan>님, 이런 상품은
-              어떠신가요?
+              <S.HeaderSpan>
+                {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
+              </S.HeaderSpan>
+              이런 상품은 어떠신가요?
               <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>
