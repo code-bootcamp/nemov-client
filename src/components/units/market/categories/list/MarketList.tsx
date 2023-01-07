@@ -18,6 +18,7 @@ import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
   productsData?: Pick<IQuery, "fetchProducts"> | undefined;
+  isInCartData?: Pick<IQuery, "fetchIsInCart"> | undefined;
 }
 
 export default function MarketList(props: IMarketListProps) {
@@ -29,29 +30,25 @@ export default function MarketList(props: IMarketListProps) {
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
-    const result = await productToCart(productId);
+    const result = await productToCart(event.currentTarget.id);
+    const status = result?.data?.toggleProductToCart;
+    console.log(status);
+    if (status === true) {
+      Modal.success({ content: "장바구니에 상품을 담았습니다." });
+      setIsActive(status);
+    } else {
+      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+    }
+
     const productItem = props.productsData?.fetchProducts.filter((cur) => {
       if (cur.id === productId) {
         return cur;
       } else {
-        return undefined;
+        return productId;
       }
     });
     setProductItemVal(productItem);
-    console.log(productItemVal);
-
-    const status = result?.data?.toggleProductToCart;
-    if (status === undefined) {
-      return;
-    }
-    setIsActive(status);
-    // console.log(status);
-
-    if (!status) {
-      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
-    } else {
-      Modal.success({ content: "장바구니에 상품을 담았습니다." });
-    }
+    console.log(productItem);
   };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
@@ -76,7 +73,7 @@ export default function MarketList(props: IMarketListProps) {
       return undefined;
     }
   });
-  console.log("타이틀", listTitle);
+  // console.log("타이틀", listTitle);
 
   return (
     <>
