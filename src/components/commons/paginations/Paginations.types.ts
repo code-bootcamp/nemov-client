@@ -1,20 +1,20 @@
 import { ApolloQueryResult } from "@apollo/client";
 import {
   IQuery,
-  IQueryFetchPointTransactionsCountArgs,
+  IQueryFetchPointTransactionsArgs,
   IQueryFetchProductOrdersCountByBuyerArgs,
 } from "../../../commons/types/generated/types";
 
-export interface IPaginations01Props {
+export interface IPagination01Props {
   count: Pick<IQuery, "fetchProductOrdersCountByBuyer"> | undefined;
   refetch: (
     variables?: Partial<IQueryFetchProductOrdersCountByBuyerArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductOrdersByBuyer">>>;
 }
 
-export interface IPaginations02Props {
+export interface IPagination02Props {
   count: Pick<IQuery, "fetchPointTransactionsCount"> | undefined;
   refetch: (
-    variables?: Partial<IQueryFetchPointTransactionsCountArgs> | undefined
+    variables?: Partial<IQueryFetchPointTransactionsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchPointTransactions">>>;
 }

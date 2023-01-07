@@ -1,17 +1,24 @@
 import styled from "@emotion/styled";
+import { amazon } from "../../../commons/styles/colorPalettes";
 
-export const PageWrapper = styled.ul`
+interface IPaginationsStylesProps {
+  isActive?: boolean;
+}
+
+export const PageWrapper = styled.div`
   margin-top: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 1px solid red;
 `;
 
-export const PageLi = styled.li`
+export const PageLi = styled.button`
   width: 34px;
   height: 34px;
   text-align: center;
+  border: 1px solid red;
   border-width: 1px 1px 1px 0px;
   border-top-style: solid;
   border-right-style: solid;
@@ -22,7 +29,7 @@ export const PageLi = styled.li`
   border-image: initial;
   border-left-style: initial;
   border-left-color: initial;
-  background-color: #fff;
+  background-color: ${(props: IPaginationsStylesProps) => (props.isActive ? `${amazon}` : "#fff")};
   line-height: 30px;
   cursor: pointer;
 `;

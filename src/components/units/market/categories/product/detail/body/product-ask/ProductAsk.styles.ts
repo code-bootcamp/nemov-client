@@ -6,7 +6,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
 import { flexColumn, flexRow } from "../../../../../../../../commons/styles/globalStyles";
+import { IAnswer } from "../../../../../../../../commons/types/generated/types";
 // import { IProductAskStylesProps } from "../../../Market.types";
+
+interface IProductAskStylesProps {
+  data?: IAnswer | null | undefined;
+}
 
 export const IconStyleSet01 = css`
   ${colorBase04}
@@ -61,6 +66,10 @@ export const QuestionInfoRight = styled.section`
   align-items: center;
 `;
 
+export const AnswerStatus = styled.span`
+  color: ${(props: IProductAskStylesProps) => (props.data !== undefined ? "#f7330e" : "black")};
+`;
+
 export const OpenAnswerButton01 = styled(KeyboardArrowDownIcon)`
   ${colorBase04}
   width: 2rem;
@@ -97,7 +106,7 @@ export const QuestionWriteHeader = styled.h2`
 export const QuestionWriteForm = styled.form``;
 
 export const ProductName = styled.header`
-  margin: 1rem 0;
+  margin: 1.3rem 0;
   font-weight: 800;
   font-size: 1.2rem;
   padding-left: 0.4rem;

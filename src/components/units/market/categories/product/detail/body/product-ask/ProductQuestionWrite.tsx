@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { SetterOrUpdater } from "recoil";
 import { StyledCommonButton02 } from "../../../../../../../commons/buttons/CommonButtons.styles";
 import {
   IFormQuestionData,
@@ -8,18 +7,14 @@ import {
 } from "../../../../../../../commons/hooks/useMutations/question/UseMutationCreateQuestion";
 import * as S from "./ProductAsk.styles";
 import { Modal } from "antd";
+import { IProductAskProps } from "../../../../../Market.types";
 
-interface IProductQuestionWriteProps {
-  setIsOpen: SetterOrUpdater<boolean>;
-}
-
-export default function ProductQuestionWrite(props: IProductQuestionWriteProps) {
+export default function ProductQuestionWrite(props: IProductAskProps) {
   const {
     register,
     handleSubmit,
     reset,
     watch,
-
     formState: { isSubmitSuccessful },
   } = useForm<IFormQuestionData>({
     mode: "onSubmit",
@@ -53,15 +48,13 @@ export default function ProductQuestionWrite(props: IProductQuestionWriteProps) 
     <S.QuestionWriteInnerWrapper>
       <S.QuestionWriteHeader>상품 문의하기</S.QuestionWriteHeader>
       <S.QuestionWriteForm onSubmit={handleSubmit(onSubmitQuestion)}>
-        <S.ProductName>상품 이름</S.ProductName>
+        <S.ProductName>{props.data?.data?.fetchProduct.name}</S.ProductName>
         <S.QuestionTitle
           {...register("title", { required: "제목을 입력해주세요.", minLength: 2 })}
-          {...watch(["title"])}
           placeholder="제목을 입력해주세요."
         />
         <S.QuestionDetail
           {...register("contents", { required: "내용을 입력해주세요.", maxLength: 100 })}
-          {...watch(["contents"])}
           placeholder="내용을 입력해주세요."
         />
         <S.QuestionButtonWrapper02>

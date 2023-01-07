@@ -9,9 +9,9 @@ import MarketCategory from "../../../../src/components/units/market/categories/c
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
-  console.log("라우터 쿼리 넘버", router);
+  console.log("라우터 쿼리 넘버", router.query);
   const { data: productsData } = UseQueryFetchProducts({
-    categoryId: String(router.query.categoryId),
+    productCategoryId: String(router.query.categoryId),
     veganLevel: 0,
     page: 1,
   });

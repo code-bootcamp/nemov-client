@@ -16,7 +16,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
     const data = await client.query({
       query: FETCH_PRODUCTS,
       variables: {
-        categoryId: id,
+        productCategoryId: id,
         veganLevel: 0,
         page: 1,
       },
@@ -25,7 +25,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
     void router.push(`/market/categories/${String(id)}`);
   };
 
-  console.log(props.categoryData?.fetchProductCategories);
+  // console.log(props.categoryData?.fetchProductCategories);
 
   return (
     <>

@@ -7,6 +7,8 @@ import { CustomArrowProps } from "react-slick";
 import MarketCategory from "../categories/category/MarketCategory";
 import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
+import { UseQueryFetchProductsOfBestSelling } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfBestSelling";
+import { UseQueryFetchProductsOfRecommend } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfRecommend";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -21,6 +23,17 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 );
 
 export default function MarketMain() {
+  const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
+  const { data: recItemData } = UseQueryFetchProductsOfRecommend();
+
+  console.log(
+    "베스트아이템 데이터",
+    bestItemData?.fetchProductsOfRecommend,
+
+    "추천아이템 데이터",
+    recItemData?.fetchProductsOfRecommend
+  );
+
   const settings = {
     centerMode: true,
     infinite: true,

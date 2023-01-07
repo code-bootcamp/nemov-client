@@ -6,8 +6,8 @@ import {
   UseQueryFetchProductOrdersCountByBuyer,
 } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductOrdersByBuyer";
 import { getDate } from "../../../../commons/libraries/utilies";
-import Paginations01 from "../../../commons/paginations/Paginations01.index";
 import Link from "next/link";
+import Pagination02 from "../../../commons/paginations/Pagination02.index";
 
 export default function MypageOrderlist() {
   const { RangePicker } = DatePicker;
@@ -67,7 +67,7 @@ export default function MypageOrderlist() {
                 </S.OrderInfo>
               </S.OrderHistory>
             ))}
-            <Paginations01 count={dataCount} refetch={refetch} />
+            <Pagination02 count={dataCount} refetch={refetch} />
           </>
         ) : (
           <>
