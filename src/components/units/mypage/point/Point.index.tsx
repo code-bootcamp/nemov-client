@@ -5,7 +5,7 @@ import {
   UseQueryFetchPointTransactions,
   UseQueryFetchPointTransactionsCount,
 } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
-import Paginations02 from "../../../commons/paginations/Paginations02.index";
+import Paginations02 from "../../../commons/paginations/Pagination02.index";
 import * as S from "./Point.styles";
 
 export default function MypagePoint() {
@@ -22,10 +22,7 @@ export default function MypagePoint() {
     page: 1,
   });
 
-  const { data: dataCount } = UseQueryFetchPointTransactionsCount({
-    startDate,
-    endDate,
-  });
+  const { data: dataCount } = UseQueryFetchPointTransactionsCount();
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
     setStartDate(dateStrings[0]);

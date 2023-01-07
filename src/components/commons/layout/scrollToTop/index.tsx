@@ -12,7 +12,6 @@ const ScrollWrap = styled.div`
 const TopBtn = styled.button`
   width: 3rem;
   height: 3rem;
-  border: 1px solid #999;
   background-color: #fff;
   border-radius: 50%;
   font-size: 0.8rem;

@@ -3,9 +3,7 @@ import { UseQueryFetchProductOrdersBySeller } from "../../../commons/hooks/useQu
 import * as S from "./ProductOrderList.styles";
 
 export default function ProductOrderList() {
-  const { query } = UseQueryFetchProductOrdersBySeller({
-    startDate: 0,
-    endDate: 0,
+  const { data } = UseQueryFetchProductOrdersBySeller({
     page: 1,
   });
 
@@ -18,17 +16,19 @@ export default function ProductOrderList() {
             <S.Tr>
               <S.Th>번호</S.Th>
               <S.Th>상품</S.Th>
-              <S.Th>포인트</S.Th>
-              <S.Th>총 포인트</S.Th>
+              <S.Th>가격</S.Th>
+              <S.Th>상태</S.Th>
+              <S.Th>리뷰 유/무</S.Th>
             </S.Tr>
           </S.Thead>
           <S.Tbody>
-            {query.data?.fetchProductOrdersBySeller.map((el, index) => (
+            {data?.fetchProductOrdersBySeller.map((el, index) => (
               <S.Tr key={el.id}>
                 <S.Td>{index + 1}</S.Td>
                 <S.Td>{el.product.name}</S.Td>
-                <S.Td>{el.product.price}원</S.Td>
-                <S.Td>{el.seller.point}%</S.Td>
+                <S.Td>{el.product.price}</S.Td>
+                <S.Td>{el.status}</S.Td>
+                <S.Td>{el.review?.contents ? "유" : "무"}</S.Td>
               </S.Tr>
             ))}
           </S.Tbody>

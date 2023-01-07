@@ -5,72 +5,35 @@ import {
 } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCT_ORDERS_BY_SELLER = gql`
-    query fetchProductOrdersBySeller($startDate:DateTime $endDate:DateTime page:Int!){
-        fetchProductOrdersBySeller(startDate:$startDate endDate:$endDate page:$page){
-            id
-            amount
-            quantity
-            status
-            buyer{
-                id
-                name
-                email
-                phone
-                role
-                point
-            }
-            seller{
-                id
-                name
-                email
-                phone
-                role
-                point
-            }
-            product{
-                id
-                name
-                category
-                description
-                image
-                deliveryFee
-                price
-                discount
-                quantity
-                isOutOfStock
-            }
-            review{
-                id
-                title
-                contents
-                rating
-                product{
-                    id
-                    name
-                    category
-                    veganLevel
-                    description
-                    image
-                    deliveryFee
-                    price
-                    discount
-                    quantity
-                    isOutOfStock
-                }
-                user{
-                    id
-                    name
-                    email
-                    phone
-                    veganLevel
-                    zipCode
-                    point
-                }
-            }
-            createdAt
-            updatedAt
-        }
+  query fetchProductOrdersBySeller($startDate: DateTime, $endDate: DateTime, $page: Int!) {
+    fetchProductOrdersBySeller(startDate: $startDate, endDate: $endDate, page: $page) {
+      id
+      amount
+      quantity
+      status
+      # buyer {
+      #   id
+      #   name
+      # }
+      seller {
+        id
+        name
+        role
+        point
+      }
+      product {
+        id
+        name
+        price
+        discount
+        isOutOfStock
+      }
+      createdAt
+      review {
+        title
+      }
     }
+  }
 `;
 
 export const UseQueryFetchProductOrdersBySeller = (
@@ -84,5 +47,5 @@ export const UseQueryFetchProductOrdersBySeller = (
     fetchPolicy: "cache-and-network",
   });
 
-  return { query };
+  return query;
 };

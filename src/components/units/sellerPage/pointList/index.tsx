@@ -1,3 +1,4 @@
+import { getDate } from "../../../../commons/libraries/utilies";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { UseQueryFetchPointTransactions } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
 import * as S from "./pointList.style";
@@ -7,7 +8,6 @@ export default function PointList() {
     page: 1,
   });
 
-  console.log(data?.fetchPointTransactions);
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>판매자 포인트 관리 페이지</S.Title>
@@ -24,10 +24,10 @@ export default function PointList() {
           <S.Tbody>
             {data?.fetchPointTransactions.map((el, index) => (
               <S.Tr key={el.id}>
-                <S.Td>{index + 1}</S.Td>
-                <S.Td>{el.createdAt}</S.Td>
-                <S.Td>{el.amount}</S.Td>
-                <S.Td>{el.balance}%</S.Td>
+                <S.Td>{el.balance}</S.Td>
+                <S.Td>{getDate(el.createdAt)}</S.Td>
+                <S.Td>{el.amount}원</S.Td>
+                <S.Td>{el.balance}원</S.Td>
               </S.Tr>
             ))}
           </S.Tbody>

@@ -106,14 +106,13 @@ export default function ProductWrite(props: ProductWriteProps) {
   const onClickEdit = async (data: ProductInput) => {
     // const resultFile = await uploadFile({ variables: { file: files } });
     // const url = resultFile.data?.uploadFile;
-
-    console.log("3333333");
+    // console.log("3333333");
     // await updateProduct({
     //   variables: {
-    //     productId: String(router.query.productId),
+    //     productCategoryId: String(router.query.productId),
     //     updateProductInput: {
     //       name: String(data.name),
-    //       productCategory: IProduct_Category_Type.Beauty,
+    //       productCategoryId: data.productCategoryId,
     //       description: "11111",
     //       discount: Number(data.discount),
     //       deliveryFee: Number(data.deliveryFee),
