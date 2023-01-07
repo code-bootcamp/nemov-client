@@ -1,4 +1,4 @@
-import { getDiscountPrice, getVeganName } from "../../../../../../commons/libraries/utilies";
+import { getVeganName } from "../../../../../../commons/libraries/utilies";
 import { IProduct } from "../../../../../../commons/types/generated/types";
 import {
   CommonBasketIcon02,
@@ -37,7 +37,7 @@ export const ItemDisPlay02 = (props: IItemDisPlayProps) => {
       {props.recData ? (
         <S.ItemDisplay>
           <S.RecommendItemImg01 image={String(props.recData?.image)}>
-            <S.DiscountDisplay>{props.recData?.discount}%</S.DiscountDisplay>
+            <S.DiscountDisplay>{props.recData?.discountRate}%</S.DiscountDisplay>
           </S.RecommendItemImg01>
           <S.ItemDetail>
             <TagsWrapper01>
@@ -48,9 +48,9 @@ export const ItemDisPlay02 = (props: IItemDisPlayProps) => {
                 <S.ItemName>{props.recData?.name}</S.ItemName>
                 <S.ItemPrices>
                   <S.ItemDiscountPrice>
-                    {getDiscountPrice(props.recData?.price, props.recData?.discount)}원
+                    {props.recData?.discountedPrice.toLocaleString()}원
                   </S.ItemDiscountPrice>
-                  <S.ItemOriginPrice>{props.recData?.price}원</S.ItemOriginPrice>
+                  <S.ItemOriginPrice>{props.recData?.price.toLocaleString()}원</S.ItemOriginPrice>
                 </S.ItemPrices>
               </S.DetailFooterLeft>
               <CommonBasketIcon02 />

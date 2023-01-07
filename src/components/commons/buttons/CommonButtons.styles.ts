@@ -70,3 +70,11 @@ export const MinusBtn = styled.button`
   background-color: transparent;
   border-radius: 0;
 `;
+
+export const MinusBtn02 = styled.input`
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  border-radius: 0;
+`;

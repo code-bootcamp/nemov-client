@@ -9,7 +9,6 @@ export const FETCH_PRODUCT = gql`
       description
       image
       veganLevel
-      deliveryFee
       price
       discountRate
       discountedPrice

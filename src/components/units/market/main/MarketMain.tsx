@@ -25,6 +25,8 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 export default function MarketMain() {
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
+  const { data: categoryData } = UseQueryFetchCategories();
+  const { data: loginUserData } = UseQueryFetchLoginUser();
 
   console.log("추천상품", recItemData);
 
@@ -51,9 +53,6 @@ export default function MarketMain() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-
-  const { data: categoryData } = UseQueryFetchCategories();
-  const { data: loginUserData } = UseQueryFetchLoginUser();
 
   return (
     <GlobalWrapper>

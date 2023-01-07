@@ -4,7 +4,7 @@ import * as MS from "../../main/MarketMain.styles";
 import * as S from "./MarketList.styles";
 import * as IDS from "./item-display/ItemDisplay.styles";
 import ListSearch from "./ListSearch";
-import { getDiscountPrice, getVeganName } from "../../../../../commons/libraries/utilies";
+import { getVeganName } from "../../../../../commons/libraries/utilies";
 
 import { IProduct, IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
@@ -99,11 +99,12 @@ export default function MarketList(props: IMarketListProps) {
                 <S.DetailFooterLeft>
                   <S.ItemName03>{products.name}</S.ItemName03>
                   <IDS.ItemPrices>
+                    {products.discountRate === 0}
                     <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
                     <S.ItemDiscountPrice02>
-                      {getDiscountPrice(products.price, products.discountedPrice)}원
+                      {products.discountedPrice.toLocaleString()}원
                     </S.ItemDiscountPrice02>
-                    <S.ItemOriginPrice03>{products.price}원</S.ItemOriginPrice03>
+                    <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
                   </IDS.ItemPrices>
                 </S.DetailFooterLeft>
                 <BasketButton01
