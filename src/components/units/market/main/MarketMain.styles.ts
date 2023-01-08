@@ -131,6 +131,7 @@ export const ItemsWrapper01 = styled.section`
   gap: 5%;
   background-color: white;
   border-radius: 8px;
+  overflow: auto;
 `;
 
 export const ItemsWrapper02 = styled.section`

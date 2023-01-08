@@ -18,11 +18,13 @@ import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
 import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
+// import InfiniteScroll01 from "../../../../commons/infiniteScrolls/InfiniteScroll01";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
   productsData?: Pick<IQuery, "fetchProducts"> | undefined;
   isInCartData?: Pick<IQuery, "fetchIsInCart"> | undefined;
+  productsFetchMore?: any;
 }
 
 export default function MarketList(props: IMarketListProps) {
@@ -96,6 +98,7 @@ export default function MarketList(props: IMarketListProps) {
         <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
       ))}
       <ListSearch />
+      {/* <InfiniteScroll01 fetchMore={props.productsFetchMore} data={props.productsData}> */}
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
         {props.productsData?.fetchProducts.map((products) => (
           // isOutOfStock === true이면, 매진 상태 나타내기
@@ -131,6 +134,7 @@ export default function MarketList(props: IMarketListProps) {
           </IDS.ItemDisplay03>
         ))}
       </MS.ItemsWrapper01>
+      {/* </InfiniteScroll01> */}
     </>
   );
 }

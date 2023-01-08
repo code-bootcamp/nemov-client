@@ -11,7 +11,7 @@ import { UseQueryFetchIsInCart } from "../../../../src/components/commons/hooks/
 export default function MarketCategoriesPage() {
   const router = useRouter();
   console.log("라우터 쿼리 넘버", router.query);
-  const { data: productsData } = UseQueryFetchProducts({
+  const { data: productsData, fetchMore: productsFetchMore } = UseQueryFetchProducts({
     productCategoryId: String(router.query.categoryId),
     veganLevel: 0,
     page: 1,
@@ -32,6 +32,7 @@ export default function MarketCategoriesPage() {
             categoryData={categoryData}
             productsData={productsData}
             isInCartData={isInCartData}
+            productsFetchMore={productsFetchMore}
           />
         </CategoryMain>
       </GlobalWrapper>
