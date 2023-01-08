@@ -1,5 +1,7 @@
 import { Modal } from "antd";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../../../commons/stores";
 import { IProduct } from "../../../../../commons/types/generated/types";
 import {
   StyledCommonButton01,
@@ -16,6 +18,7 @@ interface ICartModalProps {
 }
 
 export default function CartModal(props: ICartModalProps) {
+  const accessToken = useRecoilValue(accessTokenState);
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
   const { productToCart } = UseMutationToggleProductToCart();
@@ -45,16 +48,18 @@ export default function CartModal(props: ICartModalProps) {
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     // event?.stopPropagation();
     const result = await productToCart(productId);
-    console.log(result);
     const status = result?.data?.toggleProductToCart;
     console.log(status);
-    if (status === true) {
+    if (status === true && accessToken) {
       Modal.success({ content: "장바구니에 상품을 담았습니다." });
-      //   console.log("장바구니를 상품에 담았습니다.");
       props.setIsOpen(false);
-    } else {
+    } else if (status === false && accessToken) {
       Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+      props.setIsOpen(false);
     }
+    // } else {
+    //   Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    // }
   };
 
   return (

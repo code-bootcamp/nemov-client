@@ -144,7 +144,6 @@ export const ItemDisplay = styled.div`
 
 export const RecommendItemImg01 = styled.div`
   width: 100%;
-  height: 100%;
   background-image: url(${(props: IMarketDetailHeadStylesProps) => props.image});
   background-position: center;
   background-size: cover;

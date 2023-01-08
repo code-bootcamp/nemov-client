@@ -10,6 +10,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import LayoutMobileMenu from "../mobileHeader";
 import { useState } from "react";
+import { UseQueryFetchCartCount } from "../../hooks/useQueries/product/UseQueryFetchCartCount";
 
 const LOGOUT = gql`
   mutation {
@@ -20,6 +21,7 @@ const LOGOUT = gql`
 export default function LayoutHeader() {
   const router = useRouter();
   const { data } = UseQueryFetchLoginUser();
+  const { data: cartCountData } = UseQueryFetchCartCount();
   const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,6 +47,10 @@ export default function LayoutHeader() {
   const onClickMenuToggle = () => {
     setMenuOpen((prev) => !prev);
   };
+
+  // 장바구니 카운트 조회
+  console.log(cartCountData);
+
   return (
     <S.Wrapper>
       <Link href="/market">
@@ -83,6 +89,7 @@ export default function LayoutHeader() {
             </S.HeaderMenuItem>
             <Link href="/mypage/basket">
               <S.HeaderMenuItem>
+                {cartCountData && <S.BasketCount>{cartCountData?.fetchCartCount}</S.BasketCount>}
                 <S.Basket />
               </S.HeaderMenuItem>
             </Link>

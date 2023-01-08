@@ -17,6 +17,7 @@ import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
+import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
@@ -34,30 +35,23 @@ export default function MarketList(props: IMarketListProps) {
 
   const onClickToggleCartModal = (id: string) => (e: React.MouseEvent) => {
     e?.stopPropagation();
-    setIsOpen((prev) => !prev);
-    const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
-      if (cur.id === id) {
-        return setCurProductData(cur);
-      } else {
-        return undefined;
-      }
-    });
 
-    if (cartModalItem === undefined) return;
-    setCartModalItemVal(cartModalItem[0]);
+    if (!useAuth02) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      setIsOpen((prev) => !prev);
+      const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
+        if (cur.id === id) {
+          return setCurProductData(cur);
+        } else {
+          return undefined;
+        }
+      });
+
+      if (cartModalItem === undefined) return;
+      setCartModalItemVal(cartModalItem[0]);
+    }
   };
-
-  // const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
-  //   event?.stopPropagation();
-  //   const result = await productToCart(event.currentTarget.id);
-  //   const status = result?.data?.toggleProductToCart;
-  //   console.log(status);
-  //   if (status === true) {
-  //     Modal.success({ content: "장바구니에 상품을 담았습니다." });
-  //   } else {
-  //     Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
-  //   }
-  // };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
     event?.preventDefault();

@@ -3,6 +3,7 @@ import { tablet } from "../../../../commons/styles/breakPoints";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import { Menu } from "./nav";
+import { colorBase03 } from "../../../../commons/styles/colorBases";
 
 interface ILayoutMobileMenuStyleProps {
   ismenuOpen: boolean;
@@ -11,6 +12,17 @@ interface ILayoutMobileMenuStyleProps {
 export const Basket = styled(ShoppingBagOutlinedIcon)`
   color: #fff;
   cursor: pointer;
+`;
+
+export const BasketCount = styled.span`
+  position: absolute;
+  width: 1.3rem;
+  height: 1.4rem;
+  padding: 0.2rem 0.4rem;
+  top: 0.8rem;
+  right: -0.8rem;
+  border-radius: 50%;
+  ${colorBase03}
 `;
 
 export const Payment = styled(AddCardOutlinedIcon)`
@@ -86,6 +98,7 @@ export const HeaderMenuItem = styled.div`
   margin-left: 1.5rem;
   color: #fff;
   cursor: pointer;
+  position: relative;
 `;
 
 // mobile

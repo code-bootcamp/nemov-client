@@ -3,7 +3,7 @@ import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalet
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
 export const MarketDetailCrumbsWrapper = styled.section`
-  margin-top: 6rem;
+  margin: 6rem 0 2rem 0;
   width: 100%;
   display: flex;
   justify-content: flex-start;
