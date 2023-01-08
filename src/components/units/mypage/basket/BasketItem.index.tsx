@@ -1,5 +1,4 @@
 import React from "react";
-import { getDiscountPrice } from "../../../../commons/libraries/utilies";
 import { IProduct } from "../../../../commons/types/generated/types";
 import * as S from "./Basket.styles";
 
@@ -45,9 +44,7 @@ export default function MypageBasketItem(props: IMypageBasketItemProps) {
         <S.ItemPrice>
           {props.item.price} <span>원</span>
         </S.ItemPrice>
-        <S.DiscountPrice>
-          {getDiscountPrice(props.item.price, props.item.discount)} 원
-        </S.DiscountPrice>
+        <S.DiscountPrice>{props.item.discountedPrice} 원</S.DiscountPrice>
       </S.PriceWrap>
       <S.IconBtnWrap>
         {/* <S.CancelBtn>

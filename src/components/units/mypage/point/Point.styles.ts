@@ -53,6 +53,10 @@ export const TableBottomLi = styled.li`
   width: 20%;
 `;
 
+export const SpanDiv = styled.div`
+  width: 50px;
+`;
+
 export const RefundBtn = styled.button`
   width: 50px;
   padding: 8px;

@@ -5,8 +5,8 @@ import {
 } from "../../../../../commons/types/generated/types";
 
 export const CHECK_VALID_TOKEN_FOR_SIGNUP = gql`
-  mutation checkValidToken($phone: Phone!, $token: String!) {
-    checkValidToken(phone: $phone, token: $token)
+  mutation checkValidTokenForSignUp($phone: Phone!, $token: String!) {
+    checkValidTokenForSignUp(phone: $phone, token: $token)
   }
 `;
 

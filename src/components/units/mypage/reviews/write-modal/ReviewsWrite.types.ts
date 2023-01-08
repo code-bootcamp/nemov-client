@@ -10,6 +10,9 @@ export interface IReviewsWriteProps {
 
 export interface IFormData {
   contents: string;
-  rating?: number;
-  images?: string[];
+  rating: number;
+  images?: (string | undefined)[];
+  title: string;
+  reviewId?: string;
+  productOrderId?: string;
 }

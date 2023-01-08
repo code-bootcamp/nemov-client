@@ -6,7 +6,7 @@ import {
 
 export const GET_TOKEN_FOR_SIGNUP = gql`
   mutation getTokenForSignUp($phone: Phone!) {
-    getToken(phone: $phone)
+    getTokenForSignUp(phone: $phone)
   }
 `;
 

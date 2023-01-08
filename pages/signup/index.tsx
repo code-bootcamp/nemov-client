@@ -103,8 +103,12 @@ export default function SignupPage() {
               {isSeller && (
                 <>
                   <SellerNumsTitle>사업자 등록번호</SellerNumsTitle>
-                  <SellerNumsText>사업자 등록번호를 인증해주세요.</SellerNumsText>
-                  <SellerNumsInput value={bln} type="text" onChange={onChangeBusinessLN} />
+                  <SellerNumsInput
+                    value={bln}
+                    type="text"
+                    onChange={onChangeBusinessLN}
+                    placeholder="사업자 등록번호를 입력해주세요. ( - 제외)"
+                  />
                 </>
               )}
               {isSeller ? (
@@ -218,15 +222,11 @@ const SellerNumsTitle = styled.h4`
   font-weight: bold;
 `;
 
-const SellerNumsText = styled.p`
-  margin-bottom: 0;
-`;
-
 const SellerNumsInput = styled.input`
   width: 70%;
   height: 47px;
   border: 1px solid #ddd;
-  margin: 40px 0;
+  margin: 20px 0;
   text-align: center;
 `;
 
