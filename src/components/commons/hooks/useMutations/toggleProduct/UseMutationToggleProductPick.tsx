@@ -7,6 +7,7 @@ import {
 } from "../../../../../commons/types/generated/types";
 import { FETCH_IS_PICKED } from "../../useQueries/pick/UseQueryFetchIsPicked";
 import { FETCH_PICK_COUNT_OF_PRODUCT } from "../../useQueries/pick/UseQueryFetchPickCountOfProduct";
+import { FETCH_PRODUCTS_I_PICKED } from "../../useQueries/pick/UserQueryFetchProductsIPicked";
 
 // 찜하기 기능
 export const TOGGLE_PRODUCT_PICK = gql`
@@ -24,6 +25,7 @@ export const UseMutationToggleProductPick = () => {
     refetchQueries: [
       { query: FETCH_PICK_COUNT_OF_PRODUCT, variables: { productId: router.query.productId } },
       { query: FETCH_IS_PICKED, variables: { productId: router.query.productId } },
+      { query: FETCH_PRODUCTS_I_PICKED, variables: { page: 1 } },
     ],
   });
 

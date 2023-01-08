@@ -9,11 +9,11 @@ import React, { useState } from "react";
 // import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
 import * as S from "./Basket.styles";
-import MypageBasketItem from "./BasketItem.index";
+// import MypageBasketItem from "./BasketItem.index";
 
-interface IData {
-  id: number;
-  title: string;
+interface IResultType {
+  number?: number | undefined;
+  id?: string;
 }
 
 export default function MypageBasket() {
@@ -61,14 +61,6 @@ export default function MypageBasket() {
 
   // console.log(data);
 
-  // 할인율 적용된 가격
-  // const productPrice = getDiscountPrice(data?.fetchCart.price, data?.fetchCart.discount);
-  // const productPrice = data?.fetchCart.map((cart, index) => {
-  //   return getDiscountPrice(cart.price, cart.discount);
-  // });
-
-  // console.log(productPrice);
-
   // 총 상품금액
   let totalPrice = 0;
 
@@ -78,15 +70,23 @@ export default function MypageBasket() {
   });
 
   // 총 할인금액
-  let totalDiscountPrice = 0;
+  let totalDiscountedPrice = 0;
 
   data?.fetchCart.map((cart) => {
-    totalDiscountPrice += cart.discountedPrice;
-    return totalDiscountPrice;
+    totalDiscountedPrice += cart.price * (cart.discountRate / 100);
+    return totalDiscountedPrice;
   });
 
+  // 배송비
+  let deliveryFee;
+  if (totalPrice >= 50000) {
+    deliveryFee = 0;
+  } else {
+    deliveryFee = 3000;
+  }
+
   // 총 결제금액
-  // const totalSum = totalPrice - totalDiscountPrice + Number(data?.fetchCart[0].deliveryFee);
+  const totalSum = totalPrice - totalDiscountedPrice + deliveryFee;
 
   // 수량 버튼
   // const onClickCountUp = (e: React.MouseEvent) => {
@@ -108,30 +108,38 @@ export default function MypageBasket() {
   // };
 
   // 체크박스 기능
-  const checkData: IData[] = [
-    { id: 0, title: "선택 1" },
-    { id: 1, title: "선택 2" },
-    { id: 2, title: "선택 3" },
-    { id: 3, title: "선택 4" },
-  ];
+  const checkData = data?.fetchCart.map((el, index) => {
+    const result: IResultType = {};
+    result.number = index;
+    result.id = el.id;
+    return result;
+  });
+  console.log(checkData);
+  // const checkData: IData[] = [
+  //   { id: 0, title: "선택 1" },
+  //   { id: 1, title: "선택 2" },
+  //   { id: 2, title: "선택 3" },
+  // ];
 
-  const [checkItems, setCheckItems] = useState<number[]>([]);
+  const [checkItems, setCheckItems] = useState<(number | undefined)[]>([]);
 
-  // const handleSingleCheck = (checked: boolean, id: number) => {
-  //   if (checked) {
-  //     // 단일 선택 시 체크된 아이템을 배열에 추가
-  //     setCheckItems((prev: number[]) => [...prev, id]);
-  //   } else {
-  //     // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
-  //     setCheckItems(checkItems.filter((el: number) => el !== id));
-  //   }
-  // };
+  const handleSingleCheck = (checked: boolean, id: number | undefined) => {
+    if (checked) {
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckItems((prev) => [...prev, id]);
+    } else {
+      // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+      setCheckItems(checkItems.filter((el: number | undefined) => el !== id));
+    }
+  };
+  console.log(checkItems);
 
   const handleAllCheck = (checked: boolean) => {
     if (checked) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-      const idArray: number[] = [];
-      checkData.forEach((el) => idArray.push(el.id));
+      const idArray: (number | undefined)[] = [];
+      if (checkData === undefined) return;
+      checkData.forEach((el) => idArray.push(el.number));
       setCheckItems(idArray);
     } else {
       // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
@@ -152,7 +160,7 @@ export default function MypageBasket() {
             type="checkbox"
             name="select-all"
             onChange={(e) => handleAllCheck(e.target.checked)}
-            checked={checkItems.length === checkData.length}
+            checked={checkItems.length === checkData?.length}
           />
           전체 선택
         </S.CheckboxWrapper>
@@ -161,52 +169,46 @@ export default function MypageBasket() {
           name={`select-${checkData[1].id}`}
           onChange={(e) => handleSingleCheck(e.target.checked, checkData[1].id)}
           checked={checkItems.includes(checkData[1].id)}
-        />
-        <S.ItemCheckbox
-          type="checkbox"
-          name={`select-${checkData[2].id}`}
-          onChange={(e) => handleSingleCheck(e.target.checked, checkData[2].id)}
-          checked={checkItems.includes(checkData[2].id)}
         /> */}
+
         <S.ItemUl>
           {data?.fetchCart.length !== 0 ? (
             <>
-              {data?.fetchCart.map((item, index) => (
-                <MypageBasketItem key={item.id} item={item} />
-                // <S.ItemWrapper key={index}>
-                //   <S.ItemCheckbox
-                //     type="checkbox"
-                //     name={`select-${checkData[index].id}`}
-                //     onChange={(e) => handleSingleCheck(e.target.checked, checkData[index].id)}
-                //     checked={checkItems.includes(checkData[index].id)}
-                //   />
-                //   <S.ItemImg src={cart.image} />
-                //   <S.ItemName>{cart.name}</S.ItemName>
-                //   <S.QuantityWrapper>
-                //     <S.MinusBtn onClick={onClickCountDown}>-</S.MinusBtn>
-                //     <S.QuantitySpan id={cart.id}>{quantity}</S.QuantitySpan>
-                //     <S.PlusBtn onClick={onClickCountUp} id={cart.id}>
-                //       +
-                //     </S.PlusBtn>
-                //   </S.QuantityWrapper>
-                //   <S.PriceWrap>
-                //     <S.ItemPrice>
-                //       {cart.price} <span>원</span>
-                //     </S.ItemPrice>
-                //     <S.DiscountPrice>
-                //       {getDiscountPrice(cart.price, cart.discount)} 원
-                //     </S.DiscountPrice>
-                //   </S.PriceWrap>
-                //   <S.IconBtnWrap>
-                //     {/* <S.CancelBtn>
-                //       <S.CancelIcon />
-                //     </S.CancelBtn> */}
-                //     <S.BtnWrapper>
-                //       <S.PickBtn>찜하기</S.PickBtn>
-                //       <S.BasketBtn>구매하기</S.BasketBtn>
-                //     </S.BtnWrapper>
-                //   </S.IconBtnWrap>
-                // </S.ItemWrapper>
+              {data?.fetchCart.map((cart, index) => (
+                // <MypageBasketItem key={item.id} item={item} />
+                <S.ItemWrapper key={index}>
+                  {checkData && (
+                    <S.ItemCheckbox
+                      type="checkbox"
+                      name={`select-${index}`}
+                      onChange={(e) => handleSingleCheck(e.target.checked, checkData[index].number)}
+                      checked={checkItems.includes(checkData[index].number)}
+                    />
+                  )}
+                  <S.ItemImg src={cart.image} />
+                  <S.ItemName>{cart.name}</S.ItemName>
+                  <S.QuantityWrapper>
+                    <S.MinusBtn id={cart.id}>-</S.MinusBtn>
+                    <S.QuantityInput id={cart.id} defaultValue="1" />
+                    {/* <S.QuantitySpan id={cart.id}>{quantity}</S.QuantitySpan> */}
+                    <S.PlusBtn id={cart.id}>+</S.PlusBtn>
+                  </S.QuantityWrapper>
+                  <S.PriceWrap>
+                    <S.ItemPrice>
+                      {cart.price} <span>원</span>
+                    </S.ItemPrice>
+                    <S.DiscountPrice>{cart.discountedPrice} 원</S.DiscountPrice>
+                  </S.PriceWrap>
+                  {/* <S.IconBtnWrap> */}
+                  <S.BtnWrapper>
+                    <S.CancelBtn id={cart.id}>
+                      <S.CancelIcon></S.CancelIcon>
+                    </S.CancelBtn>
+                    <S.PickBtn>찜하기</S.PickBtn>
+                    <S.BasketBtn>구매하기</S.BasketBtn>
+                  </S.BtnWrapper>
+                  {/* </S.IconBtnWrap> */}
+                </S.ItemWrapper>
               ))}
             </>
           ) : (
@@ -236,22 +238,22 @@ export default function MypageBasket() {
         <section>
           <S.Label>총 할인금액</S.Label>
           <S.Num>
-            {totalDiscountPrice} <S.NumSpan>원</S.NumSpan>
+            {totalDiscountedPrice} <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>＋</S.CalculateIcon>
         <section>
           <S.Label>총 배송비</S.Label>
           <S.Num>
-            {/* {data?.fetchCart[0].deliveryFee}  */}
-            <S.NumSpan>원</S.NumSpan>
+            {deliveryFee}
+            <S.NumSpan> 원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>=</S.CalculateIcon>
         <section>
           <S.Label>총 결제금액</S.Label>
           <S.TotalNum>
-            {/* {totalSum}  */}
+            {totalSum}
             <S.NumSpan>원</S.NumSpan>
           </S.TotalNum>
         </section>
