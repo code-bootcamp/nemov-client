@@ -1,9 +1,6 @@
 import React, { memo, useCallback, useState } from "react";
 import { getVeganName } from "../../../../../../../commons/libraries/utilies";
-import {
-  StyledCommonButton01,
-  StyledCommonButton02,
-} from "../../../../../../commons/buttons/CommonButtons.styles";
+import { StyledCommonButton01 } from "../../../../../../commons/buttons/CommonButtons.styles";
 import {
   CommonHeartIcon01,
   CommonHeartIcon02,
@@ -15,25 +12,19 @@ import { IMarketDetailProps } from "../../../../Market.types";
 import * as S from "./MarketDetailHead.styles";
 import Crumbs from "./nav/MarketCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/CountDownUpButtons";
-import { useMutation } from "@apollo/client";
-import { CREATE_PRODUCT_ORDER } from "../../../../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
-import {
-  IMutation,
-  IMutationCreateProductOrderArgs,
-} from "../../../../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
+import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 
 function MarketDetailHead(props: IMarketDetailProps) {
-  const [createProductOrder] = useMutation<
-    Pick<IMutation, "createProductOrder">,
-    IMutationCreateProductOrderArgs
-  >(CREATE_PRODUCT_ORDER);
   const { productPick } = UseMutationToggleProductPick();
+  const { productToCart } = UseMutationToggleProductToCart();
 
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
   const [isPicked, setIsPicked] = useState<boolean | undefined>(false);
+
+  const sum = (props.data.data?.fetchProduct.discountedPrice ?? 0) * quantity;
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
@@ -63,18 +54,36 @@ function MarketDetailHead(props: IMarketDetailProps) {
   );
 
   // 구매 버튼 함수
-  const onClickBuyProduct = async () => {
-    try {
-      await createProductOrder({
-        variables: {
-          productId: String(props.data.data?.fetchProduct.id),
-          amount: sum,
-          quantity,
-        },
-      });
-      Modal.success({ content: "구매가 완료되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
+  // const onClickBuyProduct = async () => {
+  //   try {
+  //     await createProductOrders({
+  //       variables: {
+  //        productOrders: [
+  //         productId: props.data.data?.fetchProduct.id,
+
+  //        ],
+  //         amount: sum,
+  //       },
+  //     });
+  //     Modal.success({ content: "구매가 완료되었습니다." });
+  //   } catch (error) {
+  //     if (error instanceof Error) console.log(error.message);
+  //   }
+  // };
+
+  // 장바구니 담기 기능
+
+  const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
+    event?.stopPropagation();
+
+    const result = await productToCart(productId);
+    console.log(result);
+    const status = result?.data?.toggleProductToCart;
+    console.log(status);
+    if (status === true) {
+      Modal.success({ content: "장바구니에 상품을 담았습니다." });
+    } else {
+      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
     }
   };
 
@@ -91,7 +100,6 @@ function MarketDetailHead(props: IMarketDetailProps) {
     }
   };
 
-  const sum = (props.data.data?.fetchProduct.discountedPrice ?? 0) * quantity;
   // useEffect(() => {
   //   if (props.data.data?.fetchProduct.discountedPrice !== undefined) {
   //     setTotalAmountAmount(sum);
@@ -163,8 +171,11 @@ function MarketDetailHead(props: IMarketDetailProps) {
               ) : (
                 <CommonHeartIcon02 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
               )}
-              <StyledCommonButton02>장바구니</StyledCommonButton02>
-              <StyledCommonButton01 onClick={onClickBuyProduct}>구매하기</StyledCommonButton01>
+              <StyledCommonButton01
+                onClick={onClickToggleProductToCart(String(props.data.data?.fetchProduct.id))}
+              >
+                장바구니
+              </StyledCommonButton01>
             </S.ButtonsWrapper01>
           </S.ProductDetailFooter01>
         </S.ProductDetailAside01>
@@ -172,4 +183,5 @@ function MarketDetailHead(props: IMarketDetailProps) {
     </>
   );
 }
+
 export default memo(MarketDetailHead);

@@ -6,7 +6,7 @@ import {
   IMutation,
   IMutationCreateQuestionArgs,
 } from "../../../../../commons/types/generated/types";
-import { FETCH_QUESTIONS_BY_PRODUCT } from "../../useQueries/UseQueryFetchQuestionsByProduct";
+import { FETCH_QUESTIONS_BY_PRODUCT } from "../../useQueries/questions/UseQueryFetchQuestionsByProduct";
 
 export const CREATE_QUESTION = gql`
   mutation createQuestion($createQuestionInput: CreateQuestionInput!, $productId: String!) {

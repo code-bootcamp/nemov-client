@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { GlobalWrapper } from "../../../../../../commons/styles/globalStyles";
 import { UseQueryFetchProduct } from "../../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
-import { UseQueryFetchQuestionsByProduct } from "../../../../../commons/hooks/useQueries/UseQueryFetchQuestionsByProduct";
+import { UseQueryFetchQuestionsByProduct } from "../../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsByProduct";
 import MarketDetailBody from "./body/MarketDetailBody";
 import MarketDetailHead from "./head/MarketDetailHead";
 

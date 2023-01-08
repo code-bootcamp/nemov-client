@@ -17,10 +17,9 @@ export interface IMarketDetailHeadStylesProps {
 //   isAnswerOpen: boolean;
 // }
 
-export interface IProductOrderData {
-  productId: string;
+export interface IProductOrdersData {
   amount: number;
-  quantity: number;
+  productOrders: [];
 }
 
 export interface IProductAskProps {

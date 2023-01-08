@@ -19,7 +19,10 @@ const ItemStyleSet01 = css`
 
 export const FontStyle02 = css`
   ${GS.semiBold}
-  font-size: 1.25rem;
+  font-size: 1.5vmax;
+  @media ${mobile} {
+    font-size: 3vmax;
+  }
 `;
 
 export const ItemDetailFooter02 = styled.footer`
@@ -30,6 +33,8 @@ export const ItemDetailFooter02 = styled.footer`
 `;
 
 // 베스트 아이템 디스플레이
+export const BestItemRanking = styled.div``;
+
 export const BestItemImage = styled.div`
   width: 100%;
   background-image: url(${(props: IMarketDetailHeadStylesProps) => props.image});
@@ -39,7 +44,7 @@ export const BestItemImage = styled.div`
   display: inline-block;
   position: relative;
   ::after {
-    content: "1";
+    content: "10";
     width: 12%;
     height: 12%;
     color: white;
@@ -113,7 +118,26 @@ export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
 `;
 
 // 추천 아이템 디스플레이 스타일
+
+export const ItemsWrapper03 = styled.section`
+  @media ${mobile} {
+    justify-content: center;
+    gap: 9vmax;
+  }
+  width: 100%;
+  padding: 2rem 0;
+  ${GS.flexRow}
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1vmax;
+  background-color: white;
+  border-radius: 8px;
+`;
+
 export const ItemDisplay = styled.div`
+  @media ${mobile} {
+    width: 80%;
+  }
   ${ItemStyleSet01}
   width: 30%;
 `;
@@ -131,14 +155,17 @@ export const RecommendItemImg01 = styled.div`
 `;
 
 export const DiscountDisplay = styled.div`
-  width: 10%;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  @media ${mobile} {
+    font-size: 1rem;
+  }
+  padding: 2% 2%;
   display: inline-block;
   position: absolute;
   left: 0;
   top: 0;
   border-radius: 4px;
   z-index: 1;
+  font-size: 1rem;
   text-align: center;
 
   ${CB.colorBase03}
@@ -152,6 +179,9 @@ export const ItemDisplay01 = styled.div`
 
 // 마켓 리스트 아이템 디스플레이
 export const ItemDisplay03 = styled.section`
+  @media ${mobile} {
+    width: 45%;
+  }
   width: 30%;
   height: 30%;
   ${ItemStyleSet01}
@@ -187,7 +217,10 @@ export const ItemDetail = styled.div`
 // `;
 
 export const ItemName = styled.span`
-  font-size: 1.25rem;
+  @media ${mobile} {
+    font-size: 2vmax;
+  }
+  font-size: 1.5rem;
 `;
 
 export const ItemPrices = styled.div`
@@ -204,6 +237,9 @@ export const ItemDiscountPrice = styled.span`
 `;
 
 export const ItemOriginPrice = styled.span`
+  @media ${mobile} {
+    font-size: 1rem;
+  }
   color: ${CP.gray};
   font-size: 0.8rem;
   text-decoration: line-through;

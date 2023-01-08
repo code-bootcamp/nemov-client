@@ -65,15 +65,17 @@ export default function MarketMain() {
               <S.HeaderSpan>
                 {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
               </S.HeaderSpan>
-              이런 상품은 어떠신가요?
-              <S.HeaderDiv01>추천상품</S.HeaderDiv01>
+              <div style={{ display: "flex" }}>
+                이런 상품은 어떠신가요?
+                <S.HeaderDiv01>추천상품</S.HeaderDiv01>
+              </div>
             </S.MarketMainHeader01>
-            <S.ItemsWrapper01>
+            <IDS.ItemsWrapper03>
               {recItemData?.fetchProductsOfRecommend.map((rec) => (
                 <ID.ItemDisPlay02 key={rec.id} recData={rec} />
               ))}
               {/* <ID.ItemDisPlay02 key={rec.id} recData={rec} />; */}
-            </S.ItemsWrapper01>
+            </IDS.ItemsWrapper03>
           </S.RecommendItemSection01>
           <S.MainMarketSection01>
             <S.MarketMainHeader02>
@@ -83,7 +85,7 @@ export default function MarketMain() {
             <S.ItemsWrapper02>
               <IDS.StyledSlider02 {...settings}>
                 {new Array(8).fill(1).map((_, index) => (
-                  <ID.ItemDisPlay01 key={index}></ID.ItemDisPlay01>
+                  <ID.ItemDisPlay01 key={index} ranking={index}></ID.ItemDisPlay01>
                 ))}
               </IDS.StyledSlider02>
             </S.ItemsWrapper02>

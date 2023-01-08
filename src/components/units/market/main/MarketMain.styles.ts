@@ -48,6 +48,11 @@ const HeaderStyle02 = css`
 `;
 
 export const MarketMainHeader01 = styled.header`
+  @media ${mobile} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
   ${HeaderStyle}
 `;
 
@@ -115,7 +120,8 @@ export const RecommendItemSection01 = styled.section`
 
 export const ItemsWrapper01 = styled.section`
   @media ${mobile} {
-    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0;
   }
   width: 100%;
   padding: 2rem 1.5rem;

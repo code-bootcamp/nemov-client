@@ -123,5 +123,6 @@ export const ProductDetailFooter01 = styled.section`
 export const ButtonsWrapper01 = styled.section`
   width: 100%;
   ${flexRow}
+  justify-content: center;
   gap: 0.7rem;
 `;
