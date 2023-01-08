@@ -52,6 +52,16 @@ export const Radio = styled.span`
   margin-left: 0.3rem;
 `;
 
+export const NoticeMap = styled(Row)`
+  border: 1px solid pink;
+`;
+
+export const Notice = styled.div`
+  width: calc(100% / 4 - 2px);
+`;
+
+export const NoticeInput = styled.input``;
+
 export const ThumbnailImgWrap = styled.div`
   width: 80%;
   display: flex;

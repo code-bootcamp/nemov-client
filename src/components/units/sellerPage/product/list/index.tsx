@@ -8,7 +8,7 @@ import {
 } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
 import React, { useState } from "react";
-import { getVeganName } from "../../../../../commons/libraries/utilies";
+import { getDate, getVeganName } from "../../../../../commons/libraries/utilies";
 
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
@@ -72,7 +72,7 @@ export default function ProductList() {
             {data?.fetchProductsBySeller.map((el, index) => (
               <S.Tr key={el.id}>
                 <S.Td>{index + 1}</S.Td>
-                <S.Td>{el.createdAt}</S.Td>
+                <S.Td>{getDate(el.createdAt)}</S.Td>
                 <S.Td>{el.name}</S.Td>
                 <S.Td>{el.price}원</S.Td>
                 <S.Td>{el.discountRate}%</S.Td>
