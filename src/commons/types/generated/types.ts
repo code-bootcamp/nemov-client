@@ -72,6 +72,11 @@ export type ICreateProductOptionInput = {
   option11: Scalars['String'];
 };
 
+export type ICreateProductOrderInput = {
+  productId: Scalars['ID'];
+  quantity: Scalars['Int'];
+};
+
 export type ICreateQuestionInput = {
   contents: Scalars['String'];
   title: Scalars['String'];
@@ -79,7 +84,7 @@ export type ICreateQuestionInput = {
 
 export type ICreateReviewInput = {
   contents: Scalars['String'];
-  images?: InputMaybe<Array<Scalars['String']>>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   rating: Scalars['Int'];
   title: Scalars['String'];
 };
@@ -110,7 +115,7 @@ export type IMutation = {
   createPointCharge: IPoint;
   createProduct: IProduct;
   createProductCategory: IProductCategory;
-  createProductOrder: IProductOrder;
+  createProductOrders: Scalars['String'];
   createQuestion: IQuestion;
   createReview: IReview;
   createUser: IUser;
@@ -208,10 +213,9 @@ export type IMutationCreateProductCategoryArgs = {
 };
 
 
-export type IMutationCreateProductOrderArgs = {
+export type IMutationCreateProductOrdersArgs = {
   amount: Scalars['Int'];
-  productId: Scalars['ID'];
-  quantity: Scalars['Int'];
+  productOrders: Array<ICreateProductOrderInput>;
 };
 
 
@@ -717,7 +721,7 @@ export type IUpdateQuestionInput = {
 
 export type IUpdateReviewInput = {
   contents?: InputMaybe<Scalars['String']>;
-  images?: InputMaybe<Array<Scalars['String']>>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   rating?: InputMaybe<Scalars['Int']>;
   title?: InputMaybe<Scalars['String']>;
 };

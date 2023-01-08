@@ -5,8 +5,14 @@ import {
 } from "../../../../../commons/types/generated/types";
 
 export const CREATE_PRODUCT = gql`
-  mutation createProduct($createProductInput: CreateProductInput!) {
-    createProduct(createProductInput: $createProductInput) {
+  mutation createProduct(
+    $createProductInput: CreateProductInput!
+    $createProductOptionInput: CreateProductOptionInput
+  ) {
+    createProduct(
+      createProductInput: $createProductInput
+      createProductOptionInput: $createProductOptionInput
+    ) {
       id
       name
       description

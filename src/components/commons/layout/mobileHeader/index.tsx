@@ -5,6 +5,7 @@ import PaymentPage from "../../../units/paymentModal/payment";
 import CommonModal01 from "../../modals/CommonModal01";
 import * as S from "./mobileHeader.styles";
 import { UseQueryFetchCategories } from "../../hooks/useQueries/product/UseQueryFetchCategories";
+import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 
 interface ILayoutMobileMenuProps {
   isOpen: boolean;
@@ -19,42 +20,45 @@ const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
 
 export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const { data: category } = UseQueryFetchCategories();
-
+  const { data: userInfo } = UseQueryFetchLoginUser();
   return (
     <>
       <S.HeaderMenu isOpen={props.isOpen}>
         <S.User>
-          <S.UserName>
-            <S.UserLevel>비건</S.UserLevel>user 님 안녕하세요
-          </S.UserName>
-          <S.UserPoint>포인트 :1500P</S.UserPoint>
-        </S.User>
-        <S.LoginMenu>
-          <Link href={props.data ? "/mypage/orderlist" : "/login"}>
-            <S.HeaderMenuItem>{props.data ? "MYPAGE" : "LOGIN"}</S.HeaderMenuItem>
-          </Link>
-          <Link href={props.data ? "/market" : "/signup"}>
-            <S.HeaderMenuItem onClick={props.data && props.onClickLogout}>
-              {props.data ? "LOGOUT" : "SIGNUP"}{" "}
-            </S.HeaderMenuItem>
-          </Link>
-        </S.LoginMenu>
-
-        {props.data && (
-          <>
-            <S.HeaderMenuItem>
-              <S.Payment onClick={props.onClickPayment} />
-              <CommonModal01 isOpen={props.isOpen} onCancel={props.paymentPage} width={200}>
-                <PaymentPage setIsOpen={props.setIsOpen} />
-              </CommonModal01>
-            </S.HeaderMenuItem>
-            <Link href="/mypage/basket">
-              <S.HeaderMenuItem>
-                <S.Basket />
+          {props.data && (
+            <>
+              <S.UserName>
+                <S.UserLevel>{userInfo?.fetchLoginUser.veganLevel}</S.UserLevel>
+                {userInfo?.fetchLoginUser.name}님
+              </S.UserName>
+              <S.UserPoint>포인트 :{userInfo?.fetchLoginUser.point}P</S.UserPoint>
+              <S.IconMenu>
+                <S.HeaderMenuItem>
+                  <S.Payment onClick={props.onClickPayment} />
+                  <CommonModal01 isOpen={props.isOpen} onCancel={props.paymentPage} width={200}>
+                    <PaymentPage setIsOpen={props.setIsOpen} />
+                  </CommonModal01>
+                </S.HeaderMenuItem>
+                <Link href="/mypage/basket">
+                  <S.HeaderMenuItem>
+                    <S.Basket />
+                  </S.HeaderMenuItem>
+                </Link>
+              </S.IconMenu>
+            </>
+          )}
+          <S.LoginMenu>
+            <Link href={props.data ? "/mypage/orderlist" : "/login"}>
+              <S.HeaderMenuItem>{props.data ? "MYPAGE" : "LOGIN"}</S.HeaderMenuItem>
+            </Link>
+            <Link href={props.data ? "/market" : "/signup"}>
+              <S.HeaderMenuItem onClick={props.data && props.onClickLogout}>
+                {props.data ? "LOGOUT" : "SIGNUP"}{" "}
               </S.HeaderMenuItem>
             </Link>
-          </>
-        )}
+          </S.LoginMenu>
+        </S.User>
+
         <S.NavWrapper>
           <Link href={"/"}>
             <S.Menu>ABOUT</S.Menu>

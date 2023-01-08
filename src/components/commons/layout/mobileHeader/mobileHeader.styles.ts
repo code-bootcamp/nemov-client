@@ -9,11 +9,11 @@ interface ILayoutMobileMenuStyleProps {
 export const HeaderMenu = styled.section`
   width: 60%;
   height: 100vh;
-  padding: 100px 0 0 100px;
+  padding: 10vmax 5vmax;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
   background-color: #648d2a;
   position: absolute;
   top: 0;
@@ -30,8 +30,9 @@ export const User = styled.div`
 `;
 
 export const UserLevel = styled.span`
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: auto;
+  padding: 5px;
   text-align: center;
   line-height: 40px;
   border-radius: 50%;
@@ -46,6 +47,8 @@ export const UserName = styled.h1`
   display: flex;
   align-items: center;
   color: #fff;
+  font-size: 1.6rem;
+  margin-bottom: 2vmax;
 `;
 
 export const UserPoint = styled.p`
@@ -56,20 +59,25 @@ export const UserPoint = styled.p`
 export const HeaderMenuItem = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
   color: #fff;
   cursor: pointer;
-  margin-right: 1rem;
 `;
 
 export const LoginMenu = styled.div`
-  padding: 2rem;
+  height: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: #fff;
   text-align: right;
+  color: #fff;
+  margin-right: 0;
+`;
+
+export const IconMenu = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Payment = styled(AddCardOutlinedIcon)`
@@ -83,12 +91,11 @@ export const Basket = styled(ShoppingBagOutlinedIcon)`
 `;
 
 export const NavWrapper = styled.nav`
-  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 export const Menu = styled.span`
