@@ -35,15 +35,41 @@ export type ICreateProductCategoryInput = {
 };
 
 export type ICreateProductInput = {
-  deliveryFee: Scalars['Int'];
+  /** 상품 상세설명 */
   description: Scalars['String'];
-  discount: Scalars['Int'];
+  /** 상품 할인율, 0 ~ 100 */
+  discountRate: Scalars['Int'];
+  /** 상품 대표 이미지에 해당하는 url */
   image: Scalars['String'];
+  /** 상품명 */
   name: Scalars['String'];
+  /** 품명 및 모델명 */
+  option1: Scalars['String'];
+  /** 제조국(원산지) */
+  option2: Scalars['String'];
+  /** 인증/허가 사항 */
+  option3: Scalars['String'];
+  /** 제조사(수입자) */
+  option4: Scalars['String'];
+  /** 소비자 상담 관련 전화번호 */
+  option5: Scalars['String'];
+  /** 상품 원가 */
   price: Scalars['Int'];
-  productCategoryId: Scalars['String'];
+  /** 상품 카테고리에 해당하는 ID */
+  productCategoryId: Scalars['ID'];
+  /** 상품 재고 수량 */
   quantity: Scalars['Int'];
+  /** 비건 레벨에 해당하는 숫자, 1: 플레시테리언 ~ 7: 비건 */
   veganLevel: Scalars['Int'];
+};
+
+export type ICreateProductOptionInput = {
+  option6: Scalars['String'];
+  option7: Scalars['String'];
+  option8: Scalars['String'];
+  option9: Scalars['String'];
+  option10: Scalars['String'];
+  option11: Scalars['String'];
 };
 
 export type ICreateQuestionInput = {
@@ -173,6 +199,7 @@ export type IMutationCreatePointChargeArgs = {
 
 export type IMutationCreateProductArgs = {
   createProductInput: ICreateProductInput;
+  createProductOptionInput?: InputMaybe<ICreateProductOptionInput>;
 };
 
 
@@ -287,6 +314,7 @@ export type IMutationUpdateAnswerArgs = {
 export type IMutationUpdateProductArgs = {
   productId: Scalars['ID'];
   updateProductInput: IUpdateProductInput;
+  updateProductOptionInput?: InputMaybe<IUpdateProductOptionInput>;
 };
 
 
@@ -359,16 +387,31 @@ export type IPoint = {
 
 export type IProduct = {
   __typename?: 'Product';
-  deliveryFee: Scalars['Int'];
+  /** 상품 생성날짜 */
+  createdAt: Scalars['DateTime'];
   description: Scalars['String'];
-  discount: Scalars['Int'];
+  discountRate: Scalars['Int'];
+  /** 상품 할인가 */
+  discountedPrice: Scalars['Int'];
   id: Scalars['ID'];
   image: Scalars['String'];
   isOutOfStock: Scalars['Boolean'];
+  /** 상품명 */
   name: Scalars['String'];
+  option1: Scalars['String'];
+  option2: Scalars['String'];
+  option3: Scalars['String'];
+  option4: Scalars['String'];
+  option5: Scalars['String'];
   price: Scalars['Int'];
+  /** 상품 카테고리 */
   productCategory: IProductCategory;
+  /** 뷰티 상품에 해당하는 추가 필수 표기 정보 */
+  productOption?: Maybe<IProductOption>;
   quantity: Scalars['Int'];
+  /** 상품 수정 날짜 */
+  updatedAt: Scalars['DateTime'];
+  /** 판매자 */
   user: IUser;
   veganLevel?: Maybe<Scalars['Int']>;
 };
@@ -378,6 +421,17 @@ export type IProductCategory = {
   id: Scalars['ID'];
   image: Scalars['String'];
   name: Scalars['String'];
+};
+
+export type IProductOption = {
+  __typename?: 'ProductOption';
+  id: Scalars['ID'];
+  option6: Scalars['String'];
+  option7: Scalars['String'];
+  option8: Scalars['String'];
+  option9: Scalars['String'];
+  option10: Scalars['String'];
+  option11: Scalars['String'];
 };
 
 export type IProductOrder = {
@@ -621,15 +675,39 @@ export type IUpdateProductCategoryInput = {
 };
 
 export type IUpdateProductInput = {
-  deliveryFee?: InputMaybe<Scalars['Int']>;
+  /** 상품 상세설명 */
   description?: InputMaybe<Scalars['String']>;
-  discount?: InputMaybe<Scalars['Int']>;
+  /** 상품 할인율, 0 ~ 100 */
+  discountRate?: InputMaybe<Scalars['Int']>;
+  /** 상품 대표 이미지에 해당하는 url */
   image?: InputMaybe<Scalars['String']>;
+  /** 상품명 */
   name?: InputMaybe<Scalars['String']>;
+  /** 품명 및 모델명 */
+  option1?: InputMaybe<Scalars['String']>;
+  /** 제조국(원산지) */
+  option2?: InputMaybe<Scalars['String']>;
+  /** 인증/허가 사항 */
+  option3?: InputMaybe<Scalars['String']>;
+  /** 제조사(수입자) */
+  option4?: InputMaybe<Scalars['String']>;
+  /** 소비자 상담 관련 전화번호 */
+  option5?: InputMaybe<Scalars['String']>;
+  /** 상품 원가 */
   price?: InputMaybe<Scalars['Int']>;
-  productCategoryId?: InputMaybe<Scalars['String']>;
+  /** 상품 재고 수량 */
   quantity?: InputMaybe<Scalars['Int']>;
+  /** 비건 레벨에 해당하는 숫자, 1: 플레시테리언 ~ 7: 비건 */
   veganLevel?: InputMaybe<Scalars['Int']>;
+};
+
+export type IUpdateProductOptionInput = {
+  option6?: InputMaybe<Scalars['String']>;
+  option7?: InputMaybe<Scalars['String']>;
+  option8?: InputMaybe<Scalars['String']>;
+  option9?: InputMaybe<Scalars['String']>;
+  option10?: InputMaybe<Scalars['String']>;
+  option11?: InputMaybe<Scalars['String']>;
 };
 
 export type IUpdateQuestionInput = {

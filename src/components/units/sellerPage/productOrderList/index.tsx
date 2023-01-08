@@ -28,7 +28,7 @@ export default function ProductOrderList() {
                 <S.Td>{el.product.name}</S.Td>
                 <S.Td>{el.product.price}</S.Td>
                 <S.Td>{el.status}</S.Td>
-                <S.Td>{el.review?.contents ? "유" : "무"}</S.Td>
+                <S.Td>{el.review?.title ? "유" : "무"}</S.Td>
               </S.Tr>
             ))}
           </S.Tbody>

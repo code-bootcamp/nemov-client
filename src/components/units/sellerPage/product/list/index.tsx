@@ -75,7 +75,7 @@ export default function ProductList() {
                 <S.Td>{index + 1}</S.Td>
                 <S.Td>{el.name}</S.Td>
                 <S.Td>{el.price}원</S.Td>
-                <S.Td>{el.discount}%</S.Td>
+                <S.Td>{el.discountRate}%</S.Td>
                 <S.Td>{el.quantity}개</S.Td>
                 <S.Td>{el.quantity === 0 ? "매진" : "판매중"}</S.Td>
                 <S.Td>{el.productCategory.name}</S.Td>

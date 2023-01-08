@@ -11,10 +11,10 @@ export const FETCH_PRODUCT_ORDERS_BY_SELLER = gql`
       amount
       quantity
       status
-      # buyer {
-      #   id
-      #   name
-      # }
+      buyer {
+        id
+        name
+      }
       seller {
         id
         name
@@ -31,6 +31,7 @@ export const FETCH_PRODUCT_ORDERS_BY_SELLER = gql`
       createdAt
       review {
         title
+        contents
       }
     }
   }
