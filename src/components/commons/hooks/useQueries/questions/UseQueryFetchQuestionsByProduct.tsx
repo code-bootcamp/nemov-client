@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchQuestionsByProductArgs,
-} from "../../../../commons/types/generated/types";
+} from "../../../../../commons/types/generated/types";
 
 export const FETCH_QUESTIONS_BY_PRODUCT = gql`
   query fetchQuestionsByProduct($productId: ID!, $page: Int!) {
