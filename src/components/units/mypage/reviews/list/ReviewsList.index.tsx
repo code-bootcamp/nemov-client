@@ -8,6 +8,7 @@ import { getDate } from "../../../../../commons/libraries/utilies";
 import { UseMutationDeleteReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationDeleteReview";
 import React, { useState } from "react";
 import { IReview } from "../../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 export default function ReviewsList() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
@@ -41,6 +42,7 @@ export default function ReviewsList() {
           reviewId: String(e.currentTarget.id),
         },
       });
+      Modal.success({ content: "후기가 삭제되었습니다." });
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
     }
@@ -52,6 +54,10 @@ export default function ReviewsList() {
 
   return (
     <>
+      <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
+        <ReviewsWrite isEdit={true} review={reviewItemVal} modalOnCancel={modalOnCancel} />
+      </CommonModal01>
+
       <S.ReviewWrapper>
         <S.ReviewUl>
           {data?.fetchReviewsByBuyer.length !== 0 ? (
@@ -59,7 +65,7 @@ export default function ReviewsList() {
               {data?.fetchReviewsByBuyer?.map((reviews, index) => (
                 <>
                   <S.ReviewLi key={index}>
-                    <S.ReviewImg src="" alt="후기 이미지" />
+                    <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
                     <S.ReviewCenterWrapper>
                       <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
                       <S.ReviewDate>{getDate(reviews.createdAt)}</S.ReviewDate>
@@ -75,14 +81,6 @@ export default function ReviewsList() {
                       </S.ReviewDeleteBtn>
                     </S.ReviewBtnWrapper>
                   </S.ReviewLi>
-
-                  <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
-                    <ReviewsWrite
-                      isEdit={true}
-                      review={reviewItemVal}
-                      modalOnCancel={modalOnCancel}
-                    />
-                  </CommonModal01>
                 </>
               ))}
             </>

@@ -81,7 +81,7 @@ export default function MypageBasket() {
   let totalDiscountPrice = 0;
 
   data?.fetchCart.map((cart) => {
-    totalDiscountPrice += cart.price * (cart.discount / 100);
+    totalDiscountPrice += cart.discountedPrice;
     return totalDiscountPrice;
   });
 

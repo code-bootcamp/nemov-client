@@ -182,7 +182,7 @@ export default function Signup(props: ISignupProps) {
               <S.InputBtnWrapper>
                 <S.PhoneInput
                   type="tel"
-                  placeholder="휴대폰 번호를 입력해주세요."
+                  placeholder="휴대폰 번호를 입력해주세요. ( - 제외)"
                   {...register("phone")}
                 />
                 <S.PhoneBtn type="button" onClick={onClickGetToken}>

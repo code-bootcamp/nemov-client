@@ -1,11 +1,12 @@
-import { DatePicker, Space } from "antd";
-import { useState } from "react";
+import { DatePicker, Modal, Space } from "antd";
+import React, { useState } from "react";
 import { getDate } from "../../../../commons/libraries/utilies";
+import { UseMutationCancelPointCharge } from "../../../commons/hooks/useMutations/point/UseMutationCancelPointCharge";
 import {
   UseQueryFetchPointTransactions,
   UseQueryFetchPointTransactionsCount,
 } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
-import Paginations02 from "../../../commons/paginations/Pagination02.index";
+import Pagination from "../../../commons/paginations/Pagination.index";
 import * as S from "./Point.styles";
 
 export default function MypagePoint() {
@@ -16,12 +17,13 @@ export default function MypagePoint() {
   const [startDate, setStartDate] = useState("2023-1-01");
   const [endDate, setEndDate] = useState(getDate(date));
 
+  const [cancelPointCharge] = UseMutationCancelPointCharge();
   const { data, refetch } = UseQueryFetchPointTransactions({
     startDate,
     endDate,
     page: 1,
   });
-
+  console.log(data);
   const { data: dataCount } = UseQueryFetchPointTransactionsCount();
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
@@ -33,6 +35,19 @@ export default function MypagePoint() {
     if (data === undefined) return;
 
     void refetch({ startDate, endDate, page: 1 });
+  };
+
+  const onClickCancelCharge = async (e: React.MouseEvent) => {
+    try {
+      await cancelPointCharge({
+        variables: {
+          impUid: String(e.currentTarget.id),
+        },
+      });
+      Modal.success({ content: "포인트 환불이 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
   };
 
   return (
@@ -50,24 +65,30 @@ export default function MypagePoint() {
         <S.TableTop>
           <S.TableTopLi>날짜</S.TableTopLi>
           <S.TableTopContent>내용</S.TableTopContent>
-          <S.TableTopLi>충전금액</S.TableTopLi>
+          <S.TableTopLi>금액</S.TableTopLi>
           <S.TableTopLi>잔액</S.TableTopLi>
           <S.TableTopSpan></S.TableTopSpan>
         </S.TableTop>
         {data?.fetchPointTransactions.length !== 0 ? (
           <>
-            {data?.fetchPointTransactions.map((el, index) => (
+            {data?.fetchPointTransactions.map((point, index) => (
               <S.TableBottom key={index}>
-                <S.TableBottomLi>{getDate(el.createdAt)}</S.TableBottomLi>
+                <S.TableBottomLi>{getDate(point.createdAt)}</S.TableBottomLi>
                 <S.TableBottomContent>
-                  {(el.status === "PAID" && "충전") ||
-                    (el.status === "CANCELLED" && "환불") ||
-                    (el.status === "BOUGHT" && "구매") ||
-                    (el.status === "REFUNDED" && "구매취소")}
+                  {(point.status === "PAID" && "충전") ||
+                    (point.status === "CANCELLED" && "환불") ||
+                    (point.status === "BOUGHT" && "구매") ||
+                    (point.status === "REFUNDED" && "구매취소")}
                 </S.TableBottomContent>
-                <S.TableBottomLi>+ {el.amount} 원</S.TableBottomLi>
-                <S.TableBottomLi>{el.user.point} 원</S.TableBottomLi>
-                <S.RefundBtn>환불</S.RefundBtn>
+                <S.TableBottomLi>{point.amount} 원</S.TableBottomLi>
+                <S.TableBottomLi>{point.balance} 원</S.TableBottomLi>
+                {point.status === "PAID" ? (
+                  <S.RefundBtn id={point.impUid ?? undefined} onClick={onClickCancelCharge}>
+                    환불
+                  </S.RefundBtn>
+                ) : (
+                  <S.SpanDiv></S.SpanDiv>
+                )}
               </S.TableBottom>
             ))}
           </>
@@ -77,7 +98,7 @@ export default function MypagePoint() {
       </section>
       {data?.fetchPointTransactions.length !== 0 && (
         <section>
-          <Paginations02 count={dataCount} refetch={refetch} />
+          <Pagination count={dataCount?.fetchPointTransactionsCount} refetch={refetch} />
         </section>
       )}
     </S.ContentsMain>

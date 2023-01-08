@@ -70,12 +70,16 @@ export const ItemImg = styled.img`
 `;
 
 export const ItemName = styled.p`
+  width: 30%;
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 0;
+  text-align: center;
 `;
 
 export const ItemInfo = styled.p`
+  width: 15%;
+  text-align: center;
   color: #555;
   margin-bottom: 0;
 `;

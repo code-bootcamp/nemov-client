@@ -1,13 +1,14 @@
 import * as S from "./Orderlist.styles";
-import { DatePicker, Space } from "antd";
-import { useState } from "react";
+import { DatePicker, Modal, Space } from "antd";
+import React, { useState } from "react";
 import {
   UseQueryFetchProductOrdersByBuyer,
   UseQueryFetchProductOrdersCountByBuyer,
 } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductOrdersByBuyer";
 import { getDate } from "../../../../commons/libraries/utilies";
 import Link from "next/link";
-import Pagination02 from "../../../commons/paginations/Pagination02.index";
+import Pagination from "../../../commons/paginations/Pagination.index";
+import { UseMutationCancelProductOrder } from "../../../commons/hooks/useMutations/product/UseMutationCancelProductOrder";
 
 export default function MypageOrderlist() {
   const { RangePicker } = DatePicker;
@@ -16,11 +17,13 @@ export default function MypageOrderlist() {
   const [startDate, setStartDate] = useState("2023-1-01");
   const [endDate, setEndDate] = useState(getDate(date));
 
+  const [cancelProductOrder] = UseMutationCancelProductOrder();
   const { data, refetch } = UseQueryFetchProductOrdersByBuyer({
     startDate,
     endDate,
     page: 1,
   });
+  console.log(data);
 
   const { data: dataCount } = UseQueryFetchProductOrdersCountByBuyer({
     startDate,
@@ -35,6 +38,19 @@ export default function MypageOrderlist() {
   const onClickSearchDate = () => {
     if (data === undefined) return;
     void refetch({ startDate, endDate, page: 1 });
+  };
+
+  const onClickCancelOrder = async (e: React.MouseEvent) => {
+    try {
+      await cancelProductOrder({
+        variables: {
+          productOrderId: e.currentTarget.id,
+        },
+      });
+      Modal.success({ content: "주문취소가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
   };
 
   return (
@@ -56,18 +72,18 @@ export default function MypageOrderlist() {
                   <S.ItemName>{order.product.name}</S.ItemName>
                   <S.ItemInfo>{order.product.price} 원</S.ItemInfo>
                   <S.ItemInfo>{order.quantity}개</S.ItemInfo>
-                  <S.ItemInfo>
-                    {order.status === "BOUGHT" ? "주문완료" : "주문취소 완료"}
-                  </S.ItemInfo>
+                  <S.ItemInfo>{order.status === "BOUGHT" ? "주문완료" : "주문취소"}</S.ItemInfo>
                   {order.status === "BOUGHT" ? (
-                    <S.CancelBtn>주문취소</S.CancelBtn>
+                    <S.CancelBtn id={order.id} onClick={onClickCancelOrder}>
+                      주문취소
+                    </S.CancelBtn>
                   ) : (
                     <S.Area></S.Area>
                   )}
                 </S.OrderInfo>
               </S.OrderHistory>
             ))}
-            <Pagination02 count={dataCount} refetch={refetch} />
+            <Pagination count={dataCount?.fetchProductOrdersCountByBuyer} refetch={refetch} />
           </>
         ) : (
           <>

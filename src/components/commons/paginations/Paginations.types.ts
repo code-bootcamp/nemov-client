@@ -6,14 +6,14 @@ import {
 } from "../../../commons/types/generated/types";
 
 export interface IPagination01Props {
-  count: Pick<IQuery, "fetchProductOrdersCountByBuyer"> | undefined;
+  count: number | undefined;
   refetch: (
     variables?: Partial<IQueryFetchProductOrdersCountByBuyerArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductOrdersByBuyer">>>;
 }
 
 export interface IPagination02Props {
-  count: Pick<IQuery, "fetchPointTransactionsCount"> | undefined;
+  count: number | undefined;
   refetch: (
     variables?: Partial<IQueryFetchPointTransactionsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchPointTransactions">>>;

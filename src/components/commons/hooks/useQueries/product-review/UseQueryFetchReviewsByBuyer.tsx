@@ -12,9 +12,6 @@ export const FETCH_REVIEWS_BY_BUYER = gql`
       product {
         name
         image
-        # user {
-        #   name
-        # }
       }
       images {
         url

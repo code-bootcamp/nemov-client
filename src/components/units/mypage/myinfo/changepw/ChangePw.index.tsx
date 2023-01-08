@@ -12,9 +12,9 @@ export default function MypageMyinfoChangePw() {
     resolver: yupResolver(ChangePwSchema),
     mode: "onChange",
   });
+
   const onSubmitForm = (data: IFormChangePw) => {
-    const { newPassword, ...value } = data;
-    void updateUserPasswordSubmit(value);
+    void updateUserPasswordSubmit(data);
   };
 
   return (
