@@ -4,7 +4,10 @@ import {
   StyledCommonButton01,
   StyledCommonButton02,
 } from "../../../../../../commons/buttons/CommonButtons.styles";
-import { CommonHeartIcon01 } from "../../../../../../commons/icons/CommonIcons.styles";
+import {
+  CommonHeartIcon01,
+  CommonHeartIcon02,
+} from "../../../../../../commons/icons/CommonIcons.styles";
 import { VeganLevelTag01 } from "../../../../../../commons/tags/CommonTags.Styles";
 
 import { IMarketDetailProps } from "../../../../Market.types";
@@ -19,15 +22,18 @@ import {
   IMutationCreateProductOrderArgs,
 } from "../../../../../../../commons/types/generated/types";
 import { Modal } from "antd";
+import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
 
 function MarketDetailHead(props: IMarketDetailProps) {
   const [createProductOrder] = useMutation<
     Pick<IMutation, "createProductOrder">,
     IMutationCreateProductOrderArgs
   >(CREATE_PRODUCT_ORDER);
+  const { productPick } = UseMutationToggleProductPick();
 
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isPicked, setIsPicked] = useState<boolean | undefined>(false);
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
@@ -67,6 +73,19 @@ function MarketDetailHead(props: IMarketDetailProps) {
         },
       });
       Modal.success({ content: "구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
+
+  // 찜하기 기능
+  const onClickTogglePick = (productId: string | undefined) => async (event: React.MouseEvent) => {
+    event?.stopPropagation();
+    try {
+      if (productId === undefined) return;
+      const result = await productPick(productId);
+      const status = result?.data?.toggleProductPick;
+      setIsPicked(status);
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
     }
@@ -139,7 +158,11 @@ function MarketDetailHead(props: IMarketDetailProps) {
               <S.PriceSumDetail01>{sum.toLocaleString()}원</S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
-              <CommonHeartIcon01 />
+              {!isPicked ? (
+                <CommonHeartIcon01 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+              ) : (
+                <CommonHeartIcon02 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+              )}
               <StyledCommonButton02>장바구니</StyledCommonButton02>
               <StyledCommonButton01 onClick={onClickBuyProduct}>구매하기</StyledCommonButton01>
             </S.ButtonsWrapper01>

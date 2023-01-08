@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { amazon, pastelGray, white } from "../../../commons/styles/colorPalettes";
 import { colorBase03, colorBase04 } from "../../../commons/styles/colorBases";
 
@@ -41,6 +42,16 @@ export const CommonBasketIcon03 = styled(ShoppingBagOutlinedIcon)`
     transition: all 0.5s ease-in-out;
     ${colorBase03}
   }
+  cursor: pointer;
+`;
+
+export const CommonHeartIcon02 = styled(FavoriteIcon)`
+  width: 2.8rem;
+  height: 2.8rem;
+  color: ${amazon};
+  border: 1px solid ${pastelGray};
+  border-radius: 10px;
+  padding: 7px;
   cursor: pointer;
 `;
 
