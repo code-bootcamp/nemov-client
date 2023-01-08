@@ -6,6 +6,7 @@ import { UseMutationCreateProduct } from "../../../../commons/hooks/useMutations
 import { useForm } from "react-hook-form";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
+import { UseQueryFetchCategories } from "../../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 // import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
 // import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 
@@ -19,20 +20,35 @@ interface ProductInput {
     id: string;
     name: string;
   };
-  deliveryFee?: number;
   description?: string;
-  discount?: number;
+  discountRate?: number;
   image?: string;
   price?: number;
   quantity?: number;
   veganLevel?: number;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  option5: string;
+  productOption?: {
+    option6: string;
+    option7: string;
+    option8: string;
+    option9: string;
+    option10: string;
+    option11: string;
+  };
 }
+
+const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
 
 export default function ProductWrite(props: ProductWriteProps) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
+  const { data: category } = UseQueryFetchCategories();
 
   const [createProduct] = UseMutationCreateProduct();
   // const [updateProduct] = UseMutationUpdateProduct();
@@ -90,12 +106,16 @@ export default function ProductWrite(props: ProductWriteProps) {
           name: String(data.name),
           productCategoryId: String(data.productCategoryId),
           description: "11111",
-          discount: Number(data.discount),
-          deliveryFee: Number(data.deliveryFee),
+          discountRate: Number(data.discountRate),
           price: Number(data.price),
           quantity: Number(data.quantity),
           image: String(url),
           veganLevel: Number(data.veganLevel),
+          option1: data.option1,
+          option2: data.option2,
+          option3: data.option3,
+          option4: data.option4,
+          option5: data.option5,
         },
       },
     });
@@ -161,17 +181,8 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.InputBox
             type="number"
             placeholder="할인율을 입력하세요"
-            {...register("discount")}
-            defaultValue={data?.discount}
-          />
-        </S.Row>
-        <S.Row>
-          <S.SubTitle>배송비</S.SubTitle>{" "}
-          <S.InputBox
-            type="text"
-            placeholder="배송비를 입력하세요"
-            {...register("deliveryFee")}
-            defaultValue={data?.deliveryFee}
+            {...register("discountRate")}
+            defaultValue={data?.discountRate}
           />
         </S.Row>
         <S.Row>
@@ -186,39 +197,20 @@ export default function ProductWrite(props: ProductWriteProps) {
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
           <div>
-            <input
-              type="radio"
-              id="e308aa69-e1f4-409a-b627-dcc690ab23e5"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            BEAUTY
-            <input
-              type="radio"
-              id="d2ad6919-f3cf-4e78-8463-65ec88f4d2c7"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            FOOD
-            <input
-              type="radio"
-              id="ba9751ba-45d2-47f8-a80e-9850ed490d2f"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            DRINK
-            <input
-              type="radio"
-              id="3bcbd43a-2ae1-41c9-a788-f3f86f3c2c56"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            LIFE
+            {category?.fetchProductCategories.map((categories, index) => (
+              <input type="radio" key={categories.id} id={categories.id} onClick={onClickGetValue}>
+                {categoryArr[index]}
+              </input>
+            ))}
           </div>
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 고시 정보</S.SubTitle>
-          <div>상품고시정보...</div>
+          <div>상품고시정보</div>
+          <div>상품고시정보</div>
+          <div>상품고시정보</div>
+          <div>상품고시정보</div>
+          <div>상품고시정보</div>
         </S.Row>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>

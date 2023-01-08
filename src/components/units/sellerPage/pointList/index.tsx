@@ -15,8 +15,8 @@ export default function PointList() {
         <S.Table>
           <S.Thead>
             <S.Tr>
-              <S.Th>번호</S.Th>
               <S.Th>날짜</S.Th>
+              <S.Th>상태</S.Th>
               <S.Th>입출금 내역</S.Th>
               <S.Th>포인트 합계</S.Th>
             </S.Tr>
@@ -24,8 +24,8 @@ export default function PointList() {
           <S.Tbody>
             {data?.fetchPointTransactions.map((el, index) => (
               <S.Tr key={el.id}>
-                <S.Td>{el.balance}</S.Td>
                 <S.Td>{getDate(el.createdAt)}</S.Td>
+                <S.Td>{el.status}</S.Td>
                 <S.Td>{el.amount}원</S.Td>
                 <S.Td>{el.balance}원</S.Td>
               </S.Tr>

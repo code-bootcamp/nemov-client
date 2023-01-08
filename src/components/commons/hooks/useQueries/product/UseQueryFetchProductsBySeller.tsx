@@ -18,7 +18,7 @@ export const FETCH_PRODUCTS_BY_SELLER = gql`
       veganLevel
       deliveryFee
       price
-      discount
+      discountRate
       quantity
       isOutOfStock
     }

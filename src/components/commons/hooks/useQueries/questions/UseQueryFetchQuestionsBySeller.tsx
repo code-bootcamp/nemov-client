@@ -10,6 +10,7 @@ export const FETCH_QUESTIONS_BY_SELLER = gql`
       id
       title
       contents
+      createdAt
       product {
         id
         name
