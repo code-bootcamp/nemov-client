@@ -7,31 +7,40 @@ import { useForm } from "react-hook-form";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { UseQueryFetchCategories } from "../../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
-// import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
-// import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
+import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import { categoryContents } from "../register/category";
 
 interface ProductWriteProps {
   isEdit: boolean;
 }
 
 interface ProductInput {
-  name?: string;
+  name: string;
   productCategoryId: {
     id: string;
     name: string;
   };
-  description?: string;
-  discountRate?: number;
-  image?: string;
-  price?: number;
-  quantity?: number;
-  veganLevel?: number;
+  description: string;
+  discountRate: number;
+  image: string;
+  price: number;
+  quantity: number;
+  veganLevel: number;
   option1: string;
   option2: string;
   option3: string;
   option4: string;
   option5: string;
-  productOption?: {
+  createProductOptionInput?: {
+    option6: string;
+    option7: string;
+    option8: string;
+    option9: string;
+    option10: string;
+    option11: string;
+  };
+  updateProductOptionInput?: {
     option6: string;
     option7: string;
     option8: string;
@@ -49,12 +58,11 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
   const { data: category } = UseQueryFetchCategories();
-
+  const newCategory = category?.fetchProductCategories.filter((el, i) => el.name !== "전체");
   const [createProduct] = UseMutationCreateProduct();
-  // const [updateProduct] = UseMutationUpdateProduct();
+  const [updateProduct] = UseMutationUpdateProduct();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
-  console.log(data);
 
   const [uploadFile] = UseMutationUploadFile();
 
@@ -78,7 +86,6 @@ export default function ProductWrite(props: ProductWriteProps) {
   };
 
   const onClickGetValue = (event: any) => {
-    console.log(event.target.id);
     setValue("productCategoryId", event.target.id);
   };
 
@@ -97,25 +104,33 @@ export default function ProductWrite(props: ProductWriteProps) {
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
-
+    if (!url) return;
     // const context = Editor.prototype.getInstance().getHTML();
 
     const result = await createProduct({
       variables: {
         createProductInput: {
-          name: String(data.name),
-          productCategoryId: String(data.productCategoryId),
+          name: data.name,
+          productCategoryId: data.productCategoryId.id,
           description: "11111",
-          discountRate: Number(data.discountRate),
-          price: Number(data.price),
-          quantity: Number(data.quantity),
-          image: String(url),
-          veganLevel: Number(data.veganLevel),
+          discountRate: data.discountRate,
+          price: data.price,
+          quantity: data.quantity,
+          image: url,
+          veganLevel: data.veganLevel,
           option1: data.option1,
           option2: data.option2,
           option3: data.option3,
           option4: data.option4,
           option5: data.option5,
+        },
+        createProductOptionInput: {
+          option6: String(data.createProductOptionInput?.option6),
+          option7: String(data.createProductOptionInput?.option7),
+          option8: String(data.createProductOptionInput?.option8),
+          option9: String(data.createProductOptionInput?.option9),
+          option10: String(data.createProductOptionInput?.option10),
+          option11: String(data.createProductOptionInput?.option11),
         },
       },
     });
@@ -124,34 +139,45 @@ export default function ProductWrite(props: ProductWriteProps) {
   };
 
   const onClickEdit = async (data: ProductInput) => {
-    // const resultFile = await uploadFile({ variables: { file: files } });
-    // const url = resultFile.data?.uploadFile;
-    // console.log("3333333");
-    // await updateProduct({
-    //   variables: {
-    //     productCategoryId: String(router.query.productId),
-    //     updateProductInput: {
-    //       name: String(data.name),
-    //       productCategoryId: data.productCategoryId,
-    //       description: "11111",
-    //       discount: Number(data.discount),
-    //       deliveryFee: Number(data.deliveryFee),
-    //       price: Number(data.price),
-    //       quantity: Number(data.quantity),
-    //       image: String(url),
-    //       veganLevel: Number(data.veganLevel),
-    //     },
-    //   },
-    //   refetchQueries: [
-    //     {
-    //       query: FETCH_PRODUCTS_BY_SELLER,
-    //       variables: {
-    //         page: 1,
-    //       },
-    //     },
-    //   ],
-    // });
-    // void router.push("/seller");
+    const resultFile = await uploadFile({ variables: { file: files } });
+    const url = resultFile.data?.uploadFile;
+    console.log("3333333");
+    await updateProduct({
+      variables: {
+        productId: String(router.query.productId),
+        updateProductInput: {
+          name: data.name,
+          description: "11111",
+          discountRate: data.discountRate,
+          price: data.price,
+          quantity: data.quantity,
+          image: url,
+          veganLevel: data.veganLevel,
+          option1: data.option1,
+          option2: data.option2,
+          option3: data.option3,
+          option4: data.option4,
+          option5: data.option5,
+        },
+        updateProductOptionInput: {
+          option6: String(data.updateProductOptionInput?.option6),
+          option7: String(data.updateProductOptionInput?.option7),
+          option8: String(data.updateProductOptionInput?.option8),
+          option9: String(data.updateProductOptionInput?.option9),
+          option10: String(data.updateProductOptionInput?.option10),
+          option11: String(data.updateProductOptionInput?.option11),
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_PRODUCTS_BY_SELLER,
+          variables: {
+            page: 1,
+          },
+        },
+      ],
+    });
+    void router.push("/seller");
   };
 
   return (
@@ -196,21 +222,27 @@ export default function ProductWrite(props: ProductWriteProps) {
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
-          <div>
-            {category?.fetchProductCategories.map((categories, index) => (
-              <input type="radio" key={categories.id} id={categories.id} onClick={onClickGetValue}>
-                {categoryArr[index]}
-              </input>
+          <S.Category>
+            {newCategory?.map((categories, index) => (
+              <S.Label key={categories.id}>
+                <input type="radio" id={categories.id} name="category" onClick={onClickGetValue} />
+                <S.Radio>{categoryArr[index]}</S.Radio>
+              </S.Label>
             ))}
-          </div>
+          </S.Category>
         </S.Row>
         <S.Row>
-          <S.SubTitle>상품 고시 정보</S.SubTitle>
-          <div>상품고시정보</div>
-          <div>상품고시정보</div>
-          <div>상품고시정보</div>
-          <div>상품고시정보</div>
-          <div>상품고시정보</div>
+          <S.SubTitle>상세 고시 정보</S.SubTitle>
+          <div style={{ border: "1px solid red" }}>
+            {categoryContents.map((notice, index) => (
+              <S.NoticeMap key={index}>
+                <S.Notice>{categoryContents[index]}</S.Notice>
+                <S.Notice>
+                  <S.NoticeInput type="text" />
+                </S.Notice>
+              </S.NoticeMap>
+            ))}
+          </div>
         </S.Row>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>

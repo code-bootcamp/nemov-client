@@ -53,6 +53,7 @@ export const Wrapper = styled.header`
     }
   }
   @media ${tablet} {
+    padding: 1rem;
     :hover {
       div,
       ${Menu}, ${Basket}, ${Payment} {

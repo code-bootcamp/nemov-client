@@ -13,14 +13,12 @@ export const FETCH_PRODUCTS_BY_SELLER = gql`
         id
         name
       }
-      description
-      image
       veganLevel
-      deliveryFee
       price
       discountRate
       quantity
       isOutOfStock
+      createdAt
     }
   }
 `;

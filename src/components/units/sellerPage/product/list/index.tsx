@@ -8,7 +8,7 @@ import {
 } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
 import React, { useState } from "react";
-import { getVeganName } from "../../../../../commons/libraries/utilies";
+import { getDate, getVeganName } from "../../../../../commons/libraries/utilies";
 
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
@@ -44,9 +44,7 @@ export default function ProductList() {
       onOk() {
         void onClickDelete(clickEvent);
       },
-      onCancel() {
-        console.log("Cancel");
-      },
+      onCancel() {},
     });
   };
 
@@ -58,6 +56,7 @@ export default function ProductList() {
           <S.Thead>
             <S.Tr>
               <S.Th>번호</S.Th>
+              <S.Th>날짜</S.Th>
               <S.Th>상품</S.Th>
               <S.Th>가격</S.Th>
               <S.Th>할인률</S.Th>
@@ -73,6 +72,7 @@ export default function ProductList() {
             {data?.fetchProductsBySeller.map((el, index) => (
               <S.Tr key={el.id}>
                 <S.Td>{index + 1}</S.Td>
+                <S.Td>{getDate(el.createdAt)}</S.Td>
                 <S.Td>{el.name}</S.Td>
                 <S.Td>{el.price}원</S.Td>
                 <S.Td>{el.discountRate}%</S.Td>
