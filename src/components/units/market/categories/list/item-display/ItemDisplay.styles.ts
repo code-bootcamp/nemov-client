@@ -20,6 +20,9 @@ const ItemStyleSet01 = css`
 export const FontStyle02 = css`
   ${GS.semiBold}
   font-size: 1.5vmax;
+  @media ${mobile} {
+    font-size: 3vmax;
+  }
 `;
 
 export const ItemDetailFooter02 = styled.footer`
@@ -117,6 +120,9 @@ export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
 // 추천 아이템 디스플레이 스타일
 
 export const ItemsWrapper03 = styled.section`
+  @media ${mobile} {
+    justify-content: center;
+  }
   width: 100%;
   padding: 2rem 1.5rem;
   ${GS.flexRow}
@@ -128,6 +134,9 @@ export const ItemsWrapper03 = styled.section`
 `;
 
 export const ItemDisplay = styled.div`
+  @media ${mobile} {
+    width: 80%;
+  }
   ${ItemStyleSet01}
   width: 30%;
 `;
@@ -146,17 +155,17 @@ export const RecommendItemImg01 = styled.div`
 
 export const DiscountDisplay = styled.div`
   @media ${mobile} {
-    width: 4vw;
+    font-size: 1vmax;
+    padding: 2.8% 2%;
   }
-  width: 3vw;
-  padding: 1.5vh 0vw;
+  padding: 2.5% 2%;
   display: inline-block;
   position: absolute;
   left: 0;
   top: 0;
   border-radius: 4px;
   z-index: 1;
-  font-size: 1vmax;
+  font-size: 1rem;
   text-align: center;
 
   ${CB.colorBase03}
@@ -208,6 +217,9 @@ export const ItemDetail = styled.div`
 // `;
 
 export const ItemName = styled.span`
+  @media ${mobile} {
+    font-size: 2vmax;
+  }
   font-size: 1.5vmax;
 `;
 
@@ -225,6 +237,9 @@ export const ItemDiscountPrice = styled.span`
 `;
 
 export const ItemOriginPrice = styled.span`
+  @media ${mobile} {
+    font-size: 1rem;
+  }
   color: ${CP.gray};
   font-size: 0.8rem;
   text-decoration: line-through;
