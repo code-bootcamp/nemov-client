@@ -92,6 +92,9 @@ export const ItemOriginPrice03 = styled.span`
 // 검색창, 셀렉트박스 스타일
 
 export const ListSearchSection = styled.section`
+  @media ${mobile} {
+    padding: 0 2rem;
+  }
   width: 100%;
   ${GS.flexRow}
   justify-content: flex-end;
@@ -102,11 +105,17 @@ export const ListSearchSection = styled.section`
 `;
 
 export const SearchSection = styled.section`
+  @media ${mobile} {
+    width: 70%;
+  }
   display: flex;
   align-items: center;
 `;
 
 export const SearchInputBox = styled.input`
+  @media ${mobile} {
+    width: 100%;
+  }
   padding: 0.5rem;
   border-bottom: 2px solid ${gray};
 `;
@@ -118,5 +127,8 @@ export const StyledSearchIcon = styled(SearchIcon)`
 `;
 
 export const SelectBox = styled(Select)`
+  @media ${mobile} {
+    width: 15rem;
+  }
   width: 10rem;
 `;

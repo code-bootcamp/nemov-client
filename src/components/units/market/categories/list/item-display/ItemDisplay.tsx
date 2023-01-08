@@ -9,12 +9,14 @@ import * as S from "./ItemDisplay.styles";
 
 interface IItemDisPlayProps {
   recData?: IProduct;
+  ranking?: number;
 }
 
 // 베스트 상품 아이템 디스플레이
-export const ItemDisPlay01 = () => {
+export const ItemDisPlay01 = (props: IItemDisPlayProps) => {
   return (
     <S.ItemDisplay01>
+      {/* <S.BestItemRanking>{props.ranking}</S.BestItemRanking> */}
       <S.BestItemImage image="/images/best1.jpg"></S.BestItemImage>
       <S.ItemDetailFooter02>
         <S.DetailFooterLeft>
