@@ -9,7 +9,8 @@ export const FETCH_PRODUCTS_OF_RECOMMEND = gql`
       image
       veganLevel
       price
-      discount
+      discountRate
+      discountedPrice
       isOutOfStock
     }
   }

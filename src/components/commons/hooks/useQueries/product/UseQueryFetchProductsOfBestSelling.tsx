@@ -9,7 +9,7 @@ export const FETCH_PRODUCTS_OF_BEST_SELLING = gql`
       image
       veganLevel
       price
-      discount
+      discountRate
       isOutOfStock
     }
   }

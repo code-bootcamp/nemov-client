@@ -2,6 +2,13 @@ import styled from "@emotion/styled";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
+export const MarketDetailCrumbsWrapper = styled.section`
+  margin-top: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
 export const MarketDetailPageHead = styled.section`
   width: 100%;
   ${flexRow}
@@ -44,7 +51,7 @@ export const ProductDetailLevelSection = styled.section`
 export const ProductPriceDetail01 = styled.section`
   margin-bottom: 1rem;
   ${flexColumn}
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
 `;
 
@@ -53,7 +60,7 @@ export const ProductDiscount01 = styled.span`
 `;
 
 export const ProductOriginalPrice01 = styled.span`
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: ${gray};
   text-decoration: line-through;
 `;
@@ -66,11 +73,16 @@ export const PriceDetailSection01 = styled.section`
 `;
 
 export const DetailInfoTitle01 = styled.span`
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
 `;
 
 export const DetailInfoContent01 = styled.span`
+  font-size: 1.1rem;
+  font-weight: 500;
+`;
+export const DetailInfoContent02 = styled.span`
+  color: gray;
   font-size: 0.9rem;
   font-weight: 500;
 `;
@@ -98,7 +110,7 @@ export const PriceSumSection01 = styled.section`
 `;
 
 export const PriceSumDetail01 = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 700;
 `;
 

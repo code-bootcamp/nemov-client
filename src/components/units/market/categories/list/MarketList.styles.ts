@@ -14,7 +14,7 @@ export const CategoryMain = styled.main`
 `;
 
 export const ListTitle = styled.h1`
-  margin-top: 4rem;
+  margin-top: 4.6rem;
   ${GS.bold}
 `;
 
@@ -27,10 +27,29 @@ export const ItemImage03 = styled.img`
   cursor: pointer;
 `;
 
+export const SoldOut = styled.span``;
+
+export const ItemSoldOutDisPlay = styled.div`
+  width: 100%;
+  ${GS.flexCenter}
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  aspect-ratio: 1/1;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  :hover ${SoldOut} {
+    display: block;
+  }
+`;
+
 export const ItemImageBox01 = styled.div`
   width: 100%;
   ${GS.flexColumn}
   overflow: hidden;
+  position: relative;
   :hover ${ItemImage03} {
     transform: scale(1.1);
   }
@@ -78,7 +97,7 @@ export const ListSearchSection = styled.section`
   justify-content: flex-end;
   align-items: center;
   padding: 0 4rem;
-  margin: 5rem 0 1rem;
+  margin: 1rem 0;
   gap: 1rem;
 `;
 

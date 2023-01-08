@@ -25,14 +25,20 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 export default function MarketMain() {
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
+  const { data: categoryData } = UseQueryFetchCategories();
+  const { data: loginUserData } = UseQueryFetchLoginUser();
 
-  console.log(
-    "베스트아이템 데이터",
-    bestItemData?.fetchProductsOfRecommend,
+  console.log("추천상품", recItemData);
 
-    "추천아이템 데이터",
-    recItemData?.fetchProductsOfRecommend
-  );
+  // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
+  //   if (!rec.isOutOfStock) {
+  //     return rec;
+  //   } else {
+  //     return undefined;
+  //   }
+  // });
+
+  // console.log("추천상품 중 매진 아닌것", curRecItemData);
 
   const settings = {
     centerMode: true,
@@ -48,9 +54,6 @@ export default function MarketMain() {
     prevArrow: <PrevArrow />,
   };
 
-  const { data: categoryData } = UseQueryFetchCategories();
-  const { data: loginUserData } = UseQueryFetchLoginUser();
-
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
@@ -59,14 +62,17 @@ export default function MarketMain() {
           <S.PageLine />
           <S.RecommendItemSection01>
             <S.MarketMainHeader01>
-              <S.HeaderSpan>{loginUserData?.fetchLoginUser.name}</S.HeaderSpan>님, 이런 상품은
-              어떠신가요?
+              <S.HeaderSpan>
+                {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
+              </S.HeaderSpan>
+              이런 상품은 어떠신가요?
               <S.HeaderDiv01>추천상품</S.HeaderDiv01>
             </S.MarketMainHeader01>
             <S.ItemsWrapper01>
-              {new Array(3).fill(1).map((_, index) => (
-                <ID.ItemDisPlay02 key={index} />
+              {recItemData?.fetchProductsOfRecommend.map((rec) => (
+                <ID.ItemDisPlay02 key={rec.id} recData={rec} />
               ))}
+              {/* <ID.ItemDisPlay02 key={rec.id} recData={rec} />; */}
             </S.ItemsWrapper01>
           </S.RecommendItemSection01>
           <S.MainMarketSection01>

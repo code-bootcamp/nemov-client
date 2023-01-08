@@ -1,20 +1,19 @@
 import React, { memo, useCallback, useState } from "react";
-import {
-  getDiscountPrice,
-  getVeganName,
-  sumOfTotalAmount,
-} from "../../../../../../../commons/libraries/utilies";
+import { getVeganName } from "../../../../../../../commons/libraries/utilies";
 import {
   StyledCommonButton01,
   StyledCommonButton02,
 } from "../../../../../../commons/buttons/CommonButtons.styles";
-import { CommonHeartIcon01 } from "../../../../../../commons/icons/CommonIcons.styles";
+import {
+  CommonHeartIcon01,
+  CommonHeartIcon02,
+} from "../../../../../../commons/icons/CommonIcons.styles";
 import { VeganLevelTag01 } from "../../../../../../commons/tags/CommonTags.Styles";
 
 import { IMarketDetailProps } from "../../../../Market.types";
 
 import * as S from "./MarketDetailHead.styles";
-import MarketDetailHeadCrumbs from "./nav/MarketDetailHeadCrumbs";
+import Crumbs from "./nav/MarketCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/CountDownUpButtons";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT_ORDER } from "../../../../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
@@ -23,61 +22,45 @@ import {
   IMutationCreateProductOrderArgs,
 } from "../../../../../../../commons/types/generated/types";
 import { Modal } from "antd";
+import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
 
 function MarketDetailHead(props: IMarketDetailProps) {
-  // 할인율 적용된 가격
-  const productPrice = getDiscountPrice(
-    props.data.data?.fetchProduct.price,
-    props.data.data?.fetchProduct.discount
-  );
-
   const [createProductOrder] = useMutation<
     Pick<IMutation, "createProductOrder">,
     IMutationCreateProductOrderArgs
   >(CREATE_PRODUCT_ORDER);
+  const { productPick } = UseMutationToggleProductPick();
 
-  const [quantity, setQuantity] = useState(1);
-  const [totalAmount, setTotalAmountAmount] = useState(1);
-  // const [isDisabled, setIsDisabled] = useState(false);
+  const [quantity, setQuantity] = useState(parseInt("1"));
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isPicked, setIsPicked] = useState<boolean | undefined>(false);
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      if (productPrice === undefined) {
-        return;
+      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+
+      if (quantity <= 1) {
+        setQuantity(1);
+      } else {
+        setIsDisabled(false);
+        setQuantity((prev) => prev - 1);
       }
-      setQuantity((prev) => prev - 1);
-      setTotalAmountAmount(productPrice * quantity);
+      console.log(quantity);
     },
     [quantity]
   );
 
   const onClickQuantityUp = useCallback(
     (e: React.MouseEvent) => {
-      console.log("클릭");
       e.preventDefault();
-      if (productPrice === undefined) {
-        return;
-      }
+      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+
       setQuantity((prev) => prev + 1);
-      setTotalAmountAmount(productPrice * quantity);
     },
     [quantity]
   );
-
-  // 수량 버튼 누르면 금액 변경되는 함수
-  // useEffect(() => {
-  //   const onChangeProductPrice = () => {
-  //     if (productPrice === undefined) {
-  //       return;
-  //     }
-  //     const amountUp = productPrice * quantity;
-  //     setAmount(amountUp);
-  //   };
-  // }, [onClickQuantityDown]);
-
-  // const { buyProduct } = UseMutationCreateProductOrder();
 
   // 구매 버튼 함수
   const onClickBuyProduct = async () => {
@@ -85,7 +68,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
       await createProductOrder({
         variables: {
           productId: String(props.data.data?.fetchProduct.id),
-          amount: totalAmount,
+          amount: sum,
           quantity,
         },
       });
@@ -94,9 +77,38 @@ function MarketDetailHead(props: IMarketDetailProps) {
       if (error instanceof Error) console.log(error.message);
     }
   };
+
+  // 찜하기 기능
+  const onClickTogglePick = (productId: string | undefined) => async (event: React.MouseEvent) => {
+    event?.stopPropagation();
+    try {
+      if (productId === undefined) return;
+      const result = await productPick(productId);
+      const status = result?.data?.toggleProductPick;
+      setIsPicked(status);
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
+
+  const sum = (props.data.data?.fetchProduct.discountedPrice ?? 0) * quantity;
+  // useEffect(() => {
+  //   if (props.data.data?.fetchProduct.discountedPrice !== undefined) {
+  //     setTotalAmountAmount(sum);
+  //     setQuantity(quantity);
+  //   }
+  // }, [props.data]);
+
+  console.log("선택수량", quantity, "총 상품 금액", sum);
+
   return (
     <>
-      <MarketDetailHeadCrumbs />
+      <S.MarketDetailCrumbsWrapper>
+        <Crumbs
+          id={props.data.data?.fetchProduct.productCategory.id}
+          categoryName={props.data.data?.fetchProduct.productCategory.name}
+        />
+      </S.MarketDetailCrumbsWrapper>
       <S.MarketDetailPageHead>
         {props.data.data?.fetchProduct.image !== undefined ? (
           <S.ProductDetailImage01 src={`${props.data.data?.fetchProduct.image}`} />
@@ -115,41 +127,42 @@ function MarketDetailHead(props: IMarketDetailProps) {
           </S.ProductDetailLevelSection>
           <S.ProductPriceDetail01>
             <S.PriceDetailSection01>
-              <S.ProductDiscount01>{props.data.data?.fetchProduct.discount}%</S.ProductDiscount01>
-              <span>{productPrice}원</span>
+              <S.ProductDiscount01>
+                {props.data.data?.fetchProduct.discountRate}%
+              </S.ProductDiscount01>
+              <span>{props.data.data?.fetchProduct.discountedPrice.toLocaleString()}원</span>
               <S.ProductOriginalPrice01>
-                {props.data.data?.fetchProduct.price}원
+                {props.data.data?.fetchProduct.price.toLocaleString()}원
               </S.ProductOriginalPrice01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
               <S.DetailInfoTitle01>배송비</S.DetailInfoTitle01>
-              <S.DetailInfoContent01>
-                {props.data.data?.fetchProduct.deliveryFee}원
-              </S.DetailInfoContent01>
+              <S.DetailInfoContent01>3,000원</S.DetailInfoContent01>
+            </S.PriceDetailSection01>
+            <S.PriceDetailSection01>
+              <S.DetailInfoContent02>30,000원 이상 구매시 배송비 무료</S.DetailInfoContent02>
             </S.PriceDetailSection01>
           </S.ProductPriceDetail01>
           <S.ProductDetailFooter01>
             <S.PQuantitySelectSection>
               <S.DetailInfoTitle01>{props.data.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
-                <span>{(productPrice ?? 0) * quantity}원</span>
-                <CountDownBtn type="button" onClick={onClickQuantityDown} />
+                <span>{sum.toLocaleString()}원</span>
+                <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
                 <span>{quantity}</span>
                 <CountUpBtn type="button" onClick={onClickQuantityUp} />
               </S.PQRightButtons>
             </S.PQuantitySelectSection>
             <S.PriceSumSection01>
               <S.DetailInfoTitle01>총 상품 금액</S.DetailInfoTitle01>
-              <S.PriceSumDetail01>
-                {sumOfTotalAmount(
-                  (productPrice ?? 0) * quantity,
-                  props.data.data?.fetchProduct.deliveryFee ?? 0
-                )}
-                원
-              </S.PriceSumDetail01>
+              <S.PriceSumDetail01>{sum.toLocaleString()}원</S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
-              <CommonHeartIcon01 />
+              {!isPicked ? (
+                <CommonHeartIcon01 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+              ) : (
+                <CommonHeartIcon02 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+              )}
               <StyledCommonButton02>장바구니</StyledCommonButton02>
               <StyledCommonButton01 onClick={onClickBuyProduct}>구매하기</StyledCommonButton01>
             </S.ButtonsWrapper01>

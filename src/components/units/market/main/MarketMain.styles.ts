@@ -121,7 +121,8 @@ export const ItemsWrapper01 = styled.section`
   padding: 2rem 1.5rem;
   ${GS.flexRow}
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap: 5%;
   background-color: white;
   border-radius: 8px;
 `;

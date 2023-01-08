@@ -10,8 +10,8 @@ export const TagsWrapper01 = styled.div`
 export const VeganLevelTag01 = styled.div`
   ${flexCenter}
   width: auto;
-  height: 25px;
-  padding: 10px;
+  /* height: 25px; */
+  padding: 0.5rem;
   font-family: "SUIT-Light";
   font-size: 0.5rem;
   text-align: center;

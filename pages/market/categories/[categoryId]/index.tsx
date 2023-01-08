@@ -6,6 +6,7 @@ import { UseQueryFetchProducts } from "../../../../src/components/commons/hooks/
 import MarketList from "../../../../src/components/units/market/categories/list/MarketList";
 import { CategoryMain } from "../../../../src/components/units/market/categories/list/MarketList.styles";
 import MarketCategory from "../../../../src/components/units/market/categories/category/MarketCategory";
+import { UseQueryFetchIsInCart } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchIsInCart";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
@@ -18,12 +19,20 @@ export default function MarketCategoriesPage() {
 
   const { data: categoryData } = UseQueryFetchCategories();
 
+  const { data: isInCartData } = UseQueryFetchIsInCart({
+    productId: String(router.query.productId),
+  });
+
   return (
     <>
       <GlobalWrapper>
         <CategoryMain>
           <MarketCategory categoryData={categoryData} />
-          <MarketList categoryData={categoryData} productsData={productsData} />
+          <MarketList
+            categoryData={categoryData}
+            productsData={productsData}
+            isInCartData={isInCartData}
+          />
         </CategoryMain>
       </GlobalWrapper>
     </>

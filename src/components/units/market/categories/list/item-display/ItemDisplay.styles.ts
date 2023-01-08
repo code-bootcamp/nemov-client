@@ -127,21 +127,21 @@ export const RecommendItemImg01 = styled.div`
   object-fit: cover;
   display: inline-block;
   position: relative;
-  ::after {
-    content: "19%";
-    width: 10%;
-    padding: 0.5rem 2.5rem 0.5rem 0.5rem;
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 4px;
-    z-index: 1;
-    text-align: center;
-
-    ${CB.colorBase03}
-  }
   aspect-ratio: 1/1;
+`;
+
+export const DiscountDisplay = styled.div`
+  width: 10%;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 4px;
+  z-index: 1;
+  text-align: center;
+
+  ${CB.colorBase03}
 `;
 
 // 마켓 베스트 아이템 디스플레이

@@ -9,9 +9,9 @@ export const FETCH_PRODUCT = gql`
       description
       image
       veganLevel
-      deliveryFee
       price
-      discount
+      discountRate
+      discountedPrice
       quantity
       isOutOfStock
       user {

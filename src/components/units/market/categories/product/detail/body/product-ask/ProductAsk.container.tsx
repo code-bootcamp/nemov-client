@@ -20,9 +20,11 @@ export default function ProductAsk(props: IMarketDetailProps) {
     setIsOpen((prev) => !prev);
   };
 
-  console.log(
-    props.questionsData?.fetchQuestionsByProduct.map((questions) => questions.answer?.contents)
-  );
+  // console.log(
+  //   props.questionsData?.fetchQuestionsByProduct.map((questions) => questions.answer?.contents)
+  // );
+
+  console.log(props.questionsData?.fetchQuestionsByProduct);
 
   return (
     <>
@@ -43,6 +45,12 @@ export default function ProductAsk(props: IMarketDetailProps) {
           </S.QuestionButtonWrapper>
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
+          {props.questionsData?.fetchQuestionsByProduct.length === 0 && (
+            <S.ProductAskNone>
+              <S.StyledQuestionIcon />
+              상품 문의가 없습니다.
+            </S.ProductAskNone>
+          )}
           {props.questionsData?.fetchQuestionsByProduct.map((questions, index) => (
             <CS.TabContentList02 key={index}>
               <CS.ContentListHeader02>
