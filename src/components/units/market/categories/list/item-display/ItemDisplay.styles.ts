@@ -122,13 +122,14 @@ export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
 export const ItemsWrapper03 = styled.section`
   @media ${mobile} {
     justify-content: center;
+    gap: 9vmax;
   }
   width: 100%;
-  padding: 2rem 1.5rem;
+  padding: 2rem 0;
   ${GS.flexRow}
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 5vmax;
+  justify-content: space-between;
+  gap: 1vmax;
   background-color: white;
   border-radius: 8px;
 `;
@@ -155,10 +156,9 @@ export const RecommendItemImg01 = styled.div`
 
 export const DiscountDisplay = styled.div`
   @media ${mobile} {
-    font-size: 1vmax;
-    padding: 2.8% 2%;
+    font-size: 1rem;
   }
-  padding: 2.5% 2%;
+  padding: 2% 2%;
   display: inline-block;
   position: absolute;
   left: 0;
@@ -220,7 +220,7 @@ export const ItemName = styled.span`
   @media ${mobile} {
     font-size: 2vmax;
   }
-  font-size: 1.5vmax;
+  font-size: 1.5rem;
 `;
 
 export const ItemPrices = styled.div`

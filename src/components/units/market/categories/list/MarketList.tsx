@@ -10,11 +10,13 @@ import { IProduct, IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
-import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
+// import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import React, { useState } from "react";
 import { Modal } from "antd";
 import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 import Crumbs from "../product/detail/head/nav/MarketCrumbs";
+import CommonModal01 from "../../../../commons/modals/CommonModal01";
+import CartModal from "./CartModalPage";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
@@ -25,32 +27,37 @@ interface IMarketListProps {
 export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
   const client = useApolloClient();
-  const { productToCart } = UseMutationToggleProductToCart();
-  const [productItemVal, setProductItemVal] = useState<IProduct[]>();
-  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  // const { productToCart } = UseMutationToggleProductToCart();
+  const [cartModalItemVal, setCartModalItemVal] = useState<IProduct>();
+  const [curProductData, setCurProductData] = useState<IProduct>();
 
-  const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
-    event?.stopPropagation();
-    const result = await productToCart(event.currentTarget.id);
-    const status = result?.data?.toggleProductToCart;
-    console.log(status);
-    if (status === true) {
-      Modal.success({ content: "장바구니에 상품을 담았습니다." });
-      setIsActive(status);
-    } else {
-      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
-    }
-
-    const productItem = props.productsData?.fetchProducts.filter((cur) => {
-      if (cur.id === productId) {
-        return cur;
+  const onClickToggleCartModal = (id: string) => (e: React.MouseEvent) => {
+    e?.stopPropagation();
+    setIsOpen((prev) => !prev);
+    const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
+      if (cur.id === id) {
+        return setCurProductData(cur);
       } else {
-        return productId;
+        return undefined;
       }
     });
-    setProductItemVal(productItem);
-    console.log(productItem);
+
+    if (cartModalItem === undefined) return;
+    setCartModalItemVal(cartModalItem[0]);
   };
+
+  // const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
+  //   event?.stopPropagation();
+  //   const result = await productToCart(event.currentTarget.id);
+  //   const status = result?.data?.toggleProductToCart;
+  //   console.log(status);
+  //   if (status === true) {
+  //     Modal.success({ content: "장바구니에 상품을 담았습니다." });
+  //   } else {
+  //     Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+  //   }
+  // };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
     event?.preventDefault();
@@ -76,8 +83,20 @@ export default function MarketList(props: IMarketListProps) {
   });
   // console.log("타이틀", listTitle);
 
+  const modalOnCancel = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <>
+      <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={500}>
+        <CartModal
+          curProductData={curProductData}
+          onCancel={modalOnCancel}
+          setIsOpen={setIsOpen}
+        ></CartModal>
+      </CommonModal01>
+
       <S.ListTitle>{categoryData?.map((categories) => categories.name)}</S.ListTitle>
       {categoryData?.map((categories) => (
         <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
@@ -112,11 +131,7 @@ export default function MarketList(props: IMarketListProps) {
                     <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
                   </IDS.ItemPrices>
                 </S.DetailFooterLeft>
-                <BasketButton01
-                  id={products.id}
-                  isActive={isActive}
-                  onClick={onClickToggleProductToCart(products.id)}
-                />
+                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
               </S.ItemDetailFooter02>
             </IDS.ItemDetail>
           </IDS.ItemDisplay03>

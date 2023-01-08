@@ -4,7 +4,7 @@ interface IBasketButton01Props {
   isActive?: boolean;
   id?: string;
   setIsActive?: (id: string) => void;
-  onClick: (event: React.MouseEvent) => Promise<void>;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 export default function BasketButton01(props: IBasketButton01Props) {
