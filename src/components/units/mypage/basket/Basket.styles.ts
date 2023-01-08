@@ -24,7 +24,6 @@ export const CheckboxWrapper = styled.label`
   flex-direction: row;
   align-items: center;
   padding-bottom: 1.6rem;
-  margin-bottom: 1.6rem;
   border-bottom: 1px solid black;
 `;
 
@@ -119,8 +118,10 @@ export const DeliveryPrice = styled.p`
 `;
 
 export const BtnWrapper = styled.div`
-  width: 10%;
-  text-align: center;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const QuantityWrapper = styled.div`
@@ -170,6 +171,7 @@ export const Label = styled.label`
 `;
 
 export const Num = styled.p`
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-top: 16px;
@@ -183,6 +185,7 @@ export const NumSpan = styled.span`
 `;
 
 export const TotalNum = styled.p`
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
   color: #255941;
@@ -267,22 +270,10 @@ export const MoveBtn = styled.button`
   border: 1px solid #ddd;
 `;
 
-export const IconBtnWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  background-color: none;
-`;
-
 export const CancelBtn = styled.button`
-  position: absolute;
-  right: -8px;
-  top: -40px;
-  padding: 0 10px;
-  background: none;
+  padding: 5px 8px;
+  background-color: transparent;
 `;
-
 export const CancelIcon = styled(CloseIcon)`
   font-size: 20px;
 `;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colorBase01 } from "../../../../commons/styles/colorBases";
+import { colorBase01, colorBase03 } from "../../../../commons/styles/colorBases";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const ContentsMain = styled.section`
@@ -38,7 +38,6 @@ export const PickedItem = styled.li`
 export const PickedImg = styled.img`
   width: 15%;
   aspect-ratio: 5/5;
-  border: 1px solid red;
 `;
 
 export const PickedCenterWrapper = styled.div`
@@ -48,12 +47,11 @@ export const PickedCenterWrapper = styled.div`
 `;
 
 export const Tags = styled.div`
-  width: 10%;
-  font-family: "SUIT-Light";
+  width: 120px;
   text-align: center;
   padding: 0.5rem;
   border-radius: 2rem;
-  ${colorBase01}
+  ${colorBase03}
 `;
 
 export const PickedName = styled.p`
@@ -70,12 +68,12 @@ export const PriceDateWrap = styled.div`
 export const PickedPrice = styled.p`
   font-weight: bold;
   width: 15%;
-  border-right: 1px solid black;
 `;
 
 export const PickedDate = styled.p`
   width: 15%;
   text-align: center;
+  margin-left: 10px;
   color: #555;
 `;
 
@@ -85,6 +83,7 @@ export const BtnWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 export const BasketBtn = styled.button`
@@ -96,6 +95,7 @@ export const BasketBtn = styled.button`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 18px;
+  margin-top: 10px;
 `;
 
 export const BuyBtn = styled.button`
@@ -112,17 +112,17 @@ export const BuyBtn = styled.button`
   margin-top: 10px;
 `;
 
-export const IconBtnWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-`;
-
-export const CancelIcon = styled(CloseIcon)`
+export const CancelBtn = styled.button`
   position: absolute;
-  right: 0;
+  padding: 5px 8px;
+  background-color: transparent;
+  right: -4px;
   top: -30px;
+`;
+export const CancelIcon = styled(CloseIcon)`
+  /* position: absolute; */
+  right: 0;
+  top: -20px;
   font-size: 20px;
   cursor: pointer;
 `;

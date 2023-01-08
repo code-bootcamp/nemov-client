@@ -12,7 +12,15 @@ export const FETCH_PRODUCTS_I_PICKED = gql`
       price
       image
       veganLevel
+      createdAt
+      updatedAt
     }
+  }
+`;
+
+export const FETCH_PRODUCTS_I_PICKED_COUNT = gql`
+  query fetchProductsIPickedCount {
+    fetchProductsIPickedCount
   }
 `;
 
@@ -21,6 +29,14 @@ export const UseQueryFetchProductsIPicked = (variables: IQueryFetchProductsIPick
     FETCH_PRODUCTS_I_PICKED,
     { variables }
   );
+
+  return query;
+};
+
+export const UseQueryFetchProductsIPickedCount = () => {
+  const query = useQuery<Pick<IQuery, "fetchProductsIPickedCount">>(FETCH_PRODUCTS_I_PICKED_COUNT, {
+    fetchPolicy: "cache-and-network",
+  });
 
   return query;
 };

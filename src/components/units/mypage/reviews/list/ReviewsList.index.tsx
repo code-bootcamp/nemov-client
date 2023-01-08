@@ -63,25 +63,23 @@ export default function ReviewsList() {
           {data?.fetchReviewsByBuyer.length !== 0 ? (
             <>
               {data?.fetchReviewsByBuyer?.map((reviews, index) => (
-                <>
-                  <S.ReviewLi key={index}>
-                    <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
-                    <S.ReviewCenterWrapper>
-                      <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
-                      <S.ReviewDate>{getDate(reviews.createdAt)}</S.ReviewDate>
-                      <S.ReviewContent>{reviews.title}</S.ReviewContent>
-                      <S.ReviewContent>{reviews.contents}</S.ReviewContent>
-                    </S.ReviewCenterWrapper>
-                    <S.ReviewBtnWrapper>
-                      <S.ReviewEditBtn onClick={onClickReviewEdit(reviews.id)}>
-                        후기 수정
-                      </S.ReviewEditBtn>
-                      <S.ReviewDeleteBtn id={reviews.id} onClick={onClickReviewDelete}>
-                        후기 삭제
-                      </S.ReviewDeleteBtn>
-                    </S.ReviewBtnWrapper>
-                  </S.ReviewLi>
-                </>
+                <S.ReviewLi key={index}>
+                  <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
+                  <S.ReviewCenterWrapper>
+                    <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
+                    <S.ReviewDate>{getDate(reviews.createdAt)}</S.ReviewDate>
+                    <S.ReviewContent>{reviews.title}</S.ReviewContent>
+                    <S.ReviewContent>{reviews.contents}</S.ReviewContent>
+                  </S.ReviewCenterWrapper>
+                  <S.ReviewBtnWrapper>
+                    <S.ReviewEditBtn onClick={onClickReviewEdit(reviews.id)}>
+                      후기 수정
+                    </S.ReviewEditBtn>
+                    <S.ReviewDeleteBtn id={reviews.id} onClick={onClickReviewDelete}>
+                      후기 삭제
+                    </S.ReviewDeleteBtn>
+                  </S.ReviewBtnWrapper>
+                </S.ReviewLi>
               ))}
             </>
           ) : (

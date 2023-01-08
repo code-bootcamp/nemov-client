@@ -23,7 +23,7 @@ export default function MypagePoint() {
     endDate,
     page: 1,
   });
-  console.log(data);
+
   const { data: dataCount } = UseQueryFetchPointTransactionsCount();
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
