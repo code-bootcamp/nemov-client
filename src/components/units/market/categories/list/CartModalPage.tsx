@@ -44,7 +44,6 @@ export default function CartModal(props: ICartModalProps) {
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     // event?.stopPropagation();
-    console.log("클릭");
     const result = await productToCart(productId);
     console.log(result);
     const status = result?.data?.toggleProductToCart;

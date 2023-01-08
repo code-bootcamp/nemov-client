@@ -29,7 +29,7 @@ export default function MarketList(props: IMarketListProps) {
   const client = useApolloClient();
   const [isOpen, setIsOpen] = useState(false);
   // const { productToCart } = UseMutationToggleProductToCart();
-  const [cartModalItemVal, setCartModalItemVal] = useState<IProduct>();
+  const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
 
   const onClickToggleCartModal = (id: string) => (e: React.MouseEvent) => {
