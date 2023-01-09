@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth01 } from "../../commons/hooks/useAuths/useAuth01";
 import PointList from "./pointList";
 import ProductList from "./product/list";
 import ProductOrderList from "./productOrderList";
@@ -6,6 +7,8 @@ import QnAList from "./qnaList";
 import * as S from "./Seller.styles";
 
 export default function SellerManagementPage() {
+  useAuth01();
+
   const [isSelected, setIsSelected] = useState([true, false, false, false]);
 
   const onClickProductList = () => {
