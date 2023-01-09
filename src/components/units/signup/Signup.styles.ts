@@ -61,6 +61,14 @@ export const Label = styled.p`
   margin-bottom: 0;
 `;
 
+export const BlnInput = styled.input`
+  width: 59%;
+  height: 3rem;
+  border: none;
+  border-bottom: 1px solid #1f3d31;
+  outline: none;
+`;
+
 export const Input = styled.input`
   width: 75%;
   height: 3rem;

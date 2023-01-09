@@ -39,6 +39,7 @@ export default function MypageOrderlist() {
     void refetch({ startDate, endDate, page: 1 });
   };
 
+  // 주문 취소
   const onClickCancelOrder = async (e: React.MouseEvent) => {
     try {
       await cancelProductOrder({
