@@ -51,20 +51,24 @@ interface ProductInput {
 }
 
 const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
+const Option1 = categoryContents[0];
+const Option2 = categoryContents[1];
+// const OptionProperty1 = ["option1", "option2", "option3", "option4", "option5"];
+// const OptionProperty2 = ["option6", "option7", "option8", "option9", "option10", "option11"];
 
 export default function ProductWrite(props: ProductWriteProps) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
+  const [cg, setCG] = useState();
   const { data: category } = UseQueryFetchCategories();
   const newCategory = category?.fetchProductCategories.filter((el, i) => el.name !== "전체");
   const [createProduct] = UseMutationCreateProduct();
   const [updateProduct] = UseMutationUpdateProduct();
+  const [uploadFile] = UseMutationUploadFile();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
-
-  const [uploadFile] = UseMutationUploadFile();
 
   const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
@@ -72,7 +76,7 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
+    // console.log(file);
     if (file === undefined) return;
 
     const fileReader = new FileReader();
@@ -87,8 +91,21 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
+    setCG(event.target.id);
+    // console.log(event.target.id);
   };
 
+  const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
+    const property1: any = option.target.id;
+    setValue(property1, option.target.value);
+    console.log(property1);
+  };
+
+  const onChangeGetOption2 = (option: React.ChangeEvent<HTMLInputElement>) => {
+    const property2: any = option.target.id;
+    setValue(property2, option.target.value);
+    console.log(property2);
+  };
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
   };
@@ -100,7 +117,7 @@ export default function ProductWrite(props: ProductWriteProps) {
   }, [data]);
 
   const onClickSubmit = async (data: ProductInput) => {
-    console.log(data);
+    // console.log(data);
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
@@ -141,7 +158,6 @@ export default function ProductWrite(props: ProductWriteProps) {
   const onClickEdit = async (data: ProductInput) => {
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
-    console.log("3333333");
     await updateProduct({
       variables: {
         productId: String(router.query.productId),
@@ -226,24 +242,118 @@ export default function ProductWrite(props: ProductWriteProps) {
             {newCategory?.map((categories, index) => (
               <S.Label key={categories.id}>
                 <input type="radio" id={categories.id} name="category" onClick={onClickGetValue} />
-                <S.Radio>{categoryArr[index]}</S.Radio>
+                <S.Radio>
+                  {categories.name}({categoryArr[index]})
+                </S.Radio>
               </S.Label>
             ))}
           </S.Category>
         </S.Row>
-        <S.Row>
-          <S.SubTitle>상세 고시 정보</S.SubTitle>
-          <div style={{ border: "1px solid red" }}>
-            {categoryContents.map((notice, index) => (
-              <S.NoticeMap key={index}>
-                <S.Notice>{categoryContents[index]}</S.Notice>
-                <S.Notice>
-                  <S.NoticeInput type="text" />
-                </S.Notice>
-              </S.NoticeMap>
-            ))}
-          </div>
-        </S.Row>
+        <S.OptionsRow>
+          <S.OptionsTitle>상세 고시 정보</S.OptionsTitle>
+          <S.Options>
+            {/* {Option1.map((option1, index) => ( */}
+            <S.NoticeMap>
+              <S.Notice>${Option1[0]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option1"
+                placeholder="입력해주세요"
+                defaultValue={data?.option1}
+                onChange={onChangeGetOption1}
+              />
+              <S.Notice>${Option1[1]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option2"
+                placeholder="입력해주세요"
+                defaultValue={data?.option2}
+                onChange={onChangeGetOption1}
+              />
+              <S.Notice>${Option1[2]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option3"
+                placeholder="입력해주세요"
+                defaultValue={data?.option3}
+                onChange={onChangeGetOption1}
+              />
+              <S.Notice>${Option1[3]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option4"
+                placeholder="입력해주세요"
+                defaultValue={data?.option4}
+                onChange={onChangeGetOption1}
+              />
+              <S.Notice>${Option1[4]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option5"
+                placeholder="입력해주세요"
+                defaultValue={data?.option5}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            {/* ))} */}
+            {
+              cg === "e70b1a57-e4f7-41fa-93a3-ef4d13de57e2" && (
+                // Option2.map((option2, index) =>
+                <S.NoticeMap>
+                  <S.Notice>${Option2[0]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option6"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option6}
+                    onChange={onChangeGetOption2}
+                  />
+                  <S.Notice>${Option2[1]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option7"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option7}
+                    onChange={onChangeGetOption2}
+                  />
+                  <S.Notice>${Option2[2]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option8"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option8}
+                    onChange={onChangeGetOption2}
+                  />
+                  <S.Notice>${Option2[3]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option9"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option9}
+                    onChange={onChangeGetOption2}
+                  />
+                  <S.Notice>${Option2[4]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option10"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option10}
+                    onChange={onChangeGetOption2}
+                  />
+                  <S.Notice>${Option2[5]}</S.Notice>
+                  <S.NoticeInput
+                    type="text"
+                    id="option11"
+                    placeholder="입력해주세요"
+                    defaultValue={data?.productOption?.option11}
+                    onChange={onChangeGetOption2}
+                  />
+                </S.NoticeMap>
+              )
+              // )
+            }
+          </S.Options>
+        </S.OptionsRow>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>
           <S.Category>

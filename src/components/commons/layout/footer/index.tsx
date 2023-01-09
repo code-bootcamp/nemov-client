@@ -137,7 +137,7 @@ export default function LayoutFooter() {
         <FooterLeft>
           <Link href="/market">
             <FooterLogo>
-              <LogoImg src="/logo/logo_hover.png" />
+              <LogoImg src="/logo/logo_hover.png" alt="메인페이지로 이동" />
             </FooterLogo>
           </Link>
           <hr />
