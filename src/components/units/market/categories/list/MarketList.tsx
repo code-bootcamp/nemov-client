@@ -109,7 +109,7 @@ export default function MarketList(props: IMarketListProps) {
                     <S.SoldOut>SOLD OUT</S.SoldOut>
                   </S.ItemSoldOutDisPlay>
                 )}
-                <S.ItemImage03 src={products.image} />
+                <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
               </S.ItemImageBox01>
               <IDS.ItemDetail>
                 <TagsWrapper01>

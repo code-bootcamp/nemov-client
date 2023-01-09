@@ -37,7 +37,3 @@ export const CategoryTitle = styled.span`
 export const StyledCategoryIcon = styled.img`
   width: 80%;
 `;
-
-export const StyledCategoryIcon02 = styled.img`
-  /* background-image: ; */
-`;

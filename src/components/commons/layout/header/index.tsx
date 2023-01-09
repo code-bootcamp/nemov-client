@@ -55,7 +55,7 @@ export default function LayoutHeader() {
     <S.Wrapper>
       <Link href="/market">
         <S.Logo>
-          <S.LogoImg src="/logo/logo_.png" />
+          <S.LogoImg src="/logo/logo_.png" alt="마켓 메인 페이지로 이동" />
         </S.Logo>
       </Link>
       <S.LayoutNavWrap>

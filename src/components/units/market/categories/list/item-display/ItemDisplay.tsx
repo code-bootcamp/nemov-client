@@ -10,7 +10,7 @@ import {
   VeganLevelTag01,
   VeganLevelTag02,
 } from "../../../../../commons/tags/CommonTags.Styles";
-import { DiscountRate01, ItemDetailFooter02 } from "../MarketList.styles";
+import { ItemDetailFooter02 } from "../MarketList.styles";
 import * as S from "./ItemDisplay.styles";
 
 interface IItemDisPlayProps {
