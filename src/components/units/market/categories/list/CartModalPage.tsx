@@ -13,26 +13,28 @@ import * as MS from "../product/detail/head/MarketDetailHead.styles";
 
 interface ICartModalProps {
   curProductData?: IProduct | undefined;
+  quantity: number;
   onCancel?: () => void;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function CartModal(props: ICartModalProps) {
   const accessToken = useRecoilValue(accessTokenState);
-  const [quantity, setQuantity] = useState(parseInt("1"));
+
   const [isDisabled, setIsDisabled] = useState(false);
   const { toggleProductToCart } = UseMutationToggleProductToCart();
-  const sum = (props.curProductData?.discountedPrice ?? 0) * quantity;
+  const sum = (props.curProductData?.discountedPrice ?? 0) * props.quantity;
 
   const onClickQuantityDown = (e: React.MouseEvent) => {
     e.preventDefault();
     if (props.curProductData?.discountedPrice === undefined) return;
 
-    if (quantity <= 1) {
-      setQuantity(1);
+    if (props.quantity <= 1) {
+      props.setQuantity(1);
     } else {
       setIsDisabled(false);
-      setQuantity((prev) => prev - 1);
+      props.setQuantity((prev) => prev - 1);
     }
   };
 
@@ -40,10 +42,10 @@ export default function CartModal(props: ICartModalProps) {
     e.preventDefault();
     if (props.curProductData?.discountedPrice === undefined) return;
 
-    setQuantity((prev) => prev + 1);
+    props.setQuantity((prev) => prev + 1);
   };
 
-  console.log("선택수량", quantity, "총 상품 금액", sum);
+  console.log("선택수량", props.quantity, "총 상품 금액", sum);
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     // event?.stopPropagation();
@@ -51,7 +53,7 @@ export default function CartModal(props: ICartModalProps) {
       const result = await toggleProductToCart({
         variables: {
           productId,
-          count: quantity,
+          count: props.quantity,
         },
       });
       const status = result?.data?.toggleProductToCart;
@@ -59,7 +61,7 @@ export default function CartModal(props: ICartModalProps) {
       if (status === true && accessToken) {
         Modal.success({ content: "장바구니에 상품을 담았습니다." });
         props.setIsOpen(false);
-        setQuantity(1);
+        props.setQuantity(1);
       } else if (status === false && accessToken) {
         Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
         props.setIsOpen(false);
@@ -78,7 +80,7 @@ export default function CartModal(props: ICartModalProps) {
           <MS.PQRightButtons>
             <span>{sum.toLocaleString()}원</span>
             <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
-            <span>{quantity}</span>
+            <span>{props.quantity}</span>
             <CountUpBtn type="button" onClick={onClickQuantityUp} />
           </MS.PQRightButtons>
         </MS.PQuantitySelectSection>
