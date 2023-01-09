@@ -59,6 +59,7 @@ export default function CartModal(props: ICartModalProps) {
       if (status === true && accessToken) {
         Modal.success({ content: "장바구니에 상품을 담았습니다." });
         props.setIsOpen(false);
+        setQuantity(1);
       } else if (status === false && accessToken) {
         Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
         props.setIsOpen(false);
