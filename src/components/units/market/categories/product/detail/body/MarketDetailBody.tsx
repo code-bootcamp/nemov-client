@@ -31,9 +31,9 @@ function MarketDetailBody(props: IMarketDetailProps) {
         onClickProductAskTab={onClickProductAskTab}
       />
       {isTabSelected[0] && <ProductDetail data={props.data} />}
-      {isTabSelected[1] && <ProductReviewList data={props.data} />}
+      {isTabSelected[1] && <ProductReviewList data={props.data} reviewsData={props.reviewsData} />}
       {isTabSelected[2] && <ProductAsk data={props.data} questionsData={props.questionsData} />}
-      <ProductNoticeInfo />
+      <ProductNoticeInfo data={props.data} />
     </S.MarketDetailPageBody>
   );
 }

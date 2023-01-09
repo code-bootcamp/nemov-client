@@ -1,7 +1,11 @@
+import { IMarketDetailProps } from "../../../../../Market.types";
 import * as CS from "../MarketDetailBody.styles";
 import * as S from "./ProductNoticeInfo.styles";
 
-export default function ProductNoticeInfo() {
+export default function ProductNoticeInfo(props: IMarketDetailProps) {
+  const noticeData = props.data?.data?.fetchProduct.productOption;
+  console.log(noticeData);
+
   return (
     <CS.TabContentMain01>
       <CS.TabContentHeader01>
@@ -10,61 +14,55 @@ export default function ProductNoticeInfo() {
       <S.NoticeInfoTable>
         <S.TbWrapper>
           <S.TableColumnSet>
-            <S.TableColumnHead>용량 또는 중량</S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
-            <S.TableColumnHead>제조국</S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
+            {/* option1 */}
+            <S.TableColumnHead>품명 및 모델명</S.TableColumnHead>
+            <S.TableColumContent>{props.data?.data?.fetchProduct.option1}</S.TableColumContent>
+            {/* option2 */}
+            <S.TableColumnHead>인증/허가 사항</S.TableColumnHead>
+            <S.TableColumContent>{props.data?.data?.fetchProduct.option2}</S.TableColumContent>
           </S.TableColumnSet>
           <S.TableColumnSet>
-            <S.TableColumnHead>
-              제품 주요 사양 (피부타입, 색상(호, 번) 등)
-            </S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
-            <S.TableColumnHead>
-              화장품법에 따라 기재·표시하여야 하는 모든 성분
-            </S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
+            {/* option3 */}
+            <S.TableColumnHead>제조국(원산지)</S.TableColumnHead>
+            <S.TableColumContent>{props.data?.data?.fetchProduct.option3}</S.TableColumContent>
+            {/* option4 */}
+            <S.TableColumnHead>제조자(수입자)</S.TableColumnHead>
+            <S.TableColumContent>{props.data?.data?.fetchProduct.option4}</S.TableColumContent>
           </S.TableColumnSet>
+          {!!noticeData && (
+            <>
+              <S.TableColumnSet>
+                {/* option6 */}
+                <S.TableColumnHead>용량 또는 중량</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option6}</S.TableColumContent>
+                {/* option7 */}
+                <S.TableColumnHead>제품 주요 사양</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option7}</S.TableColumContent>
+              </S.TableColumnSet>
+              <S.TableColumnSet>
+                {/* option8 */}
+                <S.TableColumnHead>화장품법에 따라 기재해야하는 모든 성분</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option8}</S.TableColumContent>
+                {/* option9 */}
+                <S.TableColumnHead>사용기한 또는 개봉 후 사용기간</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option9}</S.TableColumContent>
+              </S.TableColumnSet>
+              <S.TableColumnSet>
+                {/* option10 */}
+                <S.TableColumnHead>사용방법</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option10}</S.TableColumContent>
+                {/* option11 */}
+                <S.TableColumnHead>품질보증기준</S.TableColumnHead>
+                <S.TableColumContent>{noticeData?.option11}</S.TableColumContent>
+              </S.TableColumnSet>
+            </>
+          )}
           <S.TableColumnSet>
-            <S.TableColumnHead>
-              사용기한 또는 개봉 후 사용기간(개봉 후 사용기간을 기재할 경우에는
-              제조연월일을 병행표기)
-            </S.TableColumnHead>
-            <S.TableColumContent>제품 별도 라벨 표기 참조</S.TableColumContent>
-            <S.TableColumnHead>
-              기능성 화장품의 경우 화장품법에 따른 식품의약품안전처 심사 필 유무
-              (미백, 주름개선, 자외선차단,태닝오일, 염색약, 탈모샴푸 등)
-            </S.TableColumnHead>
-            <S.TableColumContent>해당 사항 없음</S.TableColumContent>
-          </S.TableColumnSet>
-          <S.TableColumnSet>
-            <S.TableColumnHead>사용방법</S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
-            <S.TableColumnHead>사용할 때 주의사항</S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
-          </S.TableColumnSet>
-          <S.TableColumnSet>
-            <S.TableColumnHead>제조업자 및 제조판매업자</S.TableColumnHead>
-            <S.TableColumContent>
-              상품설명 및 상품이미지 참조
-            </S.TableColumContent>
-            <S.TableColumnHead>품질보증기준</S.TableColumnHead>
-            <S.TableColumContent>
-              본 제품에 이상이 있을 경우 공정거래위원회 고시 소비자 분쟁해결
-              기준에 의해 보상해드립니다.
-            </S.TableColumContent>
+            {/* option5 */}
+            <S.TableColumnHead>소비자상담 관련 전화번호</S.TableColumnHead>
+            <S.TableColumContent>{props.data?.data?.fetchProduct.option5}</S.TableColumContent>
+            <S.TableColumnHead />
+            <S.TableColumContent />
           </S.TableColumnSet>
         </S.TbWrapper>
       </S.NoticeInfoTable>

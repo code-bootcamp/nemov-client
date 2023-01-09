@@ -19,9 +19,7 @@ export default function MarketCategoriesPage() {
 
   const { data: categoryData } = UseQueryFetchCategories();
 
-  const { data: isInCartData } = UseQueryFetchIsInCart({
-    productId: String(router.query.productId),
-  });
+  const { data: isInCartData } = UseQueryFetchIsInCart(String(router.query.productId));
 
   return (
     <>

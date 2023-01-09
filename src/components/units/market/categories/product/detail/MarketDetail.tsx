@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { GlobalWrapper } from "../../../../../../commons/styles/globalStyles";
+import { UseQueryFetchReviewsByProduct } from "../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
 import { UseQueryFetchProduct } from "../../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { UseQueryFetchQuestionsByProduct } from "../../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsByProduct";
 import MarketDetailBody from "./body/MarketDetailBody";
@@ -15,8 +16,15 @@ const InnerWrapper = styled.div`
 
 export default function MarketDetail() {
   const router = useRouter();
-  const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
+  const { query: productsData } = UseQueryFetchProduct({
+    productId: String(router.query.productId),
+  });
   const { data } = UseQueryFetchQuestionsByProduct({
+    productId: String(router.query.productId),
+    page: 1,
+  });
+
+  const { data: reviewsData } = UseQueryFetchReviewsByProduct({
     productId: String(router.query.productId),
     page: 1,
   });
@@ -25,8 +33,8 @@ export default function MarketDetail() {
   return (
     <GlobalWrapper>
       <InnerWrapper>
-        <MarketDetailHead data={query} />
-        <MarketDetailBody data={query} questionsData={data} />
+        <MarketDetailHead data={productsData} />
+        <MarketDetailBody data={productsData} questionsData={data} reviewsData={reviewsData} />
       </InnerWrapper>
     </GlobalWrapper>
   );

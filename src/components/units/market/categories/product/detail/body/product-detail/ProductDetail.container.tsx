@@ -11,7 +11,7 @@ export default function ProductDetail(props: IMarketDetailProps) {
         {typeof window !== "undefined" ? (
           <S.ProductDescription
             dangerouslySetInnerHTML={{
-              __html: Dompurify.sanitize(String(props.data.data?.fetchProduct.description)),
+              __html: Dompurify.sanitize(String(props.data?.data?.fetchProduct.description)),
             }}
           />
         ) : (
