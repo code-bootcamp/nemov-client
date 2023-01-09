@@ -37,7 +37,7 @@ export default function MarketMain() {
   const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
 
-  console.log("추천상품", recItemData);
+  // console.log("추천상품", recItemData);
 
   // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
   //   if (!rec.isOutOfStock) {

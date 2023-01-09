@@ -61,7 +61,7 @@ export default function ProductAsk(props: IMarketDetailProps) {
             <CS.TabContentList02 key={index}>
               <CS.ContentListHeader02>
                 <S.QuestionInfoLeft>
-                  <CS.ContentTitle>문의 제목</CS.ContentTitle>
+                  <CS.ContentTitle>{questions.title}</CS.ContentTitle>
                   <CS.Info02Detail>
                     <span>{questions.user.name}</span>
                     <span>2023.01.01</span>
