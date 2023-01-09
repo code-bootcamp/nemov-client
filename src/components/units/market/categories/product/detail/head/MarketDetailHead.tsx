@@ -18,7 +18,7 @@ import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/
 
 function MarketDetailHead(props: IMarketDetailProps) {
   const { productPick } = UseMutationToggleProductPick();
-  const { productToCart } = UseMutationToggleProductToCart();
+  const { toggleProductToCart } = UseMutationToggleProductToCart();
 
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
@@ -76,7 +76,12 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
 
-    const result = await productToCart(productId);
+    const result = await toggleProductToCart({
+      variables: {
+        productId,
+        count: quantity,
+      },
+    });
     console.log(result);
     const status = result?.data?.toggleProductToCart;
     console.log(status);

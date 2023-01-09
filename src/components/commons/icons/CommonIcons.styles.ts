@@ -5,6 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { amazon, pastelGray, white } from "../../../commons/styles/colorPalettes";
 import { colorBase03, colorBase04 } from "../../../commons/styles/colorBases";
+import { mobile } from "../../../commons/styles/breakPoints";
 
 interface ICommonBasketIconProps {
   isActive?: boolean;
@@ -31,9 +32,30 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   }
   cursor: pointer;
+
+  @media ${mobile} {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 export const CommonBasketIcon03 = styled(ShoppingBagOutlinedIcon)`
+  font-size: 2.5rem;
+  padding: 0.3rem;
+  border-radius: 50%;
+  ${colorBase04}
+  :hover {
+    transition: all 0.5s ease-in-out;
+    ${colorBase03}
+  }
+  cursor: pointer;
+
+  @media ${mobile} {
+    font-size: 4rem;
+  }
+`;
+
+export const CommonBasketIcon04 = styled(ShoppingBagOutlinedIcon)`
   font-size: 2.5rem;
   padding: 0.3rem;
   border-radius: 50%;

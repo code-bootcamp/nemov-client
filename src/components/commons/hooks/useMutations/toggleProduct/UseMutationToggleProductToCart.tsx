@@ -1,5 +1,4 @@
 import { gql, useMutation } from "@apollo/client";
-import { Modal } from "antd";
 import {
   IMutation,
   IMutationToggleProductToCartArgs,
@@ -7,8 +6,8 @@ import {
 import { FETCH_CART_COUNT } from "../../useQueries/product/UseQueryFetchCartCount";
 
 export const TOGGLE_PRODUCT_TO_CART = gql`
-  mutation toggleProductToCart($productId: ID!) {
-    toggleProductToCart(productId: $productId)
+  mutation toggleProductToCart($productId: ID!, $count: Int) {
+    toggleProductToCart(productId: $productId, count: $count)
   }
 `;
 
@@ -20,20 +19,20 @@ export const UseMutationToggleProductToCart = () => {
     refetchQueries: [{ query: FETCH_CART_COUNT }],
   });
 
-  const productToCart = async (productId: string) => {
-    try {
-      return await toggleProductToCart({
-        variables: {
-          productId,
-        },
-      });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-      Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    }
-  };
+  // const productToCart = async (productId: string) => {
+  //   try {
+  //     return await toggleProductToCart({
+  //       variables: {
+  //         productId,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof Error) console.log(error.message);
+  //     Modal.error({ content: "로그인이 필요한 서비스입니다." });
+  //   }
+  // };
 
   return {
-    productToCart,
+    toggleProductToCart,
   };
 };

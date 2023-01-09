@@ -125,7 +125,11 @@ export default function MarketList(props: IMarketListProps) {
                       <S.ItemDiscountPrice02>
                         {products.discountedPrice.toLocaleString()}원
                       </S.ItemDiscountPrice02>
-                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
+                      {!!products.discountRate && (
+                        <S.ItemOriginPrice03>
+                          {products.price.toLocaleString()}원
+                        </S.ItemOriginPrice03>
+                      )}
                     </IDS.ItemPrices>
                   </S.DetailFooterLeft>
                   <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />

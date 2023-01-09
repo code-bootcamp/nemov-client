@@ -54,6 +54,8 @@ export default function MarketMain() {
     prevArrow: <PrevArrow />,
   };
 
+  console.log(bestItemData);
+
   return (
     <GlobalWrapper>
       <S.MarketMainContainer>
@@ -84,8 +86,8 @@ export default function MarketMain() {
             </S.MarketMainHeader02>
             <S.ItemsWrapper02>
               <IDS.StyledSlider02 {...settings}>
-                {new Array(8).fill(1).map((_, index) => (
-                  <ID.ItemDisPlay01 key={index} ranking={index}></ID.ItemDisPlay01>
+                {bestItemData?.fetchProductsOfBestSelling.map((best) => (
+                  <ID.ItemDisPlay01 key={best.id} bestData={best}></ID.ItemDisPlay01>
                 ))}
               </IDS.StyledSlider02>
             </S.ItemsWrapper02>

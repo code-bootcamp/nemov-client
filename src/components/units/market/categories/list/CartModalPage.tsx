@@ -21,7 +21,7 @@ export default function CartModal(props: ICartModalProps) {
   const accessToken = useRecoilValue(accessTokenState);
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
-  const { productToCart } = UseMutationToggleProductToCart();
+  const { toggleProductToCart } = UseMutationToggleProductToCart();
   const sum = (props.curProductData?.discountedPrice ?? 0) * quantity;
 
   const onClickQuantityDown = (e: React.MouseEvent) => {
@@ -47,19 +47,26 @@ export default function CartModal(props: ICartModalProps) {
 
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     // event?.stopPropagation();
-    const result = await productToCart(productId);
-    const status = result?.data?.toggleProductToCart;
-    console.log(status);
-    if (status === true && accessToken) {
-      Modal.success({ content: "장바구니에 상품을 담았습니다." });
-      props.setIsOpen(false);
-    } else if (status === false && accessToken) {
-      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
-      props.setIsOpen(false);
+    try {
+      const result = await toggleProductToCart({
+        variables: {
+          productId,
+          count: quantity,
+        },
+      });
+      const status = result?.data?.toggleProductToCart;
+      console.log(status);
+      if (status === true && accessToken) {
+        Modal.success({ content: "장바구니에 상품을 담았습니다." });
+        props.setIsOpen(false);
+      } else if (status === false && accessToken) {
+        Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+        props.setIsOpen(false);
+      }
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
     }
-    // } else {
-    //   Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    // }
   };
 
   return (
