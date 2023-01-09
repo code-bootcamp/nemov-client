@@ -7,10 +7,10 @@ import {
 import { FETCH_CART } from "../../useQueries/product/UseQueryFetchCart";
 // import { UseQueryFetchProduct } from "../../useQueries/product/UseQueryFetchProduct";
 
-interface IValue {
-  productId: string;
-  quantity: number;
-}
+// interface IValue {
+//   productId: string;
+//   quantity: number;
+// }
 
 export const CREATE_PRODUCT_ORDERS = gql`
   mutation createProductOrders($productOrders: [CreateProductOrderInput!]!, $amount: Int!) {
@@ -24,15 +24,16 @@ export const UseMutationCreateProductOrders = () => {
     IMutationCreateProductOrdersArgs
   >(CREATE_PRODUCT_ORDERS, { refetchQueries: [{ query: FETCH_CART }] });
 
-  const buyProducts = async (value: IValue, amount: number) => {
+  const buyProducts = async (value: any, amount: number) => {
     await createProductOrders({
       variables: {
-        productOrders: [
-          {
-            productId: value.productId,
-            quantity: value.quantity,
-          },
-        ],
+        // productOrders: [
+        //   {
+        //     productId: value.productId,
+        //     quantity: value.quantity,
+        //   },
+        // ],
+        productOrders: value,
         // 총 상품 금액
         amount,
       },

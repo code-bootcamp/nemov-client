@@ -67,7 +67,7 @@ export const PriceDateWrap = styled.div`
 
 export const PickedPrice = styled.p`
   font-weight: bold;
-  width: 15%;
+  width: 20%;
 `;
 
 export const PickedDate = styled.p`
@@ -117,7 +117,7 @@ export const CancelBtn = styled.button`
   padding: 5px 8px;
   background-color: transparent;
   right: -4px;
-  top: -30px;
+  top: -40px;
 `;
 export const CancelIcon = styled(CloseIcon)`
   /* position: absolute; */

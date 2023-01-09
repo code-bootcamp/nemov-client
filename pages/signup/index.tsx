@@ -52,7 +52,10 @@ export default function SignupPage() {
       });
       if (result.data?.checkBusinessLicenseNumber) {
         Modal.success({ content: "사업자 등록번호 인증에 성공했습니다." });
-        void router.push("/signup/seller");
+        void router.push({
+          pathname: "/signup/seller",
+          query: { bln },
+        });
       }
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

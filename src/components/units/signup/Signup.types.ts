@@ -9,8 +9,10 @@ export interface IFormSignupData {
   address: string;
   addressDetail: string;
   checkbox?: boolean;
+  bln?: string | string[] | undefined;
 }
 
 export interface ISignupProps {
   isSeller: boolean;
+  bln?: string | string[] | undefined;
 }

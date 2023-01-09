@@ -21,6 +21,7 @@ export default function Signup(props: ISignupProps) {
   const [time, setTime] = useState(false);
   const [tokenInput, setTokenInput] = useState("");
   const [getConfirmToken, setGetConfirmToken] = useState("");
+  const bln = props.bln;
 
   // 인증번호 요청
   const [getTokenForSignup] = UseMutationGetTokenForSignup();
@@ -176,6 +177,12 @@ export default function Signup(props: ISignupProps) {
               <S.Error>{formState.errors.name?.message}</S.Error>
             </S.InputErrorWrapper>
           </S.InputWrapper>
+          {props.isSeller && (
+            <S.InputWrapper>
+              <S.Label>사업자 번호</S.Label>
+              <S.BlnInput type="text" readOnly value={bln} {...register("bln")} />
+            </S.InputWrapper>
+          )}
           <S.InputWrapper>
             <S.Label>휴대폰 번호</S.Label>
             <S.PhoneWrapper>

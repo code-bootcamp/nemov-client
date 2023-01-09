@@ -18,14 +18,17 @@ export default function MypagePicked() {
   });
 
   const { data: dataCount } = UseQueryFetchProductsIPickedCount();
-  const { productToCart } = UseMutationToggleProductToCart();
+  const { toggleProductToCart } = UseMutationToggleProductToCart();
   const { productPick } = UseMutationToggleProductPick();
 
   const onClickBasket = (productId: string) => async (e: React.MouseEvent) => {
     try {
-      const result = await productToCart(e.currentTarget.id);
+      const result = await toggleProductToCart({
+        variables: {
+          productId,
+        },
+      });
       const status = result?.data?.toggleProductToCart;
-      // console.log(status);
       if (status === true) {
         Modal.success({ content: "장바구니에 상품을 담았습니다." });
         setIsActive(status);
@@ -63,7 +66,6 @@ export default function MypagePicked() {
                     <S.PickedName>{pick.name}</S.PickedName>
                     <S.PriceDateWrap>
                       <S.PickedPrice>{pick.price.toLocaleString()} 원</S.PickedPrice>
-                      {/* <S.PickedDate>{getDate(pick.createdAt)}</S.PickedDate> */}
                     </S.PriceDateWrap>
                   </S.PickedCenterWrapper>
                   <S.BtnWrapper>
@@ -73,7 +75,6 @@ export default function MypagePicked() {
                     <S.BasketBtn id={pick.id} onClick={onClickBasket(pick.id)}>
                       장바구니
                     </S.BasketBtn>
-                    <S.BuyBtn>구매하기</S.BuyBtn>
                   </S.BtnWrapper>
                 </S.PickedItem>
               </div>

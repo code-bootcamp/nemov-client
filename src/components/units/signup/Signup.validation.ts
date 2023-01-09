@@ -8,8 +8,8 @@ export const SignupSchema = yup.object({
   password: yup
     .string()
     .matches(
-      /^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,16}$/,
-      "영문+숫자 조합 8~16자리의 비밀번호를 입력해주세요."
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].{8,16}$/,
+      "영문 대/소문자+숫자+특수문자 조합 8~16자리의 비밀번호를 입력해주세요."
     )
     .required("비밀번호를 입력해주세요."),
   passwordCheck: yup
