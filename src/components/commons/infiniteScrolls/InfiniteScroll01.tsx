@@ -31,14 +31,15 @@ export default function InfiniteScroll01(props: IInfiniteScroll01Props) {
   return (
     <div
       style={{
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
         width: "100%",
+        display: "flex",
+        flexWrap: "wrap",
+        overflow: "auto",
+        paddingTop: "10px",
+        justifyContent: "center",
       }}
     >
-      <InfiniteScroll pageStart={1} loadMore={onLoadMore} hasMore={true || false} useWindow={false}>
+      <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
         {props.children}
       </InfiniteScroll>
     </div>

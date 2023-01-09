@@ -18,7 +18,7 @@ import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
 import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
-// import InfiniteScroll01 from "../../../../commons/infiniteScrolls/InfiniteScroll01";
+import InfiniteScroll01 from "../../../../commons/infiniteScrolls/InfiniteScroll01";
 
 interface IMarketListProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
@@ -98,43 +98,43 @@ export default function MarketList(props: IMarketListProps) {
         <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
       ))}
       <ListSearch />
-      {/* <InfiniteScroll01 fetchMore={props.productsFetchMore} data={props.productsData}> */}
-      <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
-        {props.productsData?.fetchProducts.map((products) => (
-          // isOutOfStock === true이면, 매진 상태 나타내기
-          <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
-            <S.ItemImageBox01>
-              {!!products.isOutOfStock && (
-                <S.ItemSoldOutDisPlay>
-                  <S.SoldOut>SOLD OUT</S.SoldOut>
-                </S.ItemSoldOutDisPlay>
-              )}
-              <S.ItemImage03 src={products.image} />
-            </S.ItemImageBox01>
-            <IDS.ItemDetail>
-              <TagsWrapper01>
-                <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
-              </TagsWrapper01>
-              <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
-                <S.DetailFooterLeft>
-                  <S.ItemName03>{products.name}</S.ItemName03>
-                  <IDS.ItemPrices>
-                    {products.discountRate !== 0 && (
-                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
-                    )}
-                    <S.ItemDiscountPrice02>
-                      {products.discountedPrice.toLocaleString()}원
-                    </S.ItemDiscountPrice02>
-                    <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
-                  </IDS.ItemPrices>
-                </S.DetailFooterLeft>
-                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
-              </S.ItemDetailFooter02>
-            </IDS.ItemDetail>
-          </IDS.ItemDisplay03>
-        ))}
-      </MS.ItemsWrapper01>
-      {/* </InfiniteScroll01> */}
+      <InfiniteScroll01 fetchMore={props.productsFetchMore} data={props.productsData}>
+        <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
+          {props.productsData?.fetchProducts.map((products) => (
+            // isOutOfStock === true이면, 매진 상태 나타내기
+            <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
+              <S.ItemImageBox01>
+                {!!products.isOutOfStock && (
+                  <S.ItemSoldOutDisPlay>
+                    <S.SoldOut>SOLD OUT</S.SoldOut>
+                  </S.ItemSoldOutDisPlay>
+                )}
+                <S.ItemImage03 src={products.image} />
+              </S.ItemImageBox01>
+              <IDS.ItemDetail>
+                <TagsWrapper01>
+                  <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
+                </TagsWrapper01>
+                <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
+                  <S.DetailFooterLeft>
+                    <S.ItemName03>{products.name}</S.ItemName03>
+                    <IDS.ItemPrices>
+                      {products.discountRate !== 0 && (
+                        <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                      )}
+                      <S.ItemDiscountPrice02>
+                        {products.discountedPrice.toLocaleString()}원
+                      </S.ItemDiscountPrice02>
+                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
+                    </IDS.ItemPrices>
+                  </S.DetailFooterLeft>
+                  <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
+                </S.ItemDetailFooter02>
+              </IDS.ItemDetail>
+            </IDS.ItemDisplay03>
+          ))}
+        </MS.ItemsWrapper01>
+      </InfiniteScroll01>
     </>
   );
 }

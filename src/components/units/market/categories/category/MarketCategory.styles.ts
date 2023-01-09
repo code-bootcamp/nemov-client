@@ -4,6 +4,7 @@ import { mobile } from "../../../../../commons/styles/breakPoints";
 export const CategoryWrapper = styled.section`
   @media ${mobile} {
     width: 80%;
+    padding-top: 10vmax;
   }
   width: 60%;
   display: flex;

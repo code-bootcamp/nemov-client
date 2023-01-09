@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../../commons/styles/globalStyles";
 import * as CP from "../../../../../../commons/styles/colorPalettes";
 import * as CB from "../../../../../../commons/styles/colorBases";
@@ -181,8 +181,17 @@ export const ItemDisplay03 = styled.section`
   @media ${mobile} {
     width: 45%;
   }
-  width: 30%;
-  height: 30%;
+
+  @media ${tablet} {
+    max-width: 270px;
+  }
+
+  @media (max-width: 957px) {
+    max-width: 230px;
+  }
+  width: 100%;
+  max-width: 370px;
+  /* height: 500px; */
   ${ItemStyleSet01}
   padding: 1rem;
 `;

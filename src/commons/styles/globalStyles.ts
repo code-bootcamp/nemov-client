@@ -21,7 +21,7 @@ export const globalStyles = css`
 
   @media ${mobile} {
     html {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
 

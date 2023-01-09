@@ -45,6 +45,5 @@ export const CrumbLink02 = styled.a`
   display: inline-block;
   font-size: 0.938rem;
   position: relative;
-  padding-right: 0.875rem;
   margin-right: 0.375rem;
 `;
