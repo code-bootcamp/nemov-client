@@ -18,11 +18,11 @@ export const MarketDetailPageHead = styled.section`
   border-bottom: 2px solid #e6e0e0;
 `;
 
-// export const ProductDetailImage01 = styled.img`
-//   width: 50%;
-//   aspect-ratio: 1/1;
-//   object-fit: cover;
-// `;
+export const ProductDetailImage01 = styled.img`
+  width: 50%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+`;
 
 export const ProductDetailAside01 = styled.aside`
   width: 40%;
