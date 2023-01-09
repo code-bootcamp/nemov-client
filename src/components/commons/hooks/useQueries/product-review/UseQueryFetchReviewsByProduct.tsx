@@ -8,12 +8,16 @@ export const FETCH_REVIEWS_BY_PRODUCT = gql`
   query fetchReviewsByProduct($productId: ID!, $page: Int!) {
     fetchReviewsByProduct(productId: $productId, page: $page) {
       id
+      createdAt
       title
       contents
+      rating
+      images {
+        url
+      }
       user {
         name
       }
-      createdAt
     }
   }
 `;

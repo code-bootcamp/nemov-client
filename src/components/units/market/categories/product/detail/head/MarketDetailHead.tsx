@@ -24,13 +24,13 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isPicked, setIsPicked] = useState<boolean | undefined>(false);
 
-  const sum = (props.data.data?.fetchProduct.discountedPrice ?? 0) * quantity;
+  const sum = (props.data?.data?.fetchProduct.discountedPrice ?? 0) * quantity;
 
   // 수량 버튼
   const onClickQuantityDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+      if (props.data?.data?.fetchProduct.discountedPrice === undefined) return;
 
       if (quantity <= 1) {
         setQuantity(1);
@@ -46,33 +46,14 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const onClickQuantityUp = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      if (props.data.data?.fetchProduct.discountedPrice === undefined) return;
+      if (props.data?.data?.fetchProduct.discountedPrice === undefined) return;
 
       setQuantity((prev) => prev + 1);
     },
     [quantity]
   );
 
-  // 구매 버튼 함수
-  // const onClickBuyProduct = async () => {
-  //   try {
-  //     await createProductOrders({
-  //       variables: {
-  //        productOrders: [
-  //         productId: props.data.data?.fetchProduct.id,
-
-  //        ],
-  //         amount: sum,
-  //       },
-  //     });
-  //     Modal.success({ content: "구매가 완료되었습니다." });
-  //   } catch (error) {
-  //     if (error instanceof Error) console.log(error.message);
-  //   }
-  // };
-
   // 장바구니 담기 기능
-
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
 
@@ -105,47 +86,40 @@ function MarketDetailHead(props: IMarketDetailProps) {
     }
   };
 
-  // useEffect(() => {
-  //   if (props.data.data?.fetchProduct.discountedPrice !== undefined) {
-  //     setTotalAmountAmount(sum);
-  //     setQuantity(quantity);
-  //   }
-  // }, [props.data]);
-
   console.log("선택수량", quantity, "총 상품 금액", sum);
 
   return (
     <>
       <S.MarketDetailCrumbsWrapper>
         <Crumbs
-          id={props.data.data?.fetchProduct.productCategory.id}
-          categoryName={props.data.data?.fetchProduct.productCategory.name}
+          id={props.data?.data?.fetchProduct.productCategory.id}
+          categoryName={props.data?.data?.fetchProduct.productCategory.name}
         />
       </S.MarketDetailCrumbsWrapper>
       <S.MarketDetailPageHead>
-        {props.data.data?.fetchProduct.image !== undefined ? (
+        {props.data?.data?.fetchProduct.image !== undefined ? (
           <S.ProductDetailImage01 src={`${props.data.data?.fetchProduct.image}`} />
         ) : (
           <S.ProductDetailImage01 src="/images/best2.jpg" />
         )}
         <S.ProductDetailAside01>
           <S.ProductDetailHeader01>
-            <S.ProductBrandName01>{props.data.data?.fetchProduct.user.name}</S.ProductBrandName01>
-            <S.ProductName01>{props.data.data?.fetchProduct.name}</S.ProductName01>
+            <S.ProductBrandName01>{props.data?.data?.fetchProduct.user.name}</S.ProductBrandName01>
+            <S.ProductName01>{props.data?.data?.fetchProduct.name}</S.ProductName01>
           </S.ProductDetailHeader01>
           <S.ProductDetailLevelSection>
             <VeganLevelTag01>
-              {getVeganName(props.data.data?.fetchProduct.veganLevel)}
+              {getVeganName(props.data?.data?.fetchProduct.veganLevel)}
             </VeganLevelTag01>
           </S.ProductDetailLevelSection>
           <S.ProductPriceDetail01>
             <S.PriceDetailSection01>
               <S.ProductDiscount01>
-                {props.data.data?.fetchProduct.discountRate}%
+                {props.data?.data?.fetchProduct.discountRate}%
               </S.ProductDiscount01>
-              <span>{props.data.data?.fetchProduct.discountedPrice.toLocaleString()}원</span>
+              <span>{props.data?.data?.fetchProduct.discountedPrice.toLocaleString()}원</span>
               <S.ProductOriginalPrice01>
-                {props.data.data?.fetchProduct.price.toLocaleString()}원
+                {props.data?.data?.fetchProduct.price.toLocaleString()}원
               </S.ProductOriginalPrice01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
@@ -153,12 +127,12 @@ function MarketDetailHead(props: IMarketDetailProps) {
               <S.DetailInfoContent01>3,000원</S.DetailInfoContent01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
-              <S.DetailInfoContent02>30,000원 이상 구매시 배송비 무료</S.DetailInfoContent02>
+              <S.DetailInfoContent02>50,000원 이상 구매시 배송비 무료</S.DetailInfoContent02>
             </S.PriceDetailSection01>
           </S.ProductPriceDetail01>
           <S.ProductDetailFooter01>
             <S.PQuantitySelectSection>
-              <S.DetailInfoTitle01>{props.data.data?.fetchProduct.name}</S.DetailInfoTitle01>
+              <S.DetailInfoTitle01>{props.data?.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
                 <span>{sum.toLocaleString()}원</span>
                 <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
@@ -172,12 +146,12 @@ function MarketDetailHead(props: IMarketDetailProps) {
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>
               {!isPicked ? (
-                <CommonHeartIcon01 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+                <CommonHeartIcon01 onClick={onClickTogglePick(props.data?.data?.fetchProduct.id)} />
               ) : (
-                <CommonHeartIcon02 onClick={onClickTogglePick(props.data.data?.fetchProduct.id)} />
+                <CommonHeartIcon02 onClick={onClickTogglePick(props.data?.data?.fetchProduct.id)} />
               )}
               <StyledCommonButton01
-                onClick={onClickToggleProductToCart(String(props.data.data?.fetchProduct.id))}
+                onClick={onClickToggleProductToCart(String(props.data?.data?.fetchProduct.id))}
               >
                 장바구니
               </StyledCommonButton01>
