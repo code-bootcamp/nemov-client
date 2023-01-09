@@ -3,17 +3,23 @@ import * as S from "./ProductAsk.styles";
 import * as CS from "../MarketDetailBody.styles";
 import OpenModalButton01 from "../../../../../../../commons/buttons/OpenModalButton01";
 import { useRecoilState } from "recoil";
-import { isOpenState } from "../../../../../../../../commons/stores";
+import { accessTokenState, isOpenState } from "../../../../../../../../commons/stores";
 import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
 import { IMarketDetailProps } from "../../../../../Market.types";
+import { Modal } from "antd";
 // import { MouseEventHandler, useState } from "react";
 
 export default function ProductAsk(props: IMarketDetailProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  const [accessToken] = useRecoilState(accessTokenState);
 
   const onClickQuestionWrite = () => {
-    setIsOpen((prev) => !prev);
+    if (!accessToken) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      setIsOpen((prev) => !prev);
+    }
   };
 
   const modalOnCancel = () => {
