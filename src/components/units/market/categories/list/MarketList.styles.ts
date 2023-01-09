@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
 import { mobile } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
-import * as S from "../../main/MarketMain.styles";
+// import * as S from "../../main/MarketMain.styles";
 import { FontStyle03, FontStyle04 } from "./item-display/ItemDisplay.styles";
 
 export const CategoryMain = styled.main`

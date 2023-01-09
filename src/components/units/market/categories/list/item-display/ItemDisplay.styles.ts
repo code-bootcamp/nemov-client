@@ -206,7 +206,7 @@ export const ItemDisplay03 = styled.section`
     max-width: 230px;
   }
   width: 100%;
-  max-width: 370px;
+  max-width: 360px;
   /* height: 500px; */
   ${ItemStyleSet01}
   padding: 1rem;
