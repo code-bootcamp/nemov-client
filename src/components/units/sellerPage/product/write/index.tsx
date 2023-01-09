@@ -17,10 +17,7 @@ interface ProductWriteProps {
 
 interface ProductInput {
   name: string;
-  productCategoryId: {
-    id: string;
-    name: string;
-  };
+  productCategoryId: string;
   description: string;
   discountRate: number;
   image: string;
@@ -33,20 +30,20 @@ interface ProductInput {
   option4: string;
   option5: string;
   createProductOptionInput?: {
-    option6: string;
-    option7: string;
-    option8: string;
-    option9: string;
-    option10: string;
-    option11: string;
+    option6?: string;
+    option7?: string;
+    option8?: string;
+    option9?: string;
+    option10?: string;
+    option11?: string;
   };
   updateProductOptionInput?: {
-    option6: string;
-    option7: string;
-    option8: string;
-    option9: string;
-    option10: string;
-    option11: string;
+    option6?: string;
+    option7?: string;
+    option8?: string;
+    option9?: string;
+    option10?: string;
+    option11?: string;
   };
 }
 
@@ -92,7 +89,7 @@ export default function ProductWrite(props: ProductWriteProps) {
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
     setCG(event.target.id);
-    // console.log(event.target.id);
+    console.log(event.target.id);
   };
 
   const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,11 +125,11 @@ export default function ProductWrite(props: ProductWriteProps) {
       variables: {
         createProductInput: {
           name: data.name,
-          productCategoryId: data.productCategoryId.id,
+          productCategoryId: data.productCategoryId,
           description: "11111",
-          discountRate: data.discountRate,
-          price: data.price,
-          quantity: data.quantity,
+          discountRate: Number(data.discountRate),
+          price: Number(data.price),
+          quantity: Number(data.quantity),
           image: url,
           veganLevel: data.veganLevel,
           option1: data.option1,
@@ -163,7 +160,7 @@ export default function ProductWrite(props: ProductWriteProps) {
         productId: String(router.query.productId),
         updateProductInput: {
           name: data.name,
-          description: "11111",
+          description: "상품내용.. 얼른 토스트 ui 해야지..",
           discountRate: data.discountRate,
           price: data.price,
           quantity: data.quantity,
@@ -241,7 +238,14 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.Category>
             {newCategory?.map((categories, index) => (
               <S.Label key={categories.id}>
-                <input type="radio" id={categories.id} name="category" onClick={onClickGetValue} />
+                <input
+                  type="radio"
+                  id={categories.id}
+                  name="category"
+                  onClick={onClickGetValue}
+                  value={data?.productCategory.id}
+                  readOnly
+                />
                 <S.Radio>
                   {categories.name}({categoryArr[index]})
                 </S.Radio>
@@ -254,23 +258,27 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.Options>
             {/* {Option1.map((option1, index) => ( */}
             <S.NoticeMap>
-              <S.Notice>${Option1[0]}</S.Notice>
+              <S.Notice>{Option1[0]}</S.Notice>
               <S.NoticeInput
                 type="text"
                 id="option1"
                 placeholder="입력해주세요"
-                defaultValue={data?.option1}
+                value={data?.option1}
                 onChange={onChangeGetOption1}
               />
-              <S.Notice>${Option1[1]}</S.Notice>
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[1]}</S.Notice>
               <S.NoticeInput
                 type="text"
                 id="option2"
                 placeholder="입력해주세요"
-                defaultValue={data?.option2}
+                value={data?.option2}
                 onChange={onChangeGetOption1}
               />
-              <S.Notice>${Option1[2]}</S.Notice>
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[2]}</S.Notice>
               <S.NoticeInput
                 type="text"
                 id="option3"
@@ -278,20 +286,24 @@ export default function ProductWrite(props: ProductWriteProps) {
                 defaultValue={data?.option3}
                 onChange={onChangeGetOption1}
               />
-              <S.Notice>${Option1[3]}</S.Notice>
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[3]}</S.Notice>
               <S.NoticeInput
                 type="text"
                 id="option4"
                 placeholder="입력해주세요"
-                defaultValue={data?.option4}
+                value={data?.option4}
                 onChange={onChangeGetOption1}
               />
-              <S.Notice>${Option1[4]}</S.Notice>
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[4]}</S.Notice>
               <S.NoticeInput
                 type="text"
                 id="option5"
                 placeholder="입력해주세요"
-                defaultValue={data?.option5}
+                value={data?.option5}
                 onChange={onChangeGetOption1}
               />
             </S.NoticeMap>
@@ -299,56 +311,68 @@ export default function ProductWrite(props: ProductWriteProps) {
             {
               cg === "e70b1a57-e4f7-41fa-93a3-ef4d13de57e2" && (
                 // Option2.map((option2, index) =>
-                <S.NoticeMap>
-                  <S.Notice>${Option2[0]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option6"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option6}
-                    onChange={onChangeGetOption2}
-                  />
-                  <S.Notice>${Option2[1]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option7"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option7}
-                    onChange={onChangeGetOption2}
-                  />
-                  <S.Notice>${Option2[2]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option8"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option8}
-                    onChange={onChangeGetOption2}
-                  />
-                  <S.Notice>${Option2[3]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option9"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option9}
-                    onChange={onChangeGetOption2}
-                  />
-                  <S.Notice>${Option2[4]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option10"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option10}
-                    onChange={onChangeGetOption2}
-                  />
-                  <S.Notice>${Option2[5]}</S.Notice>
-                  <S.NoticeInput
-                    type="text"
-                    id="option11"
-                    placeholder="입력해주세요"
-                    defaultValue={data?.productOption?.option11}
-                    onChange={onChangeGetOption2}
-                  />
-                </S.NoticeMap>
+                <>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[0]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option6"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option6}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[1]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option7"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option7}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[2]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option8"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option8}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[3]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option9"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option9}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[4]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option10"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option10}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[5]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option11"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option11}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                </>
               )
               // )
             }
@@ -358,7 +382,14 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>비건 유형</S.SubTitle>
           <S.Category>
             <S.Label>
-              <input type="radio" id="1" value="FLEX" name="level" onClick={onClickRadio} />
+              <input
+                type="radio"
+                id="1"
+                value="FLEX"
+                name="level"
+                onClick={onClickRadio}
+                readOnly
+              />
               <S.Radio>FLEX</S.Radio>
             </S.Label>
             <S.Label>

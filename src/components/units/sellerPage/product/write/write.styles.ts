@@ -70,12 +70,13 @@ export const NoticeMap = styled(Row)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
   background-color: #f7f7f7;
+  margin-bottom: 1rem;
 `;
 
 export const Notice = styled.div`
   width: 50%;
+  padding-left: 10px;
 `;
 
 export const NoticeInput = styled.input`

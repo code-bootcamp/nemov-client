@@ -22,7 +22,7 @@ export const Menu = styled.span`
   color: #fff;
 `;
 
-const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
+const categoryArr = ["ALL", "FOOD", "DRINK", "BEAUTY", "LIFE"];
 
 export default function LayoutNav() {
   const { data } = UseQueryFetchCategories();
