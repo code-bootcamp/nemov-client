@@ -100,6 +100,7 @@ export const PageLine = styled.div`
 
 export const MainMarketSection01 = styled.section`
   width: 100%;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
