@@ -23,7 +23,6 @@ export default function MypageOrderlist() {
     endDate,
     page: 1,
   });
-  console.log(data);
 
   const { data: dataCount } = UseQueryFetchProductOrdersCountByBuyer({
     startDate,
@@ -70,7 +69,9 @@ export default function MypageOrderlist() {
                 <S.OrderInfo>
                   <S.ItemImg src={order.product.image} alt="상품 이미지" />
                   <S.ItemName>{order.product.name}</S.ItemName>
-                  <S.ItemInfo>{order.product.price} 원</S.ItemInfo>
+                  <S.ItemInfo>
+                    {(order.product.discountedPrice * order.quantity).toLocaleString()} 원
+                  </S.ItemInfo>
                   <S.ItemInfo>{order.quantity}개</S.ItemInfo>
                   <S.ItemInfo>{order.status === "BOUGHT" ? "주문완료" : "주문취소"}</S.ItemInfo>
                   {order.status === "BOUGHT" ? (

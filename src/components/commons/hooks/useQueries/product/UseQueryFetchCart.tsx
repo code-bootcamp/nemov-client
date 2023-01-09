@@ -4,13 +4,16 @@ import { IQuery } from "../../../../../commons/types/generated/types";
 export const FETCH_CART = gql`
   query fetchCart {
     fetchCart {
-      id
-      image
-      name
-      price
-      discountRate
-      discountedPrice
-      quantity
+      product {
+        id
+        image
+        name
+        price
+        discountRate
+        discountedPrice
+        quantity
+      }
+      count
     }
   }
 `;

@@ -1,120 +1,178 @@
-// import { useMutation } from "@apollo/client";
-// import { Modal } from "antd";
+import { Modal } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
-// import { getDiscountPrice } from "../../../../commons/libraries/utilies";
-// import { IMutation, IMutationCreateProductOrderArgs } from "../../../../commons/types/generated/types";
-// import { CREATE_PRODUCT_ORDER, UseMutationCreateProductOrder } from "../../../commons/hooks/useMutations/product/UseMutationCreateProductOrder";
-// import { CountDownBtn, CountUpBtn } from "../../../commons/buttons/CountDownUpButtons";
+import { UseMutationCreateProductOrders } from "../../../commons/hooks/useMutations/product/UseMutationCreateProductOrders";
+import { UseMutationToggleProductPick02 } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductPick02";
+import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 // import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import { UseQueryFetchCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchCart";
+// import { UseQueryFetchIsInCart } from "../../../commons/hooks/useQueries/product/UseQueryFetchIsInCart";
 import * as S from "./Basket.styles";
-// import MypageBasketItem from "./BasketItem.index";
 
 interface IResultType {
   number?: number | undefined;
   id?: string;
 }
 
+interface IItemType {
+  productId?: string;
+  quantity?: number;
+}
+
 export default function MypageBasket() {
-  // const [quantity, setQuantity] = useState(1);
-  // const [totalAmount, setTotalAmount] = useState(1);
-
   const { data } = UseQueryFetchCart();
-  // const [itemList, setItemList] = useState([data?.fetchCart]);
-  // console.log(itemList);
+  // const { data: isInCartData } = UseQueryFetchIsInCart(productId);
+  const { productPick } = UseMutationToggleProductPick02();
+  const { productToCart } = UseMutationToggleProductToCart();
+  const { buyProducts } = UseMutationCreateProductOrders();
 
-  // const onChangeProps = (id: string, key, value) => {
-  //   setItemList((prevState) => {
-  //     return prevState.map((obj) => {
-  //       if (obj.id === id) {
-  //         return { ...obj, [key]: value };
-  //       } else {
-  //         return { ...obj };
-  //       }
-  //     });
-  //   });
-  // };
+  const [product, setProduct] = useState(data?.fetchCart);
+  // const [product, setProduct] = useState(data.fetchCart);
+  console.log(product);
 
-  // const { productToCart } = UseMutationToggleProductToCart();
+  // 찜하기
+  const onClickPick = (productId: string) => async (e: React.MouseEvent) => {
+    try {
+      if (productId === undefined) return;
+      await productPick(productId);
+      Modal.success({ content: "찜한 상품에 추가되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
 
-  // const [createProductOrder] = useMutation<
-  //   Pick<IMutation, "createProductOrder">,
-  //   IMutationCreateProductOrderArgs
-  // >(CREATE_PRODUCT_ORDER);
+  // 장바구니 삭제
+  const onClickDeleteBasket = (productId: string) => async (e: React.MouseEvent) => {
+    try {
+      await productToCart(productId);
+      Modal.success({ content: "상품이 장바구니에서 삭제되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
 
-  // 구매 버튼 함수
-  // const onClickBuyProduct = async (e: React.MouseEvent) => {
-  //   try {
-  //     await createProductOrder({
-  //       variables: {
-  //         productId: String(e.currentTarget.id),
-  //         amount: totalAmount,
-  //         quantity,
-  //       },
-  //     });
-  //     Modal.success({ content: "구매가 완료되었습니다." });
-  //   } catch (error) {
-  //     if (error instanceof Error) console.log(error.message);
-  //   }
-  // };
+  // 구매 기능 - 하나만 구매할 때
+  const onClickBuyProduct = (productId: string) => async (e: React.MouseEvent) => {
+    const Item = product?.filter((el) => {
+      if (el.product.id === e.currentTarget.id) {
+        return el;
+      } else {
+        return undefined;
+      }
+    });
+    if (Item === undefined) return;
+    console.log(Item[0]);
 
-  // console.log(data);
+    let amount = Item[0].product.discountedPrice * Item[0].count;
+    if (amount < 50000) {
+      amount += 3000;
+    }
+    const quantity = Item[0].count;
+    const value = { productId, quantity };
+
+    try {
+      await buyProducts(value, amount);
+
+      Modal.success({ content: "상품 구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
+
+  const value = data?.fetchCart.map((el) => {
+    const item: IItemType = {};
+    item.productId = el.product.id;
+    item.quantity = el.count;
+    return item;
+  });
+
+  // 구매 기능 - 한꺼번에 구매할 때
+  const onClickBuyProducts = async () => {
+    // const value = data?.fetchCart.map((el) => {
+    //   const item: IItemType = {};
+    //   item.productId = el.product.id;
+    //   item.quantity = el.count;
+    //   return item;
+    // });
+
+    const amount = product?.map((el) => el.product.discountedPrice * el.count);
+
+    // const value = { productId, quantity };
+
+    try {
+      await buyProducts(value, amount);
+      Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
 
   // 총 상품금액
-  let totalPrice = 0;
+  let amount = 0;
 
-  data?.fetchCart.map((cart) => {
-    totalPrice += cart.price;
-    return totalPrice;
+  product?.map((cart) => {
+    amount += Number(cart.product.price) * cart.count;
+    return amount;
   });
 
   // 총 할인금액
   let totalDiscountedPrice = 0;
 
-  data?.fetchCart.map((cart) => {
-    totalDiscountedPrice += cart.price * (cart.discountRate / 100);
+  product?.map((cart) => {
+    totalDiscountedPrice += (cart.product.price - cart.product.discountedPrice) * cart.count;
     return totalDiscountedPrice;
   });
 
   // 배송비
   let deliveryFee;
-  if (totalPrice >= 50000) {
+  if (amount >= 50000) {
     deliveryFee = 0;
   } else {
     deliveryFee = 3000;
   }
 
   // 총 결제금액
-  const totalSum = totalPrice - totalDiscountedPrice + deliveryFee;
+  const totalSum = amount - totalDiscountedPrice + deliveryFee;
 
-  // 수량 버튼
-  // const onClickCountUp = (e: React.MouseEvent) => {
-  // if (quantity >= 1) {
-  // }
-  // setTotalAmount(productPrice[0] * count);
-  // };
+  //  수량 버튼
+  const onClickCountUp = (productId: string, quantity: number) => (e: React.MouseEvent) => {
+    setProduct(
+      product?.map((product) => {
+        if (product.product.id === productId && quantity >= 1) {
+          return {
+            ...product,
+            count: Number(product.count) + 1,
+          };
+        } else {
+          return product;
+        }
+      })
+    );
+  };
 
-  // console.log(productPrice);
-
-  // const onClickCountDown = (e: React.MouseEvent) => {
-  // if (quantity > 1) {
-  //   if (productPrice === undefined) {
-  //     return;
-  //   }
-  //   setQuantity((prev) => prev - 1);
-  //   // setTotalAmount(productPrice * count);
-  // }
-  // };
+  const onClickCountDown = (productId: string, quantity: number) => (e: React.MouseEvent) => {
+    setProduct(
+      product?.map((product) => {
+        if (product.product.id === productId && quantity > 1) {
+          return {
+            ...product,
+            count: Number(product.count) - 1,
+          };
+        } else {
+          return product;
+        }
+      })
+    );
+  };
 
   // 체크박스 기능
   const checkData = data?.fetchCart.map((el, index) => {
     const result: IResultType = {};
     result.number = index;
-    result.id = el.id;
+    result.id = el.product.id;
     return result;
   });
-  console.log(checkData);
+  // console.log(checkData);
   // const checkData: IData[] = [
   //   { id: 0, title: "선택 1" },
   //   { id: 1, title: "선택 2" },
@@ -132,7 +190,7 @@ export default function MypageBasket() {
       setCheckItems(checkItems.filter((el: number | undefined) => el !== id));
     }
   };
-  console.log(checkItems);
+  // console.log(checkItems);
 
   const handleAllCheck = (checked: boolean) => {
     if (checked) {
@@ -146,10 +204,6 @@ export default function MypageBasket() {
       setCheckItems([]);
     }
   };
-
-  // const onClickDelete = async (e: React.MouseEvent) => {
-  //   await productToCart(e.currentTarget.id);
-  // };
 
   return (
     <S.ContentsMain>
@@ -174,8 +228,7 @@ export default function MypageBasket() {
         <S.ItemUl>
           {data?.fetchCart.length !== 0 ? (
             <>
-              {data?.fetchCart.map((cart, index) => (
-                // <MypageBasketItem key={item.id} item={item} />
+              {product?.map((cart, index) => (
                 <S.ItemWrapper key={index}>
                   {checkData && (
                     <S.ItemCheckbox
@@ -185,29 +238,43 @@ export default function MypageBasket() {
                       checked={checkItems.includes(checkData[index].number)}
                     />
                   )}
-                  <S.ItemImg src={cart.image} />
-                  <S.ItemName>{cart.name}</S.ItemName>
+                  <S.ItemImg src={cart.product.image} />
+                  <S.ItemName>{cart.product.name}</S.ItemName>
                   <S.QuantityWrapper>
-                    <S.MinusBtn id={cart.id}>-</S.MinusBtn>
-                    <S.QuantityInput id={cart.id} defaultValue="1" />
-                    {/* <S.QuantitySpan id={cart.id}>{quantity}</S.QuantitySpan> */}
-                    <S.PlusBtn id={cart.id}>+</S.PlusBtn>
+                    <S.MinusBtn
+                      id={cart.product.id}
+                      onClick={onClickCountDown(cart.product.id, cart.count)}
+                    >
+                      -
+                    </S.MinusBtn>
+                    <S.Quantity id={cart.product.id}>{cart.count}</S.Quantity>
+                    <S.PlusBtn
+                      id={cart.product.id}
+                      onClick={onClickCountUp(cart.product.id, cart.count)}
+                    >
+                      +
+                    </S.PlusBtn>
                   </S.QuantityWrapper>
                   <S.PriceWrap>
                     <S.ItemPrice>
-                      {cart.price} <span>원</span>
+                      {(cart.product.price * cart.count).toLocaleString()} <span>원</span>
                     </S.ItemPrice>
-                    <S.DiscountPrice>{cart.discountedPrice} 원</S.DiscountPrice>
+                    <S.DiscountPrice>
+                      {(cart.product.discountedPrice * cart.count).toLocaleString()} 원
+                    </S.DiscountPrice>
                   </S.PriceWrap>
-                  {/* <S.IconBtnWrap> */}
                   <S.BtnWrapper>
-                    <S.CancelBtn id={cart.id}>
+                    <S.CancelBtn
+                      id={cart.product.id}
+                      onClick={onClickDeleteBasket(cart.product.id)}
+                    >
                       <S.CancelIcon></S.CancelIcon>
                     </S.CancelBtn>
-                    <S.PickBtn>찜하기</S.PickBtn>
-                    <S.BasketBtn>구매하기</S.BasketBtn>
+                    <S.PickBtn onClick={onClickPick(cart.product.id)}>찜하기</S.PickBtn>
+                    <S.BasketBtn id={cart.product.id} onClick={onClickBuyProduct(cart.product.id)}>
+                      구매하기
+                    </S.BasketBtn>
                   </S.BtnWrapper>
-                  {/* </S.IconBtnWrap> */}
                 </S.ItemWrapper>
               ))}
             </>
@@ -231,21 +298,21 @@ export default function MypageBasket() {
         <section>
           <S.Label>총 상품금액</S.Label>
           <S.Num>
-            {totalPrice} <S.NumSpan>원</S.NumSpan>
+            {amount.toLocaleString()} <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>－</S.CalculateIcon>
         <section>
           <S.Label>총 할인금액</S.Label>
           <S.Num>
-            {totalDiscountedPrice} <S.NumSpan>원</S.NumSpan>
+            {totalDiscountedPrice.toLocaleString()} <S.NumSpan>원</S.NumSpan>
           </S.Num>
         </section>
         <S.CalculateIcon>＋</S.CalculateIcon>
         <section>
           <S.Label>총 배송비</S.Label>
           <S.Num>
-            {deliveryFee}
+            {deliveryFee.toLocaleString()}
             <S.NumSpan> 원</S.NumSpan>
           </S.Num>
         </section>
@@ -253,7 +320,7 @@ export default function MypageBasket() {
         <section>
           <S.Label>총 결제금액</S.Label>
           <S.TotalNum>
-            {totalSum}
+            {totalSum.toLocaleString()}
             <S.NumSpan>원</S.NumSpan>
           </S.TotalNum>
         </section>
@@ -261,7 +328,7 @@ export default function MypageBasket() {
       <S.BottomBtnWrapper>
         <S.SelectBtn>선택 삭제</S.SelectBtn>
         <S.SelectBtn>선택상품 주문하기</S.SelectBtn>
-        <S.TotalBtn>전체상품 주문하기</S.TotalBtn>
+        <S.TotalBtn onClick={onClickBuyProducts}>전체상품 주문하기</S.TotalBtn>
       </S.BottomBtnWrapper>
     </S.ContentsMain>
   );

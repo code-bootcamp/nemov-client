@@ -7,9 +7,11 @@ export const FETCH_IS_IN_CART = gql`
   }
 `;
 
-export const UseQueryFetchIsInCart = (variables: IQueryFetchIsInCartArgs) => {
+export const UseQueryFetchIsInCart = (productId: string) => {
   const query = useQuery<Pick<IQuery, "fetchIsInCart">, IQueryFetchIsInCartArgs>(FETCH_IS_IN_CART, {
-    variables,
+    variables: {
+      productId,
+    },
   });
 
   return query;

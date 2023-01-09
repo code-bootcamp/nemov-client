@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { UseQueryFetchUserPoint } from "../../../hooks/useQueries/point/UseQueryFetchUserPoint";
+import { UseQueryFetchCartCount } from "../../../hooks/useQueries/product/UseQueryFetchCartCount";
+import { UseQueryFetchProductOrdersCountByBuyer } from "../../../hooks/useQueries/product/UseQueryFetchProductOrdersByBuyer";
 import * as S from "./styles";
 
 export default function MypageLayoutHeader() {
+  const { data } = UseQueryFetchUserPoint();
+  const { data: orderData } = UseQueryFetchProductOrdersCountByBuyer({});
+  const { data: cartData } = UseQueryFetchCartCount();
+
   return (
     <>
       <S.ContentsHeader>
@@ -9,7 +16,7 @@ export default function MypageLayoutHeader() {
           <S.HeaderItem>
             <S.ItemTitle>주문/취소</S.ItemTitle>
             <span>
-              <S.ItemValue>0</S.ItemValue>건
+              <S.ItemValue>{orderData?.fetchProductOrdersCountByBuyer}</S.ItemValue>건
             </span>
           </S.HeaderItem>
         </Link>
@@ -17,7 +24,7 @@ export default function MypageLayoutHeader() {
           <S.HeaderItem>
             <S.ItemTitle>장바구니</S.ItemTitle>
             <span>
-              <S.ItemValue>0</S.ItemValue>건
+              <S.ItemValue>{cartData?.fetchCartCount}</S.ItemValue>건
             </span>
           </S.HeaderItem>
         </Link>
@@ -25,7 +32,7 @@ export default function MypageLayoutHeader() {
           <S.HeaderItem>
             <S.ItemTitle>포인트</S.ItemTitle>
             <span>
-              <S.ItemValue></S.ItemValue>P
+              <S.ItemValue>{data?.fetchUserPoint}</S.ItemValue>P
             </span>
           </S.HeaderItem>
         </Link>
