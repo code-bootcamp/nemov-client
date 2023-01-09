@@ -5,9 +5,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
-import { flexColumn, flexRow } from "../../../../../../../../commons/styles/globalStyles";
+import {
+  flexCenter,
+  flexColumn,
+  flexRow,
+} from "../../../../../../../../commons/styles/globalStyles";
 import { IAnswer } from "../../../../../../../../commons/types/generated/types";
-// import { IProductAskStylesProps } from "../../../Market.types";
+import LiveHelpOutlinedIcon from "@mui/icons-material/LiveHelpOutlined";
+import { amazon } from "../../../../../../../../commons/styles/colorPalettes";
 
 interface IProductAskStylesProps {
   data?: IAnswer | null | undefined;
@@ -18,11 +23,19 @@ export const IconStyleSet01 = css`
   width: 10%;
 `;
 
-export const ProductAskMain = styled.main`
+export const ProductAskNone = styled.section`
   width: 100%;
-  margin-top: 10%;
+  margin: 10% 0;
   padding: 1rem;
+  ${flexCenter}
   flex-direction: column;
+  font-size: 1.3rem;
+  gap: 1rem;
+`;
+
+export const StyledQuestionIcon = styled(LiveHelpOutlinedIcon)`
+  font-size: 4rem;
+  color: ${amazon};
 `;
 
 export const TitlesWrapper = styled.section`

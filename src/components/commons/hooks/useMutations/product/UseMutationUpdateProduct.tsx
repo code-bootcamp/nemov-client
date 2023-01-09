@@ -6,36 +6,24 @@ import {
 
 export const UPDATE_PRODUCT = gql`
   mutation updateProduct(
-    $productCategoryId: ID!
-    $updateProductCategoryInput: UpdateProductInput!
+    $productId: ID!
+    $updateProductInput: UpdateProductInput!
+    $updateProductOptionInput: UpdateProductOptionInput!
   ) {
     updateProduct(
-      productCategoryId: $productCategoryId
-      updateProductCategoryInput: $updateProductCategoryInput
+      productId: $productId
+      updateProductInput: $updateProductInput
+      updateProductOptionInput: $updateProductOptionInput
     ) {
       id
       name
-      productCategory {
-        id
-        name
-        image
-      }
       description
       image
       veganLevel
-      deliveryFee
       price
-      discount
+      discountRate
       quantity
       isOutOfStock
-      user {
-        id
-        name
-        email
-        phone
-        role
-        point
-      }
     }
   }
 `;

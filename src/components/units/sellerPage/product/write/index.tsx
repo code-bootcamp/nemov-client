@@ -6,42 +6,69 @@ import { UseMutationCreateProduct } from "../../../../commons/hooks/useMutations
 import { useForm } from "react-hook-form";
 import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
 import { UseQueryFetchProduct } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
-// import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
-// import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import { UseQueryFetchCategories } from "../../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
+import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations/product/UseMutationUpdateProduct";
+import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
+import { categoryContents } from "../register/category";
 interface ProductWriteProps {
   isEdit: boolean;
 }
 interface ProductInput {
-  name?: string;
-  productCategoryId: {
-    id: string;
-    name: string;
+  name: string;
+  productCategoryId: string;
+  description: string;
+  discountRate: number;
+  image: string;
+  price: number;
+  quantity: number;
+  veganLevel: number;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  option5: string;
+  createProductOptionInput?: {
+    option6?: string;
+    option7?: string;
+    option8?: string;
+    option9?: string;
+    option10?: string;
+    option11?: string;
   };
-  deliveryFee?: number;
-  description?: string;
-  discount?: number;
-  image?: string;
-  price?: number;
-  quantity?: number;
-  veganLevel?: number;
+  updateProductOptionInput?: {
+    option6?: string;
+    option7?: string;
+    option8?: string;
+    option9?: string;
+    option10?: string;
+    option11?: string;
+  };
 }
+
+const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
+const Option1 = categoryContents[0];
+const Option2 = categoryContents[1];
+// const OptionProperty1 = ["option1", "option2", "option3", "option4", "option5"];
+// const OptionProperty2 = ["option6", "option7", "option8", "option9", "option10", "option11"];
 export default function ProductWrite(props: ProductWriteProps) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
+  const [cg, setCG] = useState();
+  const { data: category } = UseQueryFetchCategories();
+  const newCategory = category?.fetchProductCategories.filter((el, i) => el.name !== "전체");
   const [createProduct] = UseMutationCreateProduct();
-  // const [updateProduct] = UseMutationUpdateProduct();
+  const [updateProduct] = UseMutationUpdateProduct();
+  const [uploadFile] = UseMutationUploadFile();
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
-  console.log(data);
-  const [uploadFile] = UseMutationUploadFile();
   const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
   });
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
+    // console.log(file);
     if (file === undefined) return;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
@@ -53,8 +80,21 @@ export default function ProductWrite(props: ProductWriteProps) {
     };
   };
   const onClickGetValue = (event: any) => {
-    console.log(event.target.id);
     setValue("productCategoryId", event.target.id);
+    setCG(event.target.id);
+    console.log(event.target.id);
+  };
+
+  const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
+    const property1: any = option.target.id;
+    setValue(property1, option.target.value);
+    console.log(property1);
+  };
+
+  const onChangeGetOption2 = (option: React.ChangeEvent<HTMLInputElement>) => {
+    const property2: any = option.target.id;
+    setValue(property2, option.target.value);
+    console.log(property2);
   };
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
@@ -65,23 +105,37 @@ export default function ProductWrite(props: ProductWriteProps) {
     }
   }, [data]);
   const onClickSubmit = async (data: ProductInput) => {
-    console.log(data);
+    // console.log(data);
     // console.log(Editor.prototype.getInstance().getHTML());
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
+    
+    if (!url) return;
     // const context = Editor.prototype.getInstance().getHTML();
     const result = await createProduct({
       variables: {
         createProductInput: {
-          name: String(data.name),
-          productCategoryId: String(data.productCategoryId),
+          name: data.name,
+          productCategoryId: data.productCategoryId,
           description: "11111",
-          discount: Number(data.discount),
-          deliveryFee: Number(data.deliveryFee),
+          discountRate: Number(data.discountRate),
           price: Number(data.price),
           quantity: Number(data.quantity),
-          image: String(url),
-          veganLevel: Number(data.veganLevel),
+          image: url,
+          veganLevel: data.veganLevel,
+          option1: data.option1,
+          option2: data.option2,
+          option3: data.option3,
+          option4: data.option4,
+          option5: data.option5,
+        },
+        createProductOptionInput: {
+          option6: String(data.createProductOptionInput?.option6),
+          option7: String(data.createProductOptionInput?.option7),
+          option8: String(data.createProductOptionInput?.option8),
+          option9: String(data.createProductOptionInput?.option9),
+          option10: String(data.createProductOptionInput?.option10),
+          option11: String(data.createProductOptionInput?.option11),
         },
       },
     });
@@ -89,34 +143,44 @@ export default function ProductWrite(props: ProductWriteProps) {
     void router.push("/seller");
   };
   const onClickEdit = async (data: ProductInput) => {
-    // const resultFile = await uploadFile({ variables: { file: files } });
-    // const url = resultFile.data?.uploadFile;
-    // console.log("3333333");
-    // await updateProduct({
-    //   variables: {
-    //     productCategoryId: String(router.query.productId),
-    //     updateProductInput: {
-    //       name: String(data.name),
-    //       productCategoryId: data.productCategoryId,
-    //       description: "11111",
-    //       discount: Number(data.discount),
-    //       deliveryFee: Number(data.deliveryFee),
-    //       price: Number(data.price),
-    //       quantity: Number(data.quantity),
-    //       image: String(url),
-    //       veganLevel: Number(data.veganLevel),
-    //     },
-    //   },
-    //   refetchQueries: [
-    //     {
-    //       query: FETCH_PRODUCTS_BY_SELLER,
-    //       variables: {
-    //         page: 1,
-    //       },
-    //     },
-    //   ],
-    // });
-    // void router.push("/seller");
+    const resultFile = await uploadFile({ variables: { file: files } });
+    const url = resultFile.data?.uploadFile;
+    await updateProduct({
+      variables: {
+        productId: String(router.query.productId),
+        updateProductInput: {
+          name: data.name,
+          description: "상품내용.. 얼른 토스트 ui 해야지..",
+          discountRate: data.discountRate,
+          price: data.price,
+          quantity: data.quantity,
+          image: url,
+          veganLevel: data.veganLevel,
+          option1: data.option1,
+          option2: data.option2,
+          option3: data.option3,
+          option4: data.option4,
+          option5: data.option5,
+        },
+        updateProductOptionInput: {
+          option6: String(data.updateProductOptionInput?.option6),
+          option7: String(data.updateProductOptionInput?.option7),
+          option8: String(data.updateProductOptionInput?.option8),
+          option9: String(data.updateProductOptionInput?.option9),
+          option10: String(data.updateProductOptionInput?.option10),
+          option11: String(data.updateProductOptionInput?.option11),
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_PRODUCTS_BY_SELLER,
+          variables: {
+            page: 1,
+          },
+        },
+      ],
+    });
+    void router.push("/seller");
   };
   return (
     <S.Wrapper>
@@ -145,17 +209,8 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.InputBox
             type="number"
             placeholder="할인율을 입력하세요"
-            {...register("discount")}
-            defaultValue={data?.discount}
-          />
-        </S.Row>
-        <S.Row>
-          <S.SubTitle>배송비</S.SubTitle>{" "}
-          <S.InputBox
-            type="text"
-            placeholder="배송비를 입력하세요"
-            {...register("deliveryFee")}
-            defaultValue={data?.deliveryFee}
+            {...register("discountRate")}
+            defaultValue={data?.discountRate}
           />
         </S.Row>
         <S.Row>
@@ -169,46 +224,161 @@ export default function ProductWrite(props: ProductWriteProps) {
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 카테고리</S.SubTitle>
-          <div>
-            <input
-              type="radio"
-              id="e308aa69-e1f4-409a-b627-dcc690ab23e5"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            BEAUTY
-            <input
-              type="radio"
-              id="d2ad6919-f3cf-4e78-8463-65ec88f4d2c7"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            FOOD
-            <input
-              type="radio"
-              id="ba9751ba-45d2-47f8-a80e-9850ed490d2f"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            DRINK
-            <input
-              type="radio"
-              id="3bcbd43a-2ae1-41c9-a788-f3f86f3c2c56"
-              name="category"
-              onClick={onClickGetValue}
-            />
-            LIFE
-          </div>
+          <S.Category>
+            {newCategory?.map((categories, index) => (
+              <S.Label key={categories.id}>
+                <input
+                  type="radio"
+                  id={categories.id}
+                  name="category"
+                  onClick={onClickGetValue}
+                  value={data?.productCategory.id}
+                  readOnly
+                />
+                <S.Radio>
+                  {categories.name}({categoryArr[index]})
+                </S.Radio>
+              </S.Label>
+            ))}
+          </S.Category>
         </S.Row>
-        <S.Row>
-          <S.SubTitle>상품 고시 정보</S.SubTitle>
-          <div>상품고시정보...</div>
-        </S.Row>
+        <S.OptionsRow>
+          <S.OptionsTitle>상세 고시 정보</S.OptionsTitle>
+          <S.Options>
+            {/* {Option1.map((option1, index) => ( */}
+            <S.NoticeMap>
+              <S.Notice>{Option1[0]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option1"
+                placeholder="입력해주세요"
+                value={data?.option1}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[1]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option2"
+                placeholder="입력해주세요"
+                value={data?.option2}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[2]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option3"
+                placeholder="입력해주세요"
+                defaultValue={data?.option3}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[3]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option4"
+                placeholder="입력해주세요"
+                value={data?.option4}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            <S.NoticeMap>
+              <S.Notice>{Option1[4]}</S.Notice>
+              <S.NoticeInput
+                type="text"
+                id="option5"
+                placeholder="입력해주세요"
+                value={data?.option5}
+                onChange={onChangeGetOption1}
+              />
+            </S.NoticeMap>
+            {/* ))} */}
+            {
+              cg === "e70b1a57-e4f7-41fa-93a3-ef4d13de57e2" && (
+                // Option2.map((option2, index) =>
+                <>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[0]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option6"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option6}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[1]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option7"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option7}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[2]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option8"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option8}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[3]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option9"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option9}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[4]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option10"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option10}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                  <S.NoticeMap>
+                    <S.Notice>{Option2[5]}</S.Notice>
+                    <S.NoticeInput
+                      type="text"
+                      id="option11"
+                      placeholder="입력해주세요"
+                      value={data?.productOption?.option11}
+                      onChange={onChangeGetOption2}
+                    />
+                  </S.NoticeMap>
+                </>
+              )
+              // )
+            }
+          </S.Options>
+        </S.OptionsRow>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>
           <S.Category>
             <S.Label>
-              <input type="radio" id="1" value="FLEX" name="level" onClick={onClickRadio} />
+              <input
+                type="radio"
+                id="1"
+                value="FLEX"
+                name="level"
+                onClick={onClickRadio}
+                readOnly
+              />
               <S.Radio>FLEX</S.Radio>
             </S.Label>
             <S.Label>

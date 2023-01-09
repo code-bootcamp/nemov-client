@@ -27,12 +27,6 @@ export const getVeganName = (level: Maybe<number> | undefined) => {
   }
 };
 
-export const sumOfTotalAmount = (totalPrice: number, deliveryFee: number) => {
-  const sum = totalPrice + deliveryFee;
-
-  return sum;
-};
-
 export const getDate = (value: string) => {
   const date = new Date(value);
   const yyyy = date.getFullYear();

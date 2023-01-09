@@ -6,11 +6,12 @@ import { UseQueryFetchProducts } from "../../../../src/components/commons/hooks/
 import MarketList from "../../../../src/components/units/market/categories/list/MarketList";
 import { CategoryMain } from "../../../../src/components/units/market/categories/list/MarketList.styles";
 import MarketCategory from "../../../../src/components/units/market/categories/category/MarketCategory";
+import { UseQueryFetchIsInCart } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchIsInCart";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
   console.log("라우터 쿼리 넘버", router.query);
-  const { data: productsData } = UseQueryFetchProducts({
+  const { data: productsData, fetchMore: productsFetchMore } = UseQueryFetchProducts({
     productCategoryId: String(router.query.categoryId),
     veganLevel: 0,
     page: 1,
@@ -18,12 +19,19 @@ export default function MarketCategoriesPage() {
 
   const { data: categoryData } = UseQueryFetchCategories();
 
+  const { data: isInCartData } = UseQueryFetchIsInCart(String(router.query.productId));
+
   return (
     <>
       <GlobalWrapper>
         <CategoryMain>
           <MarketCategory categoryData={categoryData} />
-          <MarketList categoryData={categoryData} productsData={productsData} />
+          <MarketList
+            categoryData={categoryData}
+            productsData={productsData}
+            isInCartData={isInCartData}
+            productsFetchMore={productsFetchMore}
+          />
         </CategoryMain>
       </GlobalWrapper>
     </>

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../commons/styles/breakPoints";
 import { colorBase03 } from "../../../commons/styles/colorBases";
 import { flexCenter, flexRow } from "../../../commons/styles/globalStyles";
 
@@ -7,13 +8,32 @@ export const TagsWrapper01 = styled.div`
   gap: 0.5rem;
 `;
 
-export const VeganLevelTag01 = styled.div`
+export const TagsWrapper02 = styled.div`
+  width: 100%;
+  ${flexRow}
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const VeganLevelTag01 = styled.span`
   ${flexCenter}
-  width: auto;
-  height: 25px;
-  padding: 10px;
+  padding: 0.3rem 0.5rem;
   font-family: "SUIT-Light";
-  font-size: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 10px;
+  ${colorBase03}
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
+`;
+
+export const VeganLevelTag02 = styled.span`
+  ${flexCenter}
+  padding: 0 0.5rem;
+  height: 1.5rem;
+  font-family: "SUIT-Light";
+  font-size: 0.9rem;
   text-align: center;
   border-radius: 10px;
   ${colorBase03}

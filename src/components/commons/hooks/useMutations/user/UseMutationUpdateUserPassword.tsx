@@ -4,6 +4,7 @@ import {
   IMutation,
   IMutationUpdateUserPasswordArgs,
 } from "../../../../../commons/types/generated/types";
+import { IFormChangePw } from "../../../../units/mypage/myinfo/changepw/ChangePw.types";
 
 export const UPDATE_USER_PASSWORD = gql`
   mutation updateUserPassword($password: Password!) {
@@ -19,14 +20,14 @@ export const UseMutationUpdateUserPassword = () => {
     IMutationUpdateUserPasswordArgs
   >(UPDATE_USER_PASSWORD);
 
-  const updateUserPasswordSubmit = async (password: IMutationUpdateUserPasswordArgs) => {
+  const updateUserPasswordSubmit = async (data: IFormChangePw) => {
     try {
       await updateUserPassword({
-        variables: { password },
+        variables: { password: data.newPassword },
       });
       Modal.success({ content: "비밀번호가 변경되었습니다." });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) console.log(error.message);
     }
   };
 

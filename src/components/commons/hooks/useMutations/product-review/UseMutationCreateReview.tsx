@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { IMutation, IMutationCreateReviewArgs } from "../../../../../commons/types/generated/types";
+import { IFormData } from "../../../../units/mypage/reviews/write-modal/ReviewsWrite.types";
 import { FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW } from "../../useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
 
 export const CREATE_REVIEW = gql`
@@ -16,18 +17,26 @@ export const UseMutationCreateReview = () => {
     CREATE_REVIEW
   );
 
-  const createReviewSubmit = async (data: IMutationCreateReviewArgs) => {
+  const createReviewSubmit = async (data: IFormData) => {
     try {
       await createReview({
         variables: {
           createReviewInput: {
-            title: data.createReviewInput.title,
-            contents: data.createReviewInput.contents,
-            rating: data.createReviewInput.rating,
+            title: data.title,
+            contents: data.contents,
+            rating: data.rating,
+            images: data.images,
           },
-          productOrderId: data.productOrderId,
+          productOrderId: String(data.productOrderId),
         },
-        refetchQueries: [{ query: FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW }],
+        refetchQueries: [
+          {
+            query: FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW,
+            variables: {
+              page: 1,
+            },
+          },
+        ],
       });
       Modal.success({ content: "상품 후기가 등록되었습니다." });
     } catch (error) {

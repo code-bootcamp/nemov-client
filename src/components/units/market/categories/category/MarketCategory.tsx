@@ -32,7 +32,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
       <S.CategoryWrapper>
         {props.categoryData?.fetchProductCategories.map((categories) => (
           <S.Category key={categories.id} onClick={onClickMoveToCategory(categories.id)}>
-            <S.StyledCategoryIcon src={categories.image} />
+            <S.StyledCategoryIcon src={categories.image} alt={categories.name} />
             <S.CategoryTitle>{categories.name}</S.CategoryTitle>
           </S.Category>
         ))}

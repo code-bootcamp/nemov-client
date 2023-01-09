@@ -17,6 +17,7 @@ export const FETCH_PRODUCT_ORDERS_BY_BUYER = gql`
         name
         image
         price
+        discountedPrice
         quantity
       }
       createdAt

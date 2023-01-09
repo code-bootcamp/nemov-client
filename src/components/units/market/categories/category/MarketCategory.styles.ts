@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../commons/styles/breakPoints";
 
 export const CategoryWrapper = styled.section`
-  width: 50%;
+  @media ${mobile} {
+    width: 80%;
+    padding-top: 10vmax;
+  }
+  width: 60%;
   display: flex;
   flex-direction: row;
   padding-top: 2rem;
@@ -31,8 +36,4 @@ export const CategoryTitle = styled.span`
 
 export const StyledCategoryIcon = styled.img`
   width: 80%;
-`;
-
-export const StyledCategoryIcon02 = styled.img`
-  /* background-image: ; */
 `;

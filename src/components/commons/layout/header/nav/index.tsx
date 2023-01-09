@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { tablet } from "../../../../../commons/styles/breakPoints";
+import { UseQueryFetchCategories } from "../../../hooks/useQueries/product/UseQueryFetchCategories";
 
 export const NavWrapper = styled.nav`
   width: 100%;
@@ -13,9 +13,6 @@ export const NavWrapper = styled.nav`
   left: 50%;
   transform: translate(-50%);
   z-index: -1;
-  @media ${tablet} {
-    display: none;
-  }
 `;
 
 export const Menu = styled.span`
@@ -25,27 +22,20 @@ export const Menu = styled.span`
   color: #fff;
 `;
 
+const categoryArr = ["ALL", "FOOD", "DRINK", "BEAUTY", "LIFE"];
+
 export default function LayoutNav() {
+  const { data } = UseQueryFetchCategories();
   return (
     <NavWrapper>
       <Link href={"/"}>
         <Menu>ABOUT</Menu>
       </Link>
-      <Link href={"/market"}>
-        <Menu>ALL</Menu>
-      </Link>
-      <Link href={"/market"}>
-        <Menu>FOOD</Menu>
-      </Link>
-      <Link href={"/market"}>
-        <Menu>DRINK</Menu>
-      </Link>
-      <Link href={"/market"}>
-        <Menu>BEAUTY</Menu>
-      </Link>
-      <Link href={"/market"}>
-        <Menu>LIFE</Menu>
-      </Link>
+      {data?.fetchProductCategories.map((categories, index) => (
+        <Link href={`/market/categories/${categories.id}`} key={index}>
+          <Menu>{categoryArr[index]}</Menu>
+        </Link>
+      ))}
     </NavWrapper>
   );
 }

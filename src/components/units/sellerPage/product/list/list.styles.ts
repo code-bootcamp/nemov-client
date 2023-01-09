@@ -39,26 +39,6 @@ export const Td = styled.td`
   text-align: center;
 `;
 
-// export const Media = css`
-//   @media ${mobile} {
-//     table {
-//       width: 100%;
-
-//       thead {
-//         border-bottom: 3px solid #008cba;
-//       }
-
-//       tbody {
-//         tr {
-//           border-bottom: 1px solid #ddd;
-//           td {
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const Btn1 = styled.button`
   width: 4vmax;
   height: 2vmax;

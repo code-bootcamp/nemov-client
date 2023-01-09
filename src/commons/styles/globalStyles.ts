@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
 import { deepGreen } from "./colorPalettes";
+import { mobile, tablet } from "./breakPoints";
 
 export const globalStyles = css`
   * {
@@ -12,9 +13,15 @@ export const globalStyles = css`
     font-family: "Arita-Medium";
   }
 
-  @media (max-width: 1300px) {
+  @media ${tablet} {
     html {
-      font-size: 14px;
+      font-size: 12px;
+    }
+  }
+
+  @media ${mobile} {
+    html {
+      font-size: 10px;
     }
   }
 

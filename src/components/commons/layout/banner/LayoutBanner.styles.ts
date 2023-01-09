@@ -62,25 +62,25 @@ const BannerImg = styled.div`
 `;
 
 export const BannerImg1 = styled(BannerImg)`
-  background: url("/images/banner/1.jpg") no-repeat center;
+  background: url("/images/banner/1.webp") no-repeat center;
   @media ${tablet} {
-    background: url("/images/banner/11.jpg") no-repeat center;
+    background: url("/images/banner/11.webp") no-repeat center;
     background-size: cover;
   }
 `;
 
 export const BannerImg2 = styled(BannerImg)`
-  background: url("/images/banner/2.jpg") no-repeat center;
+  background: url("/images/banner/2.webp") no-repeat center;
   @media ${tablet} {
-    background: url("/images/banner/22.jpg") no-repeat center;
+    background: url("/images/banner/22.webp") no-repeat center;
     background-size: cover;
   }
 `;
 
 export const BannerImg3 = styled(BannerImg)`
-  background: url("/images/banner/3.jpg") no-repeat center;
+  background: url("/images/banner/3.webp") no-repeat center;
   @media ${tablet} {
-    background: url("/images/banner/33.jpg") no-repeat center;
+    background: url("/images/banner/33.webp") no-repeat center;
     background-size: cover;
   }
 `;

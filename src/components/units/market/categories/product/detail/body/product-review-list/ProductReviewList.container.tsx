@@ -1,21 +1,15 @@
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
+import * as AS from "../product-ask/ProductAsk.styles";
 import { IMarketDetailProps } from "../../../../../Market.types";
-import { UseQueryFetchReviewsByProduct } from "../../../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
-import { useRouter } from "next/router";
+import { getDate } from "../../../../../../../../commons/libraries/utilies";
 
 // export interface ITabContentsProps {
 //   isHidden: boolean;
 // }
 
 export default function ProductReviewList(props: IMarketDetailProps) {
-  const router = useRouter();
-  const { data } = UseQueryFetchReviewsByProduct({
-    productId: String(router.query.productId),
-    page: 1,
-  });
-
-  console.log(data);
+  console.log(props.reviewsData);
 
   return (
     <CS.TabContentMain01>
@@ -24,27 +18,37 @@ export default function ProductReviewList(props: IMarketDetailProps) {
         <CS.TabContentSubTitle01>해당 상품을 구매한 구매자들의 후기입니다.</CS.TabContentSubTitle01>
       </CS.TabContentHeader01>
       <CS.TabContentInnerWrapper>
-        {new Array(5).fill(1).map((reviews, index) => (
+        {(props.reviewsData === undefined ||
+          props.reviewsData?.fetchReviewsByProduct.length === 0) && (
+          <AS.ProductAskNone>
+            <AS.StyledQuestionIcon />
+            해당 상품에 대한 후기가 없습니다.
+          </AS.ProductAskNone>
+        )}
+        {props.reviewsData?.fetchReviewsByProduct.map((reviews, index) => (
           <CS.TabContentList01 key={index}>
             <CS.ContentListHeader01>
               <CS.HeaderInfo01>
-                <CS.ContentTitle>후기 제목</CS.ContentTitle>
-                <S.PRRating value={5} disabled />
+                <CS.ContentTitle>{reviews.title}</CS.ContentTitle>
+                <S.PRRating value={reviews.rating} disabled />
               </CS.HeaderInfo01>
               <CS.HeaderInfo02>
                 <CS.Info02Detail>
-                  <span>닉네임</span>
-                  <span>2022.12.07</span>
+                  {/* <span>{reviews.user.name}</span> */}
+                  <span>{getDate(reviews.updatedAt)}</span>
                 </CS.Info02Detail>
               </CS.HeaderInfo02>
             </CS.ContentListHeader01>
-            <CS.ContentDetail01>
-              너무 맛있어서 10개 묶음으로 샀어요!! 다음에 또 사고 싶어요~
-            </CS.ContentDetail01>
+            <CS.ContentDetail01>{reviews.contents}</CS.ContentDetail01>
             <S.PRImages>
-              <S.PRImage01 width="10%" src="/icons/best-icon.png" />
-              <S.PRImage01 width="10%" src="/icons/best-icon.png" />
-              <S.PRImage01 width="10%" src="/icons/best-icon.png" />
+              {reviews.images?.map((image, index) => (
+                <S.PRImage01
+                  width="10%"
+                  key={index}
+                  alt={`${reviews.title}의 이미지`}
+                  src={image.url}
+                />
+              ))}
             </S.PRImages>
           </CS.TabContentList01>
         ))}

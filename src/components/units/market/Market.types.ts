@@ -3,8 +3,9 @@ import { SetterOrUpdater } from "recoil";
 import { IQuery, IQueryFetchProductArgs } from "../../../commons/types/generated/types";
 
 export interface IMarketDetailProps {
-  data: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
+  data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
   questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
+  reviewsData?: Pick<IQuery, "fetchReviewsByProduct"> | undefined;
 }
 
 export interface IMarketDetailHeadStylesProps {
@@ -17,10 +18,9 @@ export interface IMarketDetailHeadStylesProps {
 //   isAnswerOpen: boolean;
 // }
 
-export interface IProductOrderData {
-  productId: string;
+export interface IProductOrdersData {
   amount: number;
-  quantity: number;
+  productOrders: [];
 }
 
 export interface IProductAskProps {

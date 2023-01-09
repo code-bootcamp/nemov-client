@@ -11,14 +11,12 @@ export const PageWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
 `;
 
-export const PageLi = styled.button`
+export const PageLi = styled.div`
   width: 34px;
   height: 34px;
   text-align: center;
-  border: 1px solid red;
   border-width: 1px 1px 1px 0px;
   border-top-style: solid;
   border-right-style: solid;
@@ -29,7 +27,9 @@ export const PageLi = styled.button`
   border-image: initial;
   border-left-style: initial;
   border-left-color: initial;
-  background-color: ${(props: IPaginationsStylesProps) => (props.isActive ? `${amazon}` : "#fff")};
+  border-radius: 0;
+  color: ${(props: IPaginationsStylesProps) => (props.isActive ? "white" : "black")};
+  background-color: ${(props: IPaginationsStylesProps) => (props.isActive ? `${amazon}` : "white")};
   line-height: 30px;
   cursor: pointer;
 `;

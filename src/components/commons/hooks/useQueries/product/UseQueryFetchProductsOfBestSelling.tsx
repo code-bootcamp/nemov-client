@@ -9,16 +9,20 @@ export const FETCH_PRODUCTS_OF_BEST_SELLING = gql`
       image
       veganLevel
       price
-      discount
+      discountRate
+      discountedPrice
       isOutOfStock
     }
   }
 `;
 
 export const UseQueryFetchProductsOfBestSelling = () => {
-  const query = useQuery<Pick<IQuery, "fetchProductsOfRecommend">>(FETCH_PRODUCTS_OF_BEST_SELLING, {
-    fetchPolicy: "cache-and-network",
-  });
+  const query = useQuery<Pick<IQuery, "fetchProductsOfBestSelling">>(
+    FETCH_PRODUCTS_OF_BEST_SELLING,
+    {
+      fetchPolicy: "cache-and-network",
+    }
+  );
 
   return query;
 };
