@@ -17,8 +17,6 @@ export default function MypagePicked() {
     page: 1,
   });
 
-  console.log(data);
-
   const { data: dataCount } = UseQueryFetchProductsIPickedCount();
   const { productToCart } = UseMutationToggleProductToCart();
   const { productPick } = UseMutationToggleProductPick();
@@ -56,15 +54,15 @@ export default function MypagePicked() {
         {data?.fetchProductsIPicked.length !== 0 ? (
           <>
             {data?.fetchProductsIPicked.map((pick, index) => (
-              <>
+              <div key={index}>
                 <S.Date>{getDate(pick.createdAt)}</S.Date>
-                <S.PickedItem key={index}>
+                <S.PickedItem>
                   <S.PickedImg src={pick.image} />
                   <S.PickedCenterWrapper>
                     <S.Tags>{getVeganName(pick.veganLevel)}</S.Tags>
                     <S.PickedName>{pick.name}</S.PickedName>
                     <S.PriceDateWrap>
-                      <S.PickedPrice>{pick.price} 원</S.PickedPrice>
+                      <S.PickedPrice>{pick.price.toLocaleString()} 원</S.PickedPrice>
                       {/* <S.PickedDate>{getDate(pick.createdAt)}</S.PickedDate> */}
                     </S.PriceDateWrap>
                   </S.PickedCenterWrapper>
@@ -78,7 +76,7 @@ export default function MypagePicked() {
                     <S.BuyBtn>구매하기</S.BuyBtn>
                   </S.BtnWrapper>
                 </S.PickedItem>
-              </>
+              </div>
             ))}
             <Pagination count={dataCount?.fetchProductsIPickedCount} refetch={refetch} />
           </>

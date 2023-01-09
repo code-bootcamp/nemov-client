@@ -149,6 +149,11 @@ export const MinusBtn = styled.button`
   border-radius: 0;
 `;
 
+export const Quantity = styled.span`
+  width: 30px;
+  text-align: center;
+`;
+
 export const QuantityInput = styled.input`
   width: 30px;
   text-align: center;
