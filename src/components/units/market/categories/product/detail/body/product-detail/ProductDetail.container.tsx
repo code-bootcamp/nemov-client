@@ -7,7 +7,7 @@ export default function ProductDetail(props: IMarketDetailProps) {
   return (
     <CS.TabContentMain01>
       <S.ProductDetailSection>
-        <S.ProductDetailImg src="/images/product-detail-ex02.webp" />
+        <S.ProductDetailImg src="/images/product-detail-ex02.webp" alt="상품 상세 보기 예시" />
         {typeof window !== "undefined" ? (
           <S.ProductDescription
             dangerouslySetInnerHTML={{

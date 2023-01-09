@@ -4,7 +4,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
 import { mobile } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
-import * as S from "../../main/MarketMain.styles";
+// import * as S from "../../main/MarketMain.styles";
+import { FontStyle03, FontStyle04 } from "./item-display/ItemDisplay.styles";
 
 export const CategoryMain = styled.main`
   ${GS.flexColumn}
@@ -70,22 +71,26 @@ export const DetailFooterLeft = styled.div`
 export const ItemName03 = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const ItemDescription = styled.span``;
 
 export const DiscountRate01 = styled.span`
-  ${S.FontStyle02}
+  ${FontStyle03}
   color: ${amazon};
 `;
 
 export const ItemDiscountPrice02 = styled.span`
-  ${S.FontStyle02}
+  ${FontStyle03}
 `;
 
 export const ItemOriginPrice03 = styled.span`
+  ${FontStyle04}
   color: rgb(181, 181, 181);
-  font-size: 0.9rem;
+
   text-decoration: line-through;
 `;
 

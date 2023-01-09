@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../../commons/styles/globalStyles";
 import * as CP from "../../../../../../commons/styles/colorPalettes";
 import * as CB from "../../../../../../commons/styles/colorBases";
@@ -25,9 +25,24 @@ export const FontStyle02 = css`
   }
 `;
 
-export const ItemDetailFooter02 = styled.footer`
-  ${GS.flexRow}
-  justify-content: space-between;
+export const FontStyle03 = css`
+  ${GS.semiBold}
+  font-size: 1.5vmax;
+  @media ${mobile} {
+    font-size: 2vmax;
+  }
+`;
+
+export const FontStyle04 = css`
+  font-size: 0.9rem;
+  @media ${mobile} {
+    font-size: 1.2vmax;
+  }
+`;
+
+export const ItemDetailFooter03 = styled.footer`
+  ${GS.flexColumn}
+  gap: 0.5rem;
   @media ${mobile} {
   }
 `;
@@ -43,13 +58,13 @@ export const BestItemImage = styled.div`
   object-fit: cover;
   display: inline-block;
   position: relative;
-  ::after {
+  /* ::after {
     content: "10";
     width: 12%;
     height: 12%;
     color: white;
     background-color: rgba(0, 0, 0, 0.25);
-    /* padding: 0.5rem 0.8rem; */
+    padding: 0.5rem 0.8rem;
     line-height: 44px;
     font-size: 1.2rem;
     display: inline-block;
@@ -58,7 +73,7 @@ export const BestItemImage = styled.div`
     top: 0;
     z-index: 1;
     text-align: center;
-  }
+  } */
   aspect-ratio: 1/1;
 `;
 
@@ -75,6 +90,7 @@ export const StyledSlider02 = styled(Slider)`
   .slick-center {
     opacity: 1;
     transition: all 0.5s ease-in-out;
+    height: auto;
 
     transform: scale(1.1);
   }
@@ -144,7 +160,6 @@ export const ItemDisplay = styled.div`
 
 export const RecommendItemImg01 = styled.div`
   width: 100%;
-  height: 100%;
   background-image: url(${(props: IMarketDetailHeadStylesProps) => props.image});
   background-position: center;
   background-size: cover;
@@ -182,13 +197,23 @@ export const ItemDisplay03 = styled.section`
   @media ${mobile} {
     width: 45%;
   }
-  width: 30%;
-  height: 30%;
+
+  @media ${tablet} {
+    max-width: 270px;
+  }
+
+  @media (max-width: 957px) {
+    max-width: 230px;
+  }
+  width: 100%;
+  max-width: 360px;
+  /* height: 500px; */
   ${ItemStyleSet01}
   padding: 1rem;
 `;
 
 export const ItemDetailFooter = styled.section`
+  width: 100%;
   ${GS.flexRow}
   justify-content: space-between;
 `;
@@ -216,9 +241,16 @@ export const ItemDetail = styled.div`
 //   transition: 0.3s ease-in-out;
 // `;
 
-export const ItemName = styled.span`
+export const BestItemName = styled.span`
   @media ${mobile} {
     font-size: 2vmax;
+  }
+  font-size: 1.2rem;
+`;
+
+export const ItemName = styled.span`
+  @media ${mobile} {
+    font-size: 3vmax;
   }
   font-size: 1.5rem;
 `;
@@ -232,8 +264,25 @@ export const ItemPrices = styled.div`
   }
 `;
 
+export const DiscountRate02 = styled.span`
+  @media ${mobile} {
+    font-size: 3vmax;
+  }
+  ${FontStyle02}
+  color: ${CP.amazon};
+`;
+
+export const DiscountRate03 = styled.span`
+  ${FontStyle03}
+  color: ${CP.amazon};
+`;
+
 export const ItemDiscountPrice = styled.span`
   ${FontStyle02}
+`;
+
+export const ItemDiscountPrice02 = styled.span`
+  ${FontStyle03}
 `;
 
 export const ItemOriginPrice = styled.span`

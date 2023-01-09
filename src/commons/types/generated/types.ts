@@ -29,6 +29,13 @@ export type IAnswer = {
   user: IUser;
 };
 
+export type ICartOutput = {
+  __typename?: 'CartOutput';
+  /** 장바구니에 담긴 상품 수량 */
+  count: Scalars['Int'];
+  product: IProduct;
+};
+
 export type ICreateProductCategoryInput = {
   image: Scalars['String'];
   name: Scalars['String'];
@@ -305,6 +312,7 @@ export type IMutationToggleProductPickArgs = {
 
 
 export type IMutationToggleProductToCartArgs = {
+  count?: InputMaybe<Scalars['Int']>;
   productId: Scalars['ID'];
 };
 
@@ -456,7 +464,7 @@ export type IQuery = {
   __typename?: 'Query';
   fetchAnswer: IAnswer;
   fetchAnswerByQuestion: IAnswer;
-  fetchCart: Array<IProduct>;
+  fetchCart: Array<ICartOutput>;
   fetchCartCount: Scalars['Int'];
   fetchIsInCart: Scalars['Boolean'];
   fetchIsPicked: Scalars['Boolean'];

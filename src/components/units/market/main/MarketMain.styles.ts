@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../../commons/styles/breakPoints";
 import { colorBase03 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
@@ -120,17 +120,19 @@ export const RecommendItemSection01 = styled.section`
 
 export const ItemsWrapper01 = styled.section`
   @media ${mobile} {
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 0;
   }
+  @media ${tablet} {
+    justify-content: center;
+  }
   width: 100%;
-  padding: 2rem 1.5rem;
   ${GS.flexRow}
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 5%;
   background-color: white;
-  border-radius: 8px;
+  /* border-radius: 8px; */
+  /* overflow: auto; */
 `;
 
 export const ItemsWrapper02 = styled.section`
