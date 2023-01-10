@@ -3,6 +3,7 @@ import {
   IQuery,
   IQueryFetchPointTransactionsArgs,
   IQueryFetchProductOrdersCountByBuyerArgs,
+  IQueryFetchProductsArgs,
   IQueryFetchProductsIPickedArgs,
 } from "../../../commons/types/generated/types";
 
@@ -25,4 +26,11 @@ export interface IPagination03Props {
   refetch: (
     variables?: Partial<IQueryFetchProductsIPickedArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsIPicked">>>;
+}
+
+export interface IPagination07Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchProductsArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProducts">>>;
 }

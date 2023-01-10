@@ -137,3 +137,8 @@ export const SelectBox = styled(Select)`
   }
   width: 10rem;
 `;
+
+export const PaginationSection = styled.section`
+  width: 100%;
+  justify-content: flex-end;
+`;
