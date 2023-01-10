@@ -141,3 +141,9 @@ export const AnswerContents = styled.textarea`
   border-radius: 10px;
   margin-top: 1rem;
 `;
+
+export const NoQnaText = styled.p`
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 40px;
+`;

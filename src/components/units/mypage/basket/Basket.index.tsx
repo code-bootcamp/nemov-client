@@ -21,14 +21,13 @@ interface IItemType {
 
 export default function MypageBasket() {
   const { data } = UseQueryFetchCart();
-  // console.log(data);
+  const [product, setProduct] = useState(data?.fetchCart);
+  console.log(data);
 
   // const { data: isInCartData } = UseQueryFetchIsInCart(productId);
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
   const { buyProducts } = UseMutationCreateProductOrders();
-
-  const [product, setProduct] = useState(data?.fetchCart);
 
   // 찜하기
   const onClickPick = (productId: string) => async (e: React.MouseEvent) => {
@@ -85,6 +84,7 @@ export default function MypageBasket() {
 
   // 구매 기능 - 한꺼번에 구매할 때
   const onClickBuyProducts = async () => {
+    // value - productId, quantity
     const value = data?.fetchCart.map((el) => {
       const item: IItemType = {};
       item.productId = el.product.id;
@@ -92,6 +92,7 @@ export default function MypageBasket() {
       return item;
     });
 
+    // amount
     if (product === undefined) {
       return [];
     }
@@ -101,23 +102,29 @@ export default function MypageBasket() {
       return sum;
     });
 
-    const amount = sum.reduce((a, b) => a + b);
-
-    try {
-      await buyProducts(value, amount);
-      Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
-
-      totalDiscountedPrice = 0;
-      priceSum = 0;
-      deliveryFee = 0;
-      totalSum = 0;
-      // setPriceSum(0);
-      // setTotalDiscountedPrice(0);
-      // setDeliveryFee(0);
-      // setTotalSum(0);
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
+    let amount = sum.reduce((a, b) => a + b);
+    if (amount < 50000) {
+      amount += 3000;
     }
+
+    console.log(value, amount);
+
+    // try {
+    void buyProducts(value, amount);
+    // Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
+
+    totalDiscountedPrice = 0;
+    priceSum = 0;
+    deliveryFee = 0;
+    totalSum = 0;
+    location.reload();
+    // setPriceSum(0);
+    // setTotalDiscountedPrice(0);
+    // setDeliveryFee(0);
+    // setTotalSum(0);
+    // } catch (error) {
+    //   if (error instanceof Error) console.log(error.message);
+    // }
   };
 
   // 총 상품금액
@@ -150,11 +157,10 @@ export default function MypageBasket() {
   let deliveryFee;
   // const [deliveryFee, setDeliveryFee] = useState(0);
 
-  if (priceSum >= 50000) {
+  if (priceSum - totalDiscountedPrice >= 50000) {
     deliveryFee = 0;
     // setDeliveryFee(0);
-  } else if (priceSum === 0) {
-    // setDeliveryFee(3000);
+  } else if (priceSum - totalDiscountedPrice < 50000) {
     deliveryFee = 3000;
   } else {
     deliveryFee = 0;
@@ -353,7 +359,7 @@ export default function MypageBasket() {
       <S.BottomBtnWrapper>
         {/* <S.SelectBtn>선택 삭제</S.SelectBtn>
         <S.SelectBtn>선택상품 주문하기</S.SelectBtn> */}
-        <S.TotalBtn onClick={onClickBuyProducts}>전체상품 주문하기</S.TotalBtn>
+        <S.TotalBtn onClick={onClickBuyProducts}>전체상품 구매하기</S.TotalBtn>
       </S.BottomBtnWrapper>
     </S.ContentsMain>
   );

@@ -139,7 +139,7 @@ export const ConfirmTime = styled.span`
   font-weight: bold;
   position: absolute;
   top: 10px;
-  right: 120px;
+  right: 130px;
 `;
 
 export const PhoneBtn = styled.button`
