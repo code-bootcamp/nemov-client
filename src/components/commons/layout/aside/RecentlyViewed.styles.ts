@@ -5,11 +5,12 @@ export const SideBarWrap = styled.main`
   position: fixed;
   top: 40%;
   right: 0;
-  width: 150px;
+  width: 100px;
   padding: 2%;
   background-color: #fff;
   outline: none;
   border: none;
+  border-radius: 15px;
   transition: background-color 0.2s;
   box-shadow: 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%),
     0 9px 28px 8px rgb(0 0 0 / 5%);
@@ -24,7 +25,7 @@ export const SideBarWrap = styled.main`
 `;
 
 export const Title = styled.h1`
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: 10px;
 `;
 
@@ -34,5 +35,27 @@ export const Contents = styled.section`
     height: 90px;
     background-color: #999;
     margin-bottom: 3px;
+  }
+`;
+
+export const Thumbnail = styled.div`
+  & + div {
+    margin-top: 10px;
+  }
+  > a {
+    display: block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background-color: #c4c4c4;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  > a > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
   }
 `;
