@@ -89,19 +89,17 @@ export default function ProductWrite(props: ProductWriteProps) {
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
     setCG(event.target.id);
-    console.log(event.target.id);
   };
 
   const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
     const property1: any = option.target.id;
     setValue(property1, option.target.value);
-    console.log(property1);
   };
 
   const onChangeGetOption2 = (option: React.ChangeEvent<HTMLInputElement>) => {
     const property2: any = option.target.id;
     setValue(property2, option.target.value);
-    console.log(property2);
+    console.log(option.target.value);
   };
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
@@ -212,7 +210,7 @@ export default function ProductWrite(props: ProductWriteProps) {
             type="number"
             placeholder="상품기격을 입력하세요"
             {...register("price")}
-            defaultValue={data?.price}
+            defaultValue={data?.price.toLocaleString()}
           />
         </S.Row>
         <S.Row>
@@ -244,7 +242,6 @@ export default function ProductWrite(props: ProductWriteProps) {
                   name="category"
                   onClick={onClickGetValue}
                   value={data?.productCategory.id}
-                  readOnly
                 />
                 <S.Radio>
                   {categories.name}({categoryArr[index]})
@@ -283,7 +280,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                 type="text"
                 id="option3"
                 placeholder="입력해주세요"
-                defaultValue={data?.option3}
+                value={data?.option3}
                 onChange={onChangeGetOption1}
               />
             </S.NoticeMap>
@@ -316,7 +313,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[0]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option6"
+                      id="productOption.option6"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option6}
                       onChange={onChangeGetOption2}
@@ -326,7 +323,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[1]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option7"
+                      id="productOption.option7"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option7}
                       onChange={onChangeGetOption2}
@@ -336,7 +333,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[2]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option8"
+                      id="productOption.option8"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option8}
                       onChange={onChangeGetOption2}
@@ -346,7 +343,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[3]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option9"
+                      id="productOption.option9"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option9}
                       onChange={onChangeGetOption2}
@@ -356,7 +353,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[4]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option10"
+                      id="productOption.option10"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option10}
                       onChange={onChangeGetOption2}
@@ -366,7 +363,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                     <S.Notice>{Option2[5]}</S.Notice>
                     <S.NoticeInput
                       type="text"
-                      id="option11"
+                      id="productOption.option11"
                       placeholder="입력해주세요"
                       value={data?.productOption?.option11}
                       onChange={onChangeGetOption2}
@@ -382,14 +379,7 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>비건 유형</S.SubTitle>
           <S.Category>
             <S.Label>
-              <input
-                type="radio"
-                id="1"
-                value="FLEX"
-                name="level"
-                onClick={onClickRadio}
-                readOnly
-              />
+              <input type="radio" id="1" value="FLEX" name="level" onClick={onClickRadio} />
               <S.Radio>FLEX</S.Radio>
             </S.Label>
             <S.Label>

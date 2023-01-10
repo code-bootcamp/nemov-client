@@ -64,20 +64,20 @@ const Section = styled.section`
 `;
 
 export const Section1 = styled(Section)`
-  background: url(/images/landing/1.jpg) no-repeat 50% 0 fixed;
+  background: url(/images/landing/1.webp) no-repeat 50% 0 fixed;
   background-size: cover;
 `;
 
 export const Section2 = styled(Section)`
-  background: url(/images/landing/2.jpg) no-repeat 50% 0 fixed;
+  background: url(/images/landing/2.webp) no-repeat 50% 0 fixed;
   background-size: cover;
 `;
 export const Section3 = styled(Section)`
-  background: url(/images/landing/3.jpg) no-repeat 50% 0 fixed;
+  background: url(/images/landing/3.webp) no-repeat 50% 0 fixed;
   background-size: cover;
 `;
 export const Section4 = styled(Section)`
-  background: url(/images/landing/4.jpg) no-repeat 50% 0 fixed;
+  background: url(/images/landing/4.webp) no-repeat 50% 0 fixed;
   background-size: cover;
 `;
 
@@ -104,8 +104,7 @@ export const Title = styled.h1`
   margin: 25px 0;
   color: #fff;
   line-height: 4vmax;
-  text-shadow: rgba(0, 0, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  text-shadow: rgba(0, 0, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 `;
 
 export const Sentence = styled.p`
