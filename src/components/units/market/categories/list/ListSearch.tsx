@@ -1,12 +1,13 @@
 import { useApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { getVeganName } from "../../../../../commons/libraries/utilies";
+// import { getVeganName } from "../../../../../commons/libraries/utilies";
 import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 import {
   ListSearchSection,
   SearchInputBox,
   SearchSection,
+  SelectBox,
   StyledSearchIcon,
 } from "./MarketList.styles";
 
@@ -17,7 +18,8 @@ export default function ListSearch() {
 
   const prefetchByLevel = (value: number) => async () => {
     setSelected(value);
-    console.log("클릭");
+    console.log(selected);
+    // console.log("클릭");
     console.log(value);
     const data = await client.query({
       query: FETCH_PRODUCTS,
@@ -35,7 +37,8 @@ export default function ListSearch() {
         <SearchInputBox />
         <StyledSearchIcon />
       </SearchSection>
-      {/* <SelectBox
+      <SelectBox
+        onChange={prefetchByLevel(selected)}
         defaultValue={"비건 레벨"}
         options={[
           {
@@ -44,7 +47,7 @@ export default function ListSearch() {
             selected: true,
             disabled: true,
           },
-          { value: 1, label: "플렉시테리언", onSelect: prefetchByLevel(1) },
+          { value: 1, label: "플렉시테리언" },
           { value: 2, label: "폴로" },
           { value: 3, label: "페스코" },
           { value: 4, label: "락토 오보" },
@@ -52,8 +55,8 @@ export default function ListSearch() {
           { value: 6, label: "락토" },
           { value: 7, label: "비건" },
         ]}
-      ></SelectBox> */}
-      <select onChange={prefetchByLevel(selected)}>
+      ></SelectBox>
+      {/* <select onChange={prefetchByLevel(selected)}>
         <option value={1}>{getVeganName(1)}</option>
         <option value={2}>{getVeganName(2)}</option>
         <option value={3}>{getVeganName(3)}</option>
@@ -61,7 +64,7 @@ export default function ListSearch() {
         <option value={5}>{getVeganName(5)}</option>
         <option value={6}>{getVeganName(6)}</option>
         <option value={7}>{getVeganName(7)}</option>
-      </select>
+      </select> */}
     </ListSearchSection>
   );
 }
