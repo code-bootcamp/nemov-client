@@ -37,7 +37,7 @@ export default function MarketMain() {
   const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
 
-  console.log("추천상품", recItemData);
+  // console.log("추천상품", recItemData);
 
   // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
   //   if (!rec.isOutOfStock) {
@@ -72,6 +72,7 @@ export default function MarketMain() {
   const [isOpen, setIsOpen] = useState(false);
   const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
+  const [quantity, setQuantity] = useState(parseInt("1"));
 
   // 추천 상품 아이템 장바구니 모달 열기
   const onClickToggleCartModal01 = (id: string) => (e: React.MouseEvent) => {
@@ -140,6 +141,8 @@ export default function MarketMain() {
           curProductData={curProductData}
           onCancel={modalOnCancel}
           setIsOpen={setIsOpen}
+          setQuantity={setQuantity}
+          quantity={quantity}
         ></CartModal>
       </CommonModal01>
 

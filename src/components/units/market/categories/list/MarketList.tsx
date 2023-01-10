@@ -1,4 +1,3 @@
-// import { CommonBasketIcon02 } from "../../../../commons/icons/CommonIcons.styles";
 import { TagsWrapper01, VeganLevelTag01 } from "../../../../commons/tags/CommonTags.Styles";
 import * as MS from "../../main/MarketMain.styles";
 import * as S from "./MarketList.styles";
@@ -10,7 +9,6 @@ import { IProduct, IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
-// import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import React, { useState } from "react";
 import { Modal } from "antd";
 import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
@@ -30,21 +28,26 @@ interface IMarketListProps {
 export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
   const client = useApolloClient();
+  const [quantity, setQuantity] = useState(parseInt("1"));
   const [isOpen, setIsOpen] = useState(false);
   // const { productToCart } = UseMutationToggleProductToCart();
   const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
 
-  const onClickToggleCartModal = (id: string) => (e: React.MouseEvent) => {
+  const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     e?.stopPropagation();
 
     if (!useAuth02) {
       Modal.error({ content: "로그인이 필요한 서비스입니다." });
     } else {
-      setIsOpen((prev) => !prev);
       const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
         if (cur.id === id) {
-          return setCurProductData(cur);
+          if (cur.isOutOfStock) {
+            return Modal.error({ content: "품절된 상품입니다." });
+          } else {
+            setIsOpen((prev) => !prev);
+            return setCurProductData(cur);
+          }
         } else {
           return undefined;
         }
@@ -81,6 +84,7 @@ export default function MarketList(props: IMarketListProps) {
 
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
+    setQuantity(1);
   };
 
   return (
@@ -90,6 +94,8 @@ export default function MarketList(props: IMarketListProps) {
           curProductData={curProductData}
           onCancel={modalOnCancel}
           setIsOpen={setIsOpen}
+          quantity={quantity}
+          setQuantity={setQuantity}
         ></CartModal>
       </CommonModal01>
 
