@@ -9,7 +9,7 @@ import { IProduct } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCT } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 import Crumbs from "../product/detail/head/nav/MarketCrumbs";
@@ -48,9 +48,9 @@ export default function MarketList(props: IMarketListProps) {
     console.log(fetchProducts);
   };
 
-  // useEffect(() => {
-  //   setFetchProducts(props.productsData?.fetchProducts);
-  // }, [props.productsData]);
+  useEffect(() => {
+    setFetchProducts(props.productsData?.fetchProducts);
+  }, [props.productsData]);
 
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     e?.stopPropagation();
@@ -124,42 +124,7 @@ export default function MarketList(props: IMarketListProps) {
       <ListSearch prefetchByLevel={prefetchByLevel} />
       {/* <InfiniteScroll02 fetchMore={props.productsFetchMore} data={props.productsData}> */}
       <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
-        {/* {fetchProducts?.map((products) => (
-          <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
-            <S.ItemImageBox01>
-              {!!products.isOutOfStock && (
-                <S.ItemSoldOutDisPlay>
-                  <S.SoldOut>SOLD OUT</S.SoldOut>
-                </S.ItemSoldOutDisPlay>
-              )}
-              <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
-            </S.ItemImageBox01>
-            <IDS.ItemDetail>
-              <TagsWrapper01>
-                <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
-              </TagsWrapper01>
-              <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
-                <S.DetailFooterLeft>
-                  <S.ItemName03>{products.name}</S.ItemName03>
-                  <IDS.ItemPrices>
-                    {products.discountRate !== 0 && (
-                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
-                    )}
-                    <S.ItemDiscountPrice02>
-                      {products.discountedPrice.toLocaleString()}원
-                    </S.ItemDiscountPrice02>
-                    {!!products.discountRate && (
-                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
-                    )}
-                  </IDS.ItemPrices>
-                </S.DetailFooterLeft>
-                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
-              </S.ItemDetailFooter02>
-            </IDS.ItemDetail>
-          </IDS.ItemDisplay03>
-        ))} */}
-        {props.productsData?.fetchProducts.map((products) => (
-          // isOutOfStock === true이면, 매진 상태 나타내기
+        {fetchProducts?.map((products) => (
           <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
             <S.ItemImageBox01>
               {!!products.isOutOfStock && (
@@ -193,9 +158,46 @@ export default function MarketList(props: IMarketListProps) {
             </IDS.ItemDetail>
           </IDS.ItemDisplay03>
         ))}
-        <S.PaginationSection>
-          <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
-        </S.PaginationSection>
+        {/* {props.productsData?.fetchProducts.map((products) => (
+          // isOutOfStock === true이면, 매진 상태 나타내기
+          <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
+            <S.ItemImageBox01>
+              {!!products.isOutOfStock && (
+                <S.ItemSoldOutDisPlay>
+                  <S.SoldOut>SOLD OUT</S.SoldOut>
+                </S.ItemSoldOutDisPlay>
+              )}
+              <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
+            </S.ItemImageBox01>
+            <IDS.ItemDetail>
+              <TagsWrapper01>
+                <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
+              </TagsWrapper01>
+              <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
+                <S.DetailFooterLeft>
+                  <S.ItemName03>{products.name}</S.ItemName03>
+                  <IDS.ItemPrices>
+                    {products.discountRate !== 0 && (
+                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                    )}
+                    <S.ItemDiscountPrice02>
+                      {products.discountedPrice.toLocaleString()}원
+                    </S.ItemDiscountPrice02>
+                    {!!products.discountRate && (
+                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
+                    )}
+                  </IDS.ItemPrices>
+                </S.DetailFooterLeft>
+                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
+              </S.ItemDetailFooter02>
+            </IDS.ItemDetail>
+          </IDS.ItemDisplay03>
+        ))} */}
+        {categoryData?.map((categories) => (
+          <S.PaginationSection key={categories.id}>
+            <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
+          </S.PaginationSection>
+        ))}
       </MS.ItemsWrapper01>
       {/* </InfiniteScroll02> */}
     </>
