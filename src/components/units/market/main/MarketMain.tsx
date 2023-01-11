@@ -1,6 +1,5 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
-// import MarketCategory from "../category/MarketCategory";
 import * as ID from "../categories/list/item-display/ItemDisplay";
 import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
@@ -37,18 +36,6 @@ export default function MarketMain() {
   const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
 
-  // console.log("추천상품", recItemData);
-
-  // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
-  //   if (!rec.isOutOfStock) {
-  //     return rec;
-  //   } else {
-  //     return undefined;
-  //   }
-  // });
-
-  // console.log("추천상품 중 매진 아닌것", curRecItemData);
-
   const settings = {
     centerMode: true,
     infinite: true,
@@ -62,8 +49,6 @@ export default function MarketMain() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-
-  // console.log(bestItemData);
 
   const router = useRouter();
   const client = useApolloClient();
@@ -170,7 +155,6 @@ export default function MarketMain() {
                     onClickToggleCartModal01={onClickToggleCartModal01}
                   />
                 ))}
-                {/* <ID.ItemDisPlay02 key={rec.id} recData={rec} />; */}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
             <S.MainMarketSection01>

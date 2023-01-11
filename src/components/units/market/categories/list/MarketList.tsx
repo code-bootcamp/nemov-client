@@ -157,41 +157,6 @@ export default function MarketList(props: IMarketListProps) {
             </IDS.ItemDetail>
           </IDS.ItemDisplay03>
         ))}
-        {/* {props.productsData?.fetchProducts.map((products) => (
-          // isOutOfStock === true이면, 매진 상태 나타내기
-          <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
-            <S.ItemImageBox01>
-              {!!products.isOutOfStock && (
-                <S.ItemSoldOutDisPlay>
-                  <S.SoldOut>SOLD OUT</S.SoldOut>
-                </S.ItemSoldOutDisPlay>
-              )}
-              <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
-            </S.ItemImageBox01>
-            <IDS.ItemDetail>
-              <TagsWrapper01>
-                <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
-              </TagsWrapper01>
-              <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
-                <S.DetailFooterLeft>
-                  <S.ItemName03>{products.name}</S.ItemName03>
-                  <IDS.ItemPrices>
-                    {products.discountRate !== 0 && (
-                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
-                    )}
-                    <S.ItemDiscountPrice02>
-                      {products.discountedPrice.toLocaleString()}원
-                    </S.ItemDiscountPrice02>
-                    {!!products.discountRate && (
-                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
-                    )}
-                  </IDS.ItemPrices>
-                </S.DetailFooterLeft>
-                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
-              </S.ItemDetailFooter02>
-            </IDS.ItemDetail>
-          </IDS.ItemDisplay03>
-        ))} */}
         {categoryData?.map((categories) => (
           <S.PaginationSection key={categories.id}>
             <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
