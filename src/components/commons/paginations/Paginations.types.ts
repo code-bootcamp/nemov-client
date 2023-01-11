@@ -26,3 +26,8 @@ export interface IPagination03Props {
     variables?: Partial<IQueryFetchProductsIPickedArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsIPicked">>>;
 }
+
+export interface IPagination07Props {
+  count: number | undefined;
+  refetch: any;
+}

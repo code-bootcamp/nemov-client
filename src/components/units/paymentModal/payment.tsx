@@ -89,17 +89,17 @@ export default function PaymentPage(props: PaymentProps) {
       />
       <S.SelectBoxWrap>
         <S.SelectBox onClick={onclickGetValue} id="10000">
-          10000원
+          +10,000
         </S.SelectBox>
         <S.SelectBox onClick={onclickGetValue} id="20000">
-          20000원
+          +20,000
         </S.SelectBox>
         <S.SelectBox onClick={onclickGetValue} id="50000">
-          50000원
+          +50,000
         </S.SelectBox>
 
         <S.SelectBoxLast onClick={onclickGetValue} id="100000">
-          100000원
+          +100,000
         </S.SelectBoxLast>
       </S.SelectBoxWrap>
       <S.PaymentBtn onClick={onClickPayment}>충전하기</S.PaymentBtn>

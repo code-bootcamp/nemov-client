@@ -1,9 +1,14 @@
 import { MouseEvent, useState } from "react";
 import * as S from "./Paginations.styles";
-import { IPagination01Props, IPagination02Props, IPagination03Props } from "./Paginations.types";
+import {
+  IPagination01Props,
+  IPagination02Props,
+  IPagination03Props,
+  IPagination07Props,
+} from "./Paginations.types";
 
 export default function Pagination(
-  props: IPagination01Props | IPagination02Props | IPagination03Props
+  props: IPagination01Props | IPagination02Props | IPagination03Props | IPagination07Props
 ) {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
