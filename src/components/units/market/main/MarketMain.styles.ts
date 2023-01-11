@@ -52,6 +52,8 @@ export const MarketMainHeader01 = styled.header`
     flex-direction: column;
     align-items: flex-start;
     gap: 0.2rem;
+
+    padding: 0 3rem;
   }
   ${HeaderStyle}
 `;

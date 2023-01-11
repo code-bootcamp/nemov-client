@@ -116,7 +116,7 @@ export const ListSearchSection = styled.section`
   @media ${mobile} {
     padding: 0;
     margin-top: 5rem;
-    justify-content: normal;
+    justify-content: space-around;
     gap: 0rem;
   }
   width: 100%;
