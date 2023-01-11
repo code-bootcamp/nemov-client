@@ -6,7 +6,7 @@ import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { FindIdSchema } from "./FindId.validtation";
 
 export default function FindId() {
-  const { register, handleSubmit, formState } = useForm({
+  const { register } = useForm({
     resolver: yupResolver(FindIdSchema),
     mode: "onChange",
   });

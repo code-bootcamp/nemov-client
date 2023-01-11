@@ -15,7 +15,7 @@ import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
-import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
+// import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
 import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 // import InfiniteScroll02 from "../../../../commons/infiniteScrolls/InfiniteScroll02";
 import Pagination from "../../../../commons/paginations/Pagination.index";
