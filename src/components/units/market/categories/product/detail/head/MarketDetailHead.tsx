@@ -153,7 +153,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
               </S.ProductOriginalPrice01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
-              <S.DetailInfoTitle01>배송비</S.DetailInfoTitle01>
+              <S.DeliveryFeeTitle>배송비</S.DeliveryFeeTitle>
               <S.DetailInfoContent01>3,000원</S.DetailInfoContent01>
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>

@@ -86,4 +86,9 @@ export const CommonHeartIcon01 = styled(FavoriteBorderIcon)`
   border-radius: 10px;
   padding: 7px;
   cursor: pointer;
+
+  @media ${mobile} {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
