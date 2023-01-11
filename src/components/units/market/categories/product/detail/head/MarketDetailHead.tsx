@@ -12,7 +12,7 @@ import { IMarketDetailProps } from "../../../../Market.types";
 import * as S from "./MarketDetailHead.styles";
 import Crumbs from "./nav/MarketCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/CountDownUpButtons";
-import { Modal } from "antd";
+import { message } from "antd";
 import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
 import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 
@@ -20,6 +20,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
   const { productPick } = UseMutationToggleProductPick();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
 
+  const [messageApi, contextHolder] = message.useMessage();
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
   const [isPicked, setIsPicked] = useState<boolean | undefined>(false);
@@ -67,9 +68,17 @@ function MarketDetailHead(props: IMarketDetailProps) {
     const status = result?.data?.toggleProductToCart;
     console.log(status);
     if (status === true) {
-      Modal.success({ content: "장바구니에 상품을 담았습니다." });
+      void messageApi.open({
+        type: "success",
+        content: "상품을 장바구니에 담았습니다.",
+        duration: 5,
+      });
     } else {
-      Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+      void messageApi.open({
+        type: "error",
+        content: "상품이 장바구니에서 삭제되었습니다.",
+        duration: 5,
+      });
     }
   };
 
@@ -150,6 +159,7 @@ function MarketDetailHead(props: IMarketDetailProps) {
               ) : (
                 <CommonHeartIcon02 onClick={onClickTogglePick(props.data?.data?.fetchProduct.id)} />
               )}
+              {contextHolder}
               <StyledCommonButton01
                 onClick={onClickToggleProductToCart(String(props.data?.data?.fetchProduct.id))}
               >
