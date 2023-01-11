@@ -35,7 +35,7 @@ export const ButtonStyleSet03 = css`
   ${colorBase03}
 
   @media ${mobile} {
-    font-size: 10px;
+    font-size: 1rem;
   }
 `;
 
