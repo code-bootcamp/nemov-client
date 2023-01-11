@@ -58,5 +58,8 @@ export const CrumbLink02 = styled.a`
   position: relative;
   margin-right: 0.375rem;
   @media ${mobile} {
+    top: 0.1rem;
+    left: 0.2rem;
+    font-size: 1.4rem;
   }
 `;

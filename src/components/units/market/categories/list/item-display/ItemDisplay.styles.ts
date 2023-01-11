@@ -206,14 +206,14 @@ export const ItemDisplay03 = styled.section`
   }
 
   @media ${tablet} {
-    max-width: 270px;
+    /* max-width: 270px; */
   }
 
   @media (max-width: 957px) {
-    max-width: 230px;
+    /* max-width: 230px; */
   }
-  width: 100%;
-  max-width: 360px;
+  width: 30%;
+  /* max-width: 360px; */
   /* height: 500px; */
   ${ItemStyleSet01}
   padding: 1rem;

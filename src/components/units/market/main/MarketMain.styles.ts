@@ -120,20 +120,18 @@ export const RecommendItemSection01 = styled.section`
 `;
 
 export const ItemsWrapper01 = styled.section`
-  @media ${mobile} {
-    justify-content: space-around;
-    gap: 0;
-  }
-  @media ${tablet} {
-    justify-content: center;
-  }
   width: 100%;
   ${GS.flexRow}
   flex-wrap: wrap;
   justify-content: flex-start;
   background-color: white;
-  /* border-radius: 8px; */
-  /* overflow: auto; */
+  gap: 5%;
+  @media ${mobile} {
+    gap: 10%;
+    margin-top: 10%;
+  }
+  @media ${tablet} {
+  }
 `;
 
 export const ItemsWrapper02 = styled.section`

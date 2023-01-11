@@ -124,50 +124,56 @@ export default function MarketList(props: IMarketListProps) {
       {categoryData?.map((categories) => (
         <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
       ))}
-      <ListSearch prefetchByLevel={prefetchByLevel} />
       {/* <InfiniteScroll02 fetchMore={props.productsFetchMore} data={props.productsData}> */}
-      <MS.ItemsWrapper01 style={{ flexWrap: "wrap" }}>
-        {fetchProducts?.map((products) => (
-          <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
-            <S.ItemImageBox01>
-              {!!products.isOutOfStock && (
-                <S.ItemSoldOutDisPlay>
-                  <S.SoldOut>SOLD OUT</S.SoldOut>
-                </S.ItemSoldOutDisPlay>
-              )}
-              <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
-            </S.ItemImageBox01>
-            <IDS.ItemDetail>
-              <TagsWrapper01>
-                <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
-              </TagsWrapper01>
-              <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
-                <S.DetailFooterLeft>
-                  <S.ItemName03>{products.name}</S.ItemName03>
-                  <IDS.ItemPrices>
-                    {products.discountRate !== 0 && (
-                      <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
-                    )}
-                    <S.ItemDiscountPrice02>
-                      {products.discountedPrice.toLocaleString()}원
-                    </S.ItemDiscountPrice02>
-                    {!!products.discountRate && (
-                      <S.ItemOriginPrice03>{products.price.toLocaleString()}원</S.ItemOriginPrice03>
-                    )}
-                  </IDS.ItemPrices>
-                </S.DetailFooterLeft>
-                <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
-              </S.ItemDetailFooter02>
-            </IDS.ItemDetail>
-          </IDS.ItemDisplay03>
-        ))}
-        {categoryData?.map((categories) => (
-          <S.PaginationSection key={categories.id}>
-            <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
-          </S.PaginationSection>
-        ))}
-      </MS.ItemsWrapper01>
+      {/* <div style={{ display: "flex", justifyContent: "center", width: "100%" }}> */}
+      <S.ListWrapper>
+        <ListSearch prefetchByLevel={prefetchByLevel} />
+        <MS.ItemsWrapper01>
+          {fetchProducts?.map((products) => (
+            <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
+              <S.ItemImageBox01>
+                {!!products.isOutOfStock && (
+                  <S.ItemSoldOutDisPlay>
+                    <S.SoldOut>SOLD OUT</S.SoldOut>
+                  </S.ItemSoldOutDisPlay>
+                )}
+                <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
+              </S.ItemImageBox01>
+              <IDS.ItemDetail>
+                <TagsWrapper01>
+                  <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
+                </TagsWrapper01>
+                <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
+                  <S.DetailFooterLeft>
+                    <S.ItemName03>{products.name}</S.ItemName03>
+                    <IDS.ItemPrices>
+                      {products.discountRate !== 0 && (
+                        <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                      )}
+                      <S.ItemDiscountPrice02>
+                        {products.discountedPrice.toLocaleString()}원
+                      </S.ItemDiscountPrice02>
+                      {!!products.discountRate && (
+                        <S.ItemOriginPrice03>
+                          {products.price.toLocaleString()}원
+                        </S.ItemOriginPrice03>
+                      )}
+                    </IDS.ItemPrices>
+                  </S.DetailFooterLeft>
+                  <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
+                </S.ItemDetailFooter02>
+              </IDS.ItemDetail>
+            </IDS.ItemDisplay03>
+          ))}
+          {categoryData?.map((categories) => (
+            <S.PaginationSection key={categories.id}>
+              <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
+            </S.PaginationSection>
+          ))}
+        </MS.ItemsWrapper01>
+      </S.ListWrapper>
       {/* </InfiniteScroll02> */}
+      {/* </div> */}
     </>
   );
 }
