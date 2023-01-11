@@ -20,7 +20,6 @@ const ToastUIEditor = dynamic(async () => await import("../../../../commons/toas
 interface ProductWriteProps {
   isEdit: boolean;
 }
-
 interface ProductInput {
   name: string;
   productCategoryId: string;
@@ -76,12 +75,10 @@ export default function ProductWrite(props: ProductWriteProps) {
   const { register, handleSubmit, setValue, getValues } = useForm<ProductInput>({
     mode: "onChange",
   });
-
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     // console.log(file);
     if (file === undefined) return;
-
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
@@ -115,6 +112,7 @@ export default function ProductWrite(props: ProductWriteProps) {
       setValue("createProductOptionInput.option11", data.productOption?.option11);
     }
   }, [data]);
+
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
     setCG(event.target.id);
@@ -139,17 +137,17 @@ export default function ProductWrite(props: ProductWriteProps) {
     const text = contentsRef?.current?.getInstance().getHTML();
     setValue("description", text === "<p><br><p>" ? "" : text);
   };
-
   useEffect(() => {
     if (data?.image) {
       setImageUrl(data.image);
     }
   }, [data]);
-
   const onClickSubmit = async (data: ProductInput) => {
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
+    
     if (!url) return;
+
     const result = await createProduct({
       variables: {
         createProductInput: {
@@ -180,7 +178,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     console.log("result:", result);
     void router.push("/seller");
   };
-
   const onClickEdit = async (data: ProductInput) => {
     let url = data.image;
     if (files) {
@@ -225,7 +222,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     });
     void router.push("/seller");
   };
-
   return (
     <S.Wrapper>
       <S.Title>판매자 상품 {isEdit ? "수정" : "등록"} 페이지</S.Title>
