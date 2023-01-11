@@ -12,7 +12,7 @@ import { IMarketDetailProps } from "../../../../Market.types";
 import * as S from "./MarketDetailHead.styles";
 import Crumbs from "./nav/MarketCrumbs";
 import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/CountDownUpButtons";
-import { message } from "antd";
+import { message, Modal } from "antd";
 import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
 import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 
@@ -57,28 +57,34 @@ function MarketDetailHead(props: IMarketDetailProps) {
   // 장바구니 담기 기능
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
-
-    const result = await toggleProductToCart({
-      variables: {
-        productId,
-        count: quantity,
-      },
-    });
-    console.log(result);
-    const status = result?.data?.toggleProductToCart;
-    console.log(status);
-    if (status === true) {
-      void messageApi.open({
-        type: "success",
-        content: "상품을 장바구니에 담았습니다.",
-        duration: 5,
+    try {
+      const result = await toggleProductToCart({
+        variables: {
+          productId,
+          count: quantity,
+        },
       });
-    } else {
-      void messageApi.open({
-        type: "error",
-        content: "상품이 장바구니에서 삭제되었습니다.",
-        duration: 5,
-      });
+      console.log(result);
+      const status = result?.data?.toggleProductToCart;
+      console.log(status);
+      if (status === true) {
+        void messageApi.open({
+          type: "success",
+          content: "상품을 장바구니에 담았습니다.",
+          duration: 5,
+        });
+      } else {
+        void messageApi.open({
+          type: "error",
+          content: "상품이 장바구니에서 삭제되었습니다.",
+          duration: 5,
+        });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        Modal.error({ content: `${error.message}` });
+      }
     }
   };
 
