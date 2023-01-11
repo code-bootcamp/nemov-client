@@ -50,7 +50,7 @@ export const Btn1 = styled.button`
 `;
 
 export const Btn2 = styled.button`
-  width: 12vmax;
+  width: 15vmax;
   font-size: 1rem;
   padding: 2%;
   :hover {

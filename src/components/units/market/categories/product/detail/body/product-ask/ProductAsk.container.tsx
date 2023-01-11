@@ -3,17 +3,23 @@ import * as S from "./ProductAsk.styles";
 import * as CS from "../MarketDetailBody.styles";
 import OpenModalButton01 from "../../../../../../../commons/buttons/OpenModalButton01";
 import { useRecoilState } from "recoil";
-import { isOpenState } from "../../../../../../../../commons/stores";
+import { accessTokenState, isOpenState } from "../../../../../../../../commons/stores";
 import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
 import { IMarketDetailProps } from "../../../../../Market.types";
+import { Modal } from "antd";
 // import { MouseEventHandler, useState } from "react";
 
 export default function ProductAsk(props: IMarketDetailProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
+  const [accessToken] = useRecoilState(accessTokenState);
 
   const onClickQuestionWrite = () => {
-    setIsOpen((prev) => !prev);
+    if (!accessToken) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      setIsOpen((prev) => !prev);
+    }
   };
 
   const modalOnCancel = () => {
@@ -29,7 +35,7 @@ export default function ProductAsk(props: IMarketDetailProps) {
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={700}>
-        <ProductQuestionWrite setIsOpen={setIsOpen} data={props.data} />
+        <ProductQuestionWrite setIsOpen={setIsOpen} data={props.data} isEdit={false} />
       </CommonModal01>
 
       <CS.TabContentMain01>
@@ -55,7 +61,7 @@ export default function ProductAsk(props: IMarketDetailProps) {
             <CS.TabContentList02 key={index}>
               <CS.ContentListHeader02>
                 <S.QuestionInfoLeft>
-                  <CS.ContentTitle>문의 제목</CS.ContentTitle>
+                  <CS.ContentTitle>{questions.title}</CS.ContentTitle>
                   <CS.Info02Detail>
                     <span>{questions.user.name}</span>
                     <span>2023.01.01</span>

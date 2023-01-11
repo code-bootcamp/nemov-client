@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationCreateProductOrdersArgs,
@@ -25,19 +26,24 @@ export const UseMutationCreateProductOrders = () => {
   >(CREATE_PRODUCT_ORDERS, { refetchQueries: [{ query: FETCH_CART }] });
 
   const buyProducts = async (value: any, amount: number) => {
-    await createProductOrders({
-      variables: {
-        // productOrders: [
-        //   {
-        //     productId: value.productId,
-        //     quantity: value.quantity,
-        //   },
-        // ],
-        productOrders: value,
-        // 총 상품 금액
-        amount,
-      },
-    });
+    try {
+      await createProductOrders({
+        variables: {
+          // productOrders: [
+          //   {
+          //     productId: value.productId,
+          //     quantity: value.quantity,
+          //   },
+          // ],
+          productOrders: value,
+          // 총 상품 금액
+          amount,
+        },
+      });
+      Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
   };
 
   return { buyProducts };

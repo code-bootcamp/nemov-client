@@ -1,20 +1,24 @@
 // import styled from "@emotion/styled";
-import InfiniteScroll from "react-infinite-scroller";
+import { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { IQuery } from "../../../commons/types/generated/types";
 
-interface IInfiniteScroll01Props {
+interface IInfiniteScroll02Props {
   data?: Pick<IQuery, "fetchProducts">;
   fetchMore?: any;
   children: JSX.Element;
 }
 
-export default function InfiniteScroll01(props: IInfiniteScroll01Props) {
+export default function InfiniteScroll02(props: IInfiniteScroll02Props) {
+  const [length, setLength] = useState(0);
+
   const onLoadMore = () => {
     if (props.data?.fetchProducts === undefined) return;
-    console.log("fetchProducts 총 개수", props.data.fetchProducts.length);
-    console.log("page:", Math.ceil(props.data.fetchProducts.length / 9) + 1);
-    console.log("floor page:", Math.floor(props.data.fetchProducts.length / 9) + 1);
-    props.fetchMore({
+    setLength(props.data.fetchProducts.length);
+    // console.log("fetchProducts 총 개수", props.data.fetchProducts.length);
+    // console.log("page:", Math.ceil(props.data.fetchProducts.length / 9) + 1);
+    // console.log("floor page:", Math.floor(props.data.fetchProducts.length / 9) + 1);
+    void props.fetchMore({
       variables: {
         page: Math.ceil(props.data.fetchProducts.length / 9) + 1,
       },
@@ -43,7 +47,12 @@ export default function InfiniteScroll01(props: IInfiniteScroll01Props) {
         justifyContent: "center",
       }}
     >
-      <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
+      <InfiniteScroll
+        dataLength={length}
+        next={onLoadMore}
+        hasMore={true}
+        loader={<h1>Loading...</h1>}
+      >
         {props.children}
       </InfiniteScroll>
     </div>

@@ -27,7 +27,7 @@ export default function LayoutHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logout] = useMutation(LOGOUT);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
+  console.log(data);
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
@@ -83,7 +83,7 @@ export default function LayoutHeader() {
           <>
             <S.HeaderMenuItem>
               <S.Payment onClick={onClickPayment} />
-              <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={400}>
+              <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                 <PaymentPage setIsOpen={setIsOpen} />
               </CommonModal01>
             </S.HeaderMenuItem>

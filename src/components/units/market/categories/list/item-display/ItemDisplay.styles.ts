@@ -80,7 +80,7 @@ export const BestItemImage = styled.div`
 // 베스트 아이템 슬라이더
 export const StyledSlider02 = styled(Slider)`
   width: 100%;
-  height: 100%;
+  height: 120%;
 
   .center {
     opacity: 0.8;
@@ -90,9 +90,8 @@ export const StyledSlider02 = styled(Slider)`
   .slick-center {
     opacity: 1;
     transition: all 0.5s ease-in-out;
-    height: auto;
-
-    transform: scale(1.1);
+    z-index: 2;
+    transform: scale(1.2) translateY(-1%);
   }
 
   .slick-prev {
@@ -126,11 +125,19 @@ export const StyledSlider02 = styled(Slider)`
 export const NextArrowIcon = styled(ArrowForwardIosIcon)`
   font-size: 3rem;
   z-index: 10;
+  top: calc(100% - 2rem);
+  position: absolute;
+  @media ${mobile} {
+  }
 `;
 
 export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
   font-size: 3rem;
   z-index: 10;
+  top: calc(100% - 2rem);
+  position: absolute;
+  @media ${mobile} {
+  }
 `;
 
 // 추천 아이템 디스플레이 스타일

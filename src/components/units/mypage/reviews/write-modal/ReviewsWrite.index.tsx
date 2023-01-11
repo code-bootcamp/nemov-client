@@ -70,9 +70,9 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     console.log("resultUrls", resultUrls);
 
     if (!props.isEdit) {
-      void createReviewSubmit(value);
+      await createReviewSubmit(value);
     } else {
-      void updateReviewSubmit(value);
+      await updateReviewSubmit(value);
     }
 
     props.modalOnCancel();
@@ -84,8 +84,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     newUrlArr = [];
   }
 
-  console.log("newUrlArr", newUrlArr);
-
   useEffect(() => {
     if (props.review) {
       const resetData = {
@@ -96,7 +94,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
       // setFiles([]);
       reset({ ...resetData });
     }
-
     if (props.review?.images?.length !== 0) {
       if (newUrlArr === undefined) {
         setImageUrls([]);

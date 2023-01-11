@@ -1,11 +1,19 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import * as S from "./RecentlyViewed.styles";
+
+interface IRecentlyType {
+  id: string;
+  image: string;
+  name: string;
+}
 
 export default function LayoutRecentlyViewed() {
   const router = useRouter();
   const [showAside, setShowAside] = useState(false);
-  const [recentlyLists, setRecentlyLists] = useState([]);
+  const [recentlyLists, setRecentlyLists] = useState<IRecentlyType[]>([]);
 
   useEffect(() => {
     const baskets = JSON.parse(sessionStorage.getItem("baskets") ?? "[]");
@@ -30,14 +38,24 @@ export default function LayoutRecentlyViewed() {
   return (
     <>
       {showAside && (
-        <S.SideBarWrap>
-          <S.Title>최근 본 상품</S.Title>
-          <S.Contents>
-            {recentlyLists?.map((el, i) => (
-              <article key="i">el</article>
-            ))}
-          </S.Contents>
-        </S.SideBarWrap>
+        <>
+          {recentlyLists?.length > 0 && (
+            <S.SideBarWrap>
+              <S.Title>최근 본 상품</S.Title>
+              <S.Contents>
+                {recentlyLists?.map((cur) => (
+                  <S.Thumbnail key={cur.id + uuidv4()}>
+                    <Link href={`/${cur.id}`}>
+                      <a>
+                        <img src={`${cur.image}`} />
+                      </a>
+                    </Link>
+                  </S.Thumbnail>
+                ))}
+              </S.Contents>
+            </S.SideBarWrap>
+          )}
+        </>
       )}
     </>
   );

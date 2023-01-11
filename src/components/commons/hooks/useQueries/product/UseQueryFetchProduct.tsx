@@ -1,4 +1,6 @@
-import { gql, useApolloClient, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { IQuery, IQueryFetchProductArgs } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCT = gql`
@@ -39,17 +41,36 @@ export const FETCH_PRODUCT = gql`
 `;
 
 export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
+  const router = useRouter();
   const query = useQuery<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>(FETCH_PRODUCT, {
-    variables,
+    variables: {
+      productId: String(router.query.productId),
+    },
   });
-  const client = useApolloClient();
 
-  const prefetchProduct = (productId: String) => async () => {
-    await client.query({
-      query: FETCH_PRODUCT,
-      variables: { productId },
-    });
+  useEffect(() => {
+    if (query.loading) return;
+    if (query.error?.message === "상품이 존재하지 않습니다.") {
+      alert(query.error?.message);
+      void router.push("/");
+    }
+  }, [query.loading]);
+
+  useEffect(() => {
+    if (query.loading) return;
+    if (query.error !== undefined) return;
+    const todayList = query.data?.fetchProduct;
+    const baskets = JSON.parse(sessionStorage.getItem("baskets") ?? "[]");
+    const temp = baskets.filter((el: any) => el?._id === todayList?.id);
+    if (temp.length === 1) return;
+    if (baskets.length > 1) {
+      baskets.pop();
+    }
+    baskets.unshift(todayList);
+    sessionStorage.setItem("baskets", JSON.stringify(baskets));
+  }, [query.loading]);
+
+  return {
+    query,
   };
-
-  return { query, prefetchProduct };
 };

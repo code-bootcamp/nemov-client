@@ -80,7 +80,7 @@ export const QuestionInfoRight = styled.section`
 `;
 
 export const AnswerStatus = styled.span`
-  color: ${(props: IProductAskStylesProps) => (props.data !== undefined ? "#f7330e" : "black")};
+  color: ${(props: IProductAskStylesProps) => (props.data !== null ? "#f7330e" : "black")};
 `;
 
 export const OpenAnswerButton01 = styled(KeyboardArrowDownIcon)`
@@ -139,6 +139,7 @@ export const QuestionDetail = styled.textarea`
   border-radius: 0.5rem;
   padding-left: 0.6rem;
   padding-top: 0.6rem;
+  resize: none;
 `;
 
 export const QuestionButtonWrapper02 = styled.section`

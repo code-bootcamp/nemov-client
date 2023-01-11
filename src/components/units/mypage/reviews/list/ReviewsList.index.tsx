@@ -3,20 +3,25 @@ import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import ReviewsWrite from "../write-modal/ReviewsWrite.index";
 import { isOpenState } from "../../../../../commons/stores";
 import { useRecoilState } from "recoil";
-import { UseQueryFetchReviewsByBuyer } from "../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByBuyer";
+import {
+  UseQueryFetchReviewsByBuyer,
+  UseQueryFetchReviewsCountByBuyer,
+} from "../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByBuyer";
 import { getDate } from "../../../../../commons/libraries/utilies";
 import { UseMutationDeleteReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationDeleteReview";
 import React, { useState } from "react";
 import { IReview } from "../../../../../commons/types/generated/types";
 import { Modal } from "antd";
+import Pagination from "../../../../commons/paginations/Pagination.index";
 
 export default function ReviewsList() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
 
-  const [deleteReview] = UseMutationDeleteReview();
-  const { data } = UseQueryFetchReviewsByBuyer({
+  const { data, refetch } = UseQueryFetchReviewsByBuyer({
     page: 1,
   });
+  const { data: dataCount } = UseQueryFetchReviewsCountByBuyer();
+  const [deleteReview] = UseMutationDeleteReview();
 
   const [reviewItemVal, setReviewItemVal] = useState<IReview>();
 
@@ -81,6 +86,9 @@ export default function ReviewsList() {
                   </S.ReviewBtnWrapper>
                 </S.ReviewLi>
               ))}
+              <section>
+                <Pagination count={dataCount?.fetchReviewsCountByBuyer} refetch={refetch} />
+              </section>
             </>
           ) : (
             <S.NoReviewText>작성한 후기가 없습니다.</S.NoReviewText>
