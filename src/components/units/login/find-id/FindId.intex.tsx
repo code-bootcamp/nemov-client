@@ -1,8 +1,16 @@
 import styled from "@emotion/styled";
-import { colorBase01 } from "../../../../commons/styles/colorBases";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
+import { FindIdSchema } from "./FindId.validtation";
 
 export default function FindId() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(FindIdSchema),
+    mode: "onChange",
+  });
+
   return (
     <Global>
       <Form>
@@ -13,9 +21,10 @@ export default function FindId() {
           <Label>이름</Label>
           <Input type="text" placeholder="이름을 입력해주세요." />
           <Label>휴대폰 번호</Label>
-          <Input type="text" placeholder="휴대폰 번호를 입력해주세요." />
+          <Input type="text" placeholder="휴대폰 번호를 입력해주세요." {...register("phone")} />
+          <TokenBtn type="button">인증번호 받기</TokenBtn>
           <Label>인증번호</Label>
-          <ConfirmInput type="text" placeholder="인증번호를 입력해주세요." />
+          <ConfirmInput type="text" placeholder="인증번호를 입력해주세요." {...register("token")} />
           <FindBtn>아이디 찾기</FindBtn>
         </InputWrapper>
       </Form>
@@ -64,7 +73,7 @@ const Input = styled.input`
   height: 46px;
   padding: 0px 11px 1px 15px;
   border: 1px solid #ddd;
-  margin: 1rem 0 3rem 0;
+  margin: 1rem 0 2rem 0;
 `;
 
 const ConfirmInput = styled.input`
@@ -72,13 +81,21 @@ const ConfirmInput = styled.input`
   height: 46px;
   padding: 0px 11px 1px 15px;
   border: 1px solid #ddd;
-  margin: 1rem 0 3rem 0;
+  margin: 1rem 0 2rem 0;
+`;
+
+const TokenBtn = styled.button`
+  padding: 0px 10px;
+  width: 400px;
+  height: 52px;
+  border: 1px solid #222;
+  ${colorBase02}
+  margin-bottom: 20px;
 `;
 
 const FindBtn = styled.button`
   padding: 0px 10px;
   width: 400px;
   height: 52px;
-  color: rgb(255, 255, 255);
   ${colorBase01}
 `;

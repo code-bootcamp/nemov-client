@@ -139,6 +139,7 @@ export const QuestionDetail = styled.textarea`
   border-radius: 0.5rem;
   padding-left: 0.6rem;
   padding-top: 0.6rem;
+  resize: none;
 `;
 
 export const QuestionButtonWrapper02 = styled.section`

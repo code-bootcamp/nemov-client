@@ -70,9 +70,9 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     console.log("resultUrls", resultUrls);
 
     if (!props.isEdit) {
-      void createReviewSubmit(value);
+      await createReviewSubmit(value);
     } else {
-      void updateReviewSubmit(value);
+      await updateReviewSubmit(value);
     }
 
     props.modalOnCancel();

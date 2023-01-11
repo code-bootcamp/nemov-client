@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import { colorBase01 } from "../../../../commons/styles/colorBases";
-
-interface IQnaStylesProps {
-  isOpen: boolean;
-}
+import { amazon } from "../../../../commons/styles/colorPalettes";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -32,7 +29,7 @@ export const QnaItem = styled.li`
   margin-bottom: 20px;
 `;
 
-export const TopWrapper = styled.div`
+export const InnerWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -84,7 +81,6 @@ export const QnaContents = styled.textarea`
 `;
 
 export const BtnWrapper = styled.div`
-  width: 18%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -128,7 +124,13 @@ export const AnswerWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  display: ${(props: IQnaStylesProps) => (props.isOpen ? "block" : "none")};
+`;
+
+export const AnswerTitle = styled.h3`
+  color: ${amazon};
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0;
 `;
 
 export const AnswerContents = styled.textarea`

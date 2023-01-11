@@ -15,7 +15,18 @@ export const FETCH_QUESTIONS_BY_BUYER = gql`
       }
       createdAt
       updatedAt
+      answer {
+        id
+        contents
+        createdAt
+      }
     }
+  }
+`;
+
+export const FETCH_QUESTIONS_COUNT_BY_BUYER = gql`
+  query fetchQuestionsCountByBuyer {
+    fetchQuestionsCountByBuyer
   }
 `;
 
@@ -23,6 +34,14 @@ export const UseQueryFetchQuestionsByBuyer = (variables: IQueryFetchQuestionsByB
   const query = useQuery<Pick<IQuery, "fetchQuestionsByBuyer">, IQueryFetchQuestionsByBuyerArgs>(
     FETCH_QUESTIONS_BY_BUYER,
     { variables, fetchPolicy: "cache-and-network" }
+  );
+
+  return query;
+};
+
+export const UseQueryFetchQuestionsCountByBuyer = () => {
+  const query = useQuery<Pick<IQuery, "fetchQuestionsCountByBuyer">>(
+    FETCH_QUESTIONS_COUNT_BY_BUYER
   );
 
   return query;
