@@ -48,15 +48,6 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
     },
   });
 
-  // const client = useApolloClient();
-
-  // const prefetchProduct = (productId: String) => async () => {
-  //   await client.query({
-  //     query: FETCH_PRODUCT,
-  //     variables: { productId },
-  //   });
-  // };
-
   useEffect(() => {
     if (query.loading) return;
     if (query.error?.message === "상품이 존재하지 않습니다.") {
@@ -79,7 +70,6 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
     sessionStorage.setItem("baskets", JSON.stringify(baskets));
   }, [query.loading]);
 
-  // return { query, prefetchProduct };
   return {
     query,
   };

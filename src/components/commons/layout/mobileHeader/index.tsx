@@ -35,7 +35,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               <S.IconMenu>
                 <S.HeaderMenuItem>
                   <S.Payment onClick={props.onClickPayment} />
-                  <CommonModal01 isOpen={props.isOpen} onCancel={props.paymentPage} width={200}>
+                  <CommonModal01 isOpen={props.isOpen} onCancel={props.paymentPage} width={450}>
                     <PaymentPage setIsOpen={props.setIsOpen} />
                   </CommonModal01>
                 </S.HeaderMenuItem>

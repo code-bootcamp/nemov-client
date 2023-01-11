@@ -7,6 +7,7 @@ import {
   IPagination04Props,
   IPagination05Props,
   IPagination06Props,
+  IPagination07Props,
 } from "./Paginations.types";
 
 export default function Pagination(
@@ -17,6 +18,7 @@ export default function Pagination(
     | IPagination04Props
     | IPagination05Props
     | IPagination06Props
+    | IPagination07Props
 ) {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);

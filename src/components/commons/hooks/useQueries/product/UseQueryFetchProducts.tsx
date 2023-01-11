@@ -31,10 +31,13 @@ export const FETCH_PRODUCTS = gql`
 // }
 
 export const UseQueryFetchProducts = (variables: IQueryFetchProductsArgs) => {
-  const query = useQuery<Pick<IQuery, "fetchProducts">, IQueryFetchProductsArgs>(FETCH_PRODUCTS, {
+  const { data, fetchMore, client, refetch } = useQuery<
+    Pick<IQuery, "fetchProducts">,
+    IQueryFetchProductsArgs
+  >(FETCH_PRODUCTS, {
     variables,
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: "network-only",
   });
 
-  return query;
+  return { data, fetchMore, client, refetch };
 };

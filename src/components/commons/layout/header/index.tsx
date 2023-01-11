@@ -83,7 +83,7 @@ export default function LayoutHeader() {
           <>
             <S.HeaderMenuItem>
               <S.Payment onClick={onClickPayment} />
-              <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={400}>
+              <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                 <PaymentPage setIsOpen={setIsOpen} />
               </CommonModal01>
             </S.HeaderMenuItem>

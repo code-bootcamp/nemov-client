@@ -1,8 +1,5 @@
-import { useApolloClient } from "@apollo/client";
-import { useRouter } from "next/router";
-import { useState } from "react";
+// import { useState } from "react";
 // import { getVeganName } from "../../../../../commons/libraries/utilies";
-import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 import {
   ListSearchSection,
   SearchInputBox,
@@ -11,26 +8,10 @@ import {
   StyledSearchIcon,
 } from "./MarketList.styles";
 
-export default function ListSearch() {
-  const router = useRouter();
-  const [selected, setSelected] = useState(1);
-  const client = useApolloClient();
-
-  const prefetchByLevel = (value: number) => async () => {
-    setSelected(value);
-    console.log(selected);
-    // console.log("클릭");
-    console.log(value);
-    const data = await client.query({
-      query: FETCH_PRODUCTS,
-      variables: {
-        productCategoryId: router.query.categoryId,
-        veganLevel: value,
-        page: 1,
-      },
-    });
-    console.log(data);
-  };
+interface IListSearchProps {
+  prefetchByLevel: (value: number | unknown) => Promise<void>;
+}
+export default function ListSearch(props: IListSearchProps) {
   return (
     <ListSearchSection>
       <SearchSection>
@@ -38,7 +19,7 @@ export default function ListSearch() {
         <StyledSearchIcon />
       </SearchSection>
       <SelectBox
-        onChange={prefetchByLevel(selected)}
+        onChange={props.prefetchByLevel}
         defaultValue={"비건 레벨"}
         options={[
           {
@@ -47,13 +28,13 @@ export default function ListSearch() {
             selected: true,
             disabled: true,
           },
-          { value: 1, label: "플렉시테리언" },
-          { value: 2, label: "폴로" },
-          { value: 3, label: "페스코" },
-          { value: 4, label: "락토 오보" },
-          { value: 5, label: "오보" },
-          { value: 6, label: "락토" },
           { value: 7, label: "비건" },
+          { value: 6, label: "락토" },
+          { value: 5, label: "오보" },
+          { value: 4, label: "락토 오보" },
+          { value: 3, label: "페스코" },
+          { value: 2, label: "폴로" },
+          { value: 1, label: "플렉시테리언" },
         ]}
       ></SelectBox>
       {/* <select onChange={prefetchByLevel(selected)}>
