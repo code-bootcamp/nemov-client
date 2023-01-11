@@ -8,9 +8,12 @@ import { CategoryMain } from "../../../../src/components/units/market/categories
 import MarketCategory from "../../../../src/components/units/market/categories/category/MarketCategory";
 import { UseQueryFetchIsInCart } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchIsInCart";
 import { UseQueryFetchProductsCount } from "../../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProductsCount";
+import { useRecoilState } from "recoil";
+import { IsSelectedState } from "../../../../src/commons/stores";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
+  const [value] = useRecoilState(IsSelectedState);
   // console.log("라우터 쿼리 넘버", router.query);
   const {
     data: productsData,
@@ -19,7 +22,7 @@ export default function MarketCategoriesPage() {
     refetch: productsRefetch,
   } = UseQueryFetchProducts({
     productCategoryId: String(router.query.categoryId),
-    veganLevel: 0,
+    veganLevel: value,
     page: 1,
   });
 

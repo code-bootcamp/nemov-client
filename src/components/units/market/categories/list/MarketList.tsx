@@ -15,11 +15,12 @@ import BasketButton01 from "../../../../commons/icons/CommonBasketIcon01";
 import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
-import { useAuth02 } from "../../../../commons/hooks/useAuths/useAuth02";
 import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 // import InfiniteScroll02 from "../../../../commons/infiniteScrolls/InfiniteScroll02";
 import Pagination from "../../../../commons/paginations/Pagination.index";
 import { IMarketListProps } from "../../Market.types";
+import { useRecoilState } from "recoil";
+import { IsSelectedState } from "../../../../../commons/stores";
 
 export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function MarketList(props: IMarketListProps) {
   const [fetchProducts, setFetchProducts] = useState<IProduct[] | undefined>([]);
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isOpen, setIsOpen] = useState(false);
+  const [, setIsSelected] = useRecoilState(IsSelectedState);
 
   const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
@@ -35,6 +37,7 @@ export default function MarketList(props: IMarketListProps) {
 
   const prefetchByLevel = async (value: number | unknown) => {
     console.log(value);
+    setIsSelected(Number(value));
     const result = await props.productsClient?.query({
       query: FETCH_PRODUCTS,
       variables: {
@@ -54,10 +57,6 @@ export default function MarketList(props: IMarketListProps) {
 
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     e?.stopPropagation();
-
-    // if (!useAuth02) {
-    //   Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    // } else {
     const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
       if (cur.id === id) {
         if (cur.isOutOfStock) {
