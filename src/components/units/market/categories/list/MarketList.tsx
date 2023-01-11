@@ -16,11 +16,10 @@ import Crumbs from "../product/detail/head/nav/MarketCrumbs";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import CartModal from "./CartModalPage";
 import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
-// import InfiniteScroll02 from "../../../../commons/infiniteScrolls/InfiniteScroll02";
-import Pagination from "../../../../commons/paginations/Pagination.index";
 import { IMarketListProps } from "../../Market.types";
 import { useRecoilState } from "recoil";
 import { accessTokenState, IsSelectedState } from "../../../../../commons/stores";
+import Pagination02 from "../../../../commons/paginations/Pagination02";
 
 export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
@@ -34,8 +33,6 @@ export default function MarketList(props: IMarketListProps) {
   const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
 
-  // console.log(props.productsCount?.fetchProductsCount);
-
   const prefetchByLevel = async (value: number | unknown) => {
     console.log(value);
     setIsSelected(Number(value));
@@ -47,7 +44,8 @@ export default function MarketList(props: IMarketListProps) {
         page: 1,
       },
     });
-    // console.log(result.data.fetchProducts);
+    props.setStartPage(1);
+    props.setActivePage(1);
     setFetchProducts(result?.data.fetchProducts);
     console.log(fetchProducts);
   };
@@ -108,7 +106,7 @@ export default function MarketList(props: IMarketListProps) {
     setQuantity(1);
   };
 
-  console.log(props.productsCount?.fetchProductsCount);
+  // console.log(props.productsCount?.fetchProductsCount);
 
   return (
     <>
@@ -126,8 +124,6 @@ export default function MarketList(props: IMarketListProps) {
       {categoryData?.map((categories) => (
         <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
       ))}
-      {/* <InfiniteScroll02 fetchMore={props.productsFetchMore} data={props.productsData}> */}
-      {/* <div style={{ display: "flex", justifyContent: "center", width: "100%" }}> */}
       <S.ListWrapper>
         <ListSearch prefetchByLevel={prefetchByLevel} />
         <MS.ItemsWrapper01>
@@ -168,12 +164,17 @@ export default function MarketList(props: IMarketListProps) {
             </IDS.ItemDisplay03>
           ))}
           <S.PaginationSection>
-            <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
+            <Pagination02
+              count={props.productsCount?.fetchProductsCount}
+              refetch={props.refetch}
+              startPage={props.startPage ?? 0}
+              activePage={props.activePage ?? 0}
+              setStartPage={props.setStartPage}
+              setActivePage={props.setActivePage}
+            />
           </S.PaginationSection>
         </MS.ItemsWrapper01>
       </S.ListWrapper>
-      {/* </InfiniteScroll02> */}
-      {/* </div> */}
     </>
   );
 }

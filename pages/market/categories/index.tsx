@@ -15,8 +15,14 @@ import { useState } from "react";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
+
   const [category, setCategory] = useState("");
   const [value] = useRecoilState(IsSelectedState);
+
+  // 페이지네이션 시작 페이지 state
+  const [startPage, setStartPage] = useState(1);
+  const [activePage, setActivePage] = useState(1);
+
   // console.log("라우터 쿼리 넘버", router.query);
   const {
     data: productsData,
@@ -29,10 +35,15 @@ export default function MarketCategoriesPage() {
     page: 1,
   });
 
+  // console.log(productsData);
+
   const onClickMoveToCategory = (event: React.MouseEvent<HTMLDivElement>) => {
     const click = event.currentTarget.id;
     // console.log(event.currentTarget.id);
     setCategory(click);
+    setStartPage(1);
+    setActivePage(1);
+    console.log("시작 페이지", startPage);
     void productsRefetch({ productCategoryId: click });
   };
 
@@ -70,6 +81,10 @@ export default function MarketCategoriesPage() {
             refetch={productsRefetch}
             productsCount={productsCount}
             category={category}
+            setStartPage={setStartPage}
+            setActivePage={setActivePage}
+            startPage={startPage}
+            activePage={activePage}
           />
         </CategoryMain>
       </GlobalWrapper>

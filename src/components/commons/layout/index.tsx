@@ -21,11 +21,11 @@ export default function Layout(props: ILayoutProps) {
   const router = useRouter();
 
   const HIDDEN_HEADER = ["/"];
-  const SHOW_BANNER = ["/market", "/market/categories"];
+  const SHOW_BANNER = ["/market"];
   const HIDDEN_SCROLL_TO_TOP = ["/", "/login", "/signup"];
   const SHOW_ASIDE = [
     "/market",
-    `/market/categories/${String(router.query.categoryId)}`,
+    `/market/categories`,
     `/market/product/${String(router.query.productId)}`,
   ];
   const HIDDEN_FOOTER = ["/"];
