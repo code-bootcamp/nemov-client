@@ -16,7 +16,16 @@ export const UseMutationDeleteQuestion = () => {
   const [deleteQuestion] = useMutation<
     Pick<IMutation, "deleteQuestion">,
     IMutationDeleteQuestionArgs
-  >(DELETE_QUESTION, { refetchQueries: [{ query: FETCH_QUESTIONS_BY_BUYER }] });
+  >(DELETE_QUESTION, {
+    refetchQueries: [
+      {
+        query: FETCH_QUESTIONS_BY_BUYER,
+        variables: {
+          page: 1,
+        },
+      },
+    ],
+  });
 
   const deleteQuestionFunction = async (questionId: string) => {
     try {

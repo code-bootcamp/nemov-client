@@ -4,11 +4,21 @@ import {
   IPagination01Props,
   IPagination02Props,
   IPagination03Props,
+  IPagination04Props,
+  IPagination05Props,
+  IPagination06Props,
   IPagination07Props,
 } from "./Paginations.types";
 
 export default function Pagination(
-  props: IPagination01Props | IPagination02Props | IPagination03Props | IPagination07Props
+  props:
+    | IPagination01Props
+    | IPagination02Props
+    | IPagination03Props
+    | IPagination04Props
+    | IPagination05Props
+    | IPagination06Props
+    | IPagination07Props
 ) {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);

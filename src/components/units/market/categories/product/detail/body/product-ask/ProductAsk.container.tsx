@@ -35,7 +35,7 @@ export default function ProductAsk(props: IMarketDetailProps) {
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={700}>
-        <ProductQuestionWrite setIsOpen={setIsOpen} data={props.data} />
+        <ProductQuestionWrite setIsOpen={setIsOpen} data={props.data} isEdit={false} />
       </CommonModal01>
 
       <CS.TabContentMain01>

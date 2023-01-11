@@ -55,25 +55,25 @@ export default function MarketList(props: IMarketListProps) {
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     e?.stopPropagation();
 
-    if (!useAuth02) {
-      Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    } else {
-      const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
-        if (cur.id === id) {
-          if (cur.isOutOfStock) {
-            return Modal.error({ content: "품절된 상품입니다." });
-          } else {
-            setIsOpen((prev) => !prev);
-            return setCurProductData(cur);
-          }
+    // if (!useAuth02) {
+    //   Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    // } else {
+    const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
+      if (cur.id === id) {
+        if (cur.isOutOfStock) {
+          return Modal.error({ content: "품절된 상품입니다." });
         } else {
-          return undefined;
+          setIsOpen((prev) => !prev);
+          return setCurProductData(cur);
         }
-      });
+      } else {
+        return undefined;
+      }
+    });
 
-      if (cartModalItem === undefined) return;
-      setCartModalItemVal(cartModalItem[0]);
-    }
+    if (cartModalItem === undefined) return;
+    setCartModalItemVal(cartModalItem[0]);
+    // }
   };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {

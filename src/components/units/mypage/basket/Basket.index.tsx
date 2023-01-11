@@ -22,9 +22,8 @@ interface IItemType {
 export default function MypageBasket() {
   const { data } = UseQueryFetchCart();
   const [product, setProduct] = useState(data?.fetchCart);
-  console.log(data);
+  // console.log(data);
 
-  // const { data: isInCartData } = UseQueryFetchIsInCart(productId);
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
   const { buyProducts } = UseMutationCreateProductOrders();

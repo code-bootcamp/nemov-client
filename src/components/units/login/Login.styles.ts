@@ -111,7 +111,7 @@ export const FindPw = styled.a`
 `;
 
 export const Signup = styled.a`
-  margin: 100px auto 0;
+  margin-top: 40px;
   text-align: center;
   font-size: 1rem;
   font-weight: 500;

@@ -3,8 +3,12 @@ import { useRecoilState } from "recoil";
 import { getDate } from "../../../../../commons/libraries/utilies";
 import { isEditState, isOpenState } from "../../../../../commons/stores";
 import { IProductOrder } from "../../../../../commons/types/generated/types";
-import { UseQueryFetchProductOrdersWithoutReview } from "../../../../commons/hooks/useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
+import {
+  UseQueryFetchProductOrdersCountWithoutReview,
+  UseQueryFetchProductOrdersWithoutReview,
+} from "../../../../commons/hooks/useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
+import Pagination from "../../../../commons/paginations/Pagination.index";
 import ReviewsWrite from "../write-modal/ReviewsWrite.index";
 import * as S from "./ReviewsPossibleList.styles";
 
@@ -12,9 +16,10 @@ export default function ReviewsPossibleList() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [, setIsEdit] = useRecoilState(isEditState);
 
-  const { data } = UseQueryFetchProductOrdersWithoutReview({
+  const { data, refetch } = UseQueryFetchProductOrdersWithoutReview({
     page: 1,
   });
+  const { data: dataCount } = UseQueryFetchProductOrdersCountWithoutReview();
 
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
@@ -59,6 +64,12 @@ export default function ReviewsPossibleList() {
                   </S.ReviewWriteBtn>
                 </S.ReviewLi>
               ))}
+              <section>
+                <Pagination
+                  count={dataCount?.fetchProductOrdersCountWithoutReview}
+                  refetch={refetch}
+                />
+              </section>
             </>
           ) : (
             <S.NoReviewText>작성 가능한 후기가 없습니다.</S.NoReviewText>

@@ -27,7 +27,7 @@ export default function LayoutHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logout] = useMutation(LOGOUT);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
+  console.log(data);
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);

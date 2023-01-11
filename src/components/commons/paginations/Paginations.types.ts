@@ -3,7 +3,10 @@ import {
   IQuery,
   IQueryFetchPointTransactionsArgs,
   IQueryFetchProductOrdersCountByBuyerArgs,
+  IQueryFetchProductOrdersWithoutReviewArgs,
   IQueryFetchProductsIPickedArgs,
+  IQueryFetchQuestionsByBuyerArgs,
+  IQueryFetchReviewsByBuyerArgs,
 } from "../../../commons/types/generated/types";
 
 export interface IPagination01Props {
@@ -26,6 +29,27 @@ export interface IPagination03Props {
     variables?: Partial<IQueryFetchProductsIPickedArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsIPicked">>>;
 }
+
+
+export interface IPagination04Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchQuestionsByBuyerArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchQuestionsByBuyer">>>;
+}
+
+export interface IPagination05Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchReviewsByBuyerArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchReviewsByBuyer">>>;
+}
+
+export interface IPagination06Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchProductOrdersWithoutReviewArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductOrdersWithoutReview">>>;
 
 export interface IPagination07Props {
   count: number | undefined;
