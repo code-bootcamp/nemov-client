@@ -4,7 +4,7 @@ import {
   IQuery,
   IQueryFetchProductArgs,
   IQueryFetchProductsArgs,
-  IQuestion
+  IQuestion,
 } from "../../../commons/types/generated/types";
 
 export interface IMarketListProps {
@@ -17,6 +17,7 @@ export interface IMarketListProps {
     variables?: Partial<IQueryFetchProductsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProducts">>>;
   productsCount: Pick<IQuery, "fetchProductsCount"> | undefined;
+  category: string;
 }
 
 export interface IMarketDetailProps {

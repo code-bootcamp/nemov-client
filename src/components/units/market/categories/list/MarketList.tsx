@@ -42,7 +42,7 @@ export default function MarketList(props: IMarketListProps) {
     const result = await props.productsClient?.query({
       query: FETCH_PRODUCTS,
       variables: {
-        productCategoryId: router.query.categoryId,
+        productCategoryId: props.category,
         veganLevel: value,
         page: 1,
       },
@@ -108,6 +108,8 @@ export default function MarketList(props: IMarketListProps) {
     setQuantity(1);
   };
 
+  console.log(props.productsCount?.fetchProductsCount);
+
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={500}>
@@ -165,11 +167,9 @@ export default function MarketList(props: IMarketListProps) {
               </IDS.ItemDetail>
             </IDS.ItemDisplay03>
           ))}
-          {categoryData?.map((categories) => (
-            <S.PaginationSection key={categories.id}>
-              <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
-            </S.PaginationSection>
-          ))}
+          <S.PaginationSection>
+            <Pagination count={props.productsCount?.fetchProductsCount} refetch={props.refetch} />
+          </S.PaginationSection>
         </MS.ItemsWrapper01>
       </S.ListWrapper>
       {/* </InfiniteScroll02> */}

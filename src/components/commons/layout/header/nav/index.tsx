@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { UseQueryFetchCategories } from "../../../hooks/useQueries/product/UseQueryFetchCategories";
+// import { UseQueryFetchCategories } from "../../../hooks/useQueries/product/UseQueryFetchCategories";
 
 export const NavWrapper = styled.nav`
   width: 100%;
@@ -22,20 +22,18 @@ export const Menu = styled.span`
   color: #fff;
 `;
 
-const categoryArr = ["ALL", "FOOD", "DRINK", "BEAUTY", "LIFE"];
+// const categoryArr = ["ALL", "FOOD", "DRINK", "BEAUTY", "LIFE"];
 
 export default function LayoutNav() {
-  const { data } = UseQueryFetchCategories();
+  // const { data } = UseQueryFetchCategories();
   return (
     <NavWrapper>
       <Link href={"/"}>
         <Menu>ABOUT</Menu>
       </Link>
-      {data?.fetchProductCategories.map((categories, index) => (
-        <Link href={`/market/categories/${categories.id}`} key={index}>
-          <Menu>{categoryArr[index]}</Menu>
-        </Link>
-      ))}
+      <Link href={"/market/categories"}>
+        <Menu>MARKET</Menu>
+      </Link>
     </NavWrapper>
   );
 }
