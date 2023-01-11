@@ -30,7 +30,6 @@ export interface IPagination03Props {
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsIPicked">>>;
 }
 
-
 export interface IPagination04Props {
   count: number | undefined;
   refetch: (
@@ -50,6 +49,7 @@ export interface IPagination06Props {
   refetch: (
     variables?: Partial<IQueryFetchProductOrdersWithoutReviewArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductOrdersWithoutReview">>>;
+}
 
 export interface IPagination07Props {
   count: number | undefined;
