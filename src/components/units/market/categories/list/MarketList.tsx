@@ -20,7 +20,7 @@ import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/Use
 import Pagination from "../../../../commons/paginations/Pagination.index";
 import { IMarketListProps } from "../../Market.types";
 import { useRecoilState } from "recoil";
-import { IsSelectedState } from "../../../../../commons/stores";
+import { accessTokenState, IsSelectedState } from "../../../../../commons/stores";
 
 export default function MarketList(props: IMarketListProps) {
   const router = useRouter();
@@ -29,6 +29,7 @@ export default function MarketList(props: IMarketListProps) {
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isOpen, setIsOpen] = useState(false);
   const [, setIsSelected] = useRecoilState(IsSelectedState);
+  const [accessToken] = useRecoilState(accessTokenState);
 
   const [, setCartModalItemVal] = useState<IProduct>();
   const [curProductData, setCurProductData] = useState<IProduct>();
@@ -57,22 +58,25 @@ export default function MarketList(props: IMarketListProps) {
 
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     e?.stopPropagation();
-    const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
-      if (cur.id === id) {
-        if (cur.isOutOfStock) {
-          return Modal.error({ content: "품절된 상품입니다." });
+    if (!accessToken) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      const cartModalItem = props.productsData?.fetchProducts.filter((cur) => {
+        if (cur.id === id) {
+          if (cur.isOutOfStock) {
+            return Modal.error({ content: "품절된 상품입니다." });
+          } else {
+            setIsOpen((prev) => !prev);
+            return setCurProductData(cur);
+          }
         } else {
-          setIsOpen((prev) => !prev);
-          return setCurProductData(cur);
+          return undefined;
         }
-      } else {
-        return undefined;
-      }
-    });
+      });
 
-    if (cartModalItem === undefined) return;
-    setCartModalItemVal(cartModalItem[0]);
-    // }
+      if (cartModalItem === undefined) return;
+      setCartModalItemVal(cartModalItem[0]);
+    }
   };
 
   const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {

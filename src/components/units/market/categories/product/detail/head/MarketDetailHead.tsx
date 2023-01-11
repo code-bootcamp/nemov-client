@@ -15,11 +15,14 @@ import { CountDownBtn, CountUpBtn } from "../../../../../../commons/buttons/Coun
 import { message, Modal } from "antd";
 import { UseMutationToggleProductPick } from "../../../../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
 import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../../../../commons/stores";
 
 function MarketDetailHead(props: IMarketDetailProps) {
   const { productPick } = UseMutationToggleProductPick();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
 
+  const [accessToken] = useRecoilState(accessTokenState);
   const [messageApi, contextHolder] = message.useMessage();
   const [quantity, setQuantity] = useState(parseInt("1"));
   const [isDisabled, setIsDisabled] = useState(false);
@@ -57,33 +60,38 @@ function MarketDetailHead(props: IMarketDetailProps) {
   // 장바구니 담기 기능
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
-    try {
-      const result = await toggleProductToCart({
-        variables: {
-          productId,
-          count: quantity,
-        },
-      });
-      console.log(result);
-      const status = result?.data?.toggleProductToCart;
-      console.log(status);
-      if (status === true) {
-        void messageApi.open({
-          type: "success",
-          content: "상품을 장바구니에 담았습니다.",
-          duration: 5,
+
+    if (!accessToken) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      try {
+        const result = await toggleProductToCart({
+          variables: {
+            productId,
+            count: quantity,
+          },
         });
-      } else {
-        void messageApi.open({
-          type: "error",
-          content: "상품이 장바구니에서 삭제되었습니다.",
-          duration: 5,
-        });
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-        Modal.error({ content: `${error.message}` });
+        console.log(result);
+        const status = result?.data?.toggleProductToCart;
+        console.log(status);
+        if (status === true) {
+          void messageApi.open({
+            type: "success",
+            content: "상품을 장바구니에 담았습니다.",
+            duration: 5,
+          });
+        } else {
+          void messageApi.open({
+            type: "error",
+            content: "상품이 장바구니에서 삭제되었습니다.",
+            duration: 5,
+          });
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error);
+          Modal.error({ content: `${error.message}` });
+        }
       }
     }
   };
@@ -91,13 +99,20 @@ function MarketDetailHead(props: IMarketDetailProps) {
   // 찜하기 기능
   const onClickTogglePick = (productId: string | undefined) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
-    try {
-      if (productId === undefined) return;
-      const result = await productPick(productId);
-      const status = result?.data?.toggleProductPick;
-      setIsPicked(status);
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
+    if (!accessToken) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+    } else {
+      try {
+        if (productId === undefined) return;
+        const result = await productPick(productId);
+        const status = result?.data?.toggleProductPick;
+        setIsPicked(status);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+          Modal.error({ content: `${error.message}` });
+        }
+      }
     }
   };
 
