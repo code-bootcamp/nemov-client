@@ -74,7 +74,7 @@ export default function ProductAsk(props: IMarketDetailProps) {
                     <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
                   )}
 
-                  <S.OpenAnswerButton01 />
+                  <S.AnswerStatusIcon data={questions.answer} />
                 </S.QuestionInfoRight>
               </CS.ContentListHeader02>
               <S.QNAContentsSection>

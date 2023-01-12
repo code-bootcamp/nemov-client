@@ -56,12 +56,28 @@ export default function MarketCategoriesPage() {
 
   const { data: isInCartData } = UseQueryFetchIsInCart(String(router.query.productId));
 
+  const currentData = categoryData?.fetchProductCategories.filter((cur) => {
+    if (cur.id === "cc714ff0-8fd3-4f3a-9287-c921d950b45f") {
+      return cur.id[0] === "";
+    } else {
+      return "안된다";
+    }
+  });
+
   return (
     <>
       <GlobalWrapper>
         <CategoryMain>
           <CS.CategoryWrapper>
-            {categoryData?.fetchProductCategories.map((categories) => (
+            <CS.Category onClick={onClickMoveToCategory} id="">
+              <CS.StyledCategoryIcon
+                src="/icons/all-icon-after-hover.png"
+                alt="전체 아이콘 이미지"
+                id=""
+              />
+              <CS.CategoryTitle id="">전체</CS.CategoryTitle>
+            </CS.Category>
+            {currentData?.map((categories) => (
               <CS.Category key={categories.id} onClick={onClickMoveToCategory} id={categories.id}>
                 <CS.StyledCategoryIcon
                   src={categories.image}
@@ -74,7 +90,7 @@ export default function MarketCategoriesPage() {
           </CS.CategoryWrapper>
           <MarketList
             productsClient={productsClient}
-            categoryData={categoryData}
+            currentData={currentData}
             productsData={productsData}
             isInCartData={isInCartData}
             productsFetchMore={productsFetchMore}

@@ -3,8 +3,6 @@ import * as S from "./MarketMain.styles";
 import * as ID from "../categories/list/item-display/ItemDisplay";
 import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
-import MarketCategory from "../categories/category/MarketCategory";
-import { UseQueryFetchCategories } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 import { UseQueryFetchProductsOfBestSelling } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfBestSelling";
 import { UseQueryFetchProductsOfRecommend } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductsOfRecommend";
@@ -34,7 +32,7 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 export default function MarketMain() {
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
-  const { data: categoryData } = UseQueryFetchCategories();
+  // const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -135,18 +133,30 @@ export default function MarketMain() {
 
       <GlobalWrapper>
         <S.MarketMainContainer>
-          <MarketCategory categoryData={categoryData}></MarketCategory>
           <S.MainItemsWrapper>
             <S.PageLine />
             <S.RecommendItemSection01>
               <S.MarketMainHeader01>
-                <S.HeaderSpan>
-                  {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
-                </S.HeaderSpan>
-                <div style={{ display: "flex" }}>
-                  이런 상품은 어떠신가요?
-                  <S.HeaderDiv01>추천상품</S.HeaderDiv01>
+                <div>
+                  {loginUserData && (
+                    <S.HeaderSpan>
+                      {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
+                    </S.HeaderSpan>
+                  )}
+                  <div style={{ display: "flex" }}>
+                    이런 상품은 어떠신가요?
+                    <S.HeaderDiv01>추천상품</S.HeaderDiv01>
+                  </div>
                 </div>
+
+                <S.ToCategories
+                  onClick={() => {
+                    void router.push("/market/categories");
+                  }}
+                >
+                  더보기
+                  <S.StyledRightArrow />
+                </S.ToCategories>
               </S.MarketMainHeader01>
               <IDS.ItemsWrapper03>
                 {recItemData?.fetchProductsOfRecommend.map((rec) => (
@@ -161,8 +171,18 @@ export default function MarketMain() {
             </S.RecommendItemSection01>
             <S.MainMarketSection01>
               <S.MarketMainHeader02>
-                네모비 회원이 선택한 상품
-                <S.HeaderDiv02>베스트</S.HeaderDiv02>
+                <div style={{ display: "flex" }}>
+                  네모비 회원이 선택한 상품
+                  <S.HeaderDiv02>베스트</S.HeaderDiv02>
+                </div>
+                <S.ToCategories
+                  onClick={() => {
+                    void router.push("/market/categories");
+                  }}
+                >
+                  더보기
+                  <S.StyledRightArrow />
+                </S.ToCategories>
               </S.MarketMainHeader02>
               <S.ItemsWrapper02>
                 <IDS.StyledSlider02 {...settings}>

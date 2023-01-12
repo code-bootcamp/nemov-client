@@ -75,7 +75,7 @@ export const ItemImageBox01 = styled.div`
 export const ItemDetailFooter = styled.footer`
   ${GS.flexRow}
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   @media ${mobile} {
     flex-direction: column;
     align-items: flex-start;
