@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import {
   IMutation,
   IMutationCreateQuestionArgs,
@@ -23,10 +23,10 @@ export interface IFormQuestionData {
 
 export const UseMutationCreateQuestion = () => {
   const router = useRouter();
-  useEffect(() => {
-    if (!router.isReady) return;
-    console.log(router.query, "콘솔에 쿼리 찍힘");
-  }, [router.isReady]);
+  // useEffect(() => {
+  //   if (!router.isReady) return;
+  //   console.log(router.query, "콘솔에 쿼리 찍힘");
+  // }, [router.isReady]);
   const [createQuestion] = useMutation<
     Pick<IMutation, "createQuestion">,
     IMutationCreateQuestionArgs
