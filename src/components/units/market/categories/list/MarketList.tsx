@@ -93,7 +93,7 @@ export default function MarketList(props: IMarketListProps) {
 
   // 카테고리 이름 데이터
   const categoryData = props.categoryData?.fetchProductCategories.filter((categories) => {
-    if (categories.id === router.query.categoryId) {
+    if (categories.id === props.category) {
       return categories;
     } else {
       return undefined;
@@ -122,7 +122,7 @@ export default function MarketList(props: IMarketListProps) {
 
       <S.ListTitle>{categoryData?.map((categories) => categories.name)}</S.ListTitle>
       {categoryData?.map((categories) => (
-        <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
+        <Crumbs key={categories.id} id={props.category} categoryName={categories.name} />
       ))}
       <S.ListWrapper>
         <ListSearch prefetchByLevel={prefetchByLevel} />
@@ -145,10 +145,10 @@ export default function MarketList(props: IMarketListProps) {
                     <TagsWrapper01>
                       <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
                     </TagsWrapper01>
-                    <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
+                    <S.ItemDetailFooter style={{ alignItems: "center" }}>
                       <S.DetailFooterLeft>
                         <S.ItemName03>{products.name}</S.ItemName03>
-                        <IDS.ItemPrices>
+                        <S.ItemPrices02>
                           {products.discountRate !== 0 && (
                             <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
                           )}
@@ -160,13 +160,13 @@ export default function MarketList(props: IMarketListProps) {
                               {products.price.toLocaleString()}원
                             </S.ItemOriginPrice03>
                           )}
-                        </IDS.ItemPrices>
+                        </S.ItemPrices02>
                       </S.DetailFooterLeft>
                       <BasketButton01
                         id={products.id}
                         onClick={onClickToggleCartModal(products.id)}
                       />
-                    </S.ItemDetailFooter02>
+                    </S.ItemDetailFooter>
                   </IDS.ItemDetail>
                 </IDS.ItemDisplay03>
               ))
@@ -179,17 +179,17 @@ export default function MarketList(props: IMarketListProps) {
                     <TagsWrapper01>
                       <VeganLevelTag01>미리보기</VeganLevelTag01>
                     </TagsWrapper01>
-                    <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
+                    <S.ItemDetailFooter style={{ alignItems: "center" }}>
                       <S.DetailFooterLeft>
                         <S.ItemName03>미리보기</S.ItemName03>
-                        <IDS.ItemPrices>
+                        <S.ItemPrices02>
                           <S.DiscountRate01>0%</S.DiscountRate01>
                           <S.ItemDiscountPrice02>0원</S.ItemDiscountPrice02>
                           <S.ItemOriginPrice03>0원</S.ItemOriginPrice03>
-                        </IDS.ItemPrices>
+                        </S.ItemPrices02>
                       </S.DetailFooterLeft>
                       <BasketButton01 />
-                    </S.ItemDetailFooter02>
+                    </S.ItemDetailFooter>
                   </IDS.ItemDetail>
                 </IDS.ItemDisplay03>
               ))}
