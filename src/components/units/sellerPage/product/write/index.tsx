@@ -12,11 +12,6 @@ import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/p
 import { categoryContents } from "../register/category";
 import dynamic from "next/dynamic";
 
-const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
-const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
-  ssr: false,
-});
-
 interface ProductWriteProps {
   isEdit: boolean;
 }
@@ -73,13 +68,17 @@ export default function ProductWrite(props: ProductWriteProps) {
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
 
+  const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
+    ssr: false,
+  });
+  const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
+
   const { register, handleSubmit, setValue, getValues } = useForm<ProductInput>({
     mode: "onChange",
   });
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    // console.log(file);
     if (file === undefined) return;
 
     const fileReader = new FileReader();
@@ -232,21 +231,11 @@ export default function ProductWrite(props: ProductWriteProps) {
       <S.InnerWrap onSubmit={handleSubmit(isEdit ? onClickEdit : onClickSubmit)}>
         <S.Row>
           <S.SubTitle>상품이름</S.SubTitle>
-          <S.InputBox
-            type="text"
-            placeholder="상품이름을 입력하세요"
-            {...register("name")}
-            // defaultValue={data?.name}
-          />
+          <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
-          <S.InputBox
-            type="number"
-            placeholder="상품기격을 입력하세요"
-            {...register("price")}
-            // defaultValue={data?.price}
-          />
+          <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
         </S.Row>
         <S.Row>
           <S.SubTitle>할인율</S.SubTitle>
@@ -254,7 +243,6 @@ export default function ProductWrite(props: ProductWriteProps) {
             type="number"
             placeholder="할인율을 입력하세요"
             {...register("discountRate")}
-            // defaultValue={data?.discountRate}
           />
         </S.Row>
         <S.Row>
@@ -263,7 +251,6 @@ export default function ProductWrite(props: ProductWriteProps) {
             type="number"
             placeholder="총 재고수량을 입력하세요"
             {...register("quantity")}
-            // defaultValue={data?.quantity}
           />
         </S.Row>
         {!isEdit && (
@@ -423,7 +410,7 @@ export default function ProductWrite(props: ProductWriteProps) {
                   value={el}
                   name="level"
                   onClick={onClickRadio}
-                  defaultValue={isEdit ? getValues("veganLevel") : "default"}
+                  // defaultValue={isEdit ? getValues("veganLevel") : "default"}
                 />
                 <S.Radio>{el}</S.Radio>
               </S.Label>

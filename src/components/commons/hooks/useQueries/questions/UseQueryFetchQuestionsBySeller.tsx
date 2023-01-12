@@ -14,14 +14,17 @@ export const FETCH_QUESTIONS_BY_SELLER = gql`
       product {
         id
         name
-        # productCategory {
-        #   id
-        #   name
-        # }
+        productCategory {
+          id
+          name
+        }
       }
       answer {
         contents
         createdAt
+      }
+      user {
+        name
       }
     }
   }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import PointList from "./pointList";
 import ProductList from "./product/list";
 import ProductOrderList from "./productOrderList";
-import QnAList from "./qnaList";
+import QnAList from "./qnaList/list";
 import * as S from "./Seller.styles";
 
 export default function SellerManagementPage() {
