@@ -164,14 +164,14 @@ function MarketDetailHead(props: IMarketDetailProps) {
             <S.PQuantitySelectSection>
               <S.DetailInfoTitle01>{props.data?.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
-                <span>{sum.toLocaleString()}원</span>
+                <S.Numbers>{sum.toLocaleString()}원</S.Numbers>
                 <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
-                <span>{quantity}</span>
+                <S.Numbers>{quantity}</S.Numbers>
                 <CountUpBtn type="button" onClick={onClickQuantityUp} />
               </S.PQRightButtons>
             </S.PQuantitySelectSection>
             <S.PriceSumSection01>
-              <S.DetailInfoTitle01>총 상품 금액</S.DetailInfoTitle01>
+              <S.DetailInfoTitle02>총 상품 금액</S.DetailInfoTitle02>
               <S.PriceSumDetail01>{sum.toLocaleString()}원</S.PriceSumDetail01>
             </S.PriceSumSection01>
             <S.ButtonsWrapper01>

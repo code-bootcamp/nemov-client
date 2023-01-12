@@ -125,7 +125,7 @@ export const StyledSlider02 = styled(Slider)`
 export const NextArrowIcon = styled(ArrowForwardIosIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 2rem);
+  top: calc(100% - 4rem);
   position: absolute;
   @media ${mobile} {
   }
@@ -134,7 +134,7 @@ export const NextArrowIcon = styled(ArrowForwardIosIcon)`
 export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 2rem);
+  top: calc(100% - 4rem);
   position: absolute;
   @media ${mobile} {
   }
@@ -201,20 +201,19 @@ export const ItemDisplay01 = styled.div`
 
 // 마켓 리스트 아이템 디스플레이
 export const ItemDisplay03 = styled.section`
+  position: relative;
   @media ${mobile} {
     width: 45%;
+    position: relative;
   }
 
   @media ${tablet} {
-    /* max-width: 270px; */
   }
 
   @media (max-width: 957px) {
-    /* max-width: 230px; */
   }
   width: 30%;
-  /* max-width: 360px; */
-  /* height: 500px; */
+
   ${ItemStyleSet01}
   padding: 1rem;
 `;
@@ -259,7 +258,7 @@ export const ItemName = styled.span`
   @media ${mobile} {
     font-size: 3vmax;
   }
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 `;
 
 export const ItemPrices = styled.div`

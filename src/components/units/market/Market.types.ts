@@ -2,6 +2,7 @@ import { ApolloClient, ApolloQueryResult, QueryResult } from "@apollo/client";
 import { Dispatch, SetStateAction } from "react";
 import { SetterOrUpdater } from "recoil";
 import {
+  IProductCategory,
   IQuery,
   IQueryFetchProductArgs,
   IQueryFetchProductsArgs,
@@ -9,7 +10,7 @@ import {
 } from "../../../commons/types/generated/types";
 
 export interface IMarketListProps {
-  categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
+  currentData?: IProductCategory[] | undefined;
   productsData?: Pick<IQuery, "fetchProducts"> | undefined;
   isInCartData?: Pick<IQuery, "fetchIsInCart"> | undefined;
   productsFetchMore?: any;

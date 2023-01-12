@@ -10,68 +10,32 @@ import { isOpenState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Modal } from "antd";
 import CountDown from "../../commons/count/Conut.index";
-import { UseMutationCheckValidTokenForSignup } from "../../commons/hooks/useMutations/signup/UseMutationCheckValidToken";
 import { UseMutationCheckEmailExist } from "../../commons/hooks/useMutations/signup/UseMutationCheckEmailExist";
-import { UseMutationGetTokenForSignup } from "../../commons/hooks/useMutations/signup/UseMutationGetToken";
+import { UseMutationGetTokenForSignup } from "../../commons/hooks/useMutations/signup/UseMutationGetTokenForSignup";
 
 export default function Signup(props: ISignupProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-  const [time, setTime] = useState(false);
-  const [tokenInput, setTokenInput] = useState("");
-  const [getConfirmToken, setGetConfirmToken] = useState("");
+  const [token, setToken] = useState("");
   const bln = props.bln;
 
-  // 인증번호 요청
-  const [getTokenForSignup] = UseMutationGetTokenForSignup();
-  const [checkValidTokenForSignup] = UseMutationCheckValidTokenForSignup();
+  // 인증번호 받기 / 확인
+  const { getTokenForSignupFunction, checkValidTokenForSignUpFunction, time } =
+    UseMutationGetTokenForSignup();
 
-  const onClickGetToken = async () => {
-    if (!time) {
-      try {
-        const result = await getTokenForSignup({
-          variables: {
-            phone: getValues("phone"),
-          },
-        });
-        setTime(true);
-        setTimeout(() => {
-          setTime(false);
-        }, 180000);
-        console.log(result.data?.getTokenForSignUp);
-        setGetConfirmToken(String(result.data?.getTokenForSignUp));
-      } catch (error) {
-        if (error instanceof Error) Modal.error({ content: "휴대폰 번호를 확인해주세요." });
-      }
-    } else {
-      Modal.error({
-        content: "이미 인증번호 받기를 누르셨습니다. 휴대폰을 확인해주세요.",
-      });
-    }
+  const onClickGetToken = () => {
+    const phone = getValues("phone");
+    void getTokenForSignupFunction(phone);
   };
 
   const onChangeTokenInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setTokenInput(e.currentTarget.value);
+    setToken(e.currentTarget.value);
   };
 
-  const onClickConfirmToken = async () => {
-    try {
-      const result = await checkValidTokenForSignup({
-        variables: {
-          phone: getValues("phone"),
-          token: tokenInput,
-        },
-      });
-      if (result.data?.checkValidTokenForSignUp && tokenInput === getConfirmToken) {
-        setTime(false);
-        Modal.success({ content: "인증에 성공하였습니다." });
-      } else {
-        Modal.error({ content: "인증번호가 일치하지 않습니다. 다시 시도해주세요." });
-      }
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
+  const onClickConfirmToken = () => {
+    const phone = getValues("phone");
+    const value = { phone, token };
+    void checkValidTokenForSignUpFunction(value);
   };
 
   // 이메일 중복확인

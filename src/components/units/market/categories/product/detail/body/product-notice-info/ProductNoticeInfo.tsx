@@ -4,7 +4,7 @@ import * as S from "./ProductNoticeInfo.styles";
 
 export default function ProductNoticeInfo(props: IMarketDetailProps) {
   const noticeData = props.data?.data?.fetchProduct.productOption;
-  console.log(noticeData);
+  // console.log(noticeData);
 
   return (
     <CS.TabContentMain01>

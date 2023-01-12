@@ -31,12 +31,14 @@ export const ReviewCenterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 30px;
+  margin: 0 30px;
 `;
 
 export const ReviewItemName = styled.p`
   font-size: 1.25rem;
+  color: #3a3939;
   font-weight: 600;
+  margin-bottom: 0;
 `;
 
 export const ReviewDate = styled.p`

@@ -49,10 +49,16 @@ export const ProductBrandName01 = styled.span`
   font-size: 1rem;
   color: ${gray};
   margin-bottom: 0.5rem;
+  @media ${mobile} {
+    font-size: 2rem;
+  }
 `;
 
 export const ProductName01 = styled.h2`
   font-size: 2rem;
+  @media ${mobile} {
+    font-size: 3rem;
+  }
 `;
 
 export const ProductDetailLevelSection = styled.section`
@@ -65,6 +71,9 @@ export const ProductPriceDetail01 = styled.section`
   ${flexColumn}
   font-size: 2rem;
   font-weight: 700;
+  @media ${mobile} {
+    font-size: 3rem;
+  }
 `;
 
 export const ProductDiscount01 = styled.span`
@@ -75,6 +84,9 @@ export const ProductOriginalPrice01 = styled.span`
   font-size: 1rem;
   color: ${gray};
   text-decoration: line-through;
+  @media ${mobile} {
+    font-size: 2rem;
+  }
 `;
 
 export const PriceDetailSection01 = styled.section`
@@ -89,14 +101,22 @@ export const DeliveryFeeTitle = styled.span`
   font-weight: 800;
 
   @media ${mobile} {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
   }
 `;
 
 export const DetailInfoTitle01 = styled.span`
   font-size: 1.1rem;
   font-weight: 800;
+  width: 50%;
+  @media ${mobile} {
+    font-size: 1.7rem;
+  }
+`;
 
+export const DetailInfoTitle02 = styled.span`
+  font-size: 1.1rem;
+  font-weight: 800;
   @media ${mobile} {
     font-size: larger;
   }
@@ -105,14 +125,21 @@ export const DetailInfoTitle01 = styled.span`
 export const DetailInfoContent01 = styled.span`
   font-size: 1.1rem;
   font-weight: 500;
+  @media ${mobile} {
+    font-size: 1.7rem;
+  }
 `;
 export const DetailInfoContent02 = styled.span`
   color: gray;
   font-size: 0.9rem;
   font-weight: 500;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const PQuantitySelectSection = styled.section`
+  width: 100%;
   padding: 1.5rem 0;
   ${flexRow}
   justify-content: space-between;
@@ -126,6 +153,13 @@ export const PQRightButtons = styled.div`
   align-items: center;
   @media ${mobile} {
     font-size: larger;
+  }
+`;
+
+export const Numbers = styled.span`
+  font-size: 1rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
   }
 `;
 

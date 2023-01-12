@@ -3,38 +3,28 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UseMutationCreateReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationCreateReview";
 import { UseMutationUpdateReview } from "../../../../commons/hooks/useMutations/product-review/UseMutationUpdateReview";
-import { UseMutationUploadFile } from "../../../../commons/hooks/useMutations/UseMutationUploadFile";
+import { UseMutationUploadFile1 } from "../../../../commons/hooks/useMutations/UseMutationUploadFile1";
 import * as S from "./ReviewsWrite.styles";
 import { IFormData, IReviewsWriteProps } from "./ReviewsWrite.types";
 
 export default function ReviewsWrite(props: IReviewsWriteProps) {
   // 이미지 업로드
   const [imageUrls, setImageUrls] = useState<string[]>(["", "", ""]);
-  const [files, setFiles] = useState<File[]>([]);
 
-  const [uploadFile] = UseMutationUploadFile();
+  const [uploadFile1] = UseMutationUploadFile1();
 
   const onChangeFile = (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file === undefined) return;
-
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (event) => {
-      if (typeof event.target?.result === "string") {
-        const tempUrls = [...imageUrls];
-        tempUrls[index] = event.target.result;
-        // if (tempUrls.length === 0) return "";
-        setImageUrls(tempUrls);
-
-        const tempFiles = [...files];
-        tempFiles[index] = file;
-        setFiles(tempFiles);
-      }
-    };
+    try {
+      const result = await uploadFile1({ variables: { file } });
+      const tempUrls = [...imageUrls];
+      tempUrls[index] = result.data?.uploadFile1 ? result.data.uploadFile1 : "";
+      setImageUrls(tempUrls);
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
   };
-
-  // console.log("files", files);
 
   // 리뷰 Form
   const { createReviewSubmit } = UseMutationCreateReview();
@@ -46,7 +36,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     defaultValues: {
       title: "",
       contents: "",
-      // images: ["", "", ""],
     },
   });
 
@@ -54,21 +43,10 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     const productOrderId = props.data?.id;
     const reviewId = props.review?.id;
 
-    // 이미지
-    const results = await Promise.all(
-      files.map(async (el) =>
-        el !== undefined ? await uploadFile({ variables: { file: el } }) : undefined
-      )
-    );
-    const resultUrls = results.map((el) => (el !== undefined ? String(el.data?.uploadFile) : ""));
     const { ...value } = data;
     value.productOrderId = String(productOrderId);
     value.reviewId = String(reviewId);
-    // setValue("images", resultUrls);
-    value.images = resultUrls;
-
-    console.log("resultUrls", resultUrls);
-
+    value.images = imageUrls;
     if (!props.isEdit) {
       await createReviewSubmit(value);
     } else {
@@ -79,26 +57,22 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     reset({ ...data });
   };
 
-  let newUrlArr = props.review?.images?.map((el) => el.url);
-  if (newUrlArr === undefined) {
-    newUrlArr = [];
-  }
-
   useEffect(() => {
     if (props.review) {
-      const resetData = {
-        title: props.review?.title,
-        contents: props.review.contents,
-        images: newUrlArr,
-      };
-      // setFiles([]);
-      reset({ ...resetData });
-    }
-    if (props.review?.images?.length !== 0) {
-      if (newUrlArr === undefined) {
-        setImageUrls([]);
+      if (props.review.images) {
+        const resetData = {
+          title: props.review?.title,
+          contents: props.review?.contents,
+          images: props.review?.images,
+        };
+        reset({ ...resetData });
+        setImageUrls(props.review?.images);
       } else {
-        setImageUrls(newUrlArr);
+        const resetData = {
+          title: props.review?.title,
+          contents: props.review?.contents,
+        };
+        reset({ ...resetData });
       }
     }
   }, [props.review]);
@@ -154,17 +128,35 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
           <S.ModalImgWrapper>
             <S.ModalImgUploadWrapper>
               <S.UploadBtnWrapper>
-                {imageUrls[0] || props.review?.images?.length === 1 ? (
-                  <S.UploadImage src={imageUrls[0] || newUrlArr[0]} alt="후기 이미지" />
-                ) : (
-                  <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
-                )}
-
                 <S.UploadFileHidden type="file" onChange={onChangeFile(0)} />
+                {imageUrls[0] ? (
+                  <S.UploadImage src={imageUrls[0]} alt="후기 이미지01" />
+                ) : (
+                  <S.ImageDiv></S.ImageDiv>
+                )}
               </S.UploadBtnWrapper>
               <S.UploadBtnWrapper>
-                {imageUrls[1] || props.review?.images?.length === 2 ? (
-                  <S.UploadImage src={imageUrls[1] || newUrlArr[1]} alt="후기 이미지" />
+                <S.UploadFileHidden type="file" onChange={onChangeFile(1)} />
+                {imageUrls[1] ? (
+                  <S.UploadImage src={imageUrls[1]} alt="후기 이미지02" />
+                ) : (
+                  <S.ImageDiv></S.ImageDiv>
+                )}
+              </S.UploadBtnWrapper>
+              <S.UploadBtnWrapper>
+                <S.UploadFileHidden type="file" onChange={onChangeFile(2)} />
+                {imageUrls[2] ? (
+                  <S.UploadImage src={imageUrls[2]} alt="후기 이미지03" />
+                ) : (
+                  <S.ImageDiv></S.ImageDiv>
+                )}
+              </S.UploadBtnWrapper>
+              {/* <S.UploadBtnWrapper>
+                {props.review?.images?.length === 2 ? (
+                  <S.UploadImage
+                    src={imageUrls[1] || props.review?.images[1]}
+                    alt="후기 이미지02"
+                  />
                 ) : (
                   <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
                 )}
@@ -172,14 +164,17 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
                 <S.UploadFileHidden type="file" onChange={onChangeFile(1)} />
               </S.UploadBtnWrapper>
               <S.UploadBtnWrapper>
-                {imageUrls[2] || props.review?.images?.length === 3 ? (
-                  <S.UploadImage src={imageUrls[2] || newUrlArr[2]} alt="후기 이미지" />
+                {props.review?.images?.length === 3 ? (
+                  <S.UploadImage
+                    src={imageUrls[2] || props.review?.images[2]}
+                    alt="후기 이미지03"
+                  />
                 ) : (
                   <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
                 )}
 
                 <S.UploadFileHidden type="file" onChange={onChangeFile(2)} />
-              </S.UploadBtnWrapper>
+              </S.UploadBtnWrapper> */}
             </S.ModalImgUploadWrapper>
             <S.ModalImgTextWrapper>
               <S.ModalImgText>

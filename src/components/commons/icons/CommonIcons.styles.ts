@@ -19,6 +19,9 @@ export const CommonBasketIcon01 = styled(ShoppingBagIcon)`
 `;
 
 export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
   width: 2.6rem;
   height: 2.6rem;
   padding: 7px;
@@ -36,6 +39,9 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
   @media ${mobile} {
     width: 4rem;
     height: 4rem;
+    position: absolute;
+    bottom: 5%;
+    right: 0%;
   }
 `;
 

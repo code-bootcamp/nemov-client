@@ -36,7 +36,7 @@ export const UseQueryFetchProducts = (variables: IQueryFetchProductsArgs) => {
     IQueryFetchProductsArgs
   >(FETCH_PRODUCTS, {
     variables,
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
   });
 
   return { data, fetchMore, client, refetch };

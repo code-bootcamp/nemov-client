@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colorBase01 } from "../../../../../commons/styles/colorBases";
 
 export const MyPageMenu = styled.aside`
   width: 30%;
@@ -69,4 +70,11 @@ export const ManageOptions = styled.a`
   font-weight: 600;
   margin-bottom: 20px;
   cursor: pointer;
+`;
+
+export const DeleteUserBtn = styled.button`
+  ${colorBase01}
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 0.8rem;
 `;

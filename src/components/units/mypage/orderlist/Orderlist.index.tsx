@@ -40,11 +40,11 @@ export default function MypageOrderlist() {
   };
 
   // 주문 취소
-  const onClickCancelOrder = async (e: React.MouseEvent) => {
+  const onClickCancelOrder = (productOrderId: string) => async (e: React.MouseEvent) => {
     try {
       await cancelProductOrder({
         variables: {
-          productOrderId: e.currentTarget.id,
+          productOrderId,
         },
       });
       Modal.success({ content: "주문취소가 완료되었습니다." });
@@ -76,7 +76,7 @@ export default function MypageOrderlist() {
                   <S.ItemInfo>{order.quantity}개</S.ItemInfo>
                   <S.ItemInfo>{order.status === "BOUGHT" ? "주문완료" : "주문취소"}</S.ItemInfo>
                   {order.status === "BOUGHT" ? (
-                    <S.CancelBtn id={order.id} onClick={onClickCancelOrder}>
+                    <S.CancelBtn id={order.id} onClick={onClickCancelOrder(order.id)}>
                       주문취소
                     </S.CancelBtn>
                   ) : (

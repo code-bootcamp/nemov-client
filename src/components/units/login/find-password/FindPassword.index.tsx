@@ -12,7 +12,8 @@ import { FindPwSchema } from "./FindPassword.validation";
 export interface IFormFindPasswordData {
   email: string;
   phone: string;
-  token: string;
+  password: string;
+  prevPassword: string;
 }
 
 export default function FindPassword() {
@@ -43,11 +44,11 @@ export default function FindPassword() {
   const { register, handleSubmit, formState, getValues, setValue, watch } =
     useForm<IFormFindPasswordData>({
       resolver: yupResolver(FindPwSchema),
-      mode: "onSubmit",
+      mode: "onChange",
     });
 
   const onSubmitForm = (data: IFormFindPasswordData) => {
-    const { token, ...value } = data;
+    const { prevPassword, ...value } = data;
     void findPasswordSubmit(value);
   };
 
@@ -63,12 +64,26 @@ export default function FindPassword() {
     <Global>
       <Form onSubmit={handleSubmit(onSubmitForm)}>
         <Line>
-          <H2>비밀번호 찾기</H2>
+          <H2>비밀번호 재설정</H2>
         </Line>
         <InputWrapper>
           <Label>아이디</Label>
           <Input type="text" placeholder="아이디를 입력해주세요." {...register("email")} />
           <Error>{formState.errors.email?.message}</Error>
+          <Label>현재 비밀번호</Label>
+          <Input
+            type="password"
+            placeholder="현재 비밀번호를 입력해주세요."
+            {...register("prevPassword")}
+          />
+          <Error>{formState.errors.prevPassword?.message}</Error>
+          <Label>새로운 비밀번호</Label>
+          <Input
+            type="password"
+            placeholder="변경할 비밀번호를 입력해주세요."
+            {...register("password")}
+          />
+          <Error>{formState.errors.password?.message}</Error>
           <Label>휴대폰 번호</Label>
           <Input
             type="text"
@@ -90,7 +105,7 @@ export default function FindPassword() {
           <TokenBtn type="button" onClick={onClickConfirmToken}>
             인증번호 확인
           </TokenBtn>
-          <FindBtn>비밀번호 찾기</FindBtn>
+          <FindBtn>비밀번호 변경하기</FindBtn>
         </InputWrapper>
       </Form>
     </Global>
@@ -98,12 +113,12 @@ export default function FindPassword() {
 }
 
 const Global = styled(GlobalWrapper)`
-  height: 90vh;
+  height: 120vh;
   padding: 10% 0 5% 0;
 `;
 
 const Line = styled.div`
-  width: 150px;
+  width: 170px;
   border-bottom: 2px solid #1f3d31;
   text-align: center;
 `;
@@ -131,7 +146,7 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
-  width: 25%;
+  width: 28%;
 `;
 
 const Input = styled.input`
