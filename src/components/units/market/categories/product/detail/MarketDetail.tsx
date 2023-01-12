@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { mobile } from "../../../../../../commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../../../../commons/styles/globalStyles";
 import { UseQueryFetchReviewsByProduct } from "../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
 import { UseQueryFetchProduct } from "../../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
@@ -12,6 +13,9 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${mobile} {
+    margin-top: 10%;
+  }
 `;
 
 export default function MarketDetail() {

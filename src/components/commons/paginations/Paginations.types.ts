@@ -1,4 +1,5 @@
 import { ApolloQueryResult } from "@apollo/client";
+import { Dispatch, SetStateAction } from "react";
 import {
   IQuery,
   IQueryFetchPointTransactionsArgs,
@@ -54,4 +55,8 @@ export interface IPagination06Props {
 export interface IPagination07Props {
   count: number | undefined;
   refetch: any;
+  startPage: number;
+  activePage: number;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  setActivePage: Dispatch<SetStateAction<number>>;
 }

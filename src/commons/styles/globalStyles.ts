@@ -10,7 +10,7 @@ export const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Arita-Medium";
+    font-family: "Arita-Medium", "NotoSansKR-Regular";
   }
 
   @media ${tablet} {
@@ -97,6 +97,12 @@ export const globalStyles = css`
   @font-face {
     font-family: "Arita-Thin";
     src: url("/fonts/arita-dotum-Thin.woff");
+  }
+
+  // alt font
+  @font-face {
+    font-family: "NotoSansKR-Regular";
+    src: url("/fonts/NotoSansKR-Regular.woff");
   }
 `;
 

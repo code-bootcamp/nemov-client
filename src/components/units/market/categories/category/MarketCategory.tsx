@@ -1,12 +1,15 @@
-import { useApolloClient } from "@apollo/client";
+import { ApolloQueryResult, useApolloClient } from "@apollo/client";
 import { useRouter } from "next/router";
 import React from "react";
-import { IQuery } from "../../../../../commons/types/generated/types";
+import { IQuery, IQueryFetchProductsArgs } from "../../../../../commons/types/generated/types";
 import { FETCH_PRODUCTS } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 import * as S from "./MarketCategory.styles";
 
 interface IMarketCategoryProps {
   categoryData?: Pick<IQuery, "fetchProductCategories"> | undefined;
+  productsRefetch?: (
+    variables?: Partial<IQueryFetchProductsArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProducts">>>;
 }
 
 export default function MarketCategory(props: IMarketCategoryProps) {
@@ -25,7 +28,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
       },
     });
     // console.log(data);
-    void router.push(`/market/categories/${click}`);
+    void router.push(`/market/categories`);
   };
 
   return (

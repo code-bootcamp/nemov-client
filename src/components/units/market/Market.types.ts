@@ -1,10 +1,11 @@
 import { ApolloClient, ApolloQueryResult, QueryResult } from "@apollo/client";
+import { Dispatch, SetStateAction } from "react";
 import { SetterOrUpdater } from "recoil";
 import {
   IQuery,
   IQueryFetchProductArgs,
   IQueryFetchProductsArgs,
-  IQuestion
+  IQuestion,
 } from "../../../commons/types/generated/types";
 
 export interface IMarketListProps {
@@ -17,6 +18,11 @@ export interface IMarketListProps {
     variables?: Partial<IQueryFetchProductsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProducts">>>;
   productsCount: Pick<IQuery, "fetchProductsCount"> | undefined;
+  category: string;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  setActivePage: Dispatch<SetStateAction<number>>;
+  startPage?: number;
+  activePage?: number;
 }
 
 export interface IMarketDetailProps {
@@ -27,13 +33,7 @@ export interface IMarketDetailProps {
 
 export interface IMarketDetailHeadStylesProps {
   image: string;
-  // content: string;
 }
-
-// export interface IProductAskStylesProps {
-//   isAnswer: string;
-//   isAnswerOpen: boolean;
-// }
 
 export interface IProductOrdersData {
   amount: number;

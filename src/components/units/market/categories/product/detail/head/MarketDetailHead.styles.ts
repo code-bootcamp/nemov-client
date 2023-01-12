@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../../../commons/styles/breakPoints";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
@@ -16,17 +17,28 @@ export const MarketDetailPageHead = styled.section`
   padding-bottom: 6.25rem;
   margin-bottom: 3.25rem;
   border-bottom: 2px solid #e6e0e0;
+  @media ${mobile} {
+    ${flexColumn}
+    align-items: center;
+    gap: 2rem;
+  }
 `;
 
 export const ProductDetailImage01 = styled.img`
   width: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
+  @media ${mobile} {
+    width: 80%;
+  }
 `;
 
 export const ProductDetailAside01 = styled.aside`
   width: 40%;
   ${flexColumn}
+  @media ${mobile} {
+    width: 80%;
+  }
 `;
 
 export const ProductDetailHeader01 = styled.header`
@@ -72,9 +84,22 @@ export const PriceDetailSection01 = styled.section`
   align-items: center;
 `;
 
+export const DeliveryFeeTitle = styled.span`
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  @media ${mobile} {
+    font-size: 1.2rem;
+  }
+`;
+
 export const DetailInfoTitle01 = styled.span`
   font-size: 1.1rem;
   font-weight: 800;
+
+  @media ${mobile} {
+    font-size: larger;
+  }
 `;
 
 export const DetailInfoContent01 = styled.span`
@@ -99,6 +124,9 @@ export const PQRightButtons = styled.div`
   ${flexRow}
   gap: 1vmax;
   align-items: center;
+  @media ${mobile} {
+    font-size: larger;
+  }
 `;
 
 export const PriceSumSection01 = styled.section`

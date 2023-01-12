@@ -12,7 +12,8 @@ export const ButtonStyleSet01 = css`
   ${colorBase01}
 
   @media ${mobile} {
-    font-size: 10px;
+    font-size: larger;
+    border-radius: 0.9rem;
   }
 `;
 
@@ -43,6 +44,9 @@ export const StyledCommonButton01 = styled.button`
   ${ButtonStyleSet01}
   width: 100%;
   height: 3rem;
+  @media ${mobile} {
+    height: 4rem;
+  }
 `;
 
 export const StyledCommonButton02 = styled.button`
