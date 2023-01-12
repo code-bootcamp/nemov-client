@@ -31,10 +31,11 @@ export const Title = styled.h1`
 
 export const Contents = styled.section`
   article {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     background-color: #999;
     margin-bottom: 3px;
+    object-fit: cover;
   }
 `;
 
@@ -57,5 +58,6 @@ export const Thumbnail = styled.div`
     left: 0;
     top: 0;
     height: 100%;
+    width: 100%;
   }
 `;

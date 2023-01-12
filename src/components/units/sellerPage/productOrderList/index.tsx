@@ -1,17 +1,18 @@
 import { getDate } from "../../../../commons/libraries/utilies";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { UseQueryFetchProductOrdersBySeller } from "../../../commons/hooks/useQueries/product/UseQueryFetchProductOrdersBySeller";
+import Pagination from "../../../commons/paginations/Pagination.index";
 import * as S from "./ProductOrderList.styles";
 
 export default function ProductOrderList() {
-  const { data } = UseQueryFetchProductOrdersBySeller({
+  const { data, refetch } = UseQueryFetchProductOrdersBySeller({
     page: 1,
   });
 
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>판매자 주문 내역 관리 페이지</S.Title>
-      <section>
+      <section style={{ display: "flex", flexDirection: "column" }}>
         <S.Table>
           <S.Thead>
             <S.Tr>
@@ -36,6 +37,7 @@ export default function ProductOrderList() {
             ))}
           </S.Tbody>
         </S.Table>
+        <Pagination refetch={refetch} count={data?.fetchProductOrdersBySeller.length} />
       </section>
     </GlobalWrapper>
   );

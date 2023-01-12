@@ -31,6 +31,7 @@ export default function LayoutHeader() {
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
+    setMenuOpen(false);
   };
 
   const paymentPage = () => {
@@ -42,6 +43,7 @@ export default function LayoutHeader() {
     setAccessToken("");
     await router.push("/market");
     location.reload();
+    setMenuOpen(false);
   };
 
   const onClickMenuToggle = () => {
@@ -75,6 +77,7 @@ export default function LayoutHeader() {
             onClickPayment={onClickPayment}
             paymentPage={paymentPage}
             onClickLogout={onClickLogout}
+            setMenuOpen={setMenuOpen}
           />
         )}
       </>

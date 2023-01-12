@@ -1,5 +1,8 @@
-import { useState } from "react";
-// import { useAuth01 } from "../../commons/hooks/useAuths/useAuth01";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../commons/stores";
 import PointList from "./pointList";
 import ProductList from "./product/list";
 import ProductOrderList from "./productOrderList";
@@ -7,7 +10,15 @@ import QnAList from "./qnaList/list";
 import * as S from "./Seller.styles";
 
 export default function SellerManagementPage() {
-  // useAuth01();
+  const router = useRouter();
+  const accessToken = useRecoilValue(accessTokenState);
+
+  useEffect(() => {
+    if (accessToken === undefined) {
+      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+      void router.push("/login");
+    }
+  });
 
   const [isSelected, setIsSelected] = useState([true, false, false, false]);
 

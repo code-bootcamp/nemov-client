@@ -11,6 +11,8 @@ import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations
 import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import { categoryContents } from "../register/category";
 import dynamic from "next/dynamic";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { WriteProductSchema } from "./validation";
 
 interface ProductWriteProps {
   isEdit: boolean;
@@ -47,6 +49,7 @@ interface ProductInput {
     option11?: string;
   };
 }
+require("tui-placeholder");
 
 const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
 const Option1 = categoryContents[0];
@@ -73,7 +76,8 @@ export default function ProductWrite(props: ProductWriteProps) {
   });
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
-  const { register, handleSubmit, setValue } = useForm<ProductInput>({
+  const { register, handleSubmit, setValue, formState } = useForm<ProductInput>({
+    resolver: yupResolver(WriteProductSchema),
     mode: "onChange",
   });
 
@@ -233,6 +237,7 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>상품이름</S.SubTitle>
           <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
         </S.Row>
+        <div style={{ color: "red" }}>{formState.errors.name?.message}</div>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
           <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import * as S from "./RecentlyViewed.styles";
 
 interface IRecentlyType {
@@ -35,6 +34,10 @@ export default function LayoutRecentlyViewed() {
     };
   }, []);
 
+  const onClickProduct = (e: any) => {
+    console.log("타겟", e.target.id);
+  };
+
   return (
     <>
       {showAside && (
@@ -44,8 +47,8 @@ export default function LayoutRecentlyViewed() {
               <S.Title>최근 본 상품</S.Title>
               <S.Contents>
                 {recentlyLists?.map((cur) => (
-                  <S.Thumbnail key={cur.id + uuidv4()}>
-                    <Link href={`/${cur.id}`}>
+                  <S.Thumbnail key={cur.id} onClick={onClickProduct}>
+                    <Link href={`/market/product/${cur.id}`}>
                       <a>
                         <img src={`${cur.image}`} />
                       </a>

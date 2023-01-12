@@ -4,6 +4,7 @@ import { GlobalWrapper } from "../../../../../commons/styles/globalStyles";
 import { IQuestion } from "../../../../../commons/types/generated/types";
 import { UseQueryFetchQuestionsBySeller } from "../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsBySeller";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
+import Pagination from "../../../../commons/paginations/Pagination.index";
 import WriteModal from "../writeModal";
 import * as S from "./QnAList.styles";
 
@@ -11,7 +12,7 @@ export default function QnAList() {
   const [isOpen, setIsOpen] = useState(false);
   const [QuestionsItemVal, setQuestionsItemVal] = useState<IQuestion>();
   const [questionId, setQuestionId] = useState("");
-  const { data } = UseQueryFetchQuestionsBySeller({
+  const { data, refetch } = UseQueryFetchQuestionsBySeller({
     page: 1,
   });
 
@@ -37,7 +38,7 @@ export default function QnAList() {
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>문의 내역 관리 페이지</S.Title>
-      <section>
+      <section style={{ display: "flex", flexDirection: "column" }}>
         <S.Table>
           <S.Thead>
             <S.Tr>
@@ -72,6 +73,7 @@ export default function QnAList() {
             </CommonModal01>
           </S.Tbody>
         </S.Table>
+        <Pagination refetch={refetch} count={data?.fetchQuestionsBySeller.length} />
       </section>
     </GlobalWrapper>
   );

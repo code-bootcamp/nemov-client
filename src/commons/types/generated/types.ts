@@ -24,7 +24,7 @@ export type IAnswer = {
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  question: IQuestion;
+  question?: Maybe<IQuestion>;
   updatedAt: Scalars['DateTime'];
   user: IUser;
 };
@@ -151,6 +151,7 @@ export type IMutation = {
   updateUser: IUser;
   updateUserPassword: IUser;
   uploadFile: Scalars['String'];
+  uploadFile1: Scalars['String'];
 };
 
 
@@ -362,6 +363,11 @@ export type IMutationUploadFileArgs = {
   file: Scalars['Upload'];
 };
 
+
+export type IMutationUploadFile1Args = {
+  file: Scalars['Upload'];
+};
+
 /** 결제 상태에 대한 타입 */
 export enum IPoint_Transaction_Status_Enum {
   /** 상품 구매 완료 */
@@ -537,6 +543,12 @@ export type IQueryFetchPointTransactionsArgs = {
 };
 
 
+export type IQueryFetchPointTransactionsCountArgs = {
+  endDate?: InputMaybe<Scalars['DateTime']>;
+  startDate?: InputMaybe<Scalars['DateTime']>;
+};
+
+
 export type IQueryFetchProductArgs = {
   productId: Scalars['ID'];
 };
@@ -667,18 +679,12 @@ export type IReview = {
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  images?: Maybe<Array<IReviewImage>>;
+  images?: Maybe<Array<Scalars['String']>>;
   product: IProduct;
   rating: Scalars['Int'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user: IUser;
-};
-
-export type IReviewImage = {
-  __typename?: 'ReviewImage';
-  id: Scalars['ID'];
-  url: Scalars['String'];
 };
 
 export type IUpdateProductCategoryInput = {
