@@ -31,7 +31,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logout] = useMutation(LOGOUT);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-  console.log(data);
+  console.log(data?.fetchLoginUser.role);
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
@@ -85,7 +85,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
             )}
           </>
           <S.HeaderMenu>
-            {data && (
+            {data?.fetchLoginUser.role === "BUYER" && (
               <>
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
                   <S.Payment onClick={onClickPayment} />
@@ -103,14 +103,22 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 </Link>
               </>
             )}
-            <Link href={data ? "/mypage/orderlist" : "/login"}>
-              <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
-                {data ? "MYPAGE" : "LOGIN"}
-              </S.HeaderMenuItem>
-            </Link>
+            {data?.fetchLoginUser.role === "BUYER" ? (
+              <Link href={data ? "/mypage/orderlist" : "/login"}>
+                <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
+                  {data ? "MYPAGE" : "LOGIN"}
+                </S.HeaderMenuItem>
+              </Link>
+            ) : (
+              <Link href={data ? "/seller" : "/login"}>
+                <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
+                  {data ? "SELLER-PAGE" : "LOGIN"}
+                </S.HeaderMenuItem>
+              </Link>
+            )}
             <Link href={data ? "/market" : "/signup"}>
               <S.HeaderMenuItem onClick={data && onClickLogout} isShowBanner={props.isShowBanner}>
-                {data ? "LOGOUT" : "SIGNUP"}{" "}
+                {data ? "LOGOUT" : "SIGNUP"}
               </S.HeaderMenuItem>
             </Link>
           </S.HeaderMenu>
@@ -143,7 +151,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
             )}
           </>
           <S.HeaderMenu>
-            {data && (
+            {data?.fetchLoginUser.role === "BUYER" && (
               <>
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
                   <S.Payment onClick={onClickPayment} />
@@ -161,11 +169,19 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 </Link>
               </>
             )}
-            <Link href={data ? "/mypage/orderlist" : "/login"}>
-              <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
-                {data ? "MYPAGE" : "LOGIN"}
-              </S.HeaderMenuItem>
-            </Link>
+            {data?.fetchLoginUser.role === "BUYER" ? (
+              <Link href={data ? "/mypage/orderlist" : "/login"}>
+                <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
+                  {data ? "MYPAGE" : "LOGIN"}
+                </S.HeaderMenuItem>
+              </Link>
+            ) : (
+              <Link href={data ? "/seller" : "/login"}>
+                <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
+                  {data ? "SELLER-PAGE" : "LOGIN"}
+                </S.HeaderMenuItem>
+              </Link>
+            )}
             <Link href={data ? "/market" : "/signup"}>
               <S.HeaderMenuItem onClick={data && onClickLogout} isShowBanner={props.isShowBanner}>
                 {data ? "LOGOUT" : "SIGNUP"}{" "}
