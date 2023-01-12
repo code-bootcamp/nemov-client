@@ -30,7 +30,8 @@ export const UseMutationCreateUser = () => {
       Modal.success({ content: "회원가입이 완료되었습니다." });
       void router.push("/login");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) console.error(error.message);
+      Modal.error({ content: "회원가입에 실패하였습니다. 다시 시도해주세요." });
     }
   };
 

@@ -67,7 +67,7 @@ export default function Signup(props: ISignupProps) {
         setTime(false);
         Modal.success({ content: "인증에 성공하였습니다." });
       } else {
-        Modal.error({ content: "인증번호가 일치하지 않습니다." });
+        Modal.error({ content: "인증번호가 일치하지 않습니다. 다시 시도해주세요." });
       }
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
