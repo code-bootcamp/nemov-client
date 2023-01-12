@@ -114,20 +114,16 @@ export const ModalImgUploadWrapper = styled.div`
 `;
 
 export const UploadBtnWrapper = styled.div`
-  /* width: 12%; */
-  width: 30%;
-  /* height: 70px; */
-  /* position: relative; */
+  width: 12%;
+  height: 70px;
+  position: relative;
   margin-right: 10px;
 `;
 
 export const UploadImage = styled.img`
-  /* width: 100%;
+  width: 100%;
   aspect-ratio: 5/5;
-  margin-right: 10px; */
-  width: 50%;
-  aspect-ratio: 5/5;
-  margin-top: 20px;
+  margin-right: 10px;
 `;
 
 export const ImageDiv = styled.div`
@@ -148,13 +144,12 @@ export const ModalImgBtn = styled.button`
 `;
 
 export const UploadFileHidden = styled.input`
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   right: 0;
-  /* width: 100%;
-  height: 100%;
-  opacity: 1; */
   width: 100%;
+  height: 100%;
+  opacity: 0;
   border-bottom: 0;
   cursor: pointer;
 `;

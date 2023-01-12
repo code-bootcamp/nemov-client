@@ -30,7 +30,7 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
   const { createReviewSubmit } = UseMutationCreateReview();
   const { updateReviewSubmit } = UseMutationUpdateReview();
 
-  const { register, handleSubmit, setValue, reset } = useForm<IFormData>({
+  const { register, handleSubmit, setValue, reset, watch } = useForm<IFormData>({
     mode: "onSubmit",
     shouldUseNativeValidation: true,
     defaultValues: {
@@ -54,7 +54,11 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     }
 
     props.modalOnCancel();
-    reset({ ...data });
+
+    if (props.setIsSelected === undefined) return;
+    props.setIsSelected([true, false]);
+
+    // reset({ ...data });
   };
 
   useEffect(() => {
@@ -114,12 +118,7 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
                 })}
                 defaultValue={props.review?.contents}
               ></S.ModalContent>
-              <S.ModalContentLength>
-                {props.review?.contents
-                  ? props.review?.contents?.length
-                  : props.data?.review?.contents ?? 0}
-                / 1,000
-              </S.ModalContentLength>
+              <S.ModalContentLength>{watch("contents").length} / 1,000</S.ModalContentLength>
             </S.ModalContentInnerWrap>
           </S.InputWrap>
         </S.ModalContentWrapper>
@@ -127,7 +126,7 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
           <S.ModalLabel>사진 첨부</S.ModalLabel>
           <S.ModalImgWrapper>
             <S.ModalImgUploadWrapper>
-              <S.UploadBtnWrapper>
+              {/* <S.UploadBtnWrapper>
                 <S.UploadFileHidden type="file" onChange={onChangeFile(0)} />
                 {imageUrls[0] ? (
                   <S.UploadImage src={imageUrls[0]} alt="후기 이미지01" />
@@ -150,13 +149,18 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
                 ) : (
                   <S.ImageDiv></S.ImageDiv>
                 )}
+              </S.UploadBtnWrapper> */}
+              <S.UploadBtnWrapper>
+                {imageUrls[0] ? (
+                  <S.UploadImage src={imageUrls[0]} alt="후기 이미지01" />
+                ) : (
+                  <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
+                )}
+                <S.UploadFileHidden type="file" onChange={onChangeFile(0)} />
               </S.UploadBtnWrapper>
-              {/* <S.UploadBtnWrapper>
-                {props.review?.images?.length === 2 ? (
-                  <S.UploadImage
-                    src={imageUrls[1] || props.review?.images[1]}
-                    alt="후기 이미지02"
-                  />
+              <S.UploadBtnWrapper>
+                {imageUrls[1] ? (
+                  <S.UploadImage src={imageUrls[1]} alt="후기 이미지02" />
                 ) : (
                   <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
                 )}
@@ -164,17 +168,14 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
                 <S.UploadFileHidden type="file" onChange={onChangeFile(1)} />
               </S.UploadBtnWrapper>
               <S.UploadBtnWrapper>
-                {props.review?.images?.length === 3 ? (
-                  <S.UploadImage
-                    src={imageUrls[2] || props.review?.images[2]}
-                    alt="후기 이미지03"
-                  />
+                {imageUrls[2] ? (
+                  <S.UploadImage src={imageUrls[2]} alt="후기 이미지03" />
                 ) : (
                   <S.ModalImgBtn type="button">Upload</S.ModalImgBtn>
                 )}
 
                 <S.UploadFileHidden type="file" onChange={onChangeFile(2)} />
-              </S.UploadBtnWrapper> */}
+              </S.UploadBtnWrapper>
             </S.ModalImgUploadWrapper>
             <S.ModalImgTextWrapper>
               <S.ModalImgText>
