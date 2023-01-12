@@ -125,7 +125,7 @@ export const StyledSlider02 = styled(Slider)`
 export const NextArrowIcon = styled(ArrowForwardIosIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 2rem);
+  top: calc(100% - 4rem);
   position: absolute;
   @media ${mobile} {
   }
@@ -134,7 +134,7 @@ export const NextArrowIcon = styled(ArrowForwardIosIcon)`
 export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 2rem);
+  top: calc(100% - 4rem);
   position: absolute;
   @media ${mobile} {
   }

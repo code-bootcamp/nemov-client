@@ -77,16 +77,27 @@ export default function MarketCategoriesPage() {
               />
               <CS.CategoryTitle id="">전체</CS.CategoryTitle>
             </CS.Category>
-            {currentData?.map((categories) => (
-              <CS.Category key={categories.id} onClick={onClickMoveToCategory} id={categories.id}>
-                <CS.StyledCategoryIcon
-                  src={categories.image}
-                  alt={categories.name}
-                  id={categories.id}
-                />
-                <CS.CategoryTitle id={categories.id}>{categories.name}</CS.CategoryTitle>
-              </CS.Category>
-            ))}
+            {currentData
+              ? currentData?.map((categories) => (
+                  <CS.Category
+                    key={categories.id}
+                    onClick={onClickMoveToCategory}
+                    id={categories.id}
+                  >
+                    <CS.StyledCategoryIcon
+                      src={categories.image}
+                      alt={categories.name}
+                      id={categories.id}
+                    />
+                    <CS.CategoryTitle id={categories.id}>{categories.name}</CS.CategoryTitle>
+                  </CS.Category>
+                ))
+              : new Array(4).fill(1).map((_, index) => (
+                  <CS.Category key={index}>
+                    <CS.StyledCategoryIcon src="/icons/all-icon.png" alt="아이콘 미리보기" />
+                    <CS.CategoryTitle>미리보기</CS.CategoryTitle>
+                  </CS.Category>
+                ))}
           </CS.CategoryWrapper>
           <MarketList
             productsClient={productsClient}
