@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 interface ILayoutMobileMenuStyleProps {
   isOpen: boolean;
@@ -12,8 +12,8 @@ export const HeaderMenu = styled.section`
   padding: 10vmax 5vmax;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   background-color: #648d2a;
   position: absolute;
   top: 0;
@@ -23,43 +23,11 @@ export const HeaderMenu = styled.section`
   transition: transform 1s ease-in-out;
 `;
 
-export const User = styled.div`
-  padding: 2rem;
-  border: 1px solid #fff;
-  margin-bottom: 2rem;
-`;
-
-export const UserLevel = styled.span`
-  width: auto;
-  height: auto;
-  padding: 5px;
-  text-align: center;
-  line-height: 40px;
-  border-radius: 50%;
-  background: #fff;
-  color: #648d2a;
-  font-size: 1rem;
-  font-weight: 900;
-  margin-right: 10px;
-`;
-
-export const UserName = styled.h1`
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-size: 1.6rem;
-  margin-bottom: 2vmax;
-`;
-
-export const UserPoint = styled.p`
-  color: #fff;
-  text-align: right;
-`;
-
 export const HeaderMenuItem = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
   margin-right: 1rem;
   color: #fff;
   cursor: pointer;
@@ -75,19 +43,63 @@ export const LoginMenu = styled.div`
   margin-right: 0;
 `;
 
-export const IconMenu = styled.div`
-  display: flex;
-  justify-content: flex-end;
+export const LoginMenuItem = styled.div`
+  font-size: 1.2rem;
+  margin-right: 1.3rem;
+  margin-bottom: 3vmax;
 `;
 
-export const Payment = styled(AddCardOutlinedIcon)`
+export const User = styled.div`
+  margin-bottom: 3rem;
+`;
+
+export const UserLevel = styled.span`
+  width: auto;
+  height: auto;
+  padding: 5px;
+  text-align: left;
+  border-radius: 5%;
+  background: #fff;
+  color: #648d2a;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 10px;
+`;
+
+export const UserName = styled.h1`
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 2vmax;
+`;
+
+export const UserPoint = styled.p`
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 3vmax;
+`;
+
+export const IconMenu = styled.div`
+  display: flex;
+`;
+
+export const IconName = styled.span`
+  font-size: 10px;
+`;
+
+export const Payment = styled(CurrencyExchangeIcon)`
   color: #fff;
   cursor: pointer;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Basket = styled(ShoppingBagOutlinedIcon)`
   color: #fff;
   cursor: pointer;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const NavWrapper = styled.nav`
@@ -95,12 +107,11 @@ export const NavWrapper = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 `;
 
 export const Menu = styled.span`
   font-size: 2rem;
-  margin-bottom: 2vmax;
+  margin-bottom: 3vmax;
   cursor: pointer;
   color: #fff;
 `;

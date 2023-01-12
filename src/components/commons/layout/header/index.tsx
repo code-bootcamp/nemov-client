@@ -35,6 +35,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
+    setMenuOpen(false);
   };
 
   const paymentPage = () => {
@@ -46,6 +47,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
     setAccessToken("");
     await router.push("/market");
     location.reload();
+    setMenuOpen(false);
   };
 
   const onClickMenuToggle = () => {

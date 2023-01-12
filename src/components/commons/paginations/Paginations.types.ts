@@ -3,10 +3,13 @@ import { Dispatch, SetStateAction } from "react";
 import {
   IQuery,
   IQueryFetchPointTransactionsArgs,
+  IQueryFetchProductOrdersBySellerArgs,
   IQueryFetchProductOrdersCountByBuyerArgs,
   IQueryFetchProductOrdersWithoutReviewArgs,
+  IQueryFetchProductsBySellerArgs,
   IQueryFetchProductsIPickedArgs,
   IQueryFetchQuestionsByBuyerArgs,
+  IQueryFetchQuestionsBySellerArgs,
   IQueryFetchReviewsByBuyerArgs,
 } from "../../../commons/types/generated/types";
 
@@ -59,4 +62,32 @@ export interface IPagination07Props {
   activePage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
   setActivePage: Dispatch<SetStateAction<number>>;
+}
+
+export interface IPagination08Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchProductsBySellerArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsBySeller">>>;
+}
+
+export interface IPagination09Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchProductOrdersBySellerArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductOrdersBySeller">>>;
+}
+
+export interface IPagination10Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchQuestionsBySellerArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchQuestionsBySeller">>>;
+}
+
+export interface IPagination11Props {
+  count: number | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchPointTransactionsArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchPointTransactions">>>;
 }
