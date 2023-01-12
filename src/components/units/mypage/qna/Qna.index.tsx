@@ -20,9 +20,9 @@ export default function MypageQna() {
     page: 1,
   });
   const { data: dataCount } = UseQueryFetchQuestionsCountByBuyer();
-
   const { deleteQuestionFunction } = UseMutationDeleteQuestion();
 
+  // 문의 내역 수정
   const [questionItemVal, setQuestionItemVal] = useState<IQuestion>();
 
   const onClickEditQuestion = (questionId: string) => (e: React.MouseEvent) => {
@@ -90,9 +90,6 @@ export default function MypageQna() {
                     </S.NameDateWrap>
                   </S.InnerWrap>
                   <S.QnaContents disabled value={qna.contents} />
-                  {/* <S.AnswerBtn id={qna.id} onClick={onClickShowAnswer(qna.id)}>
-                  답변보기
-                </S.AnswerBtn> */}
                   {qna.answer && (
                     <S.AnswerWrapper>
                       <S.AnswerTitle>답변</S.AnswerTitle>

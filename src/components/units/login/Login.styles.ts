@@ -27,7 +27,7 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 8% 2% 2% 2%;
+  padding: 10% 2% 5% 2%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -73,6 +73,10 @@ export const Input = styled.input`
     transition: background-color 5000s ease-in-out 0s;
     caret-color: white;
   }
+
+  @media ${mobile} {
+    margin: 0;
+  }
 `;
 
 export const LoginBtn = styled.button`
@@ -85,12 +89,20 @@ export const LoginBtn = styled.button`
   color: white;
   background-color: #1f3d31;
   cursor: pointer;
+
+  @media ${mobile} {
+    margin: 0;
+  }
 `;
 
 export const FindWrapper = styled.div`
   width: 100%;
   margin-top: 30px;
   text-align: center;
+
+  @media ${mobile} {
+    margin: 0;
+  }
 `;
 
 export const FindId = styled.a`
@@ -117,6 +129,10 @@ export const Signup = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+
+  @media ${mobile} {
+    margin: 0;
+  }
 `;
 
 export const InputErrorWrapper = styled.div`

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { StyledCommonButton02 } from "../../../../../../../commons/buttons/CommonButtons.styles";
 import {
@@ -16,18 +16,21 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { isSubmitSuccessful },
   } = useForm<IFormQuestionData>({
     mode: "onSubmit",
-    // defaultValues: {
-    //   title: props.buyerQuestionData?.title,
-    //   contents: props.buyerQuestionData?.contents,
-    // },
     shouldUseNativeValidation: true,
   });
 
   const { createQuestionSubmit } = UseMutationCreateQuestion();
   const { updateQuestionSubmit } = UseMutationUpdateQuestion();
+
+  useEffect(() => {
+    if (props.buyerQuestionData === undefined) return;
+    setValue("title", props.buyerQuestionData?.title);
+    setValue("contents", props.buyerQuestionData?.contents);
+  }, [props.buyerQuestionData]);
 
   // 문의 등록
   const onSubmitQuestion = async (data: IFormQuestionData) => {
@@ -56,8 +59,6 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     reset({ ...data });
     props.setIsOpen((prev) => !prev);
   };
-
-  // console.log(props.buyerQuestionData);
 
   return (
     <S.QuestionWriteInnerWrapper>

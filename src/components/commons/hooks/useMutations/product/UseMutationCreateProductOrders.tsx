@@ -25,6 +25,20 @@ export const UseMutationCreateProductOrders = () => {
     IMutationCreateProductOrdersArgs
   >(CREATE_PRODUCT_ORDERS, { refetchQueries: [{ query: FETCH_CART }] });
 
+  const buyProduct = async (value: any, amount: number) => {
+    try {
+      await createProductOrders({
+        variables: {
+          productOrders: value,
+          amount,
+        },
+      });
+      Modal.success({ content: "상품 구매가 완료되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
+
   const buyProducts = async (value: any, amount: number) => {
     try {
       await createProductOrders({
@@ -46,5 +60,5 @@ export const UseMutationCreateProductOrders = () => {
     }
   };
 
-  return { buyProducts };
+  return { buyProduct, buyProducts };
 };

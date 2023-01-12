@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
-import { mobile } from "../../src/commons/styles/breakPoints";
+import { mobile, tablet } from "../../src/commons/styles/breakPoints";
 import { colorBase01 } from "../../src/commons/styles/colorBases";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -132,7 +132,7 @@ export default function SignupPage() {
 }
 
 const InnerWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 80px auto 0 auto;
   padding: 3rem 0;
   display: flex;
@@ -140,6 +140,10 @@ const InnerWrapper = styled.div`
   align-items: center;
 
   @media ${mobile} {
+    width: 100%;
+  }
+
+  @media ${tablet} {
     width: 100%;
   }
 `;

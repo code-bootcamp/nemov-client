@@ -13,9 +13,7 @@ export const FETCH_REVIEWS_BY_BUYER = gql`
         name
         image
       }
-      images {
-        url
-      }
+      images
       rating
       contents
       createdAt

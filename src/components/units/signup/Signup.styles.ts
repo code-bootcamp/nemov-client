@@ -24,12 +24,13 @@ export const ImgWrapper = styled.div`
 export const Form = styled.form`
   width: 45%;
   padding: 1%;
-  margin: 80px auto 80px auto;
+  margin: 130px auto 80px auto;
   display: flex;
   flex-direction: column;
 
   @media ${mobile} {
     width: 100%;
+    padding: 0 3rem;
   }
 `;
 
