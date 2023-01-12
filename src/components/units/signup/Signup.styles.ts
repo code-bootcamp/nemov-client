@@ -64,6 +64,9 @@ export const Label = styled.p`
   width: 20%;
   margin-right: 10px;
   margin-bottom: 0;
+  @media ${mobile} {
+    font-size: 1.6rem;
+  }
 `;
 
 export const BlnInput = styled.input`
@@ -72,6 +75,9 @@ export const BlnInput = styled.input`
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const Input = styled.input`
@@ -88,6 +94,10 @@ export const Input = styled.input`
     transition: background-color 5000s ease-in-out 0s;
     caret-color: white;
   }
+
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const CheckEmailBtn = styled.button`
@@ -96,6 +106,10 @@ export const CheckEmailBtn = styled.button`
   font-weight: 500;
   margin-left: 20px;
   ${colorBase01}
+
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const PhoneWrapper = styled.div`
@@ -110,6 +124,9 @@ export const PhoneInput = styled.input`
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const InputBtnWrapper = styled.div`
@@ -154,6 +171,9 @@ export const PhoneBtn = styled.button`
   margin-left: 20px;
   color: white;
   ${colorBase01}
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const Select = styled.select`
@@ -161,16 +181,19 @@ export const Select = styled.select`
   height: 2.5rem;
   outline: none;
   background-color: white;
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const AddWrapper = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
 `;
 
 export const ZipcodeWrapper = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -184,17 +207,23 @@ export const Zipcode = styled.input`
   text-align: center;
   outline: none;
   margin-right: 20px;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const AddBtn = styled.button`
-  width: 130px;
+  /* width: 130px; */
   border: none;
-  padding: 14px;
+  padding: 1rem;
   font-weight: 500;
   border-radius: 10px;
   color: white;
   background-color: #1f3d31;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const AddInput = styled.input`
@@ -204,6 +233,9 @@ export const AddInput = styled.input`
   border-bottom: 1px solid #1f3d31;
   outline: none;
   margin-top: 10px;
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const InfoWrapper = styled.section`
@@ -216,6 +248,9 @@ export const InfoWrapper = styled.section`
 
 export const InfoTitle = styled.label`
   font-size: 1.25rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const InfoTextWrapper = styled.div`
@@ -223,6 +258,9 @@ export const InfoTextWrapper = styled.div`
   height: 80px;
   overflow-y: scroll;
   margin: 20px 0;
+  @media ${mobile} {
+    font-size: 1.3rem;
+  }
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -242,6 +280,9 @@ export const SignupBtn = styled.button`
   margin-top: 80px;
   font-weight: 500;
   ${colorBase01}
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const Login = styled.a`
@@ -251,6 +292,9 @@ export const Login = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.4rem;
+  }
 `;
 
 export const InputErrorWrapper = styled.div`
