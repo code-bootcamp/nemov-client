@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ICartOutput } from "../../../../commons/types/generated/types";
 import { UseMutationCreateProductOrders } from "../../../commons/hooks/useMutations/product/UseMutationCreateProductOrders";
 import { UseMutationToggleProductPick02 } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductPick02";
 import { UseMutationToggleProductToCart } from "../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
@@ -21,8 +22,13 @@ interface IItemType {
 
 export default function MypageBasket() {
   const { data } = UseQueryFetchCart();
-  const [product, setProduct] = useState(data?.fetchCart);
-  // console.log(data);
+  const [product, setProduct] = useState<ICartOutput[]>([]);
+  useEffect(() => {
+    if (data?.fetchCart) {
+      setProduct(data.fetchCart);
+    }
+  }, [data?.fetchCart]);
+  console.log({ data, product });
 
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
