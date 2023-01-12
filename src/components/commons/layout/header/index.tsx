@@ -112,7 +112,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
             ) : (
               <Link href={data ? "/seller" : "/login"}>
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
-                  {data ? "SELLER-PAGE" : "LOGIN"}
+                  {data ? "SELLER" : "LOGIN"}
                 </S.HeaderMenuItem>
               </Link>
             )}
@@ -178,7 +178,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
             ) : (
               <Link href={data ? "/seller" : "/login"}>
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
-                  {data ? "SELLER-PAGE" : "LOGIN"}
+                  {data ? "SELLER" : "LOGIN"}
                 </S.HeaderMenuItem>
               </Link>
             )}
