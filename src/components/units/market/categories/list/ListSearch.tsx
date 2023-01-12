@@ -1,5 +1,8 @@
 // import { useState } from "react";
 // import { getVeganName } from "../../../../../commons/libraries/utilies";
+import { useRecoilState } from "recoil";
+import { getVeganName } from "../../../../../commons/libraries/utilies";
+import { IsSelectedState } from "../../../../../commons/stores/index";
 import {
   ListSearchSection,
   SearchInputBox,
@@ -12,6 +15,7 @@ interface IListSearchProps {
   prefetchByLevel: (value: number | unknown) => Promise<void>;
 }
 export default function ListSearch(props: IListSearchProps) {
+  const [isSelected] = useRecoilState(IsSelectedState);
   return (
     <ListSearchSection>
       <SearchSection>
@@ -36,6 +40,7 @@ export default function ListSearch(props: IListSearchProps) {
           { value: 2, label: "폴로" },
           { value: 1, label: "플렉시테리언" },
         ]}
+        value={getVeganName(isSelected)}
       ></SelectBox>
       {/* <select onChange={prefetchByLevel(selected)}>
         <option value={1}>{getVeganName(1)}</option>

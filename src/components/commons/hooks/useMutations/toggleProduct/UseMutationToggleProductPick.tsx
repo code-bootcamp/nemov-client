@@ -37,8 +37,10 @@ export const UseMutationToggleProductPick = () => {
         },
       });
     } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-      Modal.error({ content: "로그인이 필요한 서비스입니다." });
+      if (error instanceof Error) {
+        console.log(error);
+        Modal.error({ content: `${error.message}` });
+      }
     }
   };
 

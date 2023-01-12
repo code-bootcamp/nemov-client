@@ -1,6 +1,5 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
-// import MarketCategory from "../category/MarketCategory";
 import * as ID from "../categories/list/item-display/ItemDisplay";
 import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
@@ -17,7 +16,8 @@ import CommonModal01 from "../../../commons/modals/CommonModal01";
 import CartModal from "../categories/list/CartModalPage";
 import { useState } from "react";
 import { IProduct } from "../../../../commons/types/generated/types";
-import { useAuth02 } from "../../../commons/hooks/useAuths/useAuth02";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/stores";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -36,18 +36,7 @@ export default function MarketMain() {
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
   const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
-
-  // console.log("추천상품", recItemData);
-
-  // const curRecItemData = recItemData?.fetchProductsOfRecommend.filter((rec) => {
-  //   if (!rec.isOutOfStock) {
-  //     return rec;
-  //   } else {
-  //     return undefined;
-  //   }
-  // });
-
-  // console.log("추천상품 중 매진 아닌것", curRecItemData);
+  const [accessToken] = useRecoilState(accessTokenState);
 
   const settings = {
     centerMode: true,
@@ -63,8 +52,6 @@ export default function MarketMain() {
     prevArrow: <PrevArrow />,
   };
 
-  // console.log(bestItemData);
-
   const router = useRouter();
   const client = useApolloClient();
 
@@ -78,7 +65,7 @@ export default function MarketMain() {
   const onClickToggleCartModal01 = (id: string) => (e: React.MouseEvent) => {
     e?.stopPropagation();
 
-    if (!useAuth02) {
+    if (!accessToken) {
       Modal.error({ content: "로그인이 필요한 서비스입니다." });
     } else {
       setIsOpen((prev) => !prev);
@@ -99,7 +86,7 @@ export default function MarketMain() {
   const onClickToggleCartModal02 = (id: string) => (e: React.MouseEvent) => {
     e?.stopPropagation();
 
-    if (!useAuth02) {
+    if (!accessToken) {
       Modal.error({ content: "로그인이 필요한 서비스입니다." });
     } else {
       setIsOpen((prev) => !prev);
@@ -170,7 +157,6 @@ export default function MarketMain() {
                     onClickToggleCartModal01={onClickToggleCartModal01}
                   />
                 ))}
-                {/* <ID.ItemDisPlay02 key={rec.id} recData={rec} />; */}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
             <S.MainMarketSection01>

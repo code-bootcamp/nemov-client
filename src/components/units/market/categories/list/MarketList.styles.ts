@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { amazon, gray } from "../../../../../commons/styles/colorPalettes";
 import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
-import { mobile } from "../../../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
 // import * as S from "../../main/MarketMain.styles";
 import { FontStyle03, FontStyle04 } from "./item-display/ItemDisplay.styles";
@@ -11,12 +11,28 @@ export const CategoryMain = styled.main`
   ${GS.flexColumn}
   justify-content: center;
   align-items: center;
-  margin: 10% 0 3% 0;
+  margin: 10% 0;
+  @media ${tablet} {
+  }
+  @media ${mobile} {
+    padding: 0 5%;
+  }
+`;
+
+export const ListWrapper = styled.section`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const ListTitle = styled.h1`
   margin-top: 4.6rem;
   ${GS.bold}
+  @media ${mobile} {
+    font-size: xx-large;
+  }
 `;
 
 export const ItemImage03 = styled.img`
@@ -98,20 +114,23 @@ export const ItemOriginPrice03 = styled.span`
 
 export const ListSearchSection = styled.section`
   @media ${mobile} {
-    padding: 0 2rem;
+    padding: 0;
+    margin-top: 5rem;
+    justify-content: space-around;
+    gap: 0rem;
   }
   width: 100%;
   ${GS.flexRow}
   justify-content: flex-end;
   align-items: center;
-  padding: 0 4rem;
+  padding: 0 2rem;
   margin: 1rem 0;
   gap: 1rem;
 `;
 
 export const SearchSection = styled.section`
   @media ${mobile} {
-    width: 70%;
+    width: 60%;
   }
   display: flex;
   align-items: center;
@@ -127,7 +146,11 @@ export const SearchInputBox = styled.input`
 
 export const StyledSearchIcon = styled(SearchIcon)`
   color: ${amazon};
-  margin-left: 0.2rem;
+  margin-left: 0.5rem;
+  font-size: 2rem;
+  @media ${mobile} {
+    font-size: xx-large;
+  }
   cursor: pointer;
 `;
 
