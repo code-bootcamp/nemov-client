@@ -7,10 +7,10 @@ import {
 } from "../../../../../../../commons/hooks/useMutations/question/UseMutationCreateQuestion";
 import * as S from "./ProductAsk.styles";
 import { Modal } from "antd";
-import { IProductAskProps } from "../../../../../Market.types";
+import { IProductQuestionWriteProps } from "../../../../../Market.types";
 import { UseMutationUpdateQuestion } from "../../../../../../../commons/hooks/useMutations/question/UseMutationUpdateQuestion";
 
-export default function ProductQuestionWrite(props: IProductAskProps) {
+export default function ProductQuestionWrite(props: IProductQuestionWriteProps) {
   const {
     register,
     handleSubmit,

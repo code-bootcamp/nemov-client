@@ -56,7 +56,7 @@ export interface IPagination06Props {
 }
 
 export interface IPagination07Props {
-  count: number | undefined;
+  count: number;
   refetch: any;
   startPage: number;
   activePage: number;

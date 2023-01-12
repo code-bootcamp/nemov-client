@@ -1,14 +1,14 @@
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
 import * as AS from "../product-ask/ProductAsk.styles";
-import { IMarketDetailProps } from "../../../../../Market.types";
+import { IMarketDetail02Props } from "../../../../../Market.types";
 import { getDate } from "../../../../../../../../commons/libraries/utilies";
 
 // export interface ITabContentsProps {
 //   isHidden: boolean;
 // }
 
-export default function ProductReviewList(props: IMarketDetailProps) {
+export default function ProductReviewList(props: IMarketDetail02Props) {
   console.log(props.reviewsData);
 
   return (
@@ -46,7 +46,7 @@ export default function ProductReviewList(props: IMarketDetailProps) {
                   width="10%"
                   key={index}
                   alt={`${reviews.title}의 이미지`}
-                  src={image.url}
+                  src={image}
                 />
               ))}
             </S.PRImages>

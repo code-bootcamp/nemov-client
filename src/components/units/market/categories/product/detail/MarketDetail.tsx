@@ -4,7 +4,10 @@ import { mobile } from "../../../../../../commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../../../../commons/styles/globalStyles";
 import { UseQueryFetchReviewsByProduct } from "../../../../../commons/hooks/useQueries/product-review/UseQueryFetchReviewsByProduct";
 import { UseQueryFetchProduct } from "../../../../../commons/hooks/useQueries/product/UseQueryFetchProduct";
-import { UseQueryFetchQuestionsByProduct } from "../../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsByProduct";
+import {
+  UseQueryFetchQuestionsByProduct,
+  UseQueryFetchQuestionsCountByProduct,
+} from "../../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsByProduct";
 import MarketDetailBody from "./body/MarketDetailBody";
 import MarketDetailHead from "./head/MarketDetailHead";
 
@@ -23,22 +26,33 @@ export default function MarketDetail() {
   const { query: productsData } = UseQueryFetchProduct({
     productId: String(router.query.productId),
   });
-  const { data } = UseQueryFetchQuestionsByProduct({
+  const { data, refetch: questionsRefetch } = UseQueryFetchQuestionsByProduct({
     productId: String(router.query.productId),
     page: 1,
   });
+
+  const { data: questionsCount } = UseQueryFetchQuestionsCountByProduct({
+    productId: String(router.query.productId),
+  });
+
+  console.log(questionsCount?.fetchQuestionsCountByProduct);
 
   const { data: reviewsData } = UseQueryFetchReviewsByProduct({
     productId: String(router.query.productId),
     page: 1,
   });
-  // console.log("부모 컴포넌트가 랜더링됩니다.");
 
   return (
     <GlobalWrapper>
       <InnerWrapper>
         <MarketDetailHead data={productsData} />
-        <MarketDetailBody data={productsData} questionsData={data} reviewsData={reviewsData} />
+        <MarketDetailBody
+          data={productsData}
+          questionsData={data}
+          questionsRefetch={questionsRefetch}
+          questionsCount={Number(questionsCount?.fetchQuestionsCountByProduct)}
+          reviewsData={reviewsData}
+        />
       </InnerWrapper>
     </GlobalWrapper>
   );

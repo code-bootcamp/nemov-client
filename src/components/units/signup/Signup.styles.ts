@@ -46,6 +46,10 @@ export const Text = styled.p`
   font-size: 1rem;
   line-height: 1.4;
   word-break: keep-all;
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.5rem;
+  }
 `;
 
 export const InputWrapper = styled.div`

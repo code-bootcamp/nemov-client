@@ -7,7 +7,7 @@ import {
 } from "../../../../../../commons/icons/CommonIcons.styles";
 import { VeganLevelTag01 } from "../../../../../../commons/tags/CommonTags.Styles";
 
-import { IMarketDetailProps } from "../../../../Market.types";
+import { IMarketDetailHeadProps } from "../../../../Market.types";
 
 import * as S from "./MarketDetailHead.styles";
 import Crumbs from "./nav/MarketCrumbs";
@@ -18,7 +18,7 @@ import { UseMutationToggleProductToCart } from "../../../../../../commons/hooks/
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../../../../commons/stores";
 
-function MarketDetailHead(props: IMarketDetailProps) {
+function MarketDetailHead(props: IMarketDetailHeadProps) {
   const { productPick } = UseMutationToggleProductPick();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
 

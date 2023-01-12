@@ -6,11 +6,12 @@ import { useRecoilState } from "recoil";
 import { accessTokenState, isOpenState } from "../../../../../../../../commons/stores";
 import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
-import { IMarketDetailProps } from "../../../../../Market.types";
+import { IMarketDetail04Props } from "../../../../../Market.types";
 import { Modal } from "antd";
+import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
 // import { MouseEventHandler, useState } from "react";
 
-export default function ProductAsk(props: IMarketDetailProps) {
+export default function ProductAsk(props: IMarketDetail04Props) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -25,12 +26,6 @@ export default function ProductAsk(props: IMarketDetailProps) {
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
   };
-
-  // console.log(
-  //   props.questionsData?.fetchQuestionsByProduct.map((questions) => questions.answer?.contents)
-  // );
-
-  console.log(props.questionsData?.fetchQuestionsByProduct);
 
   return (
     <>
@@ -85,6 +80,14 @@ export default function ProductAsk(props: IMarketDetailProps) {
               </S.QNAContentsSection>
             </CS.TabContentList02>
           ))}
+          <Pagination02
+            count={Number(props.questionsCount)}
+            refetch={props.questionsRefetch}
+            startPage={props.startPage}
+            setStartPage={props.setStartPage}
+            setActivePage={props.setActivePage}
+            activePage={props.activePage}
+          />
         </CS.TabContentInnerWrapper>
       </CS.TabContentMain01>
     </>
