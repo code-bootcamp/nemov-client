@@ -80,14 +80,14 @@ export default function CartModal(props: ICartModalProps) {
         <MS.PQuantitySelectSection>
           <MS.DetailInfoTitle01>{props.curProductData?.name}</MS.DetailInfoTitle01>
           <MS.PQRightButtons>
-            <span>{sum.toLocaleString()}원</span>
+            <MS.Numbers>{sum.toLocaleString()}원</MS.Numbers>
             <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
-            <span>{props.quantity}</span>
+            <MS.Numbers>{props.quantity}</MS.Numbers>
             <CountUpBtn type="button" onClick={onClickQuantityUp} />
           </MS.PQRightButtons>
         </MS.PQuantitySelectSection>
         <MS.PriceSumSection01>
-          <MS.DetailInfoTitle01>총 상품 금액</MS.DetailInfoTitle01>
+          <MS.DetailInfoTitle02>총 상품 금액</MS.DetailInfoTitle02>
           <MS.PriceSumDetail01>{sum.toLocaleString()}원</MS.PriceSumDetail01>
         </MS.PriceSumSection01>
         <MS.ButtonsWrapper01 style={{ marginTop: "2rem" }}>

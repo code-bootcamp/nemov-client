@@ -38,7 +38,7 @@ export default function Layout(props: ILayoutProps) {
 
   return (
     <>
-      {!isHiddenHeader && <LayoutHeader />}
+      {!isHiddenHeader && <LayoutHeader isShowBanner={isShowBanner} />}
       {isShowBanner && <LayoutBanner />}
       <LayoutBody>{props.children}</LayoutBody>
       {isShowAside && <LayoutRecentlyViewed />}

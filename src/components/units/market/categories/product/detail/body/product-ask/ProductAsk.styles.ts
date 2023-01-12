@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+
 import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
 import {
   flexCenter,
@@ -80,14 +80,14 @@ export const QuestionInfoRight = styled.section`
 `;
 
 export const AnswerStatus = styled.span`
-  color: ${(props: IProductAskStylesProps) => (props.data !== null ? "#f7330e" : "black")};
+  color: ${(props: IProductAskStylesProps) => (props.data !== null ? `${amazon}` : "black")};
 `;
 
-export const OpenAnswerButton01 = styled(KeyboardArrowDownIcon)`
-  ${colorBase04}
-  width: 2rem;
-  height: 2rem;
-  margin: 0 1rem;
+export const AnswerStatusIcon = styled(CheckCircleOutlineRoundedIcon)`
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 0.4rem;
+  color: ${(props: IProductAskStylesProps) => (props.data !== null ? `${amazon}` : "black")};
   cursor: pointer;
 `;
 

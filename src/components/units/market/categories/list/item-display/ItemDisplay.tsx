@@ -27,7 +27,7 @@ interface IItemDisPlay02Props {
 
 // 베스트 상품 아이템 디스플레이
 export const ItemDisPlay01 = (props: IItemDisPlay01Props) => {
-  const bestItemName = props.bestData?.name.slice(0, 15);
+  const bestItemName = props.bestData?.name.slice(0, 20);
 
   return (
     <S.ItemDisplay01 onClick={props.onClickMoveToProductDetail(String(props.bestData?.id))}>
@@ -43,7 +43,7 @@ export const ItemDisPlay01 = (props: IItemDisPlay01Props) => {
           />
         </TagsWrapper02>
         <S.ItemDetailFooter03>
-          <S.BestItemName>{bestItemName?.replace(/(.{15})/g, "$1...")}</S.BestItemName>
+          <S.BestItemName>{bestItemName?.replace(/(.{20})/g, "$1...")}</S.BestItemName>
           <S.ItemPrices>
             <S.ItemDiscountPrice02>
               {props.bestData?.discountedPrice.toLocaleString()}원
@@ -61,6 +61,8 @@ export const ItemDisPlay01 = (props: IItemDisPlay01Props) => {
 
 // 추천 상품 아이템 디스플레이
 export const ItemDisPlay02 = (props: IItemDisPlay02Props) => {
+  const recItemName = props.recData?.name.slice(0, 20);
+
   return (
     <>
       {props.recData ? (
@@ -70,7 +72,7 @@ export const ItemDisPlay02 = (props: IItemDisPlay02Props) => {
             <TagsWrapper01>
               <VeganLevelTag01>{getVeganName(props.recData?.veganLevel)}</VeganLevelTag01>
             </TagsWrapper01>
-            <S.ItemName>{props.recData?.name}</S.ItemName>
+            <S.ItemName>{recItemName?.replace(/(.{20})/g, "$1...")}</S.ItemName>
             <S.ItemDetailFooter>
               <S.ItemPrices>
                 {props.recData?.discountRate !== 0 && (
