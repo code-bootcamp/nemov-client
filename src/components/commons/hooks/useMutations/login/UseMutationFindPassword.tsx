@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { IMutation, IMutationFindPasswordArgs } from "../../../../../commons/types/generated/types";
-import { IFormData } from "../../../../units/login/find-password/FindPassword.index";
+// import { IFormData } from "../../../../units/login/find-password/FindPassword.index";
 
 export const FIND_PASSWORD = gql`
   mutation findPassword($email: Email!, $phone: Phone!) {
@@ -14,7 +14,7 @@ export const UseMutationFindPassword = () => {
     FIND_PASSWORD
   );
 
-  const findPasswordSubmit = async (data: IFormData) => {
+  const findPasswordSubmit = async (data: any) => {
     try {
       const result = await findPassword({
         variables: {

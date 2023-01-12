@@ -14,6 +14,7 @@ import WriteAnswer from "./write";
 interface IWriteProps {
   data: IQuestion | undefined;
   questionId: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FETCH_QUESTION = gql`
