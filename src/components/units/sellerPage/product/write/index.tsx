@@ -73,7 +73,7 @@ export default function ProductWrite(props: ProductWriteProps) {
   });
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
-  const { register, handleSubmit, setValue, getValues } = useForm<ProductInput>({
+  const { register, handleSubmit, setValue } = useForm<ProductInput>({
     mode: "onChange",
   });
 
