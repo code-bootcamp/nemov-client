@@ -35,6 +35,7 @@ export const ReviewCenterWrapper = styled.div`
 
 export const ReviewItemName = styled.p`
   font-size: 1.25rem;
+  color: #3a3939;
   font-weight: 600;
   margin-bottom: 0.4rem;
 `;

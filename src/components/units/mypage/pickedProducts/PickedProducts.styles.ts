@@ -35,8 +35,14 @@ export const PickedItem = styled.li`
   margin-bottom: 20px;
 `;
 
-export const PickedImg = styled.img`
+export const PickedA = styled.a`
   width: 15%;
+  aspect-ratio: 5/5;
+  cursor: pointer;
+`;
+
+export const PickedImg = styled.img`
+  width: 100%;
   aspect-ratio: 5/5;
 `;
 
@@ -46,10 +52,13 @@ export const PickedCenterWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const Tags = styled.div`
-  width: 120px;
+export const TagsWrap = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const Tags = styled.span`
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.4rem 0.7rem;
   border-radius: 2rem;
   ${colorBase03}
 `;
