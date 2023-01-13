@@ -19,6 +19,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../../../../commons/stores";
 
 function MarketDetailHead(props: IMarketDetailHeadProps) {
+  console.log("마켓 상세 페이지 헤드 랜더링");
   const { productPick } = UseMutationToggleProductPick();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
 
@@ -42,7 +43,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
         setIsDisabled(false);
         setQuantity((prev) => prev - 1);
       }
-      console.log(quantity);
+      // console.log(quantity);
     },
     [quantity]
   );
@@ -73,7 +74,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
         });
         console.log(result);
         const status = result?.data?.toggleProductToCart;
-        console.log(status);
+        // console.log(status);
         if (status === true) {
           void messageApi.open({
             type: "success",
@@ -116,7 +117,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
     }
   };
 
-  console.log("선택수량", quantity, "총 상품 금액", sum);
+  // console.log("선택수량", quantity, "총 상품 금액", sum);
 
   return (
     <>
