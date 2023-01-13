@@ -32,15 +32,7 @@ interface ProductInput {
   option3: string;
   option4: string;
   option5: string;
-  createProductOptionInput?: {
-    option6?: string;
-    option7?: string;
-    option8?: string;
-    option9?: string;
-    option10?: string;
-    option11?: string;
-  };
-  updateProductOptionInput?: {
+  productOption?: {
     option6?: string;
     option7?: string;
     option8?: string;
@@ -111,19 +103,18 @@ export default function ProductWrite(props: ProductWriteProps) {
       setValue("option3", data.option3);
       setValue("option4", data.option4);
       setValue("option5", data.option5);
-      setValue("createProductOptionInput.option6", data.productOption?.option6);
-      setValue("createProductOptionInput.option7", data.productOption?.option7);
-      setValue("createProductOptionInput.option8", data.productOption?.option8);
-      setValue("createProductOptionInput.option9", data.productOption?.option9);
-      setValue("createProductOptionInput.option10", data.productOption?.option10);
-      setValue("createProductOptionInput.option11", data.productOption?.option11);
+      setValue("productOption.option6", data.productOption?.option6);
+      setValue("productOption.option7", data.productOption?.option7);
+      setValue("productOption.option8", data.productOption?.option8);
+      setValue("productOption.option9", data.productOption?.option9);
+      setValue("productOption.option10", data.productOption?.option10);
+      setValue("productOption.option11", data.productOption?.option11);
     }
   }, [data]);
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
     setCG(event.target.id);
   };
-
   const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
     const property1: any = option.target.id;
     setValue(property1, option.target.value);
@@ -150,6 +141,7 @@ export default function ProductWrite(props: ProductWriteProps) {
   }, [data]);
 
   const onClickSubmit = async (data: ProductInput) => {
+    console.log(data.description);
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
     if (!url) return;
@@ -171,12 +163,12 @@ export default function ProductWrite(props: ProductWriteProps) {
           option5: data.option5,
         },
         createProductOptionInput: {
-          option6: String(data.createProductOptionInput?.option6),
-          option7: String(data.createProductOptionInput?.option7),
-          option8: String(data.createProductOptionInput?.option8),
-          option9: String(data.createProductOptionInput?.option9),
-          option10: String(data.createProductOptionInput?.option10),
-          option11: String(data.createProductOptionInput?.option11),
+          option6: String(data.productOption?.option6),
+          option7: String(data.productOption?.option7),
+          option8: String(data.productOption?.option8),
+          option9: String(data.productOption?.option9),
+          option10: String(data.productOption?.option10),
+          option11: String(data.productOption?.option11),
         },
       },
     });
@@ -208,12 +200,12 @@ export default function ProductWrite(props: ProductWriteProps) {
           option5: data.option5,
         },
         updateProductOptionInput: {
-          option6: String(data.updateProductOptionInput?.option6),
-          option7: String(data.updateProductOptionInput?.option7),
-          option8: String(data.updateProductOptionInput?.option8),
-          option9: String(data.updateProductOptionInput?.option9),
-          option10: String(data.updateProductOptionInput?.option10),
-          option11: String(data.updateProductOptionInput?.option11),
+          option6: String(data.productOption?.option6),
+          option7: String(data.productOption?.option7),
+          option8: String(data.productOption?.option8),
+          option9: String(data.productOption?.option9),
+          option10: String(data.productOption?.option10),
+          option11: String(data.productOption?.option11),
         },
       },
       refetchQueries: [

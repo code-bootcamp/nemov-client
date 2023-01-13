@@ -6,7 +6,6 @@ import CommonModal01 from "../../modals/CommonModal01";
 import * as S from "./mobileHeader.styles";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { Dispatch, SetStateAction } from "react";
-import MypageLayoutMenu from "../mypageLayout/menu";
 
 interface ILayoutMobileMenuProps {
   isOpen: boolean;
@@ -62,6 +61,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             </Link>
           </a>
         </S.LoginMenu>
+        <h4>MY</h4>
         <S.User>
           {props.data ? (
             <>
@@ -73,25 +73,25 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
                 )}
                 {userInfo?.fetchLoginUser.name}님
               </S.UserName>
-              <S.UserPoint>포인트 :{userInfo?.fetchLoginUser.point}P</S.UserPoint>
+              <S.UserPoint>포인트 : {userInfo?.fetchLoginUser.point.toLocaleString()}P</S.UserPoint>
               {data?.fetchLoginUser.role === "BUYER" && (
                 <S.IconMenu>
-                  <S.HeaderMenuItem>
+                  <S.HeaderIconItem>
                     <S.Payment onClick={onClickPayment} />
                     <S.IconName onClick={onClickPayment}>충전하기</S.IconName>
                     <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                       <PaymentPage setIsOpen={setIsOpen} />
                     </CommonModal01>
-                  </S.HeaderMenuItem>
+                  </S.HeaderIconItem>
                   <Link href="/mypage/basket">
-                    <S.HeaderMenuItem
+                    <S.HeaderIconItem
                       onClick={() => {
                         setMenuOpen(false);
                       }}
                     >
                       <S.Basket />
                       <S.IconName>장바구니</S.IconName>
-                    </S.HeaderMenuItem>
+                    </S.HeaderIconItem>
                   </Link>
                 </S.IconMenu>
               )}
@@ -100,6 +100,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             <h1>로그인해주세요</h1>
           )}
         </S.User>
+        <h4>CATEGORY</h4>
         <S.NavWrapper>
           <Link href={"/"}>
             <S.Menu
@@ -120,7 +121,6 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             </S.Menu>
           </Link>
         </S.NavWrapper>
-        <MypageLayoutMenu data={userInfo} />
       </S.HeaderMenu>
     </>
   );

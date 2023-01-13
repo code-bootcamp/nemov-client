@@ -42,7 +42,7 @@ export type ICreateProductCategoryInput = {
 };
 
 export type ICreateProductInput = {
-  /** 상품 상세설명 */
+  /** 상품 상세설명 (최대 2000자) */
   description: Scalars['String'];
   /** 상품 할인율, 0 ~ 100 */
   discountRate: Scalars['Int'];
@@ -588,6 +588,7 @@ export type IQueryFetchProductOrdersWithoutReviewArgs = {
 export type IQueryFetchProductsArgs = {
   page: Scalars['Int'];
   productCategoryId: Scalars['ID'];
+  search: Scalars['String'];
   veganLevel: Scalars['Int'];
 };
 
@@ -599,6 +600,7 @@ export type IQueryFetchProductsBySellerArgs = {
 
 export type IQueryFetchProductsCountArgs = {
   productCategoryId: Scalars['ID'];
+  search: Scalars['String'];
   veganLevel: Scalars['Int'];
 };
 
@@ -693,7 +695,7 @@ export type IUpdateProductCategoryInput = {
 };
 
 export type IUpdateProductInput = {
-  /** 상품 상세설명 */
+  /** 상품 상세설명 (최대 2000자) */
   description?: InputMaybe<Scalars['String']>;
   /** 상품 할인율, 0 ~ 100 */
   discountRate?: InputMaybe<Scalars['Int']>;

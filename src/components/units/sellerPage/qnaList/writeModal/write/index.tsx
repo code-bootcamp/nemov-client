@@ -5,13 +5,14 @@ import { UseMutationCreateAnswer } from "../../../../../commons/hooks/useMutatio
 
 interface IAnswerProps {
   questionId: string;
-  setEdit: Dispatch<SetStateAction<boolean>>;
   questionData: Pick<IQuery, "fetchQuestion"> | undefined;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function WriteAnswer(props: IAnswerProps) {
   const [content, setContent] = useState("");
   const [createAnswer] = UseMutationCreateAnswer();
+  const { questionId, questionData, setIsOpen } = props;
 
   const onClickSubmit = async () => {
     if (!content) {
@@ -20,16 +21,15 @@ export default function WriteAnswer(props: IAnswerProps) {
     }
     await createAnswer({
       variables: {
-        questionId: props.questionId,
+        questionId,
         contents: content,
       },
     });
-    props.setEdit(false);
+    setIsOpen(false);
   };
 
   const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    console.log(event.target.value);
   };
   return (
     <>
@@ -45,7 +45,7 @@ export default function WriteAnswer(props: IAnswerProps) {
             resize: "none",
           }}
           onChange={onChangeContents}
-          defaultValue={props.questionData?.fetchQuestion.answer?.contents}
+          defaultValue={questionData?.fetchQuestion.answer?.contents}
         />
       </section>
       <button onClick={onClickSubmit} style={{ marginTop: "10px", padding: "1%" }}>

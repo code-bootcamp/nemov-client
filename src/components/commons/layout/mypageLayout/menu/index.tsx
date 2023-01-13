@@ -61,7 +61,6 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
           회원정보가 삭제됩니다. 정말로 탈퇴하시겠습니까?
         </h3>
       </Modal>
-
       <S.MyPageMenu>
         <S.MenuHeader>
           <S.Title>마이페이지</S.Title>
@@ -83,6 +82,9 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             <Link href="/mypage/picked">
               <S.Option>찜한 상품</S.Option>
             </Link>
+            <Link href="/mypage/qna">
+              <S.ManageOptions>나의 문의내역</S.ManageOptions>
+            </Link>
           </S.MyShoppingInfo>
           <S.MyShoppingList>
             <S.Options>나의 쇼핑내역</S.Options>
@@ -94,7 +96,7 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             </Link>
           </S.MyShoppingList>
 
-          <div>
+          <S.MyInfo>
             <S.Options>내 정보 관리</S.Options>
             <Link href="/mypage/myinfo">
               <S.Option onClick={onClickPwChange}>비밀번호 변경</S.Option>
@@ -102,13 +104,8 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             <Link href="/mypage/myinfo">
               <S.Option onClick={onClickInfoChange}>회원 정보 수정</S.Option>
             </Link>
-          </div>
-          <S.ManageList>
-            <Link href="/mypage/qna">
-              <S.ManageOptions>나의 문의내역</S.ManageOptions>
-            </Link>
             <S.ManageOptions onClick={onToggleModal}>회원탈퇴</S.ManageOptions>
-          </S.ManageList>
+          </S.MyInfo>
         </S.MenuContents>
       </S.MyPageMenu>
     </>
