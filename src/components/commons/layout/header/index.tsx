@@ -83,6 +83,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 onClickPayment={onClickPayment}
                 paymentPage={paymentPage}
                 onClickLogout={onClickLogout}
+                setMenuOpen={setMenuOpen}
               />
             )}
           </>
@@ -149,6 +150,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 onClickPayment={onClickPayment}
                 paymentPage={paymentPage}
                 onClickLogout={onClickLogout}
+                setMenuOpen={setMenuOpen}
               />
             )}
           </>

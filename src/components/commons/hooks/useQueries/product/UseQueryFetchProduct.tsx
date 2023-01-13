@@ -63,7 +63,7 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
     const baskets = JSON.parse(sessionStorage.getItem("baskets") ?? "[]");
     const temp = baskets.filter((el: any) => el?._id === todayList?.id);
     if (temp.length === 1) return;
-    if (baskets.length > 1) {
+    if (baskets.length > 2) {
       baskets.pop();
     }
     baskets.unshift(todayList);

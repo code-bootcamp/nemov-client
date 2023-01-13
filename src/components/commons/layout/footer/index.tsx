@@ -16,10 +16,10 @@ export default function LayoutFooter() {
         <S.FooterLeft>
           <S.RWrap>
             <S.Call>
-              <S.B>고객센터 </S.B>| 3636-3636
+              <S.B>고객센터 </S.B> 3636-3636
             </S.Call>
             <S.Email>
-              <S.B>이메일 문의 </S.B>| tlsalduszz@gmail.com
+              <S.B>이메일 문의 </S.B> tlsalduszz@gmail.com
             </S.Email>
           </S.RWrap>
           <>
@@ -36,7 +36,7 @@ export default function LayoutFooter() {
         <S.FooterRight>
           <Link href="/market">
             <S.FooterLogo>
-              <S.LogoImg src="/logo/logo_hover.png" alt="메인페이지로 이동" />
+              <S.LogoImg src="/logo/nemov_g-footer.png" alt="메인페이지로 이동" />
             </S.FooterLogo>
           </Link>
         </S.FooterRight>

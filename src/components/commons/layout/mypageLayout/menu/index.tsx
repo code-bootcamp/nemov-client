@@ -70,7 +70,7 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             안녕하세요!
           </S.User>
         </S.MenuHeader>
-        <hr />
+        <S.HR />
         <S.MenuContents>
           <S.MyShoppingInfo>
             <S.Options>나의 쇼핑정보</S.Options>
@@ -93,21 +93,23 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
               <S.Option>상품 후기</S.Option>
             </Link>
           </S.MyShoppingList>
-        </S.MenuContents>
 
-        <S.Options>내 정보 관리</S.Options>
-        <Link href="/mypage/myinfo">
-          <S.Option onClick={onClickPwChange}>비밀번호 변경</S.Option>
-        </Link>
-        <Link href="/mypage/myinfo">
-          <S.Option onClick={onClickInfoChange}>회원 정보 수정</S.Option>
-        </Link>
-        <S.ManageList>
-          <Link href="/mypage/qna">
-            <S.ManageOptions>나의 문의내역</S.ManageOptions>
-          </Link>
-          <S.ManageOptions onClick={onToggleModal}>회원탈퇴</S.ManageOptions>
-        </S.ManageList>
+          <div>
+            <S.Options>내 정보 관리</S.Options>
+            <Link href="/mypage/myinfo">
+              <S.Option onClick={onClickPwChange}>비밀번호 변경</S.Option>
+            </Link>
+            <Link href="/mypage/myinfo">
+              <S.Option onClick={onClickInfoChange}>회원 정보 수정</S.Option>
+            </Link>
+          </div>
+          <S.ManageList>
+            <Link href="/mypage/qna">
+              <S.ManageOptions>나의 문의내역</S.ManageOptions>
+            </Link>
+            <S.ManageOptions onClick={onToggleModal}>회원탈퇴</S.ManageOptions>
+          </S.ManageList>
+        </S.MenuContents>
       </S.MyPageMenu>
     </>
   );

@@ -49,7 +49,6 @@ interface ProductInput {
     option11?: string;
   };
 }
-require("tui-placeholder");
 
 const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
 const Option1 = categoryContents[0];
@@ -62,9 +61,11 @@ export default function ProductWrite(props: ProductWriteProps) {
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
-  const [cg, setCG] = useState();
+  const [cg, setCG] = useState("");
   const { data: category } = UseQueryFetchCategories();
-  const newCategory = category?.fetchProductCategories.filter((el, i) => el.name !== "전체");
+  const newCategory = category?.fetchProductCategories.filter((el) => el.name !== "전체");
+  const beautyCategory = category?.fetchProductCategories.filter((el) => el.name === "뷰티")[0].id;
+
   const [createProduct] = UseMutationCreateProduct();
   const [updateProduct] = UseMutationUpdateProduct();
   const [uploadFile] = UseMutationUploadFile();
@@ -135,7 +136,6 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
-    console.log(event.currentTarget.id);
   };
 
   const onChangeContents = () => {
@@ -153,7 +153,7 @@ export default function ProductWrite(props: ProductWriteProps) {
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
     if (!url) return;
-    const result = await createProduct({
+    await createProduct({
       variables: {
         createProductInput: {
           name: data.name,
@@ -180,7 +180,6 @@ export default function ProductWrite(props: ProductWriteProps) {
         },
       },
     });
-    console.log("result:", result);
     void router.push("/seller");
   };
 
@@ -335,7 +334,7 @@ export default function ProductWrite(props: ProductWriteProps) {
             </S.NoticeMap>
             {/* ))} */}
             {
-              cg === "e70b1a57-e4f7-41fa-93a3-ef4d13de57e2" && (
+              cg === beautyCategory && (
                 // Option2.map((option2, index) =>
                 <>
                   <S.NoticeMap>

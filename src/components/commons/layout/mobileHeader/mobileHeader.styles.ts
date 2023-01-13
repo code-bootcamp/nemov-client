@@ -15,7 +15,7 @@ export const HeaderMenu = styled.section`
   justify-content: space-around;
   align-items: flex-start;
   background-color: #648d2a;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 11;

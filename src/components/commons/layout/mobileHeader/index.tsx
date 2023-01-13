@@ -6,6 +6,7 @@ import CommonModal01 from "../../modals/CommonModal01";
 import * as S from "./mobileHeader.styles";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { Dispatch, SetStateAction } from "react";
+import MypageLayoutMenu from "../mypageLayout/menu";
 
 interface ILayoutMobileMenuProps {
   isOpen: boolean;
@@ -21,39 +22,42 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const { data: userInfo } = UseQueryFetchLoginUser();
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
+  const { isOpen, data, onClickPayment, onClickLogout, setIsOpen, paymentPage, setMenuOpen } =
+    props;
+
   return (
     <>
-      <S.HeaderMenu isOpen={props.isOpen}>
+      <S.HeaderMenu isOpen={isOpen}>
         <S.LoginMenu>
-          {props.data?.fetchLoginUser.role === "BUYER" ? (
-            <Link href={props.data ? "/mypage/orderlist" : "/login"}>
+          {data?.fetchLoginUser.role === "BUYER" ? (
+            <Link href={data ? "/mypage/orderlist" : "/login"}>
               <a style={{ cursor: "pointer" }}>
                 <S.LoginMenuItem
                   onClick={() => {
-                    props.setMenuOpen(false);
+                    setMenuOpen(false);
                   }}
                 >
-                  {props.data ? "MYPAGE" : "LOGIN"}
+                  {data ? "MYPAGE" : "LOGIN"}
                 </S.LoginMenuItem>
               </a>
             </Link>
           ) : (
-            <Link href={props.data ? "/seller" : "/login"}>
+            <Link href={data ? "/seller" : "/login"}>
               <a style={{ cursor: "pointer" }}>
                 <S.LoginMenuItem
                   onClick={() => {
-                    props.setMenuOpen(false);
+                    setMenuOpen(false);
                   }}
                 >
-                  {props.data ? "SELLER" : "LOGIN"}
+                  {data ? "SELLER" : "LOGIN"}
                 </S.LoginMenuItem>
               </a>
             </Link>
           )}
           <a style={{ cursor: "pointer" }}>
-            <Link href={props.data ? "/market" : "/signup"}>
-              <S.LoginMenuItem onClick={props.data && props.onClickLogout}>
-                {props.data ? "LOGOUT" : "SIGNUP"}
+            <Link href={data ? "/market" : "/signup"}>
+              <S.LoginMenuItem onClick={data && onClickLogout}>
+                {data ? "LOGOUT" : "SIGNUP"}
               </S.LoginMenuItem>
             </Link>
           </a>
@@ -62,7 +66,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
           {props.data ? (
             <>
               <S.UserName>
-                {props.data.fetchLoginUser.role === "BUYER" && (
+                {data?.fetchLoginUser.role === "BUYER" && (
                   <S.UserLevel>
                     {VeganLevels[Number(userInfo?.fetchLoginUser.veganLevel) - 1]}
                   </S.UserLevel>
@@ -70,19 +74,19 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
                 {userInfo?.fetchLoginUser.name}님
               </S.UserName>
               <S.UserPoint>포인트 :{userInfo?.fetchLoginUser.point}P</S.UserPoint>
-              {props.data.fetchLoginUser.role === "BUYER" && (
+              {data?.fetchLoginUser.role === "BUYER" && (
                 <S.IconMenu>
                   <S.HeaderMenuItem>
-                    <S.Payment onClick={props.onClickPayment} />
-                    <S.IconName onClick={props.onClickPayment}>충전하기</S.IconName>
-                    <CommonModal01 isOpen={props.isOpen} onCancel={props.paymentPage} width={450}>
-                      <PaymentPage setIsOpen={props.setIsOpen} />
+                    <S.Payment onClick={onClickPayment} />
+                    <S.IconName onClick={onClickPayment}>충전하기</S.IconName>
+                    <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
+                      <PaymentPage setIsOpen={setIsOpen} />
                     </CommonModal01>
                   </S.HeaderMenuItem>
                   <Link href="/mypage/basket">
                     <S.HeaderMenuItem
                       onClick={() => {
-                        props.setMenuOpen(false);
+                        setMenuOpen(false);
                       }}
                     >
                       <S.Basket />
@@ -100,7 +104,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
           <Link href={"/"}>
             <S.Menu
               onClick={() => {
-                props.setMenuOpen(false);
+                setMenuOpen(false);
               }}
             >
               ABOUT
@@ -109,13 +113,14 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
           <Link href={`/market/categories`}>
             <S.Menu
               onClick={() => {
-                props.setMenuOpen(false);
+                setMenuOpen(false);
               }}
             >
               MARKET
             </S.Menu>
           </Link>
         </S.NavWrapper>
+        <MypageLayoutMenu data={userInfo} />
       </S.HeaderMenu>
     </>
   );

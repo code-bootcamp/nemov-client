@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../commons/styles/breakPoints";
 import { colorBase01 } from "../../../../../commons/styles/colorBases";
 
 export const MyPageMenu = styled.aside`
@@ -6,6 +7,9 @@ export const MyPageMenu = styled.aside`
   padding: 3% 3% 3% 0;
   display: flex;
   flex-direction: column;
+  @media ${mobile} {
+    display: none;
+  }
 `;
 
 export const MenuHeader = styled.article`
@@ -30,6 +34,13 @@ export const UserName = styled.span`
 
 export const MenuContents = styled.article`
   margin: 3rem 0;
+  @media ${mobile} {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
+    width: 100%;
+  }
 `;
 
 export const MyShoppingInfo = styled.article`
@@ -50,11 +61,15 @@ export const Option = styled.a`
   cursor: pointer;
 `;
 
-export const MyShoppingList = styled.article``;
-
-export const ManageList = styled.article`
-  margin-top: 3rem;
+export const MyShoppingList = styled.article`
+  margin-bottom: 3rem;
 `;
+
+export const MyInfo = styled.article`
+  margin-bottom: 3rem;
+`;
+
+export const ManageList = styled.article``;
 
 export const ManageBtn = styled.button`
   background-color: rgba(38, 90, 65, 0.3);
@@ -77,4 +92,10 @@ export const DeleteUserBtn = styled.button`
   padding: 0.5rem 1rem;
   border: none;
   font-size: 0.8rem;
+`;
+
+export const HR = styled.hr`
+  @media ${mobile} {
+    display: none;
+  }
 `;
