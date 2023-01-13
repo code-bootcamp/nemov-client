@@ -57,10 +57,12 @@ export default function LandingPage() {
             네모비에서 원하는 비건 상품과 다른 비건인들의 선택을 보며 원하는 비건 상품을 구매하고
             다른 회원들에게 솔직한 후기를 남겨주세요. 우리는 물건보다 경험을 팝니다.
           </S.Sentence2>
-          <S.Btn onMouseOver={prefetchData}>
-            <Link href="/market/categories">네모비 비건제품 구경하기</Link>
-            <EastIcon />
-          </S.Btn>
+          <Link href="/market/categories">
+            <S.Btn onMouseOver={prefetchData}>
+              네모비 비건제품 구경하기
+              <EastIcon />
+            </S.Btn>
+          </Link>
         </S.Article2>
         <S.Arrows>
           <S.Path1 d="M0 0 L30 32 L60 0"></S.Path1>
@@ -92,9 +94,9 @@ export default function LandingPage() {
         <S.Article>
           <S.Title>네가 찾는 모든 비건, 네모비에서 빠르고 편리하게</S.Title>
           <S.Sentence></S.Sentence>
-          <S.Btn onMouseOver={prefetchData}>
-            <Link href="/market">네모비 베스트 상품 보러가기</Link>
-          </S.Btn>
+          <Link href="/market">
+            <S.Btn onMouseOver={prefetchData}>네모비 베스트 상품 보러가기</S.Btn>
+          </Link>
         </S.Article>
       </S.Section3>
     </S.Wrapper>

@@ -35,7 +35,7 @@ function MarketMain() {
   const router = useRouter();
   const client = useApolloClient();
 
-  console.log("마켓 메인 페이지가 랜더링 됩니다.");
+  // console.log("마켓 메인 페이지가 랜더링 됩니다.");
 
   const prefetchData = async () => {
     await client.query({

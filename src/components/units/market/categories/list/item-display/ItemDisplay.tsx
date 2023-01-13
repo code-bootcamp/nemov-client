@@ -16,7 +16,7 @@ interface IItemDisPlay01Props {
 const ItemDisPlay01 = (props: IItemDisPlay01Props) => {
   const bestItemName = props.bestData?.name.slice(0, 20);
 
-  console.log("베스트아이템이 랜더링 됩니다.");
+  // console.log("베스트아이템이 랜더링 됩니다.");
 
   return (
     <S.ItemDisplay01 onClick={props.onClickMoveToProductDetail(String(props.bestData?.id))}>

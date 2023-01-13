@@ -8,7 +8,7 @@ import ProductNoticeInfo from "./product-notice-info/ProductNoticeInfo";
 import ProductReviewList from "./product-review-list/ProductReviewList.container";
 
 function MarketDetailBody(props: IMarketDetailBodyProps) {
-  console.log("마켓 상세 바디 랜더링");
+  // console.log("마켓 상세 바디 랜더링");
   // 페이지네이션 시작 페이지 state
   const [startPage, setStartPage] = useState(1);
   const [activePage, setActivePage] = useState(1);

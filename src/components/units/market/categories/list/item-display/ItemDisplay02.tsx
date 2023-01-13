@@ -16,7 +16,7 @@ interface IItemDisPlay02Props {
 const ItemDisPlay02 = (props: IItemDisPlay02Props) => {
   const recItemName = props.recData?.name.slice(0, 20);
 
-  console.log("추천 아이템이 랜더링 됩니다.");
+  // console.log("추천 아이템이 랜더링 됩니다.");
 
   return (
     <>
