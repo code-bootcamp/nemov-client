@@ -9,14 +9,6 @@ export const Wrapper = styled.section`
   height: auto;
 `;
 
-// export const ArrowLeft = styled(ArrowBackIosNewIcon)`
-//   border: 1px solid red;
-//   width: 3.5rem;
-//   height: 3.5rem;
-//   color: red;
-//   z-index: 1;
-// `;
-
 export const StyleSlider = styled(Slider)`
   width: 100%;
   height: 100%;
@@ -39,7 +31,7 @@ export const StyleSlider = styled(Slider)`
   }
   .slick-next {
     right: 30px;
-    z-index: 1;
+    z-index: 0;
     background: url("/icons/banner_next_btn.png") no-repeat;
     width: 60px;
     height: 60px;
