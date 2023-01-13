@@ -31,7 +31,6 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logout] = useMutation(LOGOUT);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-  console.log(data?.fetchLoginUser.role);
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
     setIsEdit(false);
@@ -53,9 +52,6 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
   const onClickMenuToggle = () => {
     setMenuOpen((prev) => !prev);
   };
-
-  // 장바구니 카운트 조회
-  console.log(cartCountData);
 
   return (
     <>

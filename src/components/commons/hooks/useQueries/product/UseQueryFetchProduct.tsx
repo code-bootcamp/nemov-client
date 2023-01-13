@@ -40,7 +40,7 @@ export const FETCH_PRODUCT = gql`
   }
 `;
 
-export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
+export const UseQueryFetchProduct = () => {
   const router = useRouter();
   const query = useQuery<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>(FETCH_PRODUCT, {
     variables: {
@@ -61,7 +61,7 @@ export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
     if (query.error !== undefined) return;
     const todayList = query.data?.fetchProduct;
     const baskets = JSON.parse(sessionStorage.getItem("baskets") ?? "[]");
-    const temp = baskets.filter((el: any) => el?._id === todayList?.id);
+    const temp = baskets.filter((el: any) => el?.id === todayList?.id);
     if (temp.length === 1) return;
     if (baskets.length > 2) {
       baskets.pop();

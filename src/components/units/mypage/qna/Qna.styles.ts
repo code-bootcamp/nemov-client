@@ -73,7 +73,7 @@ export const QnaDate = styled.p`
 export const QnaContents = styled.textarea`
   resize: none;
   width: 100%;
-  height: 200px;
+  height: auto;
   padding: 2%;
   outline: none;
   border: 1px solid #ddd;

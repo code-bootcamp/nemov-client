@@ -1,10 +1,12 @@
+import React from "react";
 import * as S from "./ProductDetail.styles";
 import * as CS from "../MarketDetailBody.styles";
 import { IProductDetailProps } from "../../../../../Market.types";
 import Dompurify from "dompurify";
 
-export default function ProductDetail(props: IProductDetailProps) {
-  console.log("상품 상세 설명", props.data?.data?.fetchProduct.description);
+function ProductDetail(props: IProductDetailProps) {
+  console.log("상품 상세 컴포넌트 랜더링");
+  // console.log("상품 상세 설명", props.data?.data?.fetchProduct.description);
   return (
     <CS.TabContentMain01>
       <S.ProductDetailSection>
@@ -21,3 +23,5 @@ export default function ProductDetail(props: IProductDetailProps) {
     </CS.TabContentMain01>
   );
 }
+
+export default React.memo(ProductDetail);

@@ -7,30 +7,22 @@ interface ILayoutMobileMenuStyleProps {
 }
 
 export const HeaderMenu = styled.section`
-  width: 60%;
+  width: 80%;
   height: 100vh;
-  padding: 10vmax 5vmax;
+  padding: 10vmax 0 0 5vmax;
+  border-top-left-radius: 60px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: flex-start;
   background-color: #648d2a;
   position: fixed;
   top: 0;
   right: 0;
   z-index: 11;
+  overflow-y: scroll;
   transform: ${(props: ILayoutMobileMenuStyleProps) => !props.isOpen ?? "translateX(800px);"};
   transition: transform 1s ease-in-out;
-`;
-
-export const HeaderMenuItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 1rem;
-  color: #fff;
-  cursor: pointer;
 `;
 
 export const LoginMenu = styled.div`
@@ -45,8 +37,9 @@ export const LoginMenu = styled.div`
 
 export const LoginMenuItem = styled.div`
   font-size: 1.2rem;
-  margin-right: 1.3rem;
-  margin-bottom: 3vmax;
+  margin-bottom: 3rem;
+  padding: 0.8rem 2.2rem;
+  border: 1px solid #fff;
 `;
 
 export const User = styled.div`
@@ -80,38 +73,53 @@ export const UserPoint = styled.p`
   margin-bottom: 3vmax;
 `;
 
+export const HeaderIconItem = styled.div`
+  display: flex;
+  align-items: center;
+  width: 9rem;
+  height: 3rem;
+  color: #000;
+  cursor: pointer;
+  border: 1px solid #000;
+  padding: 1% 2%;
+  background-color: #fff;
+`;
+
 export const IconMenu = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const IconName = styled.span`
-  font-size: 10px;
+  font-size: 1.4rem;
 `;
 
 export const Payment = styled(CurrencyExchangeIcon)`
-  color: #fff;
+  color: #000;
   cursor: pointer;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-right: 0.5rem;
 `;
 
 export const Basket = styled(ShoppingBagOutlinedIcon)`
-  color: #fff;
+  color: #000;
   cursor: pointer;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-right: 0.5rem;
 `;
 
 export const NavWrapper = styled.nav`
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 `;
 
 export const Menu = styled.span`
-  font-size: 2rem;
-  margin-bottom: 3vmax;
+  font-size: 1.8rem;
+  margin-bottom: 2.4rem;
+  margin-right: 1.2rem;
   cursor: pointer;
   color: #fff;
 `;

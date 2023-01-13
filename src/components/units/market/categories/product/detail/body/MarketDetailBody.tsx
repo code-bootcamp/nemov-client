@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { IMarketDetailBodyProps } from "../../../../Market.types";
 import * as S from "./MarketDetailBody.styles";
 import MarketDetailNav from "./nav/ProductDetailNav";
@@ -8,29 +8,30 @@ import ProductNoticeInfo from "./product-notice-info/ProductNoticeInfo";
 import ProductReviewList from "./product-review-list/ProductReviewList.container";
 
 function MarketDetailBody(props: IMarketDetailBodyProps) {
+  console.log("마켓 상세 바디 랜더링");
   // 페이지네이션 시작 페이지 state
   const [startPage, setStartPage] = useState(1);
   const [activePage, setActivePage] = useState(1);
 
   const [isTabSelected, setIsTabSelected] = useState([true, false, false]);
 
-  const onClickProductDetailTab = () => {
+  const onClickProductDetailTab = useCallback(() => {
     setIsTabSelected([true, false, false]);
     setStartPage(1);
     setActivePage(1);
-  };
+  }, [isTabSelected]);
 
-  const onClickProductReviewListTab = () => {
+  const onClickProductReviewListTab = useCallback(() => {
     setIsTabSelected([false, true, false]);
     setStartPage(1);
     setActivePage(1);
-  };
+  }, [isTabSelected]);
 
-  const onClickProductAskTab = () => {
+  const onClickProductAskTab = useCallback(() => {
     setIsTabSelected([false, false, true]);
     setStartPage(1);
     setActivePage(1);
-  };
+  }, [isTabSelected]);
 
   return (
     <S.MarketDetailPageBody>

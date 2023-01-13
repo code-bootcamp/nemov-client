@@ -1,6 +1,7 @@
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import * as S from "./MarketMain.styles";
-import * as ID from "../categories/list/item-display/ItemDisplay";
+import ItemDisPlay01 from "../categories/list/item-display/ItemDisplay";
+import ItemDisPlay02 from "../categories/list/item-display/ItemDisplay02";
 import * as IDS from "../categories/list/item-display/ItemDisplay.styles";
 import { CustomArrowProps } from "react-slick";
 import { UseQueryFetchLoginUser } from "../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
@@ -12,10 +13,11 @@ import { useRouter } from "next/router";
 import { Modal } from "antd";
 import CommonModal01 from "../../../commons/modals/CommonModal01";
 import CartModal from "../categories/list/CartModalPage";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { IProduct } from "../../../../commons/types/generated/types";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
+import { FETCH_PRODUCTS } from "../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -29,10 +31,25 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
   </div>
 );
 
-export default function MarketMain() {
+function MarketMain() {
+  const router = useRouter();
+  const client = useApolloClient();
+
+  console.log("마켓 메인 페이지가 랜더링 됩니다.");
+
+  const prefetchData = async () => {
+    await client.query({
+      query: FETCH_PRODUCTS,
+      variables: {
+        productCategoryId: "",
+        veganLevel: 0,
+        page: 1,
+        search: "",
+      },
+    });
+  };
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
-  // const { data: categoryData } = UseQueryFetchCategories();
   const { data: loginUserData } = UseQueryFetchLoginUser();
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -50,9 +67,6 @@ export default function MarketMain() {
     prevArrow: <PrevArrow />,
   };
 
-  const router = useRouter();
-  const client = useApolloClient();
-
   // 모달 기능
   const [isOpen, setIsOpen] = useState(false);
   const [, setCartModalItemVal] = useState<IProduct>();
@@ -60,64 +74,73 @@ export default function MarketMain() {
   const [quantity, setQuantity] = useState(parseInt("1"));
 
   // 추천 상품 아이템 장바구니 모달 열기
-  const onClickToggleCartModal01 = (id: string) => (e: React.MouseEvent) => {
-    e?.stopPropagation();
+  const onClickToggleCartModal01 = useCallback(
+    (id: string) => (e: React.MouseEvent) => {
+      e?.stopPropagation();
 
-    if (!accessToken) {
-      Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    } else {
-      setIsOpen((prev) => !prev);
-      const cartModalItem = recItemData?.fetchProductsOfRecommend.filter((cur) => {
-        if (cur.id === id) {
-          return setCurProductData(cur);
-        } else {
-          return undefined;
-        }
-      });
+      if (!accessToken) {
+        Modal.error({ content: "로그인이 필요한 서비스입니다." });
+      } else {
+        setIsOpen((prev) => !prev);
+        const cartModalItem = recItemData?.fetchProductsOfRecommend.filter((cur) => {
+          if (cur.id === id) {
+            return setCurProductData(cur);
+          } else {
+            return undefined;
+          }
+        });
 
-      if (cartModalItem === undefined) return;
-      setCartModalItemVal(cartModalItem[0]);
-    }
-  };
+        if (cartModalItem === undefined) return;
+        setCartModalItemVal(cartModalItem[0]);
+      }
+    },
+    [recItemData]
+  );
 
   // 베스트 상품 아이템 장바구니 모달 열기
-  const onClickToggleCartModal02 = (id: string) => (e: React.MouseEvent) => {
-    e?.stopPropagation();
+  const onClickToggleCartModal02 = useCallback(
+    (id: string) => (e: React.MouseEvent) => {
+      e?.stopPropagation();
 
-    if (!accessToken) {
-      Modal.error({ content: "로그인이 필요한 서비스입니다." });
-    } else {
-      setIsOpen((prev) => !prev);
-      const cartModalItem = bestItemData?.fetchProductsOfBestSelling.filter((cur) => {
-        if (cur.id === id) {
-          return setCurProductData(cur);
-        } else {
-          return undefined;
-        }
-      });
+      if (!accessToken) {
+        Modal.error({ content: "로그인이 필요한 서비스입니다." });
+      } else {
+        setIsOpen((prev) => !prev);
+        const cartModalItem = bestItemData?.fetchProductsOfBestSelling.filter((cur) => {
+          if (cur.id === id) {
+            return setCurProductData(cur);
+          } else {
+            return undefined;
+          }
+        });
 
-      if (cartModalItem === undefined) return;
-      setCartModalItemVal(cartModalItem[0]);
-    }
-  };
+        if (cartModalItem === undefined) return;
+        setCartModalItemVal(cartModalItem[0]);
+      }
+    },
+    [bestItemData]
+  );
 
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const onClickMoveToProductDetail = (productId: string) => async (event: React.MouseEvent) => {
-    event?.preventDefault();
-    const result = await client.query({
-      query: FETCH_PRODUCT,
-      variables: { productId },
-    });
-    console.log(result.data.fetchProduct.isOutOfStock);
-    if (result.data.fetchProduct.isOutOfStock !== true) {
-      void router.push(`/market/product/${productId}`);
-    } else {
-      Modal.error({ content: "매진된 상품입니다." });
-    }
-  };
+  const onClickMoveToProductDetail = useCallback(
+    (productId: string) => async (event: React.MouseEvent) => {
+      event?.preventDefault();
+      const result = await client.query({
+        query: FETCH_PRODUCT,
+        variables: { productId },
+      });
+      // console.log(result.data.fetchProduct.isOutOfStock);
+      if (result.data.fetchProduct.isOutOfStock !== true) {
+        void router.push(`/market/product/${productId}`);
+      } else {
+        Modal.error({ content: "매진된 상품입니다." });
+      }
+    },
+    [FETCH_PRODUCT]
+  );
 
   return (
     <>
@@ -153,6 +176,7 @@ export default function MarketMain() {
                   onClick={() => {
                     void router.push("/market/categories");
                   }}
+                  onMouseOver={prefetchData}
                 >
                   더보기
                   <S.StyledRightArrow />
@@ -160,7 +184,7 @@ export default function MarketMain() {
               </S.MarketMainHeader01>
               <IDS.ItemsWrapper03>
                 {recItemData?.fetchProductsOfRecommend.map((rec) => (
-                  <ID.ItemDisPlay02
+                  <ItemDisPlay02
                     key={rec.id}
                     recData={rec}
                     onClickMoveToProductDetail={onClickMoveToProductDetail}
@@ -179,6 +203,7 @@ export default function MarketMain() {
                   onClick={() => {
                     void router.push("/market/categories");
                   }}
+                  onMouseOver={prefetchData}
                 >
                   더보기
                   <S.StyledRightArrow />
@@ -187,12 +212,12 @@ export default function MarketMain() {
               <S.ItemsWrapper02>
                 <IDS.StyledSlider02 {...settings}>
                   {bestItemData?.fetchProductsOfBestSelling.map((best) => (
-                    <ID.ItemDisPlay01
+                    <ItemDisPlay01
                       key={best.id}
                       bestData={best}
                       onClickMoveToProductDetail={onClickMoveToProductDetail}
                       onClickToggleCartModal02={onClickToggleCartModal02}
-                    ></ID.ItemDisPlay01>
+                    ></ItemDisPlay01>
                   ))}
                 </IDS.StyledSlider02>
               </S.ItemsWrapper02>
@@ -203,3 +228,5 @@ export default function MarketMain() {
     </>
   );
 }
+
+export default memo(MarketMain);
