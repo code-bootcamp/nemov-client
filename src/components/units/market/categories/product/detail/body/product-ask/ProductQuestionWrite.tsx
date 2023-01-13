@@ -7,18 +7,11 @@ import {
 } from "../../../../../../../commons/hooks/useMutations/question/UseMutationCreateQuestion";
 import * as S from "./ProductAsk.styles";
 import { Modal } from "antd";
-import { IProductAskProps } from "../../../../../Market.types";
+import { IProductQuestionWriteProps } from "../../../../../Market.types";
 import { UseMutationUpdateQuestion } from "../../../../../../../commons/hooks/useMutations/question/UseMutationUpdateQuestion";
 
-export default function ProductQuestionWrite(props: IProductAskProps) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    setValue,
-    formState: { isSubmitSuccessful },
-  } = useForm<IFormQuestionData>({
+export default function ProductQuestionWrite(props: IProductQuestionWriteProps) {
+  const { register, handleSubmit, reset, watch, setValue } = useForm<IFormQuestionData>({
     mode: "onSubmit",
     shouldUseNativeValidation: true,
   });
@@ -30,20 +23,18 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     if (props.buyerQuestionData === undefined) return;
     setValue("title", props.buyerQuestionData?.title);
     setValue("contents", props.buyerQuestionData?.contents);
-  }, [props.buyerQuestionData]);
+  }, [props.buyerQuestionData, reset]);
 
   // 문의 등록
   const onSubmitQuestion = async (data: IFormQuestionData) => {
     if (data === undefined) return;
     try {
       watch(["title", "contents"]);
+
       const result = await createQuestionSubmit(data);
       console.log(result);
-      console.log(isSubmitSuccessful);
-      if (!isSubmitSuccessful) {
-        props.setIsOpen((prev) => !prev);
-      }
-      reset({ ...data });
+      props.setIsOpen((prev) => !prev);
+      reset({ contents: "", title: "" });
       Modal.success({ content: "문의 등록이 완료되었습니다." });
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
@@ -56,7 +47,7 @@ export default function ProductQuestionWrite(props: IProductAskProps) {
     const questionId = props.buyerQuestionData?.id;
     if (questionId === undefined) return;
     void updateQuestionSubmit(data, questionId);
-    reset({ ...data });
+    reset({ contents: "", title: "" });
     props.setIsOpen((prev) => !prev);
   };
 

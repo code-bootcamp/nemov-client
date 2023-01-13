@@ -160,6 +160,9 @@ const Section = styled.section`
   padding: 3.75rem 7rem;
   display: flex;
   flex-direction: row;
+  @media (max-width: 570px) {
+    padding: 3.75rem 0;
+  }
 `;
 
 const Article = styled.article`
@@ -186,6 +189,9 @@ const TitleGeneral = styled.h3`
   border-right: 1px solid #1f3d31;
   padding: 10px 0;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const TitleSeller = styled.h3`
@@ -194,6 +200,9 @@ const TitleSeller = styled.h3`
   margin-bottom: 0;
   padding: 10px 0;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const Contents = styled.div`
@@ -208,18 +217,29 @@ const ContentsTitle = styled.h4`
   font-size: 1.25rem;
   margin-bottom: 0;
   font-weight: bold;
+  @media ${mobile} {
+    font-size: 1.6rem;
+  }
 `;
 
 const ContentsText = styled.p`
   font-size: 1rem;
   margin: 20px 0;
   text-decoration: underline;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const AccountIcon = styled(AccountCircleIcon)`
   font-size: 10rem;
   color: #ddd;
   margin: 3rem 0;
+  @media ${mobile} {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 12rem;
+  }
 `;
 
 const SellerNumsTitle = styled.h4`
@@ -242,4 +262,7 @@ const SignupBtn = styled.button`
   width: 150px;
   height: 46px;
   padding: 10px;
+  @media ${mobile} {
+    font-size: 1.6rem;
+  }
 `;

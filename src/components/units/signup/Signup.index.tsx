@@ -196,21 +196,29 @@ export default function Signup(props: ISignupProps) {
 
           <S.InputWrapper>
             <S.Label>주소</S.Label>
-            <S.AddWrapper>
-              <S.ZipcodeWrapper>
-                <S.Zipcode type="text" placeholder="07250" readOnly {...register("zipCode")} />
+            <div style={{ width: "100%", padding: "2% 2% 2% 3%" }}>
+              <div style={{ display: "flex", width: "100%" }}>
+                <S.ZipcodeWrapper>
+                  <S.Zipcode type="text" placeholder="07250" readOnly {...register("zipCode")} />
+                </S.ZipcodeWrapper>
                 <S.AddBtn type="button" onClick={onToggleModal}>
                   우편번호 검색
                 </S.AddBtn>
-              </S.ZipcodeWrapper>
-              <S.AddInput type="text" placeholder="주소를 검색해주세요." {...register("address")} />
-              <S.AddInput
-                type="text"
-                placeholder="상세 주소를 입력해주세요."
-                {...register("addressDetail")}
-              />
-              <S.Error>{formState.errors.address?.message}</S.Error>
-            </S.AddWrapper>
+              </div>
+              <S.AddWrapper>
+                <S.AddInput
+                  type="text"
+                  placeholder="주소를 검색해주세요."
+                  {...register("address")}
+                />
+                <S.AddInput
+                  type="text"
+                  placeholder="상세 주소를 입력해주세요."
+                  {...register("addressDetail")}
+                />
+                <S.Error>{formState.errors.address?.message}</S.Error>
+              </S.AddWrapper>
+            </div>
           </S.InputWrapper>
           <S.InfoWrapper>
             <S.InfoTitle>개인정보 이용약관</S.InfoTitle>
