@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/stores";
 import { IProduct } from "../../../../../commons/types/generated/types";
@@ -19,7 +19,8 @@ interface ICartModalProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CartModal(props: ICartModalProps) {
+function CartModal(props: ICartModalProps) {
+  console.log("장바구니 페이지가 리랜더링 됩니다.");
   const accessToken = useRecoilValue(accessTokenState);
 
   const [isDisabled, setIsDisabled] = useState(false);
@@ -45,34 +46,37 @@ export default function CartModal(props: ICartModalProps) {
     props.setQuantity((prev) => prev + 1);
   };
 
-  console.log("선택수량", props.quantity, "총 상품 금액", sum);
+  // console.log("선택수량", props.quantity, "총 상품 금액", sum);
 
-  const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
-    // event?.stopPropagation();
-    try {
-      const result = await toggleProductToCart({
-        variables: {
-          productId,
-          count: props.quantity,
-        },
-      });
-      const status = result?.data?.toggleProductToCart;
-      console.log(status);
-      if (status === true && accessToken) {
-        Modal.success({ content: "장바구니에 상품을 담았습니다." });
-        props.setIsOpen(false);
-        props.setQuantity(1);
-      } else if (status === false && accessToken) {
-        Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
-        props.setIsOpen(false);
+  const onClickToggleProductToCart = useCallback(
+    (productId: string) => async (event: React.MouseEvent) => {
+      event?.stopPropagation();
+      try {
+        const result = await toggleProductToCart({
+          variables: {
+            productId,
+            count: props.quantity,
+          },
+        });
+        const status = result?.data?.toggleProductToCart;
+        // console.log(status);
+        if (status === true && accessToken) {
+          Modal.success({ content: "장바구니에 상품을 담았습니다." });
+          props.setIsOpen(false);
+          props.setQuantity(1);
+        } else if (status === false && accessToken) {
+          Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+          props.setIsOpen(false);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+          Modal.error({ content: `${error.message}` });
+        }
       }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-        Modal.error({ content: `${error.message}` });
-      }
-    }
-  };
+    },
+    [props.curProductData]
+  );
 
   return (
     <>
@@ -103,3 +107,5 @@ export default function CartModal(props: ICartModalProps) {
     </>
   );
 }
+
+export default React.memo(CartModal);

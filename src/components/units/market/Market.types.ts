@@ -6,6 +6,7 @@ import {
   IQuery,
   IQueryFetchProductArgs,
   IQueryFetchProductsArgs,
+  IQueryFetchProductsCountArgs,
   IQueryFetchQuestionsByProductArgs,
   IQueryFetchReviewsByProductArgs,
   IQuestion,
@@ -17,7 +18,7 @@ export interface IMarketListProps {
   isInCartData?: Pick<IQuery, "fetchIsInCart"> | undefined;
   productsFetchMore?: any;
   productsClient?: ApolloClient<any>;
-  refetch?: (
+  refetch: (
     variables?: Partial<IQueryFetchProductsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProducts">>>;
   productsCount: Pick<IQuery, "fetchProductsCount"> | undefined;
@@ -26,6 +27,11 @@ export interface IMarketListProps {
   setActivePage: Dispatch<SetStateAction<number>>;
   startPage?: number;
   activePage?: number;
+  setSearch: Dispatch<SetStateAction<string>>;
+  productsCountRefetch: (
+    variables?: Partial<IQueryFetchProductsCountArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchProductsCount">>>;
+  onChangeSearch: (value: string) => void;
 }
 
 export interface IMarketDetailHeadProps {

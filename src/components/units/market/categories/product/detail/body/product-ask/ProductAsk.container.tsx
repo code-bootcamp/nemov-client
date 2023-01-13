@@ -1,4 +1,4 @@
-// import { ITabContentsProps } from "../product-review-list/ProductReviewList.container";
+import React from "react";
 import * as S from "./ProductAsk.styles";
 import * as CS from "../MarketDetailBody.styles";
 import OpenModalButton01 from "../../../../../../../commons/buttons/OpenModalButton01";
@@ -9,9 +9,9 @@ import ProductQuestionWrite from "./ProductQuestionWrite";
 import { IProductAskProps } from "../../../../../Market.types";
 import { Modal } from "antd";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
-// import { MouseEventHandler, useState } from "react";
 
-export default function ProductAsk(props: IProductAskProps) {
+function ProductAsk(props: IProductAskProps) {
+  console.log("상품 문의 컴포넌트 랜더링");
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -97,3 +97,5 @@ export default function ProductAsk(props: IProductAskProps) {
     </>
   );
 }
+
+export default React.memo(ProductAsk);
