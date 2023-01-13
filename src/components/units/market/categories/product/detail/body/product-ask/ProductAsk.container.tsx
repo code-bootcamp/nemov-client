@@ -6,12 +6,12 @@ import { useRecoilState } from "recoil";
 import { accessTokenState, isOpenState } from "../../../../../../../../commons/stores";
 import CommonModal01 from "../../../../../../../commons/modals/CommonModal01";
 import ProductQuestionWrite from "./ProductQuestionWrite";
-import { IMarketDetail04Props } from "../../../../../Market.types";
+import { IProductAskProps } from "../../../../../Market.types";
 import { Modal } from "antd";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
 // import { MouseEventHandler, useState } from "react";
 
-export default function ProductAsk(props: IMarketDetail04Props) {
+export default function ProductAsk(props: IProductAskProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -46,48 +46,52 @@ export default function ProductAsk(props: IMarketDetail04Props) {
           </S.QuestionButtonWrapper>
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
-          {props.questionsData?.fetchQuestionsByProduct.length === 0 && (
+          {props.questionsData?.fetchQuestionsByProduct.length === 0 ? (
             <S.ProductAskNone>
               <S.StyledQuestionIcon />
               상품 문의가 없습니다.
             </S.ProductAskNone>
-          )}
-          {props.questionsData?.fetchQuestionsByProduct.map((questions, index) => (
-            <CS.TabContentList02 key={index}>
-              <CS.ContentListHeader02>
-                <S.QuestionInfoLeft>
-                  <CS.ContentTitle>{questions.title}</CS.ContentTitle>
-                  <CS.Info02Detail>
-                    <span>{questions.user.name}</span>
-                    <span>2023.01.01</span>
-                  </CS.Info02Detail>
-                </S.QuestionInfoLeft>
-                <S.QuestionInfoRight>
-                  {!questions.answer ? (
-                    <S.AnswerStatus data={questions.answer}>답변대기</S.AnswerStatus>
-                  ) : (
-                    <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
-                  )}
+          ) : (
+            <>
+              {props.questionsData?.fetchQuestionsByProduct.map((questions, index) => (
+                <CS.TabContentList02 key={index}>
+                  <CS.ContentListHeader02>
+                    <S.QuestionInfoLeft>
+                      <CS.ContentTitle>{questions.title}</CS.ContentTitle>
+                      <CS.Info02Detail>
+                        <span>{questions.user.name}</span>
+                        <span>2023.01.01</span>
+                      </CS.Info02Detail>
+                    </S.QuestionInfoLeft>
+                    <S.QuestionInfoRight>
+                      {!questions.answer ? (
+                        <S.AnswerStatus data={questions.answer}>답변대기</S.AnswerStatus>
+                      ) : (
+                        <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
+                      )}
 
-                  <S.AnswerStatusIcon data={questions.answer} />
-                </S.QuestionInfoRight>
-              </CS.ContentListHeader02>
-              <S.QNAContentsSection>
-                <CS.ContentDetail01>{questions.contents}</CS.ContentDetail01>
-                {questions.answer?.contents && (
-                  <S.AnswerSection>{questions.answer?.contents}</S.AnswerSection>
-                )}
-              </S.QNAContentsSection>
-            </CS.TabContentList02>
-          ))}
-          <Pagination02
-            count={Number(props.questionsCount)}
-            refetch={props.questionsRefetch}
-            startPage={props.startPage}
-            setStartPage={props.setStartPage}
-            setActivePage={props.setActivePage}
-            activePage={props.activePage}
-          />
+                      <S.AnswerStatusIcon data={questions.answer} />
+                    </S.QuestionInfoRight>
+                  </CS.ContentListHeader02>
+                  <S.QNAContentsSection>
+                    <CS.ContentDetail01>{questions.contents}</CS.ContentDetail01>
+                    {questions.answer?.contents && (
+                      <S.AnswerSection>{questions.answer?.contents}</S.AnswerSection>
+                    )}
+                  </S.QNAContentsSection>
+                </CS.TabContentList02>
+              ))}
+
+              <Pagination02
+                count={Number(props.questionsCount)}
+                refetch={props.questionsRefetch}
+                startPage={props.startPage}
+                setStartPage={props.setStartPage}
+                setActivePage={props.setActivePage}
+                activePage={props.activePage}
+              />
+            </>
+          )}
         </CS.TabContentInnerWrapper>
       </CS.TabContentMain01>
     </>

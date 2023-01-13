@@ -7,6 +7,7 @@ import {
   IQueryFetchProductArgs,
   IQueryFetchProductsArgs,
   IQueryFetchQuestionsByProductArgs,
+  IQueryFetchReviewsByProductArgs,
   IQuestion,
 } from "../../../commons/types/generated/types";
 
@@ -34,40 +35,43 @@ export interface IMarketDetailHeadProps {
 export interface IMarketDetailBodyProps {
   data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
   reviewsData?: Pick<IQuery, "fetchReviewsByProduct"> | undefined;
+  reviewsCount: number;
+  reviewsRefetch: (
+    variables?: Partial<IQueryFetchReviewsByProductArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchReviewsByProduct">>>;
   questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
   questionsCount?: number;
   questionsRefetch?: (
     variables?: Partial<IQueryFetchQuestionsByProductArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchQuestionsByProduct">>>;
+}
+
+export interface IProductDetailProps {
+  data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
 }
 
 export interface IProductAskProps {
   data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
   reviewsData?: Pick<IQuery, "fetchReviewsByProduct"> | undefined;
   questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
-  questionsCount?: Pick<IQuery, "fetchQuestionsCountByProduct"> | undefined;
+  questionsCount: number;
   questionsRefetch?: (
     variables?: Partial<IQueryFetchQuestionsByProductArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchQuestionsByProduct">>>;
-  startPage?: number;
+  startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
-  activePage?: number;
+  activePage: number;
   setActivePage: Dispatch<SetStateAction<number>>;
 }
 
-export interface IMarketDetail02Props {
+export interface IProductReviewListProps {
   data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
   reviewsData?: Pick<IQuery, "fetchReviewsByProduct"> | undefined;
+  reviewsCount: number;
+  reviewsRefetch: (
+    variables?: Partial<IQueryFetchReviewsByProductArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchReviewsByProduct">>>;
   questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
-}
-
-export interface IMarketDetail04Props {
-  data?: QueryResult<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>;
-  questionsData?: Pick<IQuery, "fetchQuestionsByProduct"> | undefined;
-  questionsCount?: number;
-  questionsRefetch?: (
-    variables?: Partial<IQueryFetchQuestionsByProductArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchQuestionsByProduct">>>;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
   activePage: number;

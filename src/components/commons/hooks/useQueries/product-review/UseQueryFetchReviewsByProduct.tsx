@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchReviewsByProductArgs,
+  IQueryFetchReviewsCountByProductArgs,
 } from "../../../../../commons/types/generated/types";
 
 export const FETCH_REVIEWS_BY_PRODUCT = gql`
@@ -13,13 +14,17 @@ export const FETCH_REVIEWS_BY_PRODUCT = gql`
       title
       contents
       rating
-      images {
-        url
-      }
+      images
       # user {
       #   name
       # }
     }
+  }
+`;
+
+export const FETCH_REVIEWS_COUNT_BY_PRODUCT = gql`
+  query fetchReviewsCountByProduct($productId: ID!) {
+    fetchReviewsCountByProduct(productId: $productId)
   }
 `;
 
@@ -28,6 +33,17 @@ export const UseQueryFetchReviewsByProduct = (variables: IQueryFetchReviewsByPro
     FETCH_REVIEWS_BY_PRODUCT,
     { variables }
   );
+
+  return query;
+};
+
+export const UseQueryFetchReviewsCountByProduct = (
+  variables: IQueryFetchReviewsCountByProductArgs
+) => {
+  const query = useQuery<
+    Pick<IQuery, "fetchReviewsCountByProduct">,
+    IQueryFetchReviewsCountByProductArgs
+  >(FETCH_REVIEWS_COUNT_BY_PRODUCT, { variables });
 
   return query;
 };

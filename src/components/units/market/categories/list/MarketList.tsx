@@ -204,7 +204,7 @@ export default function MarketList(props: IMarketListProps) {
               ))}
           <S.PaginationSection>
             <Pagination02
-              count={props.productsCount?.fetchProductsCount}
+              count={Number(props.productsCount?.fetchProductsCount)}
               refetch={props.refetch}
               startPage={props.startPage ?? 0}
               activePage={props.activePage ?? 0}

@@ -16,14 +16,20 @@ function MarketDetailBody(props: IMarketDetailBodyProps) {
 
   const onClickProductDetailTab = () => {
     setIsTabSelected([true, false, false]);
+    setStartPage(1);
+    setActivePage(1);
   };
 
   const onClickProductReviewListTab = () => {
     setIsTabSelected([false, true, false]);
+    setStartPage(1);
+    setActivePage(1);
   };
 
   const onClickProductAskTab = () => {
     setIsTabSelected([false, false, true]);
+    setStartPage(1);
+    setActivePage(1);
   };
 
   return (
@@ -35,12 +41,23 @@ function MarketDetailBody(props: IMarketDetailBodyProps) {
         onClickProductAskTab={onClickProductAskTab}
       />
       {isTabSelected[0] && <ProductDetail data={props.data} />}
-      {isTabSelected[1] && <ProductReviewList data={props.data} reviewsData={props.reviewsData} />}
+      {isTabSelected[1] && (
+        <ProductReviewList
+          data={props.data}
+          reviewsData={props.reviewsData}
+          startPage={startPage}
+          setStartPage={setStartPage}
+          activePage={activePage}
+          setActivePage={setActivePage}
+          reviewsCount={props.reviewsCount}
+          reviewsRefetch={props.reviewsRefetch}
+        />
+      )}
       {isTabSelected[2] && (
         <ProductAsk
           data={props.data}
           questionsData={props.questionsData}
-          questionsCount={props.questionsCount}
+          questionsCount={Number(props.questionsCount)}
           questionsRefetch={props.questionsRefetch}
           startPage={startPage}
           setStartPage={setStartPage}
