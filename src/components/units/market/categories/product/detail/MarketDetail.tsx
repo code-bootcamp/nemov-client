@@ -27,9 +27,7 @@ const InnerWrapper = styled.div`
 export default function MarketDetail() {
   const router = useRouter();
 
-  const { query: productsData } = UseQueryFetchProduct({
-    productId: String(router.query.productId),
-  });
+  const { query: productsData } = UseQueryFetchProduct();
 
   const { data, refetch: questionsRefetch } = UseQueryFetchQuestionsByProduct({
     productId: String(router.query.productId),

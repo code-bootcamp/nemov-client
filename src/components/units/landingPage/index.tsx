@@ -4,6 +4,7 @@ import EastIcon from "@mui/icons-material/East";
 import { useApolloClient } from "@apollo/client";
 import { FETCH_PRODUCTS_OF_BEST_SELLING } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsOfBest";
 import { FETCH_PRODUCTS_OF_RECOMMEND } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsOfRecommend";
+import { FETCH_PRODUCTS } from "../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 
 export default function LandingPage() {
   const client = useApolloClient();
@@ -14,6 +15,15 @@ export default function LandingPage() {
     });
     await client.query({
       query: FETCH_PRODUCTS_OF_BEST_SELLING,
+    });
+    await client.query({
+      query: FETCH_PRODUCTS,
+      variables: {
+        productCategoryId: "",
+        veganLevel: 0,
+        search: "",
+        page: 1,
+      },
     });
   };
 
@@ -47,7 +57,7 @@ export default function LandingPage() {
             네모비에서 원하는 비건 상품과 다른 비건인들의 선택을 보며 원하는 비건 상품을 구매하고
             다른 회원들에게 솔직한 후기를 남겨주세요. 우리는 물건보다 경험을 팝니다.
           </S.Sentence2>
-          <S.Btn>
+          <S.Btn onMouseOver={prefetchData}>
             <Link href="/market/categories">네모비 비건제품 구경하기</Link>
             <EastIcon />
           </S.Btn>

@@ -40,7 +40,7 @@ export const FETCH_PRODUCT = gql`
   }
 `;
 
-export const UseQueryFetchProduct = (variables: IQueryFetchProductArgs) => {
+export const UseQueryFetchProduct = () => {
   const router = useRouter();
   const query = useQuery<Pick<IQuery, "fetchProduct">, IQueryFetchProductArgs>(FETCH_PRODUCT, {
     variables: {
