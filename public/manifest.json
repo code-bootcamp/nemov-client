@@ -1,104 +1,37 @@
 {
-  "name": "NEMOV",
-  "short_name": "NEMOV",
+  "theme_color": "#436f59",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "display": "fullscreen",
+  "name": "NEMOV",
+  "short_name": "NEMOV",
   "description": "Any vegan you're looking for, NEMOV",
   "icons": [
     {
-      "src": "/icons/all-icon-after-hover.png",
-      "sizes": "57x57",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/all-icon.png",
-      "sizes": "60x60",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/angle-left-solid.svg",
-      "sizes": "72x72",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/angle-right-solid.svg",
-      "sizes": "76x76",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/bag-shopping-solid.svg",
-      "sizes": "114x114",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/bars-solid.svg",
-      "sizes": "120x120",
-      "type": "image/svg"
-    },
-
-    {
-      "src": "/icons/best-icon.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/calendar-regular.svg",
-      "sizes": "152x152",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/cosmetic-icon.png",
+      "src": "/pwa/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/drink-icon.png",
-      "sizes": "310x310",
-      "type": "image/png"
+      "src": "/pwa/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/food-icon.png",
+      "src": "/pwa/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/heart-regular.svg",
-      "sizes": "512x512",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/heart-solid.svg",
-      "sizes": "512x512",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/pen-write-icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/phone-icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/search-icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg"
-    },
-    {
-      "src": "/icons/truck-icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/xmark-solid.svg",
-      "sizes": "512x512",
-      "type": "image/svg"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "prefer_related_applications": true,
-  "theme_color": "#436f59",
-  "background_color": "#FFFFFF"
+  "prefer_related_applications": true
 }

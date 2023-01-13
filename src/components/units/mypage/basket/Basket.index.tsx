@@ -80,13 +80,7 @@ export default function MypageBasket() {
     const productId = Item[0].product.id;
     const value = [{ productId, quantity }];
 
-    try {
-      await buyProduct(value, amount);
-
-      Modal.success({ content: "상품 구매가 완료되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-    }
+    void buyProduct(value, amount);
   };
 
   // 구매 기능 - 한꺼번에 구매할 때
