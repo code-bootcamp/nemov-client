@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../commons/styles/breakPoints";
 
 export const MyPageContents = styled.section`
   width: 70%;
@@ -7,7 +8,7 @@ export const MyPageContents = styled.section`
 
 export const ContentsHeader = styled.header`
   width: 100%;
-  height: 180px;
+  height: 11.25rem;
   box-shadow: 2px 4px 10px rgb(85 116 149 / 25%);
   border-radius: 20px;
   display: flex;
@@ -15,6 +16,9 @@ export const ContentsHeader = styled.header`
   padding: 4% 6%;
   margin-bottom: 10px;
   margin-top: 3%;
+  @media ${mobile} {
+    height: 10rem;
+  }
 `;
 
 export const HeaderItem = styled.article`

@@ -52,7 +52,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
@@ -69,6 +69,7 @@ export const Wrapper = styled.header`
     }
   }
   @media ${tablet} {
+    position: fixed;
     padding: 1rem;
     :hover {
       div,
@@ -97,6 +98,9 @@ export const Wrapper02 = styled.header`
 
   ${LogoImg} {
     content: url("/logo/logo_hover.png");
+  }
+  @media ${tablet} {
+    position: fixed;
   }
 `;
 

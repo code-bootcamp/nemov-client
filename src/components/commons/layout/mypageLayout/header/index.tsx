@@ -32,7 +32,7 @@ export default function MypageLayoutHeader() {
           <S.HeaderItem>
             <S.ItemTitle>포인트</S.ItemTitle>
             <span>
-              <S.ItemValue>{data?.fetchUserPoint}</S.ItemValue>P
+              <S.ItemValue>{data?.fetchUserPoint.toLocaleString()}</S.ItemValue>P
             </span>
           </S.HeaderItem>
         </Link>

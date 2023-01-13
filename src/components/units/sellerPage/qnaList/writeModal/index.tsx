@@ -31,7 +31,7 @@ const FETCH_QUESTION = gql`
 export default function WriteModal(props: IWriteProps) {
   const [edit, setEdit] = useState(false);
   const [deleteAnswer] = UseMutationDeleteAnswer();
-  const { data, questionId } = props;
+  const { data, questionId, setIsOpen } = props;
   const { data: questionData } = useQuery<Pick<IQuery, "fetchQuestion">, IQueryFetchQuestionArgs>(
     FETCH_QUESTION,
     {
@@ -39,7 +39,9 @@ export default function WriteModal(props: IWriteProps) {
     }
   );
 
-  console.log(questionData);
+  const onClickEdit = () => {
+    setEdit(true);
+  };
 
   const onClickDelete = async () => {
     if (questionData?.fetchQuestion.answer === undefined) return;
@@ -49,10 +51,7 @@ export default function WriteModal(props: IWriteProps) {
       },
     });
     Modal.success({ content: "후기가 삭제되었습니다." });
-  };
-
-  const onClickEdit = () => {
-    setEdit(true);
+    setIsOpen(false);
   };
 
   return (
@@ -77,8 +76,8 @@ export default function WriteModal(props: IWriteProps) {
                 <main>
                   <WriteAnswer
                     questionId={questionId}
-                    setEdit={setEdit}
                     questionData={questionData}
+                    setIsOpen={setIsOpen}
                   />
                 </main>
               ) : (
@@ -98,7 +97,11 @@ export default function WriteModal(props: IWriteProps) {
           <>
             <h1>A</h1>
             <main>
-              <WriteAnswer questionId={questionId} setEdit={setEdit} questionData={questionData} />
+              <WriteAnswer
+                questionId={questionId}
+                questionData={questionData}
+                setIsOpen={setIsOpen}
+              />
             </main>
           </>
         )}
