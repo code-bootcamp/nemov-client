@@ -16,6 +16,7 @@ import { useState } from "react";
 import { IProduct } from "../../../../commons/types/generated/types";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
+import { FETCH_PRODUCTS } from "../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -30,6 +31,20 @@ const PrevArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => 
 );
 
 export default function MarketMain() {
+  const router = useRouter();
+  const client = useApolloClient();
+
+  const prefetchData = async () => {
+    await client.query({
+      query: FETCH_PRODUCTS,
+      variables: {
+        productCategoryId: "",
+        veganLevel: 0,
+        page: 1,
+        search: "",
+      },
+    });
+  };
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
   // const { data: categoryData } = UseQueryFetchCategories();
@@ -49,9 +64,6 @@ export default function MarketMain() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-
-  const router = useRouter();
-  const client = useApolloClient();
 
   // 모달 기능
   const [isOpen, setIsOpen] = useState(false);
@@ -153,6 +165,7 @@ export default function MarketMain() {
                   onClick={() => {
                     void router.push("/market/categories");
                   }}
+                  onMouseOver={prefetchData}
                 >
                   더보기
                   <S.StyledRightArrow />
@@ -179,6 +192,7 @@ export default function MarketMain() {
                   onClick={() => {
                     void router.push("/market/categories");
                   }}
+                  onMouseOver={prefetchData}
                 >
                   더보기
                   <S.StyledRightArrow />

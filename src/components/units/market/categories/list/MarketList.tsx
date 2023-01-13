@@ -34,14 +34,15 @@ export default function MarketList(props: IMarketListProps) {
   const [curProductData, setCurProductData] = useState<IProduct>();
 
   const prefetchByLevel = async (value: number | unknown) => {
-    console.log(value);
     setIsSelected(Number(value));
+
     const result = await props.productsClient?.query({
       query: FETCH_PRODUCTS,
       variables: {
         productCategoryId: props.category,
         veganLevel: value,
         page: 1,
+        search: "",
       },
     });
     props.setStartPage(1);
@@ -134,7 +135,13 @@ export default function MarketList(props: IMarketListProps) {
         </>
       ))}
       <S.ListWrapper>
-        <ListSearch prefetchByLevel={prefetchByLevel} />
+        <ListSearch
+          prefetchByLevel={prefetchByLevel}
+          setSearch={props.setSearch}
+          productsCountRefetch={props.productsCountRefetch}
+          refetch={props.refetch}
+          onChangeSearch={props.onChangeSearch}
+        />
         <MS.ItemsWrapper01>
           {fetchProducts
             ? fetchProducts.map((products) => (
@@ -181,7 +188,7 @@ export default function MarketList(props: IMarketListProps) {
               ))
             : new Array(9).fill(1).map((_, index) => (
                 <IDS.ItemDisplay03 key={index}>
-                  <S.ItemImageBox01 style={{ backgroundColor: "gray" }}>
+                  <S.ItemImageBox01 style={{ backgroundColor: "white", border: "none" }}>
                     <S.ItemImage03 />
                   </S.ItemImageBox01>
                   <IDS.ItemDetail>
@@ -203,14 +210,21 @@ export default function MarketList(props: IMarketListProps) {
                 </IDS.ItemDisplay03>
               ))}
           <S.PaginationSection>
-            <Pagination02
-              count={Number(props.productsCount?.fetchProductsCount)}
-              refetch={props.refetch}
-              startPage={props.startPage ?? 0}
-              activePage={props.activePage ?? 0}
-              setStartPage={props.setStartPage}
-              setActivePage={props.setActivePage}
-            />
+            {fetchProducts?.length !== 0 ? (
+              <Pagination02
+                count={Number(props.productsCount?.fetchProductsCount)}
+                refetch={props.refetch}
+                startPage={props.startPage ?? 0}
+                activePage={props.activePage ?? 0}
+                setStartPage={props.setStartPage}
+                setActivePage={props.setActivePage}
+              />
+            ) : (
+              <MS.DataNone>
+                <MS.WarningIcon />
+                연관된 상품이 없습니다.
+              </MS.DataNone>
+            )}
           </S.PaginationSection>
         </MS.ItemsWrapper01>
       </S.ListWrapper>
