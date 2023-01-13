@@ -32,21 +32,23 @@ export default function ProductReviewList(props: IProductReviewListProps) {
                   </CS.HeaderInfo01>
                   <CS.HeaderInfo02>
                     <CS.Info02Detail>
-                      {/* <span>{reviews.user.name}</span> */}
+                      <span>{reviews.user.name}</span>
                       <span>{getDate(reviews.updatedAt)}</span>
                     </CS.Info02Detail>
                   </CS.HeaderInfo02>
                 </CS.ContentListHeader01>
                 <CS.ContentDetail01>{reviews.contents}</CS.ContentDetail01>
                 <S.PRImages>
-                  {reviews.images?.map((image, index) => (
-                    <S.PRImage01
-                      width="10%"
-                      key={index}
-                      alt={`${reviews.title}의 이미지`}
-                      src={image}
-                    />
-                  ))}
+                  {reviews.images
+                    ?.filter((image) => image)
+                    .map((image, index) => (
+                      <S.PRImage01
+                        width="10%"
+                        key={index}
+                        alt={`${reviews.title}의 이미지`}
+                        src={image}
+                      />
+                    ))}
                 </S.PRImages>
               </CS.TabContentList01>
             ))}
