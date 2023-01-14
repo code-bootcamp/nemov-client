@@ -1,10 +1,14 @@
 import { getDate } from "../../../../commons/libraries/utilies";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
-import { UseQueryFetchPointTransactions } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
+import {
+  UseQueryFetchPointTransactionsCount,
+  UseQueryFetchPointTransactions,
+} from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
 import Pagination from "../../../commons/paginations/Pagination.index";
 import * as S from "./pointList.style";
 
 export default function PointList() {
+  const { data: countPoint } = UseQueryFetchPointTransactionsCount();
   const { data, refetch } = UseQueryFetchPointTransactions({
     page: 1,
   });
@@ -33,7 +37,7 @@ export default function PointList() {
             ))}
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={data?.fetchPointTransactions.length} />
+        <Pagination refetch={refetch} count={countPoint?.fetchPointTransactionsCount} />
       </section>
     </GlobalWrapper>
   );

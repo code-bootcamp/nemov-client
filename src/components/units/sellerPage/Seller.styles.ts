@@ -37,9 +37,7 @@ export const Line = styled.div`
   height: 3px;
   margin: 27px 0 0 0;
   background: black;
-  transition: all 0.4s ease;
-
-  opacity: ${(props: ISellerListStylesProps) => (props.isSelected ? "1" : "0")};
+  transition: all 0.4s ease; ;
 `;
 
 export const Tab = styled.li`
@@ -49,14 +47,23 @@ export const Tab = styled.li`
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;
-
   font-weight: ${(props: ISellerListStylesProps) => (props.isSelected ? "600" : "300")};
-
   color: ${(props: ISellerListStylesProps) => (props.isSelected ? "black" : "#666")};
-
+  ::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #000;
+    top: 35px;
+    left: 0;
+    transition: all 0.4s ease;
+    opacity: ${(props: ISellerListStylesProps) => (props.isSelected ? "1" : "0")};
+  }
   :hover {
-    ${Line} {
+    ::after {
       opacity: 1;
+      transition: all 0.4s ease;
     }
   }
 `;

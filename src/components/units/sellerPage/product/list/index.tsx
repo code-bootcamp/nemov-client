@@ -5,6 +5,7 @@ import { UseMutationDeleteProduct } from "../../../../commons/hooks/useMutations
 import {
   FETCH_PRODUCTS_BY_SELLER,
   UseQueryFetchProductsBySeller,
+  UseQueryFetchProductsCountBySeller,
 } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import * as S from "./list.styles";
 import React, { useState } from "react";
@@ -14,9 +15,12 @@ import Pagination from "../../../../commons/paginations/Pagination.index";
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
   const [, setIsOpen] = useState(false);
+  const { data: productsCount } = UseQueryFetchProductsCountBySeller();
   const { data, refetch } = UseQueryFetchProductsBySeller({
     page: 1,
   });
+  console.log(productsCount?.fetchProductsCountBySeller);
+
   const [deleteProduct] = UseMutationDeleteProduct();
 
   const onClickDelete = async (id: string) => {
@@ -93,7 +97,7 @@ export default function ProductList() {
             ))}
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={data?.fetchProductsBySeller.length} />
+        <Pagination refetch={refetch} count={productsCount?.fetchProductsCountBySeller} />
         <S.Btn2 onClick={onClickMoveToPage("/seller/new")}>상품 등록하기</S.Btn2>
       </section>
     </GlobalWrapper>

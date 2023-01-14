@@ -34,11 +34,12 @@ export const LoginMenu = styled.div`
   color: #fff;
   margin-right: 0;
   cursor: pointer;
+  margin-bottom: 3rem;
 `;
 
 export const LoginMenuItem = styled.p`
+  margin: 0;
   font-size: 1.2rem;
-  margin-bottom: 3rem;
   padding: 0.8rem 2.2rem;
   border: 1px solid #fff;
   color: #fff;
@@ -53,7 +54,6 @@ export const SubTitle = styled.h2`
   color: #fff;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid #fff;
 `;
 
 export const User = styled.div`
@@ -105,6 +105,10 @@ export const HeaderIconItem = styled.p`
   padding: 1% 2%;
   color: #fff;
   cursor: pointer;
+`;
+
+export const HeaderIconItemFirst = styled(HeaderIconItem)`
+  border-right: none;
 `;
 
 export const IconName = styled.span`
