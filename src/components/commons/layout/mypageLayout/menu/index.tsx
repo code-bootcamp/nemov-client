@@ -21,9 +21,9 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
   const router = useRouter();
   const [, setIsPasswordChange] = useRecoilState(IsPasswordChange);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
   const [deleteLoginUser] = useMutation(DELETE_LOGIN_USER);
 
+  const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
   const onClickPwChange = () => {
     setIsPasswordChange(true);
   };
@@ -65,7 +65,12 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
         <S.MenuHeader>
           <S.Title>마이페이지</S.Title>
           <S.User>
-            <S.UserName>{props.data?.fetchLoginUser.name}</S.UserName>님 <br />
+            <S.FirstLine>
+              <S.UserVeganLevel>
+                {VeganLevels[props.data?.fetchLoginUser.veganLevel - 1]}
+              </S.UserVeganLevel>
+              <S.UserName>{props.data?.fetchLoginUser.name}</S.UserName>님 <br />
+            </S.FirstLine>
             안녕하세요!
           </S.User>
         </S.MenuHeader>

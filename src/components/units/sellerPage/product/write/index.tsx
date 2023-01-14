@@ -46,6 +46,10 @@ const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
 const Option1 = categoryContents[0];
 const Option2 = categoryContents[1];
 
+const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
+  ssr: false,
+});
+
 export default function ProductWrite(props: ProductWriteProps) {
   const { isEdit } = props;
   const router = useRouter();
@@ -64,9 +68,6 @@ export default function ProductWrite(props: ProductWriteProps) {
   const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
   const data = query.data?.fetchProduct;
 
-  const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
-    ssr: false,
-  });
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
   const { register, handleSubmit, setValue, formState } = useForm<ProductInput>({

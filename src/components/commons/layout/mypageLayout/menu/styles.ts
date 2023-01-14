@@ -34,6 +34,18 @@ export const User = styled.p`
   font-size: 1.3rem;
 `;
 
+export const UserVeganLevel = styled.span`
+  width: auto;
+  height: auto;
+  padding: 3%;
+  font-size: 0.7rem;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-color: #648d2a;
+  color: #fff;
+  margin-right: 5px;
+`;
+
 export const UserName = styled.span`
   font-size: 1.5rem;
   font-weight: 800;
@@ -41,6 +53,10 @@ export const UserName = styled.span`
   @media ${mobile} {
     color: palevioletred;
   }
+`;
+
+export const FirstLine = styled.div`
+  margin-bottom: 5px;
 `;
 
 export const MenuContents = styled.article`
