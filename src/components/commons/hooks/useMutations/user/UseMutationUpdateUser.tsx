@@ -5,6 +5,7 @@ import {
   IMutationUpdateUserArgs,
   IUpdateUserInput,
 } from "../../../../../commons/types/generated/types";
+import { FETCH_LOGIN_USER } from "../../useQueries/user/UseQueryFetchLoginUser";
 
 export const UPDATE_USER = gql`
   mutation updateUser($updateUserInput: UpdateUserInput!) {
@@ -18,7 +19,10 @@ export const UPDATE_USER = gql`
 
 export const UseMutationUpdateUser = () => {
   const [updateUser] = useMutation<Pick<IMutation, "updateUser">, IMutationUpdateUserArgs>(
-    UPDATE_USER
+    UPDATE_USER,
+    {
+      refetchQueries: [{ query: FETCH_LOGIN_USER }],
+    }
   );
   const updateUserFunction = async (data: IUpdateUserInput) => {
     try {
