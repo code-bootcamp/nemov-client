@@ -35,7 +35,6 @@ export default function MarketList(props: IMarketListProps) {
 
   const prefetchByLevel = async (value: number | unknown) => {
     setIsSelected(Number(value));
-
     const result = await props.productsClient?.query({
       query: FETCH_PRODUCTS,
       variables: {
