@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { colorBase01, colorBase03 } from "../../../../commons/styles/colorBases";
 import CloseIcon from "@mui/icons-material/Close";
+import { mobile, mobile2, tablet } from "../../../../commons/styles/breakPoints";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -10,6 +11,12 @@ export const Title = styled.h2`
   font-size: 1.6rem;
   line-height: 1.4;
   padding-bottom: 20px;
+
+  @media ${mobile} {
+    text-align: center;
+    padding-bottom: 0;
+    margin: 20px 0;
+  }
 `;
 
 export const PickedWrapper = styled.ul`
@@ -39,6 +46,10 @@ export const PickedA = styled.a`
   width: 15%;
   aspect-ratio: 5/5;
   cursor: pointer;
+
+  @media ${mobile2} {
+    width: 20%;
+  }
 `;
 
 export const PickedImg = styled.img`
@@ -50,10 +61,19 @@ export const PickedCenterWrapper = styled.div`
   width: 60%;
   display: flex;
   flex-direction: column;
+
+  @media ${mobile2} {
+    width: 50%;
+    padding: 8px 0;
+  }
 `;
 
 export const TagsWrap = styled.div`
   margin-bottom: 10px;
+
+  @media ${mobile2} {
+    margin-bottom: 0;
+  }
 `;
 
 export const Tags = styled.span`
@@ -61,10 +81,14 @@ export const Tags = styled.span`
   padding: 0.4rem 0.7rem;
   border-radius: 2rem;
   ${colorBase03}
+
+  @media ${mobile2} {
+    width: 50%;
+  }
 `;
 
 export const PickedName = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 8px 0;
 `;
 
@@ -77,6 +101,12 @@ export const PriceDateWrap = styled.div`
 export const PickedPrice = styled.p`
   font-weight: bold;
   width: 20%;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+
+  @media ${mobile2} {
+    width: 30%;
+  }
 `;
 
 export const PickedDate = styled.p`
@@ -96,19 +126,29 @@ export const BtnWrapper = styled.div`
 `;
 
 export const BasketBtn = styled.button`
-  min-width: 133px;
-  height: 36px;
-  padding: 0 35px;
+  width: 133px;
+  padding: 13px;
   font-size: 1rem;
-  line-height: 34px;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 50px;
   margin-top: 10px;
+
+  @media ${mobile} {
+    width: 80px;
+  }
+  @media ${tablet} {
+    width: 80px;
+  }
+  @media ${mobile2} {
+    width: 60px;
+    margin-right: 10px;
+    padding: 8px;
+  }
 `;
 
 export const BuyBtn = styled.button`
-  min-width: 133px;
+  width: 133px;
   height: 36px;
   padding: 0 35px;
   font-size: 1rem;
@@ -119,6 +159,11 @@ export const BuyBtn = styled.button`
   border: 1px solid #ddd;
   border-radius: 18px;
   margin-top: 10px;
+
+  @media ${mobile2} {
+    width: 70px;
+    margin-right: 10px;
+  }
 `;
 
 export const CancelBtn = styled.button`
@@ -127,9 +172,18 @@ export const CancelBtn = styled.button`
   background-color: transparent;
   right: -4px;
   top: -40px;
+
+  @media ${mobile} {
+    top: -25px;
+  }
+  @media ${tablet} {
+    top: -30px;
+  }
+  @media ${mobile2} {
+    top: -25px;
+  }
 `;
 export const CancelIcon = styled(CloseIcon)`
-  /* position: absolute; */
   right: 0;
   top: -20px;
   font-size: 20px;

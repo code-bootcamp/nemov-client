@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile, mobile2 } from "../../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ReviewWrapper = styled.div`
@@ -21,7 +22,7 @@ export const ReviewLi = styled.li`
 `;
 
 export const ReviewImg = styled.img`
-  width: 12%;
+  width: 15%;
   aspect-ratio: 5/5;
 `;
 
@@ -34,24 +35,26 @@ export const ReviewCenterWrapper = styled.div`
 `;
 
 export const ReviewItemName = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: #3a3939;
   font-weight: 600;
   margin-bottom: 0.4rem;
 `;
 
 export const ReviewDate = styled.p`
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #666;
   margin-bottom: 0.4rem;
 `;
 
 export const ReviewContent = styled.p`
+  font-size: 1.2rem;
   margin-bottom: 0;
+  margin: 2px 0;
 `;
 
 export const ReviewBtnWrapper = styled.div`
-  width: 10%;
+  width: 15%;
   display: flex;
   flex-direction: column;
 `;
@@ -62,6 +65,14 @@ export const ReviewEditBtn = styled.button`
   ${colorBase01}
   margin-bottom: 10px;
   border-radius: 5vmax;
+
+  @media ${mobile} {
+    width: 80px;
+  }
+  @media ${mobile2} {
+    width: 60px;
+    padding: 8px;
+  }
 `;
 
 export const ReviewDeleteBtn = styled.button`
@@ -70,6 +81,14 @@ export const ReviewDeleteBtn = styled.button`
   ${colorBase02}
   border: 1px solid #ddd;
   border-radius: 5vmax;
+
+  @media ${mobile} {
+    width: 80px;
+  }
+  @media ${mobile2} {
+    width: 60px;
+    padding: 8px;
+  }
 `;
 
 export const NoReviewText = styled.p`

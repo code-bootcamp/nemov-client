@@ -11,7 +11,7 @@ export const useAuth01 = () => {
 
   // 로그인 체크
   useEffect(() => {
-    if (!accessToken) {
+    if (accessToken === undefined) {
       Modal.error({ content: "로그인 후 이용가능합니다." });
       void router.push("/login");
     }

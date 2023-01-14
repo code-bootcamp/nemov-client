@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
@@ -9,6 +10,10 @@ export const Title = styled.h4`
   font-size: 1.6rem;
   line-height: 1.4;
   padding-bottom: 2.5rem;
+
+  @media ${mobile} {
+    margin: 20px 0;
+  }
 `;
 
 export const Form = styled.form`
@@ -24,6 +29,10 @@ export const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -33,6 +42,10 @@ export const InputWrapper = styled.div`
   align-items: center;
   gap: 5%;
   padding: 10px 20px;
+
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const Label = styled.label`
@@ -77,6 +90,10 @@ export const Zipcode = styled.input`
   text-align: center;
   outline: none;
   margin-right: 20px;
+
+  @media ${mobile} {
+    padding: 8px 0;
+  }
 `;
 
 export const AddBtn = styled.button`
@@ -85,6 +102,11 @@ export const AddBtn = styled.button`
   font-weight: 500;
   color: white;
   ${colorBase01}
+
+  @media ${mobile} {
+    width: 85px;
+    padding: 12px;
+  }
 `;
 
 export const AddInput = styled.input`
