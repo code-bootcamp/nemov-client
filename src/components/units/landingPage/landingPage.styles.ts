@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile, tablet } from "../../../commons/styles/breakPoints";
 import { colorBase02 } from "../../../commons/styles/colorBases";
 
 export const Wrapper = styled.main`
@@ -75,10 +76,24 @@ export const Section2 = styled(Section)`
 export const Section3 = styled(Section)`
   background: url(/images/landing/3.webp) no-repeat 50% 0 fixed;
   background-size: cover;
+  background-position-y: -600px;
+  @media ${tablet} {
+    background-position-y: -300px;
+  }
+  @media ${mobile} {
+    background-position-y: 0;
+  }
 `;
 export const Section4 = styled(Section)`
   background: url(/images/landing/4.webp) no-repeat 50% 0 fixed;
   background-size: cover;
+  background-position-y: -400px;
+  @media ${mobile} {
+    background-position-y: 0;
+  }
+  @media ${tablet} {
+    background-position-y: 0;
+  }
 `;
 
 export const Article = styled.article`
@@ -105,17 +120,41 @@ export const Title = styled.h1`
   color: #fff;
   line-height: 4vmax;
   text-shadow: rgba(0, 0, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  @media ${mobile} {
+    font-size: 3.5vmax;
+  }
+`;
+
+export const Title02 = styled.span`
+  text-align: center;
+  font-size: 3vmax;
+  font-weight: 900;
+  line-height: 1em;
+  margin: 25px 0;
+  color: #fff;
+  line-height: 4vmax;
+  text-shadow: rgba(0, 0, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  @media ${mobile} {
+    width: 100%;
+    padding: 0 1rem;
+  }
 `;
 
 export const Sentence = styled.p`
-  font-size: 1vmax;
+  font-size: 1.2vmax;
   color: #fff;
   margin-bottom: 3rem;
   text-align: center;
+  @media ${mobile} {
+    font-size: 2vmax;
+  }
 `;
 
 export const Sentence2 = styled(Sentence)`
   text-align: left;
+  @media ${mobile} {
+    font-size: 1.5vmax;
+  }
 `;
 
 export const Btn = styled.button`
@@ -123,7 +162,11 @@ export const Btn = styled.button`
   ${colorBase02}
   border-radius: 0%;
   font-weight: 900;
-  font-size: 0.8rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
+  @media ${mobile} {
+    padding: 2% 1.5%;
+    font-size: 1.3rem;
+  }
 `;
