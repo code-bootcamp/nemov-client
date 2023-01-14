@@ -357,6 +357,7 @@ export const MoveBtn = styled.button`
 
   @media ${mobile} {
     padding: 10px;
+    font-size: 1.2rem;
   }
 `;
 

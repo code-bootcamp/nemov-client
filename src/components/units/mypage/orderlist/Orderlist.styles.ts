@@ -4,7 +4,7 @@ import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases"
 import { amazon } from "../../../../commons/styles/colorPalettes";
 
 export const ContentsMain = styled.section`
-  padding: 3% 0;
+  padding: 3% 1%;
 `;
 
 export const Title = styled.h2`
@@ -171,12 +171,10 @@ export const MoveBtnWrap = styled.div`
 
 export const MoveBtn = styled.button`
   min-width: 130px;
-  height: 60px;
   font-size: 1rem;
   font-weight: 500;
   padding: 10px 35px;
   font-size: 1rem;
-  line-height: 34px;
   ${colorBase02}
   border-radius: 50px;
   border: 1px solid #ddd;
@@ -184,6 +182,7 @@ export const MoveBtn = styled.button`
 
   @media ${mobile} {
     padding: 10px;
+    font-size: 1.2rem;
   }
 `;
 
