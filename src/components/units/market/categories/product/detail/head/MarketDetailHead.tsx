@@ -129,9 +129,12 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
       </S.MarketDetailCrumbsWrapper>
       <S.MarketDetailPageHead>
         {props.data?.data?.fetchProduct.image !== undefined ? (
-          <S.ProductDetailImage01 src={`${props.data.data?.fetchProduct.image}`} />
+          <S.ProductDetailImage01
+            src={`${props.data.data?.fetchProduct.image}`}
+            alt="상품 이미지"
+          />
         ) : (
-          <S.ProductDetailImage01 src="/images/best2.jpg" />
+          <S.ProductDetailImageAlt />
         )}
         <S.ProductDetailAside01>
           <S.ProductDetailHeader01>
@@ -165,9 +168,9 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
             <S.PQuantitySelectSection>
               <S.DetailInfoTitle01>{props.data?.data?.fetchProduct.name}</S.DetailInfoTitle01>
               <S.PQRightButtons>
-                <S.Numbers>{sum.toLocaleString()}원</S.Numbers>
+                <S.Number02>{sum.toLocaleString()}원</S.Number02>
                 <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
-                <S.Numbers>{quantity}</S.Numbers>
+                <S.Number01>{quantity}</S.Number01>
                 <CountUpBtn type="button" onClick={onClickQuantityUp} />
               </S.PQRightButtons>
             </S.PQuantitySelectSection>

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Slider from "react-slick";
-import { tablet } from "../../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../../commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 // import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
@@ -48,6 +48,11 @@ export const StyleSlider = styled(Slider)`
     /* content: ""; */
   }
   .slick-dots {
+    @media ${mobile} {
+      width: auto;
+      bottom: 35px;
+      right: 50px;
+    }
     bottom: 20px;
     color: rgba(255, 255, 255, 0.5);
   }
@@ -110,11 +115,26 @@ export const GlobalWrap = styled(GlobalWrapper)`
     font-size: 2rem;
     font-weight: 600;
     line-height: 3rem;
+    @media ${mobile} {
+      font-size: 2.5rem;
+    }
+    @media ${mobile2} {
+      font-size: 2rem;
+    }
+  }
+
+  div {
   }
 
   p {
     font-size: 1rem;
     line-height: 1.5rem;
+    @media ${mobile} {
+      font-size: 1.5rem;
+    }
+    @media ${mobile2} {
+      font-size: 1.2rem;
+    }
   }
 
   @media ${tablet} {

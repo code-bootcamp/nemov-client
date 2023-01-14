@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../../../commons/styles/breakPoints";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
@@ -79,7 +80,7 @@ export const ContentListHeader02 = styled.header`
 
 export const HeaderInfo01 = styled.section`
   ${flexRow}
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 0.8rem;
 `;
@@ -87,6 +88,9 @@ export const HeaderInfo01 = styled.section`
 export const ContentTitle = styled.h3`
   ${FontStyle01}
   font-size: 1.2rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const HeaderInfo02 = styled.section`

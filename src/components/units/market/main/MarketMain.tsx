@@ -18,6 +18,7 @@ import { IProduct } from "../../../../commons/types/generated/types";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 import { FETCH_PRODUCTS } from "../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
+import { FETCH_PRODUCT_CATEGORIES } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -47,6 +48,9 @@ function MarketMain() {
         search: "",
       },
     });
+    await client.query({
+      query: FETCH_PRODUCT_CATEGORIES,
+    });
   };
   const { data: bestItemData } = UseQueryFetchProductsOfBestSelling();
   const { data: recItemData } = UseQueryFetchProductsOfRecommend();
@@ -54,9 +58,7 @@ function MarketMain() {
   const [accessToken] = useRecoilState(accessTokenState);
 
   const settings = {
-    centerMode: true,
     infinite: true,
-    centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
     arrows: true,
@@ -161,6 +163,7 @@ function MarketMain() {
             <S.RecommendItemSection01>
               <S.MarketMainHeader01>
                 <div>
+                  <S.HeaderDiv03>추천상품</S.HeaderDiv03>
                   {loginUserData && (
                     <S.HeaderSpan>
                       {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
@@ -194,6 +197,7 @@ function MarketMain() {
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
             <S.MainMarketSection01>
+              <S.HeaderDiv04>베스트</S.HeaderDiv04>
               <S.MarketMainHeader02>
                 <div style={{ display: "flex" }}>
                   네모비 회원이 선택한 상품

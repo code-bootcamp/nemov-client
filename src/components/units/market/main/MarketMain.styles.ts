@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile, tablet } from "../../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../../commons/styles/breakPoints";
 import { colorBase03 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
@@ -54,6 +54,9 @@ export const MarketMainHeader01 = styled.header`
 export const MarketMainHeader02 = styled.header`
   ${HeaderStyle}
   color: black;
+  @media ${mobile} {
+    padding: 0 1rem;
+  }
 `;
 
 export const HeaderSpan = styled.span`
@@ -66,11 +69,31 @@ export const HeaderSpan = styled.span`
 export const HeaderDiv01 = styled.div`
   ${HeaderStyle02}
   ${colorBase03}
+  @media (max-width: 399px) {
+    display: none;
+  }
+`;
+export const HeaderDiv03 = styled(HeaderDiv01)`
+  display: none;
+  @media (max-width: 399px) {
+    display: block;
+    width: 25%;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
 `;
 
-export const HeaderDiv02 = styled.div`
-  ${HeaderStyle02}
-  ${colorBase03}
+export const HeaderDiv02 = styled(HeaderDiv01)`
+  font-weight: 600;
+`;
+
+export const HeaderDiv04 = styled(HeaderDiv03)`
+  @media (max-width: 399px) {
+    display: block;
+    width: 15%;
+    text-align: center;
+    margin-left: 10px;
+  }
   font-weight: 600;
 `;
 
@@ -113,6 +136,10 @@ export const MainMarketSection01 = styled.section`
   flex-direction: column;
   gap: 20px;
   margin: 15% 0 10% 0;
+  @media ${mobile2} {
+    height: 15rem;
+    gap: 0px;
+  }
 `;
 
 export const RecommendItemSection01 = styled.section`
@@ -156,9 +183,21 @@ export const DataNone = styled.section`
   ${GS.flexCenter}
   flex-direction: column;
   font-weight: 900;
+  @media ${mobile2} {
+    font-size: 1.2rem;
+  }
+  @media ${tablet} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const WarningIcon = styled(WarningRoundedIcon)`
   font-size: 10rem;
   color: ${amazon};
+  @media ${mobile} {
+    font-size: 12rem;
+  }
+  @media ${mobile2} {
+    font-size: 9rem;
+  }
 `;

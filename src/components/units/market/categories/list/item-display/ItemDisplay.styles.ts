@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile, tablet } from "../../../../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../../commons/styles/globalStyles";
 import * as CP from "../../../../../../commons/styles/colorPalettes";
 import * as CB from "../../../../../../commons/styles/colorBases";
@@ -43,7 +43,8 @@ export const FontStyle04 = css`
 export const ItemDetailFooter03 = styled.footer`
   ${GS.flexColumn}
   gap: 0.5rem;
-  @media ${mobile} {
+  @media ${mobile2} {
+    display: none;
   }
 `;
 
@@ -82,16 +83,10 @@ export const StyledSlider02 = styled(Slider)`
   width: 100%;
   height: 120%;
 
-  .center {
-    opacity: 0.8;
-    transition: all 0.5s ease-in-out;
-  }
-
-  .slick-center {
-    opacity: 1;
-    transition: all 0.5s ease-in-out;
-    z-index: 2;
-    transform: scale(1.2) translateY(-1%);
+  .slick-list {
+    @media ${mobile} {
+      padding-left: 3px;
+    }
   }
 
   .slick-prev {
@@ -125,18 +120,30 @@ export const StyledSlider02 = styled(Slider)`
 export const NextArrowIcon = styled(ArrowForwardIosIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 4rem);
+  right: calc(100% - 4rem);
+  top: calc(100% - 3rem);
   position: absolute;
   @media ${mobile} {
+    right: 0;
+    top: calc(100% - 4rem);
+  }
+  @media ${mobile2} {
+    display: none;
   }
 `;
 
 export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
   font-size: 3rem;
   z-index: 10;
-  top: calc(100% - 4rem);
+  left: calc(100% - 3rem);
+  top: calc(100% - 3rem);
   position: absolute;
   @media ${mobile} {
+    left: 20px;
+    top: calc(100% - 4rem);
+  }
+  @media ${mobile2} {
+    display: none;
   }
 `;
 
