@@ -52,6 +52,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
+  padding-left: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -70,13 +71,8 @@ export const Wrapper = styled.header`
   }
   @media ${tablet} {
     position: fixed;
-    padding: 1rem;
-    :hover {
-      div,
-      ${Menu}, ${Basket}, ${Payment} {
-        color: #fff;
-      }
-    }
+    top: 0;
+    left: 0;
   }
 `;
 
@@ -101,6 +97,8 @@ export const Wrapper02 = styled.header`
   }
   @media ${tablet} {
     position: fixed;
+    top: 0;
+    left: 0;
   }
 `;
 

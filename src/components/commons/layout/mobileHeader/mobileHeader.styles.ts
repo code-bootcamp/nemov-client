@@ -33,13 +33,27 @@ export const LoginMenu = styled.div`
   text-align: right;
   color: #fff;
   margin-right: 0;
+  cursor: pointer;
 `;
 
-export const LoginMenuItem = styled.div`
+export const LoginMenuItem = styled.p`
   font-size: 1.2rem;
   margin-bottom: 3rem;
   padding: 0.8rem 2.2rem;
   border: 1px solid #fff;
+  color: #fff;
+`;
+
+export const LoginMenuItemFirst = styled(LoginMenuItem)`
+  border-right: none;
+`;
+
+export const SubTitle = styled.h2`
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #fff;
 `;
 
 export const User = styled.div`
@@ -74,23 +88,23 @@ export const UserPoint = styled.p`
   margin-bottom: 3vmax;
 `;
 
-export const HeaderIconItem = styled.div`
-  display: flex;
-  align-items: center;
-  width: 9rem;
-  height: 3rem;
-  color: #000;
-  cursor: pointer;
-  border: 1px solid #000;
-  padding: 1% 2%;
-  background-color: #fff;
-`;
-
 export const IconMenu = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
   width: 100%;
+`;
+
+export const HeaderIconItem = styled.p`
+  display: flex;
+  align-items: center;
+  width: 9rem;
+  height: 3rem;
+  border: 1px solid #fff;
+  padding: 1% 2%;
+  color: #fff;
+  cursor: pointer;
 `;
 
 export const IconName = styled.span`
@@ -98,15 +112,13 @@ export const IconName = styled.span`
 `;
 
 export const Payment = styled(CurrencyExchangeIcon)`
-  color: #000;
-  cursor: pointer;
+  color: #fff;
   font-size: 1.8rem;
   margin-right: 0.5rem;
 `;
 
 export const Basket = styled(ShoppingBagOutlinedIcon)`
-  color: #000;
-  cursor: pointer;
+  color: #fff;
   font-size: 1.8rem;
   margin-right: 0.5rem;
 `;

@@ -21,7 +21,7 @@ export const InnerWrapper = styled(GlobalWrapper)`
   align-items: center;
   padding: 2% 0;
   @media ${tablet} {
-    padding: 3%;
+    padding: 3% 0 3% 3%;
   }
   @media ${mobile} {
     padding: 3% 10%;
@@ -39,6 +39,7 @@ export const InnerWrapper1 = styled(InnerWrapper)`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    font-size: 0.7rem;
   }
 `;
 
@@ -59,7 +60,7 @@ export const RItem = styled.span`
   height: 40px;
   cursor: pointer;
   @media ${mobile} {
-    margin: 0 1.5rem 0 2rem;
+    margin: 0 1rem 0 1rem;
   }
 `;
 
@@ -78,7 +79,7 @@ export const FooterLogo = styled.span``;
 export const FooterDetail = styled.p`
   color: #999;
   font-size: 0.6rem;
-  line-height: 0.8;
+  line-height: 1.2;
 `;
 
 export const FooterRight = styled.div`
