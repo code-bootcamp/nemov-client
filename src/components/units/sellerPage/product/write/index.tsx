@@ -13,6 +13,9 @@ import { categoryContents } from "../register/category";
 import dynamic from "next/dynamic";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { WriteProductSchema } from "./validation";
+const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
+  ssr: false,
+});
 
 interface ProductWriteProps {
   isEdit: boolean;
@@ -42,15 +45,10 @@ interface ProductInput {
   };
 }
 
-const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
-const Option1 = categoryContents[0];
-const Option2 = categoryContents[1];
-
-const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
-  ssr: false,
-});
-
 export default function ProductWrite(props: ProductWriteProps) {
+  const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
+  const Option1 = categoryContents[0];
+  const Option2 = categoryContents[1];
   const { isEdit } = props;
   const router = useRouter();
   const contentsRef = useRef<any>(null);
@@ -61,13 +59,12 @@ export default function ProductWrite(props: ProductWriteProps) {
   const { data: category } = UseQueryFetchCategories();
   const newCategory = category?.fetchProductCategories.filter((el) => el.name !== "전체");
   const beautyCategory = category?.fetchProductCategories.filter((el) => el.name === "뷰티")[0].id;
-
   const [createProduct] = UseMutationCreateProduct();
   const [updateProduct] = UseMutationUpdateProduct();
   const [uploadFile] = UseMutationUploadFile();
-  const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
+  const { query } = UseQueryFetchProduct();
   const data = query.data?.fetchProduct;
-
+  
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
   const { register, handleSubmit, setValue, formState } = useForm<ProductInput>({
@@ -88,12 +85,13 @@ export default function ProductWrite(props: ProductWriteProps) {
       }
     };
   };
+  console.log(data);
 
   useEffect(() => {
     if (data) {
       setValue("name", data.name);
       setValue("description", data.description);
-      setValue("productCategoryId", data.description);
+      // setValue("productCategoryId", data.description);
       setValue("discountRate", data.discountRate);
       setValue("price", data.price);
       setValue("quantity", data.quantity);
@@ -110,12 +108,18 @@ export default function ProductWrite(props: ProductWriteProps) {
       setValue("productOption.option9", data.productOption?.option9);
       setValue("productOption.option10", data.productOption?.option10);
       setValue("productOption.option11", data.productOption?.option11);
+
+      if (data.image) {
+        setImageUrl(data.image);
+      }
     }
   }, [data]);
+
   const onClickGetValue = (event: any) => {
     setValue("productCategoryId", event.target.id);
     setCG(event.target.id);
   };
+
   const onChangeGetOption1 = (option: React.ChangeEvent<HTMLInputElement>) => {
     const property1: any = option.target.id;
     setValue(property1, option.target.value);
@@ -134,12 +138,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     const text = contentsRef?.current?.getInstance().getHTML();
     setValue("description", text === "<p><br><p>" ? "" : text);
   };
-
-  useEffect(() => {
-    if (data?.image) {
-      setImageUrl(data.image);
-    }
-  }, [data]);
 
   const onClickSubmit = async (data: ProductInput) => {
     console.log(data.description);
@@ -274,7 +272,6 @@ export default function ProductWrite(props: ProductWriteProps) {
         <S.OptionsRow>
           <S.OptionsTitle>상세 고시 정보</S.OptionsTitle>
           <S.Options>
-            {/* {Option1.map((option1, index) => ( */}
             <S.NoticeMap>
               <S.Notice>{Option1[0]}</S.Notice>
               <S.NoticeInput
@@ -325,10 +322,8 @@ export default function ProductWrite(props: ProductWriteProps) {
                 onChange={onChangeGetOption1}
               />
             </S.NoticeMap>
-            {/* ))} */}
             {
               cg === beautyCategory && (
-                // Option2.map((option2, index) =>
                 <>
                   <S.NoticeMap>
                     <S.Notice>{Option2[0]}</S.Notice>
@@ -407,7 +402,6 @@ export default function ProductWrite(props: ProductWriteProps) {
                   value={el}
                   name="level"
                   onClick={onClickRadio}
-                  // defaultValue={isEdit ? getValues("veganLevel") : "default"}
                 />
                 <S.Radio>{el}</S.Radio>
               </S.Label>
