@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { amazon, gray } from "../../../../../commons/styles/colorPalettes";
 import SearchIcon from "@mui/icons-material/Search";
 import { Select } from "antd";
-import { mobile, tablet } from "../../../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
 // import * as S from "../../main/MarketMain.styles";
 import { FontStyle03, FontStyle04 } from "./item-display/ItemDisplay.styles";
@@ -12,10 +12,12 @@ export const CategoryMain = styled.main`
   justify-content: center;
   align-items: center;
   margin: 10% 0;
-  @media ${tablet} {
-  }
   @media ${mobile} {
-    padding: 0 5%;
+    margin: 15% 0;
+  }
+  @media ${mobile2} {
+    margin: 25% 0;
+    padding: 0 3%;
   }
 `;
 

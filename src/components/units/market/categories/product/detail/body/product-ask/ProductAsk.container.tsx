@@ -40,9 +40,7 @@ function ProductAsk(props: IProductAskProps) {
               해당 상품에 대한 문의 내용을 확인할 수 있습니다.
             </CS.TabContentSubTitle01>
           </S.TitlesWrapper>
-          <S.QuestionButtonWrapper>
-            <OpenModalButton01 onClick={onClickQuestionWrite} title="문의하기"></OpenModalButton01>
-          </S.QuestionButtonWrapper>
+          <OpenModalButton01 onClick={onClickQuestionWrite} title="문의하기"></OpenModalButton01>
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
           {props.questionsData?.fetchQuestionsByProduct.length === 0 ? (
@@ -76,7 +74,7 @@ function ProductAsk(props: IProductAskProps) {
                     </S.QuestionInfoRight>
                   </CS.ContentListHeader02>
                   <S.QNAContentsSection>
-                    <CS.ContentDetail01>{questions.contents}</CS.ContentDetail01>
+                    <CS.ContentDetail02>{questions.contents}</CS.ContentDetail02>
                     {questions.answer?.contents && (
                       <S.AnswerSection>{questions.answer?.contents}</S.AnswerSection>
                     )}

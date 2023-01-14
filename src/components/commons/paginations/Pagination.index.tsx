@@ -55,7 +55,7 @@ export default function Pagination(
 
   return (
     <S.PageWrapper>
-      <S.PagePrevBtn onClick={onClickPrevPage}>&lt;</S.PagePrevBtn>
+      <S.PagePrevBtn onClick={onClickPrevPage}>&lt;&lt;</S.PagePrevBtn>
       {new Array(10).fill(1).map(
         (_, index) =>
           index + startPage <= lastPage && (
@@ -69,7 +69,7 @@ export default function Pagination(
             </S.PageLi>
           )
       )}
-      <S.PageNextBtn onClick={onClickNextPage}>&gt;</S.PageNextBtn>
+      <S.PageNextBtn onClick={onClickNextPage}>&gt;&gt;</S.PageNextBtn>
     </S.PageWrapper>
   );
 }

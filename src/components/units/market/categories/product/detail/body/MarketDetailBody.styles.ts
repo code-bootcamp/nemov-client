@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../../../../../commons/styles/breakPoints";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
@@ -39,11 +39,17 @@ export const TabContentHeader02 = styled.header`
 export const TabContentTitle01 = styled.h2`
   ${FontStyle01}
   font-size: 2rem;
+  @media ${mobile} {
+    font-size: 2.5rem;
+  }
 `;
 
 export const TabContentSubTitle01 = styled.span`
   color: ${gray};
   font-size: 0.8rem;
+  @media ${mobile2} {
+    width: 100%;
+  }
 `;
 
 export const TabContentInnerWrapper = styled.ul`
@@ -83,13 +89,20 @@ export const HeaderInfo01 = styled.section`
   justify-content: space-between;
   align-items: center;
   gap: 0.8rem;
+  @media ${mobile} {
+    ${flexColumn}
+    justify-content: flex-start;
+    align-items: unset;
+    gap: 0;
+  }
 `;
 
 export const ContentTitle = styled.h3`
   ${FontStyle01}
   font-size: 1.2rem;
   @media ${mobile} {
-    font-size: 1.5rem;
+    margin-bottom: 0;
+    font-size: 1.6rem;
   }
 `;
 
@@ -106,5 +119,12 @@ export const Info02Detail = styled.section`
 export const ContentDetail01 = styled.section`
   width: 100%;
   font-size: 1.2rem;
-  margin: 0.8rem 0;
+  margin-top: 1rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
+`;
+
+export const ContentDetail02 = styled(ContentDetail01)`
+  margin: 1rem 0;
 `;

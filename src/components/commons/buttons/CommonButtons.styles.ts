@@ -22,13 +22,13 @@ export const ButtonStyleSet01 = css`
 
 export const ButtonStyleSet02 = css`
   font-weight: 700;
-  font-size: 14px;
+  font-size: 1rem;
   border: 1px solid ${pastelGray};
 
   ${colorBase02}
 
   @media ${mobile} {
-    font-size: 10px;
+    font-size: 1.2rem;
   }
 `;
 
@@ -55,8 +55,7 @@ export const StyledCommonButton01 = styled.button`
 
 export const StyledCommonButton02 = styled.button`
   ${ButtonStyleSet02}
-  width: 100%;
-  height: 3rem;
+  padding: 0.8rem 1.3rem;
   :hover {
     ${colorBase03}
   }
