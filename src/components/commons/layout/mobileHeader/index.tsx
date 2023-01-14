@@ -71,7 +71,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
         </S.LoginMenu>
         <S.SubTitle>MY</S.SubTitle>
         <S.User>
-          {props.data ? (
+          {accessToken && props.data ? (
             <>
               <S.UserName>
                 {data?.fetchLoginUser.role === "BUYER" && (
