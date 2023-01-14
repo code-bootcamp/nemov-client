@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../../../commons/styles/breakPoints";
 
 export const CategoryWrapper = styled.section`
-  @media ${mobile} {
-    width: 100%;
-    padding-top: 10vmax;
-  }
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: row;
   padding-top: 2rem;
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const Category = styled.div`
@@ -30,10 +29,13 @@ export const Category = styled.div`
 
 export const CategoryTitle = styled.span`
   font-family: "SUIT-SemiBold";
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   @media ${mobile} {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+  @media ${mobile2} {
+    font-size: 1.3rem;
   }
 `;
 

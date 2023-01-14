@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../commons/styles/breakPoints";
 import { amazon } from "../../../commons/styles/colorPalettes";
 
 interface IPaginationsStylesProps {
@@ -33,6 +34,10 @@ export const PageLi = styled.div`
   background-color: ${(props: IPaginationsStylesProps) => (props.isActive ? `${amazon}` : "white")};
   line-height: 30px;
   cursor: pointer;
+
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const PagePrevBtn = styled.button`
@@ -41,6 +46,9 @@ export const PagePrevBtn = styled.button`
   border: 1px solid rgba(221, 221, 221);
   background-color: #fff;
   border-radius: 0;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const PageNextBtn = styled.button`
@@ -57,4 +65,7 @@ export const PageNextBtn = styled.button`
   border-right-color: rgb(221, 221, 221);
   border-bottom-color: rgb(221, 221, 221);
   border-radius: 0;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;

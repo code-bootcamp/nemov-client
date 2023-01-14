@@ -87,7 +87,7 @@ export default function ProductQuestionWrite(props: IProductQuestionWriteProps) 
           </>
         )}
         <S.QuestionButtonWrapper02>
-          <StyledCommonButton02 type="submit" style={{ width: "8rem", height: "3.3rem" }}>
+          <StyledCommonButton02 type="submit">
             문의 {props.isEdit ? "수정하기" : "등록하기"}
           </StyledCommonButton02>
         </S.QuestionButtonWrapper02>

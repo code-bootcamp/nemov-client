@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 
@@ -10,10 +10,8 @@ export const useAuth01 = () => {
   const [accessToken] = useRecoilState(accessTokenState);
 
   // 로그인 체크
-  useEffect(() => {
-    if (accessToken === undefined) {
-      Modal.error({ content: "로그인 후 이용가능합니다." });
-      void router.push("/login");
-    }
-  }, []);
+  if (accessToken === undefined) {
+    Modal.error({ content: "로그인 후 이용가능합니다." });
+    void router.push("/login");
+  }
 };
