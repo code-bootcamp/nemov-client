@@ -51,7 +51,8 @@ export const UserLevel = styled.span`
   height: auto;
   padding: 5px;
   text-align: left;
-  border-radius: 5%;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
   background: #fff;
   color: #648d2a;
   font-size: 1rem;
