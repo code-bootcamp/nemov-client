@@ -10,7 +10,10 @@ import {
   FETCH_PRODUCTS,
   UseQueryFetchProducts,
 } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProducts";
-import { UseQueryFetchProductsCount } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProductsCount";
+import {
+  FETCH_PRODUCTS_COUNT,
+  UseQueryFetchProductsCount,
+} from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProductsCount";
 import { CategoryMain } from "../../../src/components/units/market/categories/list/MarketList.styles";
 import * as CS from "../../../src/components/units/market/categories/category/MarketCategory.styles";
 import MarketList from "../../../src/components/units/market/categories/list/MarketList";
@@ -55,6 +58,10 @@ export default function MarketCategoriesPage() {
       query: FETCH_PRODUCTS,
       variables: { productCategoryId: categoryId, veganLevel: value, page: 1, search: "" },
     });
+    await client.query({
+      query: FETCH_PRODUCTS_COUNT,
+      variables: { productCategoryId: categoryId, veganLevel: value, search: "" },
+    });
   };
 
   const onChangeSearch = (value: string) => {
@@ -63,7 +70,7 @@ export default function MarketCategoriesPage() {
 
   const { data: productsCount, refetch: productsCountRefetch } = UseQueryFetchProductsCount({
     productCategoryId: category,
-    veganLevel: 0,
+    veganLevel: value,
     search,
   });
 
