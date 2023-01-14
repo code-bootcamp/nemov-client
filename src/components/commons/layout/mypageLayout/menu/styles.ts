@@ -9,54 +9,69 @@ export const MyPageMenu = styled.aside`
   flex-direction: column;
   @media ${mobile} {
     flex-direction: row;
+    justify-content: space-between;
     background: rgba(205, 209, 201, 0.2);
     border-radius: 20px;
     width: 100%;
-    padding: 10%;
+    padding: 6% 5% 5% 5%;
   }
 `;
 
 export const MenuHeader = styled.article`
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 1.4rem;
   @media ${mobile} {
-    width: 20%;
+    width: 25%;
+  }
+  @media screen and (max-width: 374px) {
+    width: 30%;
   }
 `;
 
 export const Title = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 100;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 `;
 
 export const User = styled.p`
   font-size: 1.3rem;
+  width: auto;
+  display: inline-block;
 `;
 
 export const UserVeganLevel = styled.span`
-  width: auto;
-  height: auto;
-  padding: 3%;
-  font-size: 0.7rem;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   background-color: #648d2a;
+  margin-top: 15px;
+  display: inline;
   color: #fff;
-  margin-right: 5px;
+  font-size: 0.9rem;
+  width: auto;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    width: auto;
+    margin: 4% 10px 4% 10px;
+  }
 `;
 
 export const UserName = styled.span`
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #255941;
-  @media ${mobile} {
-    color: palevioletred;
+  span {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #255941;
+    display: inline;
   }
 `;
 
 export const FirstLine = styled.div`
   margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
 `;
 
 export const MenuContents = styled.article`
@@ -64,12 +79,15 @@ export const MenuContents = styled.article`
   @media ${mobile} {
     display: flex;
     margin: 0;
-    padding-left: 8%;
+    padding-left: 2%;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-
-    width: 80%;
+    width: 75%;
+  }
+  @media screen and (max-width: 374px) {
+    justify-content: flex-end;
+    width: 70%;
   }
 `;
 
@@ -78,12 +96,16 @@ export const MyShoppingInfo = styled.article`
   @media ${mobile} {
     margin-bottom: 0;
   }
+  @media screen and (max-width: 374px) {
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+  }
 `;
 
 export const Options = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 `;
 
 export const Option = styled.a`

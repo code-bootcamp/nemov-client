@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { mobile } from "../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02, colorBase03 } from "../../../commons/styles/colorBases";
 import { pastelGray } from "../../../commons/styles/colorPalettes";
 
@@ -12,8 +12,11 @@ export const ButtonStyleSet01 = css`
   ${colorBase01}
 
   @media ${mobile} {
-    font-size: larger;
+    font-size: 1.5rem;
     border-radius: 0.9rem;
+  }
+  @media ${mobile2} {
+    font-size: 1.2rem;
   }
 `;
 
@@ -43,9 +46,10 @@ export const ButtonStyleSet03 = css`
 export const StyledCommonButton01 = styled.button`
   ${ButtonStyleSet01}
   width: 100%;
-  height: 3rem;
+  padding: 3% 0;
   @media ${mobile} {
-    height: 4rem;
+  }
+  @media ${mobile2} {
   }
 `;
 

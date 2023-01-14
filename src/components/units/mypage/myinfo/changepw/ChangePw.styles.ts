@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
@@ -31,10 +32,21 @@ export const InputWrapper = styled.div`
   align-items: center;
   gap: 5%;
   padding: 10px 20px;
+
+  @media ${mobile} {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+    gap: 0;
+  }
 `;
 
 export const Label = styled.label`
   width: 25%;
+
+  @media ${mobile} {
+    width: 40%;
+  }
 `;
 
 export const PwInput = styled.input`
@@ -44,6 +56,11 @@ export const PwInput = styled.input`
   border-radius: 4px;
   border: 1px solid #ddd;
   color: rgb(51, 51, 51);
+
+  @media ${mobile} {
+    width: 95%;
+    height: 30px;
+  }
 `;
 
 export const BtnWrapper = styled.div`

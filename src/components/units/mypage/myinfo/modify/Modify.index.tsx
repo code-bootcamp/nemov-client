@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
@@ -9,21 +10,18 @@ import * as S from "./Modify.styles";
 import { IFormUpdateData } from "./Modify.types";
 
 export default function MypageMyinfoModify() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
-
   const { updateUserFunction } = UseMutationUpdateUser();
-  const { data: loginUserData, refetch } = UseQueryFetchLoginUser();
+  const { data: loginUserData } = UseQueryFetchLoginUser();
 
-  console.log(loginUserData);
-
-  // Form
   const { register, handleSubmit, setValue, trigger } = useForm({});
 
   const onSubmitUpdate: SubmitHandler<IFormUpdateData> = async (data: IFormUpdateData) => {
     const { ...value } = data;
     value.veganLevel = Number(value.veganLevel);
-    void updateUserFunction(value);
-    await refetch();
+    await updateUserFunction(value);
+    void router.push("/mypage/orderlist");
   };
 
   // 주소 모달

@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { UseMutationUpdateUserPassword } from "../../../../commons/hooks/useMutations/user/UseMutationUpdateUserPassword";
 import * as S from "./ChangePw.styles";
@@ -6,6 +7,8 @@ import { IFormChangePw } from "./ChangePw.types";
 import { ChangePwSchema } from "./ChangePw.validation";
 
 export default function MypageMyinfoChangePw() {
+  const router = useRouter();
+
   const { updateUserPasswordSubmit } = UseMutationUpdateUserPassword();
 
   const { register, handleSubmit, formState } = useForm<IFormChangePw>({
@@ -15,6 +18,7 @@ export default function MypageMyinfoChangePw() {
 
   const onSubmitForm = (data: IFormChangePw) => {
     void updateUserPasswordSubmit(data);
+    void router.push("/mypage/orderlist");
   };
 
   return (

@@ -1,4 +1,4 @@
-import { SetterOrUpdater } from "recoil";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 import { IQuery } from "../../../../commons/types/generated/types";
 import Link from "next/link";
 import PaymentPage from "../../../units/paymentModal/payment";
@@ -6,6 +6,7 @@ import CommonModal01 from "../../modals/CommonModal01";
 import * as S from "./mobileHeader.styles";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { Dispatch, SetStateAction } from "react";
+import { accessTokenState } from "../../../../commons/stores";
 
 interface ILayoutMobileMenuProps {
   isOpen: boolean;
@@ -15,53 +16,60 @@ interface ILayoutMobileMenuProps {
   setIsOpen: SetterOrUpdater<boolean>;
   paymentPage: () => void;
   setMenuOpen: Dispatch<SetStateAction<boolean>>;
+  onClickSignup: () => void;
 }
 
 export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const { data: userInfo } = UseQueryFetchLoginUser();
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
-
-  const { isOpen, data, onClickPayment, onClickLogout, setIsOpen, paymentPage, setMenuOpen } =
-    props;
+  const [accessToken] = useRecoilState(accessTokenState);
+  const {
+    isOpen,
+    data,
+    onClickPayment,
+    onClickLogout,
+    setIsOpen,
+    paymentPage,
+    setMenuOpen,
+    onClickSignup,
+  } = props;
 
   return (
     <>
       <S.HeaderMenu isOpen={isOpen}>
         <S.LoginMenu>
           {data?.fetchLoginUser.role === "BUYER" ? (
-            <Link href={data ? "/mypage/orderlist" : "/login"}>
+            <Link href={accessToken ? "/mypage/orderlist" : "/login"}>
               <a style={{ cursor: "pointer" }}>
-                <S.LoginMenuItem
+                <S.LoginMenuItemFirst
                   onClick={() => {
                     setMenuOpen(false);
                   }}
                 >
-                  {data ? "MYPAGE" : "LOGIN"}
-                </S.LoginMenuItem>
+                  {accessToken ? "MYPAGE" : "LOGIN"}
+                </S.LoginMenuItemFirst>
               </a>
             </Link>
           ) : (
-            <Link href={data ? "/seller" : "/login"}>
+            <Link href={accessToken ? "/seller" : "/login"}>
               <a style={{ cursor: "pointer" }}>
                 <S.LoginMenuItem
                   onClick={() => {
                     setMenuOpen(false);
                   }}
                 >
-                  {data ? "SELLER" : "LOGIN"}
+                  {accessToken ? "SELLER" : "LOGIN"}
                 </S.LoginMenuItem>
               </a>
             </Link>
           )}
           <a style={{ cursor: "pointer" }}>
-            <Link href={data ? "/market" : "/signup"}>
-              <S.LoginMenuItem onClick={data && onClickLogout}>
-                {data ? "LOGOUT" : "SIGNUP"}
-              </S.LoginMenuItem>
-            </Link>
+            <S.LoginMenuItem onClick={accessToken ? onClickLogout : onClickSignup}>
+              {accessToken ? "LOGOUT" : "SIGNUP"}
+            </S.LoginMenuItem>
           </a>
         </S.LoginMenu>
-        <h4>MY</h4>
+        <S.SubTitle>MY</S.SubTitle>
         <S.User>
           {props.data ? (
             <>
@@ -100,7 +108,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             <h1>로그인해주세요</h1>
           )}
         </S.User>
-        <h4>CATEGORY</h4>
+        <S.SubTitle>CATEGORY</S.SubTitle>
         <S.NavWrapper>
           <Link href={"/"}>
             <S.Menu

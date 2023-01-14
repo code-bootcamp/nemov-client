@@ -84,9 +84,9 @@ function CartModal(props: ICartModalProps) {
         <MS.PQuantitySelectSection>
           <MS.DetailInfoTitle01>{props.curProductData?.name}</MS.DetailInfoTitle01>
           <MS.PQRightButtons>
-            <MS.Numbers>{sum.toLocaleString()}원</MS.Numbers>
+            <MS.Number02>{sum.toLocaleString()}원</MS.Number02>
             <CountDownBtn type="button" onClick={onClickQuantityDown} disabled={isDisabled} />
-            <MS.Numbers>{props.quantity}</MS.Numbers>
+            <MS.Number01>{props.quantity}</MS.Number01>
             <CountUpBtn type="button" onClick={onClickQuantityUp} />
           </MS.PQRightButtons>
         </MS.PQuantitySelectSection>

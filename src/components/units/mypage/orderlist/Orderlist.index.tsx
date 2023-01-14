@@ -14,8 +14,10 @@ export default function MypageOrderlist() {
   const { RangePicker } = DatePicker;
 
   const date = String(new Date());
-  const [startDate, setStartDate] = useState("2023-1-01");
-  const [endDate, setEndDate] = useState(getDate(date));
+  const [startDate] = useState("2023-1-01");
+  const [endDate] = useState(getDate(date));
+  const [searchStartDate, setSearchStartDate] = useState("");
+  const [searchEndDate, setSearchEndDate] = useState("");
 
   const [cancelProductOrder] = UseMutationCancelProductOrder();
   const { data, refetch } = UseQueryFetchProductOrdersByBuyer({
@@ -24,22 +26,21 @@ export default function MypageOrderlist() {
     page: 1,
   });
 
-  const { data: dataCount } = UseQueryFetchProductOrdersCountByBuyer({
+  const { data: dataCount, refetch: refetchCount } = UseQueryFetchProductOrdersCountByBuyer({
     startDate,
     endDate,
   });
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
-    setStartDate(dateStrings[0]);
-    setEndDate(dateStrings[1]);
+    setSearchStartDate(dateStrings[0]);
+    setSearchEndDate(dateStrings[1]);
   };
 
   const onClickSearchDate = () => {
-    if (data === undefined) return;
-    void refetch({ startDate, endDate, page: 1 });
+    void refetch({ startDate: searchStartDate, endDate: searchEndDate, page: 1 });
+    void refetchCount({ startDate: searchStartDate, endDate: searchEndDate });
   };
 
-  // 주문 취소
   const onClickCancelOrder = (productOrderId: string) => async (e: React.MouseEvent) => {
     try {
       await cancelProductOrder({
@@ -55,6 +56,7 @@ export default function MypageOrderlist() {
 
   return (
     <S.ContentsMain>
+      <S.Title>주문/취소 내역</S.Title>
       <S.ShoppingLookup>
         <Space direction="vertical" size={12} style={{ marginRight: "10px" }}>
           <RangePicker onChange={onChangeDate} />
@@ -66,7 +68,9 @@ export default function MypageOrderlist() {
           <>
             {data?.fetchProductOrdersByBuyer.map((order, index) => (
               <S.OrderHistory key={index}>
-                <S.Date>{getDate(order.createdAt)}</S.Date>
+                <S.Date>
+                  {order.updatedAt ? getDate(order.updatedAt) : getDate(order.createdAt)}
+                </S.Date>
                 <S.OrderInfo>
                   <S.ItemImg src={order.product.image} alt="상품 이미지" />
                   <S.ItemName>{order.product.name}</S.ItemName>

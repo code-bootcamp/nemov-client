@@ -61,17 +61,20 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
           회원정보가 삭제됩니다. 정말로 탈퇴하시겠습니까?
         </h3>
       </Modal>
+
       <S.MyPageMenu>
         <S.MenuHeader>
           <S.Title>마이페이지</S.Title>
           <S.User>
             <S.FirstLine>
+              <S.UserName>
+                <span>{props.data?.fetchLoginUser.name}</span>님
+              </S.UserName>
+              안녕하세요!
               <S.UserVeganLevel>
-                {VeganLevels[props.data?.fetchLoginUser.veganLevel - 1]}
+                <span>{VeganLevels[props.data?.fetchLoginUser.veganLevel - 1]}</span>
               </S.UserVeganLevel>
-              <S.UserName>{props.data?.fetchLoginUser.name}</S.UserName>님 <br />
             </S.FirstLine>
-            안녕하세요!
           </S.User>
         </S.MenuHeader>
         <S.HR />
@@ -87,9 +90,6 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             <Link href="/mypage/picked">
               <S.Option>찜한 상품</S.Option>
             </Link>
-            <Link href="/mypage/qna">
-              <S.ManageOptions>나의 문의내역</S.ManageOptions>
-            </Link>
           </S.MyShoppingInfo>
           <S.MyShoppingList>
             <S.Options>나의 쇼핑내역</S.Options>
@@ -98,6 +98,9 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
             </Link>
             <Link href="/mypage/reviews">
               <S.Option>상품 후기</S.Option>
+            </Link>
+            <Link href="/mypage/qna">
+              <S.ManageOptions>나의 문의내역</S.ManageOptions>
             </Link>
           </S.MyShoppingList>
 

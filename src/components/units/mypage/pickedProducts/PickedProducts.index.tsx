@@ -26,7 +26,6 @@ export default function MypagePicked() {
   const { data: dataCount } = UseQueryFetchProductsIPickedCount();
   const { productPick } = UseMutationToggleProductPick();
 
-  // 찜한 상품 삭제
   const onClickDeletePick = (productId: string) => async (e: React.MouseEvent) => {
     try {
       await productPick(productId);
@@ -36,7 +35,6 @@ export default function MypagePicked() {
     }
   };
 
-  // 장바구니 담기
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {
     const cartModalItem = data?.fetchProductsIPicked.filter((cur) => {
       if (cur.id === id) {

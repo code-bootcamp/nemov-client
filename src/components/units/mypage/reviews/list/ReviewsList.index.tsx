@@ -72,7 +72,9 @@ export default function ReviewsList() {
                   <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
                   <S.ReviewCenterWrapper>
                     <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
-                    <S.ReviewDate>{getDate(reviews.createdAt)}</S.ReviewDate>
+                    <S.ReviewDate>
+                      {reviews.updatedAt ? getDate(reviews.updatedAt) : getDate(reviews.createdAt)}
+                    </S.ReviewDate>
                     <S.ReviewContent>{reviews.title}</S.ReviewContent>
                     <S.ReviewContent>{reviews.contents}</S.ReviewContent>
                   </S.ReviewCenterWrapper>

@@ -31,8 +31,8 @@ export const FETCH_POINT_TRANSACTIONS = gql`
 `;
 
 export const FETCH_POINT_TRANSACTIONS_COUNT = gql`
-  query fetchPointTransactionsCount {
-    fetchPointTransactionsCount
+  query fetchPointTransactionsCount($startDate: DateTime, $endDate: DateTime) {
+    fetchPointTransactionsCount(startDate: $startDate, endDate: $endDate)
   }
 `;
 

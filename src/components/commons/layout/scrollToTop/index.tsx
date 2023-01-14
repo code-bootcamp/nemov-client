@@ -6,7 +6,7 @@ const ScrollWrap = styled.div`
   bottom: 2rem;
   right: 2rem;
   cursor: pointer;
-  z-index: 1;
+  z-index: 0;
 `;
 
 const TopBtn = styled.button`

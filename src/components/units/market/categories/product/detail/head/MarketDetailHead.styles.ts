@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../../../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../../../../../commons/styles/breakPoints";
 import { gray, pastelGray } from "../../../../../../../commons/styles/colorPalettes";
 import { flexColumn, flexRow } from "../../../../../../../commons/styles/globalStyles";
 
@@ -31,6 +31,14 @@ export const ProductDetailImage01 = styled.img`
   @media ${mobile} {
     width: 80%;
   }
+  @media ${mobile2} {
+    width: 100%;
+  }
+`;
+
+export const ProductDetailImageAlt = styled(ProductDetailImage01)`
+  background-color: white;
+  border: none;
 `;
 
 export const ProductDetailAside01 = styled.aside`
@@ -38,6 +46,9 @@ export const ProductDetailAside01 = styled.aside`
   ${flexColumn}
   @media ${mobile} {
     width: 80%;
+  }
+  @media ${mobile2} {
+    width: 90%;
   }
 `;
 
@@ -50,14 +61,14 @@ export const ProductBrandName01 = styled.span`
   color: ${gray};
   margin-bottom: 0.5rem;
   @media ${mobile} {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `;
 
 export const ProductName01 = styled.h2`
   font-size: 2rem;
   @media ${mobile} {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 `;
 
@@ -85,7 +96,7 @@ export const ProductOriginalPrice01 = styled.span`
   color: ${gray};
   text-decoration: line-through;
   @media ${mobile} {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -111,6 +122,12 @@ export const DetailInfoTitle01 = styled.span`
   width: 50%;
   @media ${mobile} {
     font-size: 1.7rem;
+  }
+  @media ${tablet} {
+    font-size: 1.4rem;
+  }
+  @media (max-width: 360px) {
+    width: 67%;
   }
 `;
 
@@ -156,10 +173,25 @@ export const PQRightButtons = styled.div`
   }
 `;
 
-export const Numbers = styled.span`
+export const Number01 = styled.span`
   font-size: 1rem;
   @media ${mobile} {
     font-size: 1.5rem;
+  }
+  @media ${tablet} {
+    font-size: 1.2rem;
+  }
+`;
+
+export const Number02 = styled(Number01)`
+  @media ${mobile2} {
+    display: none;
+  }
+  @media ${mobile} {
+    font-size: 1.3rem;
+  }
+  @media ${tablet} {
+    font-size: 1.2rem;
   }
 `;
 

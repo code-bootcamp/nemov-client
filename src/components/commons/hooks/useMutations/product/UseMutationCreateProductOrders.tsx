@@ -4,14 +4,8 @@ import {
   IMutation,
   IMutationCreateProductOrdersArgs,
 } from "../../../../../commons/types/generated/types";
-// import { IProductOrdersData } from "../../../../units/market/Market.types";
 import { FETCH_CART } from "../../useQueries/product/UseQueryFetchCart";
-// import { UseQueryFetchProduct } from "../../useQueries/product/UseQueryFetchProduct";
-
-// interface IValue {
-//   productId: string;
-//   quantity: number;
-// }
+import { FETCH_CART_COUNT } from "../../useQueries/product/UseQueryFetchCartCount";
 
 export const CREATE_PRODUCT_ORDERS = gql`
   mutation createProductOrders($productOrders: [CreateProductOrderInput!]!, $amount: Int!) {
@@ -23,7 +17,9 @@ export const UseMutationCreateProductOrders = () => {
   const [createProductOrders] = useMutation<
     Pick<IMutation, "createProductOrders">,
     IMutationCreateProductOrdersArgs
-  >(CREATE_PRODUCT_ORDERS, { refetchQueries: [{ query: FETCH_CART }] });
+  >(CREATE_PRODUCT_ORDERS, {
+    refetchQueries: [{ query: FETCH_CART }, { query: FETCH_CART_COUNT }],
+  });
 
   const buyProduct = async (value: any, amount: number) => {
     try {
@@ -36,6 +32,7 @@ export const UseMutationCreateProductOrders = () => {
       Modal.success({ content: "상품 구매가 완료되었습니다." });
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
+      Modal.error({ content: "상품 구매에 실패했습니다. 다시 시도해주세요." });
     }
   };
 
@@ -43,20 +40,14 @@ export const UseMutationCreateProductOrders = () => {
     try {
       await createProductOrders({
         variables: {
-          // productOrders: [
-          //   {
-          //     productId: value.productId,
-          //     quantity: value.quantity,
-          //   },
-          // ],
           productOrders: value,
-          // 총 상품 금액
           amount,
         },
       });
       Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
+      Modal.error({ content: "전체 상품 구매에 실패했습니다. 다시 시도해주세요." });
     }
   };
 

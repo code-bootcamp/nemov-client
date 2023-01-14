@@ -14,8 +14,10 @@ export default function MypagePoint() {
 
   const date = String(new Date());
 
-  const [startDate, setStartDate] = useState("2023-1-01");
-  const [endDate, setEndDate] = useState(getDate(date));
+  const [startDate] = useState("2023-1-01");
+  const [endDate] = useState(getDate(date));
+  const [searchStartDate, setSearchStartDate] = useState("");
+  const [searchEndDate, setSearchEndDate] = useState("");
 
   const [cancelPointCharge] = UseMutationCancelPointCharge();
   const { data, refetch } = UseQueryFetchPointTransactions({
@@ -24,17 +26,16 @@ export default function MypagePoint() {
     page: 1,
   });
 
-  const { data: dataCount } = UseQueryFetchPointTransactionsCount();
+  const { data: dataCount, refetch: refetchCount } = UseQueryFetchPointTransactionsCount();
 
   const onChangeDate = (value: any, dateStrings: [string, string]) => {
-    setStartDate(dateStrings[0]);
-    setEndDate(dateStrings[1]);
+    setSearchStartDate(dateStrings[0]);
+    setSearchEndDate(dateStrings[1]);
   };
 
-  const onClickSearchDate = () => {
-    if (data === undefined) return;
-
-    void refetch({ startDate, endDate, page: 1 });
+  const onClickSearchDate = async () => {
+    await refetch({ startDate: searchStartDate, endDate: searchEndDate, page: 1 });
+    await refetchCount({ startDate: searchStartDate, endDate: searchEndDate });
   };
 
   const onClickCancelCharge = async (e: React.MouseEvent) => {
@@ -54,12 +55,10 @@ export default function MypagePoint() {
     <S.ContentsMain>
       <S.Title>포인트 내역</S.Title>
       <S.ShoppingLookup>
-        <div>
-          <Space direction="vertical" size={12} style={{ marginRight: "10px" }}>
-            <RangePicker onChange={onChangeDate} />
-          </Space>
-          <S.ManageBtn onClick={onClickSearchDate}>조회</S.ManageBtn>
-        </div>
+        <Space direction="vertical" size={12} style={{ marginRight: "10px" }}>
+          <RangePicker onChange={onChangeDate} />
+        </Space>
+        <S.ManageBtn onClick={onClickSearchDate}>조회</S.ManageBtn>
       </S.ShoppingLookup>
       <section>
         <S.TableTop>

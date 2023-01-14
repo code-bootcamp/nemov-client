@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
 import { deepGreen } from "./colorPalettes";
-import { mobile, tablet } from "./breakPoints";
+import { mobile, mobile2, tablet } from "./breakPoints";
 
 export const globalStyles = css`
   * {
@@ -144,4 +144,7 @@ export const GlobalWrapper = styled.main`
   width: 100%;
   padding: 3%;
   max-width: 1200px;
+  @media ${mobile2} {
+    padding: 3% 0;
+  }
 `;

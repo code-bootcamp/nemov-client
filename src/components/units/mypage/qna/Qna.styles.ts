@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../commons/styles/breakPoints";
 import { colorBase01 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 
@@ -10,6 +11,12 @@ export const Title = styled.h2`
   font-size: 1.6rem;
   line-height: 1.4;
   padding-bottom: 20px;
+
+  @media ${mobile} {
+    text-align: center;
+    padding-bottom: 0;
+    margin: 20px 0;
+  }
 `;
 
 export const QnaWrapper = styled.ul`
@@ -45,7 +52,7 @@ export const TitleBtnWrap = styled.div`
 `;
 
 export const QnaTitle = styled.h3`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 0;
 `;
@@ -63,6 +70,7 @@ export const NameDateWrap = styled.div`
 export const QnaItemName = styled.p`
   text-align: center;
   margin-right: 30px;
+  font-size: 1.3rem;
 `;
 
 export const QnaDate = styled.p`
@@ -71,9 +79,10 @@ export const QnaDate = styled.p`
 `;
 
 export const QnaContents = styled.textarea`
+  font-size: 1.2rem;
   resize: none;
   width: 100%;
-  height: auto;
+  min-height: 120px;
   padding: 2%;
   outline: none;
   border: 1px solid #ddd;
@@ -88,25 +97,36 @@ export const BtnWrapper = styled.div`
 `;
 
 export const EditBtn = styled.button`
-  min-width: 70px;
-  height: 36px;
+  width: 70px;
+  padding: 12px 35px;
   font-size: 1rem;
   text-align: center;
-  line-height: 34px;
   color: white;
   ${colorBase01}
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+
+  @media ${mobile} {
+    width: 50px;
+    padding: 5px;
+  }
 `;
 
 export const DeleteBtn = styled.button`
-  min-width: 70px;
-  height: 36px;
+  width: 70px;
+  padding: 12px 35px;
   font-size: 1rem;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 50px;
   margin-left: 10px;
+  font-size: 1.1rem;
+
+  @media ${mobile} {
+    width: 50px;
+    padding: 5px;
+  }
 `;
 
 export const AnswerBtn = styled.button`
@@ -128,15 +148,16 @@ export const AnswerWrapper = styled.div`
 
 export const AnswerTitle = styled.h3`
   color: ${amazon};
-  font-size: 1.2rem;
+  font-size: 1.3em;
   font-weight: bold;
   margin-bottom: 0;
 `;
 
 export const AnswerContents = styled.textarea`
+  font-size: 1.2rem;
   resize: none;
   width: 100%;
-  height: 150px;
+  min-height: 110px;
   padding: 2%;
   outline: none;
   border: 1px solid #ddd;
