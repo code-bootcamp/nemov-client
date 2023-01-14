@@ -1,7 +1,8 @@
-import { Modal } from "antd";
+import { message } from "antd";
 import Head from "next/head";
 import { ChangeEvent, useState } from "react";
 import { SetterOrUpdater } from "recoil";
+import { IQuery } from "../../../commons/types/generated/types";
 import { UseMutationCreatePointCharge } from "../../commons/hooks/useMutations/point/UseMutationCreatePointCharge";
 import * as S from "./payment.styles";
 
@@ -11,12 +12,15 @@ declare const window: typeof globalThis & {
 
 interface PaymentProps {
   setIsOpen: SetterOrUpdater<boolean>;
+  data?: Pick<IQuery, "fetchLoginUser"> | undefined;
 }
 
 export default function PaymentPage(props: PaymentProps) {
   const [point, setPoint] = useState(0);
 
   const [createPointCharge] = UseMutationCreatePointCharge();
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onClickPayment = () => {
     const IMP = window.IMP; // 생략 가능
@@ -29,19 +33,18 @@ export default function PaymentPage(props: PaymentProps) {
         pg: "nice",
         pay_method: "card", // card, vbank 등
         // merchant_uid: "ORD20180131-0000011", // 중복될 시, 결제 안됨!
-        name: "노르웨이 회전 의자",
+        name: "네모비 포인트 충전",
         amount: point,
-        buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
-        buyer_tel: "010-4242-4242",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181",
+        buyer_email: props.data?.fetchLoginUser.email,
+        buyer_name: props.data?.fetchLoginUser.name,
+        buyer_tel: props.data?.fetchLoginUser.phone,
+        buyer_addr: props.data?.fetchLoginUser.address,
+        buyer_postcode: props.data?.fetchLoginUser.zipCode,
         m_redirect_url: "http://localhost:3000/mypage/", // 모바일에서는 결제시, 결제페이지로 사이트가 이동됨
       },
       (rsp: any) => {
         if (rsp.success) {
           console.log(rsp.imp_uid, rsp);
-          alert("결제에 성공하셨습니다!");
           try {
             void createPointCharge({
               variables: {
@@ -49,12 +52,27 @@ export default function PaymentPage(props: PaymentProps) {
                 amount: point,
               },
             });
+            void messageApi.open({
+              type: "success",
+              content: "결제가 완료되었습니다.",
+              duration: 5,
+            });
           } catch (error) {
-            if (error instanceof Error) Modal.error({ content: error.message });
+            if (error instanceof Error) {
+              void messageApi.open({
+                type: "error",
+                content: `${error.message}`,
+                duration: 5,
+              });
+            }
           }
           props.setIsOpen(false);
         } else {
-          alert("결제에 실패했습니다! 다시 시도해 주세요!");
+          void messageApi.open({
+            type: "error",
+            content: "결제를 실패했습니다.",
+            duration: 5,
+          });
           props.setIsOpen(false);
         }
       }
@@ -102,6 +120,7 @@ export default function PaymentPage(props: PaymentProps) {
           +100,000
         </S.SelectBoxLast>
       </S.SelectBoxWrap>
+      {contextHolder}
       <S.PaymentBtn onClick={onClickPayment}>충전하기</S.PaymentBtn>
     </S.Wrapper>
   );

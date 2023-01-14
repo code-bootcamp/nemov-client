@@ -30,7 +30,6 @@ export default function MarketCategoriesPage() {
 
   const [search, setSearch] = useState("");
 
-  // console.log("라우터 쿼리 넘버", router.query);
   const {
     data: productsData,
     fetchMore: productsFetchMore,

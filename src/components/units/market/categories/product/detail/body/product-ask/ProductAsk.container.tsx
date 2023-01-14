@@ -11,7 +11,6 @@ import { Modal } from "antd";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
 
 function ProductAsk(props: IProductAskProps) {
-  console.log("상품 문의 컴포넌트 랜더링");
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -65,12 +64,15 @@ function ProductAsk(props: IProductAskProps) {
                     </S.QuestionInfoLeft>
                     <S.QuestionInfoRight>
                       {!questions.answer ? (
-                        <S.AnswerStatus data={questions.answer}>답변대기</S.AnswerStatus>
+                        <S.AnswerStatus data={questions.answer}>
+                          답변대기 <S.AnswerWaiting />
+                        </S.AnswerStatus>
                       ) : (
-                        <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
+                        <S.AnswerStatus data={questions.answer}>
+                          답변완료
+                          <S.AnswerCompleted />
+                        </S.AnswerStatus>
                       )}
-
-                      <S.AnswerStatusIcon data={questions.answer} />
                     </S.QuestionInfoRight>
                   </CS.ContentListHeader02>
                   <S.QNAContentsSection>

@@ -20,7 +20,7 @@ interface ICartModalProps {
 }
 
 function CartModal(props: ICartModalProps) {
-  console.log("장바구니 페이지가 리랜더링 됩니다.");
+  // console.log("장바구니 페이지가 리랜더링 됩니다.");
   const accessToken = useRecoilValue(accessTokenState);
 
   const [isDisabled, setIsDisabled] = useState(false);

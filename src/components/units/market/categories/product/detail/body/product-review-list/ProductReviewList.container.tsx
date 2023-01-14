@@ -7,8 +7,7 @@ import { getDate } from "../../../../../../../../commons/libraries/utilies";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
 
 function ProductReviewList(props: IProductReviewListProps) {
-  // console.log(props.reviewsData);
-  console.log("상품 리뷰 컴포넌트 랜더링");
+  // console.log("상품 리뷰 컴포넌트 랜더링");
 
   return (
     <CS.TabContentMain01>

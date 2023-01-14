@@ -19,7 +19,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../../../../commons/stores";
 
 function MarketDetailHead(props: IMarketDetailHeadProps) {
-  console.log("마켓 상세 페이지 헤드 랜더링");
+  // console.log("마켓 상세 페이지 헤드 랜더링");
   const { productPick } = UseMutationToggleProductPick();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
 

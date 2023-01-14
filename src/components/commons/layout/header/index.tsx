@@ -89,7 +89,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
                   <S.Payment onClick={onClickPayment} />
                   <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
-                    <PaymentPage setIsOpen={setIsOpen} />
+                    <PaymentPage setIsOpen={setIsOpen} data={data} />
                   </CommonModal01>
                 </S.HeaderMenuItem>
                 <Link href="/mypage/basket">
@@ -156,7 +156,7 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
                 <S.HeaderMenuItem isShowBanner={props.isShowBanner}>
                   <S.Payment onClick={onClickPayment} />
                   <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
-                    <PaymentPage setIsOpen={setIsOpen} />
+                    <PaymentPage setIsOpen={setIsOpen} data={data} />
                   </CommonModal01>
                 </S.HeaderMenuItem>
                 <Link href="/mypage/basket">
