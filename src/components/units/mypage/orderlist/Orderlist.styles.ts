@@ -1,8 +1,20 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
+import { amazon } from "../../../../commons/styles/colorPalettes";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
+`;
+
+export const Title = styled.h2`
+  font-size: 1.6rem;
+  line-height: 1.4;
+
+  @media ${mobile} {
+    text-align: center;
+    margin: 20px 0;
+  }
 `;
 
 export const ShoppingLookup = styled.article`
@@ -10,6 +22,35 @@ export const ShoppingLookup = styled.article`
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 2.5rem;
+
+  .ant-picker {
+    :hover {
+      border-color: #d9d9d9;
+      box-shadow: none;
+    }
+
+    @media ${mobile} {
+      width: 100%;
+    }
+  }
+  .ant-picker-focused {
+    border-color: transparent;
+    box-shadow: 0 0 0 1px ${amazon};
+  }
+  .ant-picker-input > input {
+    ::placeholder {
+    }
+    border: none;
+  }
+  .ant-picker-active-bar {
+    background: ${amazon};
+  }
+  .ant-space-vertical {
+    width: 50%;
+  }
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const ManageBtn = styled.button`
@@ -18,7 +59,11 @@ export const ManageBtn = styled.button`
   border-radius: 8px;
   padding: 0.5rem 1rem;
   border: none;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+
+  @media ${mobile} {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 export const SelectTerm = styled.ul`
@@ -76,6 +121,11 @@ export const ItemName = styled.p`
   font-weight: bold;
   margin-bottom: 0;
   text-align: center;
+  padding: 0 8px;
+
+  @media ${mobile} {
+    font-size: 1.1rem;
+  }
 `;
 
 export const ItemInfo = styled.p`
@@ -90,10 +140,19 @@ export const CancelBtn = styled.button`
   padding: 12px 8px;
   border-radius: 50px;
   ${colorBase01}
+
+  @media ${mobile} {
+    width: 60px;
+    padding: 8px 4px;
+  }
 `;
 
 export const Area = styled.div`
   width: 80px;
+
+  @media ${mobile} {
+    width: 60px;
+  }
 `;
 
 export const NoOrderText = styled.p`
@@ -115,11 +174,52 @@ export const MoveBtn = styled.button`
   height: 60px;
   font-size: 1rem;
   font-weight: 500;
-  line-height: 58px;
   padding: 10px 35px;
   font-size: 1rem;
   line-height: 34px;
   ${colorBase02}
   border-radius: 50px;
   border: 1px solid #ddd;
+  margin: 20px 0;
+
+  @media ${mobile} {
+    padding: 10px;
+  }
+`;
+
+export const SeletctDateWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  .ant-picker {
+    :hover {
+      border-color: #d9d9d9;
+      box-shadow: none;
+    }
+
+    @media ${mobile} {
+      width: 100%;
+    }
+  }
+  .ant-picker-focused {
+    border-color: transparent;
+    box-shadow: 0 0 0 1px ${amazon};
+  }
+  .ant-picker-input > input {
+    ::placeholder {
+    }
+    border: none;
+  }
+  .ant-picker-active-bar {
+    background: ${amazon};
+  }
+  .ant-space-vertical {
+    width: 50%;
+  }
+  @media ${mobile} {
+    width: 100%;
+  }
 `;

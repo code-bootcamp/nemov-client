@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile, mobile2, tablet } from "../../../../commons/styles/breakPoints";
 
 interface IReviewsListStylesProps {
   isSelected: boolean;
@@ -12,10 +13,20 @@ export const Title = styled.h2`
   font-size: 1.6rem;
   line-height: 1.4;
   padding-bottom: 2.5rem;
+
+  @media ${mobile} {
+    text-align: center;
+    padding-bottom: 0;
+    margin: 20px 0;
+  }
 `;
 
 export const TabWrapper = styled.div`
   width: 100%;
+
+  @media ${mobile} {
+    margin-top: 40px;
+  }
 `;
 
 export const Tabs = styled.ul`
@@ -39,6 +50,17 @@ export const Line = styled.div`
   transition: all 0.4s ease;
 
   opacity: ${(props: IReviewsListStylesProps) => (props.isSelected ? "1" : "0")};
+
+  @media ${mobile} {
+    top: 6px;
+  }
+
+  @media ${tablet} {
+    margin-top: 21px;
+  }
+  @media ${mobile2} {
+    width: 173px;
+  }
 `;
 
 export const Tab = styled.li`

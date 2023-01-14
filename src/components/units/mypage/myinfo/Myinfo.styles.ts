@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile } from "../../../../commons/styles/breakPoints";
 import { colorBase01 } from "../../../../commons/styles/colorBases";
 
 export const ContentsMain = styled.section`
@@ -28,6 +29,10 @@ export const ConfirmInnerWrapper = styled.div`
   padding: 7px 60px 7px 120px;
   border-top: 2px solid rgb(51, 51, 51);
   border-bottom: 1px solid rgb(221, 221, 221);
+
+  @media ${mobile} {
+    padding: 16px 8px;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -36,10 +41,15 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 export const Label = styled.label`
   width: 15%;
+
+  @media ${mobile} {
+    width: 25%;
+  }
 `;
 
 export const ConfirmInput = styled.input`
@@ -47,14 +57,21 @@ export const ConfirmInput = styled.input`
   height: 46px;
   border: 1px solid #ddd;
   padding: 0px 11px 1px 15px;
+
+  @media ${mobile} {
+    width: 100%;
+  }
 `;
 
 export const ConfirmBtn = styled.button`
-  padding: 0px 10px;
-  text-align: center;
   width: 240px;
-  height: 56px;
+  padding: 14px 35px;
+  text-align: center;
   color: white;
   ${colorBase01}
   margin-top: 2.5rem;
+
+  @media ${mobile} {
+    width: 150px;
+  }
 `;

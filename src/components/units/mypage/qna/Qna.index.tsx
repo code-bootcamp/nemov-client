@@ -86,7 +86,9 @@ export default function MypageQna() {
                     </S.TitleBtnWrap>
                     <S.NameDateWrap>
                       <S.QnaItemName>{qna.product.name}</S.QnaItemName>
-                      <S.QnaDate>{getDate(qna.createdAt)}</S.QnaDate>
+                      <S.QnaDate>
+                        {qna.updatedAt ? getDate(qna.updatedAt) : getDate(qna.createdAt)}
+                      </S.QnaDate>
                     </S.NameDateWrap>
                   </S.InnerWrap>
                   <S.QnaContents disabled value={qna.contents} />
