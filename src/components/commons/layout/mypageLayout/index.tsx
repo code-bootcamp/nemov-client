@@ -29,7 +29,7 @@ export default function MypageLayout({ children }: MypageLayoutProps) {
 const MypageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 100px;
+  margin-top: 90px;
   @media ${mobile} {
     flex-direction: column;
   }
