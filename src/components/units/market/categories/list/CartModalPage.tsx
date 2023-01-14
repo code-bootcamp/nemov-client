@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { message, Modal } from "antd";
 import React, { useCallback, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/stores";
@@ -25,6 +25,7 @@ function CartModal(props: ICartModalProps) {
 
   const [isDisabled, setIsDisabled] = useState(false);
   const { toggleProductToCart } = UseMutationToggleProductToCart();
+  const [messageApi, contextHolder] = message.useMessage();
   const sum = (props.curProductData?.discountedPrice ?? 0) * props.quantity;
 
   const onClickQuantityDown = (e: React.MouseEvent) => {
@@ -61,11 +62,19 @@ function CartModal(props: ICartModalProps) {
         const status = result?.data?.toggleProductToCart;
         // console.log(status);
         if (status === true && accessToken) {
-          Modal.success({ content: "장바구니에 상품을 담았습니다." });
+          void messageApi.open({
+            type: "success",
+            content: "상품을 장바구니에 담았습니다.",
+            duration: 5,
+          });
           props.setIsOpen(false);
           props.setQuantity(1);
         } else if (status === false && accessToken) {
-          Modal.error({ content: "해당 상품이 장바구니에서 삭제되었습니다." });
+          void messageApi.open({
+            type: "error",
+            content: "상품이 장바구니에서 삭제되었습니다.",
+            duration: 5,
+          });
           props.setIsOpen(false);
         }
       } catch (error) {
@@ -95,6 +104,7 @@ function CartModal(props: ICartModalProps) {
           <MS.PriceSumDetail01>{sum.toLocaleString()}원</MS.PriceSumDetail01>
         </MS.PriceSumSection01>
         <MS.ButtonsWrapper01 style={{ marginTop: "2rem" }}>
+          {contextHolder}
           <StyledCommonButton01
             style={{ width: "40%" }}
             onClick={onClickToggleProductToCart(String(props.curProductData?.id))}
