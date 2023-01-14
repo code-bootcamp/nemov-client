@@ -30,6 +30,7 @@ export default function Pagination(
 ) {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
+  console.log(props.count);
   const lastPage = props.count !== null ? Math.ceil(Number(props.count) / 10) : 0;
 
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {

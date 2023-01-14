@@ -84,13 +84,13 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               <S.UserPoint>포인트 : {userInfo?.fetchLoginUser.point.toLocaleString()}P</S.UserPoint>
               {data?.fetchLoginUser.role === "BUYER" && (
                 <S.IconMenu>
-                  <S.HeaderIconItem>
+                  <S.HeaderIconItemFirst>
                     <S.Payment onClick={onClickPayment} />
                     <S.IconName onClick={onClickPayment}>충전하기</S.IconName>
                     <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                       <PaymentPage setIsOpen={setIsOpen} />
                     </CommonModal01>
-                  </S.HeaderIconItem>
+                  </S.HeaderIconItemFirst>
                   <Link href="/mypage/basket">
                     <S.HeaderIconItem
                       onClick={() => {

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { getDate } from "../../../../../commons/libraries/utilies";
 import { GlobalWrapper } from "../../../../../commons/styles/globalStyles";
 import { IQuestion } from "../../../../../commons/types/generated/types";
-import { UseQueryFetchQuestionsBySeller } from "../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsBySeller";
+import {
+  UseQueryFetchQuestionsBySeller,
+  UseQueryFetchQuestionsCountBySeller,
+} from "../../../../commons/hooks/useQueries/questions/UseQueryFetchQuestionsBySeller";
 import CommonModal01 from "../../../../commons/modals/CommonModal01";
 import Pagination from "../../../../commons/paginations/Pagination.index";
 import WriteModal from "../writeModal";
@@ -15,6 +18,8 @@ export default function QnAList() {
   const { data, refetch } = UseQueryFetchQuestionsBySeller({
     page: 1,
   });
+
+  const { data: questionsCount } = UseQueryFetchQuestionsCountBySeller();
 
   const onClickWrite = (id: string) => (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -73,7 +78,7 @@ export default function QnAList() {
             </CommonModal01>
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={data?.fetchQuestionsBySeller.length} />
+        <Pagination refetch={refetch} count={questionsCount?.fetchQuestionsCountBySeller} />
       </section>
     </GlobalWrapper>
   );

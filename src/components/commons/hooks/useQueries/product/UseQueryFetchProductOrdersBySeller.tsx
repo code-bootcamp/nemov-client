@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchProductOrdersBySellerArgs,
+  IQueryFetchProductOrdersCountBySellerArgs,
 } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCT_ORDERS_BY_SELLER = gql`
@@ -29,6 +30,12 @@ export const FETCH_PRODUCT_ORDERS_BY_SELLER = gql`
   }
 `;
 
+export const FETCH_PRODUCT_ORDERS_COUNT_BY_SELLER = gql`
+  query fetchProductOrdersCountBySeller($startDate: DateTime, $endDate: DateTime) {
+    fetchProductOrdersCountBySeller(startDate: $startDate, endDate: $endDate)
+  }
+`;
+
 export const UseQueryFetchProductOrdersBySeller = (
   variables: IQueryFetchProductOrdersBySellerArgs
 ) => {
@@ -37,6 +44,19 @@ export const UseQueryFetchProductOrdersBySeller = (
     IQueryFetchProductOrdersBySellerArgs
   >(FETCH_PRODUCT_ORDERS_BY_SELLER, {
     variables,
+    fetchPolicy: "cache-and-network",
+  });
+
+  return query;
+};
+
+export const UseQueryFetchProductOrdersCountBySeller = (
+  variables: IQueryFetchProductOrdersCountBySellerArgs
+) => {
+  const query = useQuery<
+    Pick<IQuery, "fetchProductOrdersCountBySeller">,
+    IQueryFetchProductOrdersCountBySellerArgs
+  >(FETCH_PRODUCT_ORDERS_COUNT_BY_SELLER, {
     fetchPolicy: "cache-and-network",
   });
 
