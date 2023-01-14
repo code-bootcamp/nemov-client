@@ -20,7 +20,6 @@ const ToastUIEditor = dynamic(async () => await import("../../../../commons/toas
 interface ProductWriteProps {
   isEdit: boolean;
 }
-
 interface ProductInput {
   name: string;
   productCategoryId: string;
@@ -71,11 +70,9 @@ export default function ProductWrite(props: ProductWriteProps) {
     resolver: yupResolver(WriteProductSchema),
     mode: "onChange",
   });
-
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file === undefined) return;
-
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
@@ -140,7 +137,6 @@ export default function ProductWrite(props: ProductWriteProps) {
   };
 
   const onClickSubmit = async (data: ProductInput) => {
-    console.log(data.description);
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
     if (!url) return;
@@ -173,7 +169,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     });
     void router.push("/seller");
   };
-
   const onClickEdit = async (data: ProductInput) => {
     let url = data.image;
     if (files) {
@@ -218,7 +213,6 @@ export default function ProductWrite(props: ProductWriteProps) {
     });
     void router.push("/seller");
   };
-
   return (
     <S.Wrapper>
       <S.Title>판매자 상품 {isEdit ? "수정" : "등록"} 페이지</S.Title>
