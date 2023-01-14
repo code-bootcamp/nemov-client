@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../commons/styles/breakPoints";
 import { colorBase01 } from "../../../commons/styles/colorBases";
 
 export const Wrapper = styled.div`
@@ -16,7 +16,7 @@ export const ImgWrapper = styled.div`
   background-size: cover;
   background-position: bottom;
 
-  @media ${mobile} {
+  @media ${tablet} {
     display: none;
   }
 `;
@@ -28,7 +28,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  @media ${mobile} {
+  @media ${tablet} {
     width: 100%;
     padding: 0 3rem;
   }
@@ -46,7 +46,7 @@ export const Text = styled.p`
   font-size: 1rem;
   line-height: 1.4;
   word-break: keep-all;
-  @media ${mobile} {
+  @media ${tablet} {
     margin: 0;
     font-size: 1.5rem;
   }
@@ -64,8 +64,12 @@ export const Label = styled.p`
   width: 20%;
   margin-right: 10px;
   margin-bottom: 0;
+  @media ${tablet} {
+    font-size: 1.5rem;
+    margin-left: 5rem;
+  }
   @media ${mobile} {
-    font-size: 1.6rem;
+    margin-left: 0;
   }
 `;
 
@@ -75,7 +79,7 @@ export const BlnInput = styled.input`
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
-  @media ${mobile} {
+  @media ${tablet} {
     font-size: 1.5rem;
   }
 `;
@@ -95,8 +99,8 @@ export const Input = styled.input`
     caret-color: white;
   }
 
-  @media ${mobile} {
-    font-size: 1.5rem;
+  @media ${tablet} {
+    font-size: 1.3rem;
   }
 `;
 
@@ -107,6 +111,9 @@ export const CheckEmailBtn = styled.button`
   margin-left: 20px;
   ${colorBase01}
 
+  @media ${tablet} {
+    font-size: 1.2rem;
+  }
   @media ${mobile} {
     font-size: 1.4rem;
   }
@@ -124,8 +131,8 @@ export const PhoneInput = styled.input`
   border: none;
   border-bottom: 1px solid #1f3d31;
   outline: none;
-  @media ${mobile} {
-    font-size: 1.5rem;
+  @media ${tablet} {
+    font-size: 1.3rem;
   }
 `;
 
@@ -171,18 +178,20 @@ export const PhoneBtn = styled.button`
   margin-left: 20px;
   color: white;
   ${colorBase01}
+  @media ${tablet} {
+    font-size: 1.3rem;
+  }
   @media ${mobile} {
-    font-size: 1.4rem;
   }
 `;
 
 export const Select = styled.select`
   width: 75%;
-  height: 2.5rem;
+  height: 3.5rem;
   outline: none;
   background-color: white;
-  @media ${mobile} {
-    font-size: 1.4rem;
+  @media ${tablet} {
+    font-size: 1.3rem;
   }
 `;
 
@@ -280,7 +289,7 @@ export const SignupBtn = styled.button`
   margin-top: 80px;
   font-weight: 500;
   ${colorBase01}
-  @media ${mobile} {
+  @media ${tablet} {
     font-size: 1.4rem;
   }
 `;
@@ -292,7 +301,7 @@ export const Login = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-  @media ${mobile} {
+  @media ${tablet} {
     font-size: 1.4rem;
   }
 `;
@@ -306,9 +315,15 @@ export const InputErrorWrapper = styled.div`
 export const Error = styled.div`
   margin-top: 8px;
   color: red;
+  @media ${mobile2} {
+    font-size: 1.2rem;
+  }
 `;
 
 export const PhoneError = styled.div`
   margin-top: 8px;
   color: red;
+  @media ${mobile2} {
+    font-size: 1.2rem;
+  }
 `;
