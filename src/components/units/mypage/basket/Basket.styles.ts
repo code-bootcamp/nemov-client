@@ -88,6 +88,7 @@ export const ItemImg = styled.img`
 export const ItemName = styled.p`
   width: 30%;
   font-size: 1.2rem;
+  color: #3a3939;
   font-weight: bold;
   margin-bottom: 0;
 `;

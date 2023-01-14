@@ -32,7 +32,7 @@ export default function MypageBasket() {
 
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
-  const { buyProducts } = UseMutationCreateProductOrders();
+  const { buyProduct, buyProducts } = UseMutationCreateProductOrders();
 
   // 찜하기
   const onClickPick = (productId: string) => async (e: React.MouseEvent) => {
@@ -60,7 +60,8 @@ export default function MypageBasket() {
   };
 
   // 구매 기능 - 하나만 구매할 때
-  const onClickBuyProduct = (productId: string) => async (e: React.MouseEvent) => {
+  const onClickBuyProduct = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     const Item = product?.filter((el) => {
       if (el.product.id === e.currentTarget.id) {
         return el;
@@ -76,20 +77,15 @@ export default function MypageBasket() {
       amount += 3000;
     }
     const quantity = Item[0].count;
+    const productId = Item[0].product.id;
     const value = [{ productId, quantity }];
 
-    try {
-      await buyProducts(value, amount);
-
-      Modal.success({ content: "상품 구매가 완료되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-    }
+    void buyProduct(value, amount);
   };
 
   // 구매 기능 - 한꺼번에 구매할 때
-  const onClickBuyProducts = async () => {
-    // value - productId, quantity
+  const onClickBuyProducts = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     const value = data?.fetchCart.map((el) => {
       const item: IItemType = {};
       item.productId = el.product.id;
@@ -97,7 +93,6 @@ export default function MypageBasket() {
       return item;
     });
 
-    // amount
     if (product === undefined) {
       return [];
     }
@@ -114,9 +109,7 @@ export default function MypageBasket() {
 
     console.log(value, amount);
 
-    // try {
     void buyProducts(value, amount);
-    // Modal.success({ content: "전체 상품 구매가 완료되었습니다." });
 
     totalDiscountedPrice = 0;
     priceSum = 0;
@@ -127,9 +120,6 @@ export default function MypageBasket() {
     // setTotalDiscountedPrice(0);
     // setDeliveryFee(0);
     // setTotalSum(0);
-    // } catch (error) {
-    //   if (error instanceof Error) console.log(error.message);
-    // }
   };
 
   // 총 상품금액
@@ -307,7 +297,7 @@ export default function MypageBasket() {
                       <S.CancelIcon></S.CancelIcon>
                     </S.CancelBtn>
                     <S.PickBtn onClick={onClickPick(cart.product.id)}>찜하기</S.PickBtn>
-                    <S.BasketBtn id={cart.product.id} onClick={onClickBuyProduct(cart.product.id)}>
+                    <S.BasketBtn id={cart.product.id} onClick={onClickBuyProduct}>
                       구매하기
                     </S.BasketBtn>
                   </S.BtnWrapper>

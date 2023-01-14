@@ -9,6 +9,10 @@ interface ILayoutMobileMenuStyleProps {
   ismenuOpen: boolean;
 }
 
+interface IHeaderMenuItemProps {
+  isShowBanner: boolean;
+}
+
 export const Basket = styled(ShoppingBagOutlinedIcon)`
   color: #fff;
   cursor: pointer;
@@ -65,6 +69,7 @@ export const Wrapper = styled.header`
     }
   }
   @media ${tablet} {
+    position: fixed;
     padding: 1rem;
     :hover {
       div,
@@ -72,6 +77,30 @@ export const Wrapper = styled.header`
         color: #fff;
       }
     }
+  }
+`;
+
+export const Wrapper02 = styled.header`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: #fff;
+  ${Menu}, ${Basket}, ${Payment} {
+    color: #000;
+  }
+
+  ${LogoImg} {
+    content: url("/logo/logo_hover.png");
+  }
+  @media ${tablet} {
+    position: fixed;
   }
 `;
 
@@ -96,7 +125,7 @@ export const HeaderMenuItem = styled.div`
   justify-content: flex-end;
   font-size: 1rem;
   margin-left: 1.5rem;
-  color: #fff;
+  color: ${(props: IHeaderMenuItemProps) => (props.isShowBanner ? "#fff" : "#000")};
   cursor: pointer;
   position: relative;
 `;

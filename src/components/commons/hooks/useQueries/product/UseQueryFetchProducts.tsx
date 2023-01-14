@@ -2,8 +2,13 @@ import { gql, useQuery } from "@apollo/client";
 import { IQuery, IQueryFetchProductsArgs } from "../../../../../commons/types/generated/types";
 
 export const FETCH_PRODUCTS = gql`
-  query fetchProducts($page: Int!, $veganLevel: Int!, $productCategoryId: ID!) {
-    fetchProducts(page: $page, veganLevel: $veganLevel, productCategoryId: $productCategoryId) {
+  query fetchProducts($page: Int!, $veganLevel: Int!, $productCategoryId: ID!, $search: String!) {
+    fetchProducts(
+      page: $page
+      veganLevel: $veganLevel
+      productCategoryId: $productCategoryId
+      search: $search
+    ) {
       id
       name
       image
@@ -36,7 +41,7 @@ export const UseQueryFetchProducts = (variables: IQueryFetchProductsArgs) => {
     IQueryFetchProductsArgs
   >(FETCH_PRODUCTS, {
     variables,
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
   });
 
   return { data, fetchMore, client, refetch };

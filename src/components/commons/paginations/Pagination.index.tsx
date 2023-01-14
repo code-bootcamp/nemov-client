@@ -8,6 +8,10 @@ import {
   IPagination05Props,
   IPagination06Props,
   IPagination07Props,
+  IPagination08Props,
+  IPagination09Props,
+  IPagination10Props,
+  IPagination11Props,
 } from "./Paginations.types";
 
 export default function Pagination(
@@ -19,11 +23,15 @@ export default function Pagination(
     | IPagination05Props
     | IPagination06Props
     | IPagination07Props
+    | IPagination08Props
+    | IPagination09Props
+    | IPagination10Props
+    | IPagination11Props
 ) {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
   const lastPage = props.count !== null ? Math.ceil(Number(props.count) / 10) : 0;
-  console.log(props.count);
+
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
     const activedPage = Number(event.currentTarget.id);
     setActivedPage(activedPage);

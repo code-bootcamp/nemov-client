@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-// import { css } from "@emotion/react";
-// import { mobile } from "../../../../commons/styles/breakPoints";
 
 export const Title = styled.h1`
   text-align: center;

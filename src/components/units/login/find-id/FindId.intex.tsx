@@ -41,9 +41,8 @@ export default function FindId() {
       mode: "onSubmit",
     });
 
-  const onSubmitForm = (data: IMutationFindEmailArgs) => {
-    const { ...value } = data;
-    void findEmailSubmit(value);
+  const onSubmitForm = async (data: IMutationFindEmailArgs) => {
+    await findEmailSubmit(data);
   };
 
   // 휴대폰 번호 형식 변환
@@ -86,7 +85,7 @@ export default function FindId() {
           <TokenBtn type="button" onClick={onClickConfirmToken}>
             인증번호 확인
           </TokenBtn>
-          <FindBtn>아이디 찾기</FindBtn>
+          <FindBtn type="submit">아이디 찾기</FindBtn>
         </InputWrapper>
       </Form>
     </Global>

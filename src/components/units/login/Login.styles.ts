@@ -27,7 +27,7 @@ export const ImgWrapper = styled.div`
 
 export const Form = styled.form`
   width: 45%;
-  padding: 8% 2% 2% 2%;
+  padding: 10% 2% 5% 2%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -36,11 +36,14 @@ export const Form = styled.form`
   @media ${mobile} {
     width: 100%;
     padding: 25% 6% 6% 6%;
+    /* justify-content: normal;
+    row-gap: 3.5rem; */
   }
 
   @media ${tablet} {
-    padding: 18% 6% 6% 6%;
+    padding: 0% 6% 6% 6%;
     width: 100%;
+    margin-top: 15vmax;
   }
 `;
 
@@ -48,18 +51,26 @@ export const Title = styled.h2`
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.4;
+  @media ${mobile} {
+    font-size: 3.5rem;
+  }
 `;
 
 export const Text = styled.p`
   margin: 20px 0;
   color: #797979;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1.4;
   word-break: keep-all;
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.5rem;
+  }
 `;
 
 export const Input = styled.input`
   width: 100%;
+  font-size: 1.3rem;
   height: 3rem;
   margin-top: 40px;
   border: none;
@@ -73,24 +84,41 @@ export const Input = styled.input`
     transition: background-color 5000s ease-in-out 0s;
     caret-color: white;
   }
+
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.4rem;
+  }
 `;
 
 export const LoginBtn = styled.button`
   width: 100%;
   padding: 18px;
+
   margin-top: 50px;
+  font-size: 1.3rem;
   font-weight: 500;
   border-radius: 10px;
   border: none;
   color: white;
   background-color: #1f3d31;
   cursor: pointer;
+
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.6rem;
+  }
 `;
 
 export const FindWrapper = styled.div`
   width: 100%;
   margin-top: 30px;
   text-align: center;
+
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.4rem;
+  }
 `;
 
 export const FindId = styled.a`
@@ -99,6 +127,10 @@ export const FindId = styled.a`
   padding: 0 1.875rem;
   color: #797979;
   cursor: pointer;
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.4rem;
+  }
 `;
 
 export const FindPw = styled.a`
@@ -108,6 +140,10 @@ export const FindPw = styled.a`
   color: #797979;
   border-left: 1px solid #abb2ae;
   cursor: pointer;
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.4rem;
+  }
 `;
 
 export const Signup = styled.a`
@@ -117,6 +153,11 @@ export const Signup = styled.a`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+
+  @media ${mobile} {
+    margin: 0;
+    font-size: 1.4rem;
+  }
 `;
 
 export const InputErrorWrapper = styled.div`

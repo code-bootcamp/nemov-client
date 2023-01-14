@@ -11,6 +11,11 @@ import { UseMutationUpdateProduct } from "../../../../commons/hooks/useMutations
 import { FETCH_PRODUCTS_BY_SELLER } from "../../../../commons/hooks/useQueries/product/UseQueryFetchProductsBySeller";
 import { categoryContents } from "../register/category";
 import dynamic from "next/dynamic";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { WriteProductSchema } from "./validation";
+const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
+  ssr: false,
+});
 
 interface ProductWriteProps {
   isEdit: boolean;
@@ -29,15 +34,7 @@ interface ProductInput {
   option3: string;
   option4: string;
   option5: string;
-  createProductOptionInput?: {
-    option6?: string;
-    option7?: string;
-    option8?: string;
-    option9?: string;
-    option10?: string;
-    option11?: string;
-  };
-  updateProductOptionInput?: {
+  productOption?: {
     option6?: string;
     option7?: string;
     option8?: string;
@@ -47,32 +44,30 @@ interface ProductInput {
   };
 }
 
-const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
-const Option1 = categoryContents[0];
-const Option2 = categoryContents[1];
-
 export default function ProductWrite(props: ProductWriteProps) {
+  const categoryArr = ["FOOD", "DRINK", "BEAUTY", "LIFE"];
+  const Option1 = categoryContents[0];
+  const Option2 = categoryContents[1];
   const { isEdit } = props;
   const router = useRouter();
   const contentsRef = useRef<any>(null);
   const { onClickMoveToPage } = useMoveToPage();
   const [imageUrl, setImageUrl] = useState("");
   const [files, setFiles] = useState<File>();
-  const [cg, setCG] = useState();
+  const [cg, setCG] = useState("");
   const { data: category } = UseQueryFetchCategories();
-  const newCategory = category?.fetchProductCategories.filter((el, i) => el.name !== "전체");
+  const newCategory = category?.fetchProductCategories.filter((el) => el.name !== "전체");
+  const beautyCategory = category?.fetchProductCategories.filter((el) => el.name === "뷰티")[0].id;
   const [createProduct] = UseMutationCreateProduct();
   const [updateProduct] = UseMutationUpdateProduct();
   const [uploadFile] = UseMutationUploadFile();
-  const { query } = UseQueryFetchProduct({ productId: String(router.query.productId) });
+  const { query } = UseQueryFetchProduct();
   const data = query.data?.fetchProduct;
-
-  const ToastUIEditor = dynamic(async () => await import("../../../../commons/toastUI"), {
-    ssr: false,
-  });
+  
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
-  const { register, handleSubmit, setValue } = useForm<ProductInput>({
+  const { register, handleSubmit, setValue, formState } = useForm<ProductInput>({
+    resolver: yupResolver(WriteProductSchema),
     mode: "onChange",
   });
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -87,12 +82,13 @@ export default function ProductWrite(props: ProductWriteProps) {
       }
     };
   };
+  console.log(data);
 
   useEffect(() => {
     if (data) {
       setValue("name", data.name);
       setValue("description", data.description);
-      setValue("productCategoryId", data.description);
+      // setValue("productCategoryId", data.description);
       setValue("discountRate", data.discountRate);
       setValue("price", data.price);
       setValue("quantity", data.quantity);
@@ -103,12 +99,16 @@ export default function ProductWrite(props: ProductWriteProps) {
       setValue("option3", data.option3);
       setValue("option4", data.option4);
       setValue("option5", data.option5);
-      setValue("createProductOptionInput.option6", data.productOption?.option6);
-      setValue("createProductOptionInput.option7", data.productOption?.option7);
-      setValue("createProductOptionInput.option8", data.productOption?.option8);
-      setValue("createProductOptionInput.option9", data.productOption?.option9);
-      setValue("createProductOptionInput.option10", data.productOption?.option10);
-      setValue("createProductOptionInput.option11", data.productOption?.option11);
+      setValue("productOption.option6", data.productOption?.option6);
+      setValue("productOption.option7", data.productOption?.option7);
+      setValue("productOption.option8", data.productOption?.option8);
+      setValue("productOption.option9", data.productOption?.option9);
+      setValue("productOption.option10", data.productOption?.option10);
+      setValue("productOption.option11", data.productOption?.option11);
+
+      if (data.image) {
+        setImageUrl(data.image);
+      }
     }
   }, [data]);
 
@@ -129,25 +129,18 @@ export default function ProductWrite(props: ProductWriteProps) {
 
   const onClickRadio = (event: React.MouseEvent<HTMLInputElement>) => {
     setValue("veganLevel", Number(event.currentTarget.id));
-    console.log(event.currentTarget.id);
   };
 
   const onChangeContents = () => {
     const text = contentsRef?.current?.getInstance().getHTML();
     setValue("description", text === "<p><br><p>" ? "" : text);
   };
-  useEffect(() => {
-    if (data?.image) {
-      setImageUrl(data.image);
-    }
-  }, [data]);
+
   const onClickSubmit = async (data: ProductInput) => {
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
-    
     if (!url) return;
-
-    const result = await createProduct({
+    await createProduct({
       variables: {
         createProductInput: {
           name: data.name,
@@ -165,16 +158,15 @@ export default function ProductWrite(props: ProductWriteProps) {
           option5: data.option5,
         },
         createProductOptionInput: {
-          option6: String(data.createProductOptionInput?.option6),
-          option7: String(data.createProductOptionInput?.option7),
-          option8: String(data.createProductOptionInput?.option8),
-          option9: String(data.createProductOptionInput?.option9),
-          option10: String(data.createProductOptionInput?.option10),
-          option11: String(data.createProductOptionInput?.option11),
+          option6: String(data.productOption?.option6),
+          option7: String(data.productOption?.option7),
+          option8: String(data.productOption?.option8),
+          option9: String(data.productOption?.option9),
+          option10: String(data.productOption?.option10),
+          option11: String(data.productOption?.option11),
         },
       },
     });
-    console.log("result:", result);
     void router.push("/seller");
   };
   const onClickEdit = async (data: ProductInput) => {
@@ -202,12 +194,12 @@ export default function ProductWrite(props: ProductWriteProps) {
           option5: data.option5,
         },
         updateProductOptionInput: {
-          option6: String(data.updateProductOptionInput?.option6),
-          option7: String(data.updateProductOptionInput?.option7),
-          option8: String(data.updateProductOptionInput?.option8),
-          option9: String(data.updateProductOptionInput?.option9),
-          option10: String(data.updateProductOptionInput?.option10),
-          option11: String(data.updateProductOptionInput?.option11),
+          option6: String(data.productOption?.option6),
+          option7: String(data.productOption?.option7),
+          option8: String(data.productOption?.option8),
+          option9: String(data.productOption?.option9),
+          option10: String(data.productOption?.option10),
+          option11: String(data.productOption?.option11),
         },
       },
       refetchQueries: [
@@ -229,6 +221,7 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>상품이름</S.SubTitle>
           <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
         </S.Row>
+        <div style={{ color: "red" }}>{formState.errors.name?.message}</div>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
           <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
@@ -273,7 +266,6 @@ export default function ProductWrite(props: ProductWriteProps) {
         <S.OptionsRow>
           <S.OptionsTitle>상세 고시 정보</S.OptionsTitle>
           <S.Options>
-            {/* {Option1.map((option1, index) => ( */}
             <S.NoticeMap>
               <S.Notice>{Option1[0]}</S.Notice>
               <S.NoticeInput
@@ -324,10 +316,8 @@ export default function ProductWrite(props: ProductWriteProps) {
                 onChange={onChangeGetOption1}
               />
             </S.NoticeMap>
-            {/* ))} */}
             {
-              cg === "e70b1a57-e4f7-41fa-93a3-ef4d13de57e2" && (
-                // Option2.map((option2, index) =>
+              cg === beautyCategory && (
                 <>
                   <S.NoticeMap>
                     <S.Notice>{Option2[0]}</S.Notice>
@@ -406,7 +396,6 @@ export default function ProductWrite(props: ProductWriteProps) {
                   value={el}
                   name="level"
                   onClick={onClickRadio}
-                  // defaultValue={isEdit ? getValues("veganLevel") : "default"}
                 />
                 <S.Radio>{el}</S.Radio>
               </S.Label>

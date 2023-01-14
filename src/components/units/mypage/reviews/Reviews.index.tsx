@@ -30,7 +30,7 @@ export default function MypageReviews() {
         </S.Tabs>
       </S.TabWrapper>
       <section>{isSelected[0] && <ReviewsList />}</section>
-      <section>{isSelected[1] && <ReviewsPossibleList />}</section>
+      <section>{isSelected[1] && <ReviewsPossibleList setIsSelected={setIsSelected} />}</section>
     </S.ContentsMain>
   );
 }

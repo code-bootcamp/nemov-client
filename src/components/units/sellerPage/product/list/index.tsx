@@ -9,11 +9,12 @@ import {
 import * as S from "./list.styles";
 import React, { useState } from "react";
 import { getDate, getVeganName } from "../../../../../commons/libraries/utilies";
+import Pagination from "../../../../commons/paginations/Pagination.index";
 
 export default function ProductList() {
   const { onClickMoveToPage } = useMoveToPage();
   const [, setIsOpen] = useState(false);
-  const { data } = UseQueryFetchProductsBySeller({
+  const { data, refetch } = UseQueryFetchProductsBySeller({
     page: 1,
   });
   const [deleteProduct] = UseMutationDeleteProduct();
@@ -51,7 +52,7 @@ export default function ProductList() {
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>판매자 상품 관리 페이지</S.Title>
-      <section>
+      <section style={{ display: "flex", flexDirection: "column" }}>
         <S.Table>
           <S.Thead>
             <S.Tr>
@@ -92,6 +93,7 @@ export default function ProductList() {
             ))}
           </S.Tbody>
         </S.Table>
+        <Pagination refetch={refetch} count={data?.fetchProductsBySeller.length} />
         <S.Btn2 onClick={onClickMoveToPage("/seller/new")}>상품 등록하기</S.Btn2>
       </section>
     </GlobalWrapper>

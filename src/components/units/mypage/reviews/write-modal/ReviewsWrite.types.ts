@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { IProductOrder, IReview } from "../../../../../commons/types/generated/types";
 
 export interface IReviewsWriteProps {
@@ -6,6 +7,7 @@ export interface IReviewsWriteProps {
   review?: IReview | undefined;
   isEdit: boolean;
   reviewsData?: IReview;
+  setIsSelected?: Dispatch<SetStateAction<boolean[]>>;
 }
 
 export interface IFormData {

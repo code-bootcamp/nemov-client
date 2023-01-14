@@ -37,6 +37,7 @@ export const ReviewCenterWrapper = styled.div`
 export const ModalReviewName = styled.h3`
   font-size: 1.25rem;
   font-weight: 600;
+  color: #3a3939;
 `;
 
 export const ModalReviewSubName = styled.p`
@@ -56,6 +57,7 @@ export const ModalContentWrapper = styled.div`
 
 export const ModalLabel = styled.label`
   width: 10%;
+  margin-bottom: 8px;
 `;
 
 export const ModalContentInnerWrap = styled.div`
@@ -124,6 +126,12 @@ export const UploadImage = styled.img`
   margin-right: 10px;
 `;
 
+export const ImageDiv = styled.div`
+  width: 50%;
+  aspect-ratio: 5/5;
+  margin-top: 20px;
+`;
+
 export const ModalImgBtn = styled.button`
   position: absolute;
   width: 100%;
@@ -142,6 +150,7 @@ export const UploadFileHidden = styled.input`
   width: 100%;
   height: 100%;
   opacity: 0;
+  border-bottom: 0;
   cursor: pointer;
 `;
 

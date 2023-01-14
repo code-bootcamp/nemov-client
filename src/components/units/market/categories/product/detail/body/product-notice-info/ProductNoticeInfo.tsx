@@ -1,10 +1,10 @@
-import { IMarketDetailProps } from "../../../../../Market.types";
+import { IMarketDetail05Props } from "../../../../../Market.types";
 import * as CS from "../MarketDetailBody.styles";
 import * as S from "./ProductNoticeInfo.styles";
 
-export default function ProductNoticeInfo(props: IMarketDetailProps) {
+export default function ProductNoticeInfo(props: IMarketDetail05Props) {
   const noticeData = props.data?.data?.fetchProduct.productOption;
-  console.log(noticeData);
+  // console.log(noticeData);
 
   return (
     <CS.TabContentMain01>

@@ -34,14 +34,15 @@ export default function MarketList(props: IMarketListProps) {
   const [curProductData, setCurProductData] = useState<IProduct>();
 
   const prefetchByLevel = async (value: number | unknown) => {
-    console.log(value);
     setIsSelected(Number(value));
+
     const result = await props.productsClient?.query({
       query: FETCH_PRODUCTS,
       variables: {
         productCategoryId: props.category,
         veganLevel: value,
         page: 1,
+        search: "",
       },
     });
     props.setStartPage(1);
@@ -92,8 +93,8 @@ export default function MarketList(props: IMarketListProps) {
   };
 
   // 카테고리 이름 데이터
-  const categoryData = props.categoryData?.fetchProductCategories.filter((categories) => {
-    if (categories.id === router.query.categoryId) {
+  const categoryData = props.currentData?.filter((categories) => {
+    if (categories.id === props.category) {
       return categories;
     } else {
       return undefined;
@@ -120,58 +121,110 @@ export default function MarketList(props: IMarketListProps) {
         ></CartModal>
       </CommonModal01>
 
-      <S.ListTitle>{categoryData?.map((categories) => categories.name)}</S.ListTitle>
+      {props.category === "" && (
+        <>
+          <S.ListTitle>전체</S.ListTitle>
+          <Crumbs id="" categoryName="전체" />
+        </>
+      )}
+
       {categoryData?.map((categories) => (
-        <Crumbs key={categories.id} id={router.query.categoryId} categoryName={categories.name} />
+        <>
+          <S.ListTitle>{categories.name}</S.ListTitle>
+          <Crumbs key={categories.id} id={props.category} categoryName={categories.name} />
+        </>
       ))}
       <S.ListWrapper>
-        <ListSearch prefetchByLevel={prefetchByLevel} />
+        <ListSearch
+          prefetchByLevel={prefetchByLevel}
+          setSearch={props.setSearch}
+          productsCountRefetch={props.productsCountRefetch}
+          refetch={props.refetch}
+          onChangeSearch={props.onChangeSearch}
+        />
         <MS.ItemsWrapper01>
-          {fetchProducts?.map((products) => (
-            <IDS.ItemDisplay03 key={products.id} onClick={onClickMoveToProductDetail(products.id)}>
-              <S.ItemImageBox01>
-                {!!products.isOutOfStock && (
-                  <S.ItemSoldOutDisPlay>
-                    <S.SoldOut>SOLD OUT</S.SoldOut>
-                  </S.ItemSoldOutDisPlay>
-                )}
-                <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
-              </S.ItemImageBox01>
-              <IDS.ItemDetail>
-                <TagsWrapper01>
-                  <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
-                </TagsWrapper01>
-                <S.ItemDetailFooter02 style={{ alignItems: "center" }}>
-                  <S.DetailFooterLeft>
-                    <S.ItemName03>{products.name}</S.ItemName03>
-                    <IDS.ItemPrices>
-                      {products.discountRate !== 0 && (
-                        <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
-                      )}
-                      <S.ItemDiscountPrice02>
-                        {products.discountedPrice.toLocaleString()}원
-                      </S.ItemDiscountPrice02>
-                      {!!products.discountRate && (
-                        <S.ItemOriginPrice03>
-                          {products.price.toLocaleString()}원
-                        </S.ItemOriginPrice03>
-                      )}
-                    </IDS.ItemPrices>
-                  </S.DetailFooterLeft>
-                  <BasketButton01 id={products.id} onClick={onClickToggleCartModal(products.id)} />
-                </S.ItemDetailFooter02>
-              </IDS.ItemDetail>
-            </IDS.ItemDisplay03>
-          ))}
+          {fetchProducts
+            ? fetchProducts.map((products) => (
+                <IDS.ItemDisplay03
+                  key={products.id}
+                  onClick={onClickMoveToProductDetail(products.id)}
+                >
+                  <S.ItemImageBox01>
+                    {!!products.isOutOfStock && (
+                      <S.ItemSoldOutDisPlay>
+                        <S.SoldOut>SOLD OUT</S.SoldOut>
+                      </S.ItemSoldOutDisPlay>
+                    )}
+                    <S.ItemImage03 src={products.image} alt={products.productCategory.name} />
+                  </S.ItemImageBox01>
+                  <IDS.ItemDetail>
+                    <TagsWrapper01>
+                      <VeganLevelTag01>{getVeganName(products.veganLevel)}</VeganLevelTag01>
+                    </TagsWrapper01>
+                    <S.ItemDetailFooter>
+                      <S.DetailFooterLeft>
+                        <S.ItemName03>{products.name}</S.ItemName03>
+                        <S.ItemPrices02>
+                          {products.discountRate !== 0 && (
+                            <S.DiscountRate01>{products.discountRate}%</S.DiscountRate01>
+                          )}
+                          <S.ItemDiscountPrice02>
+                            {products.discountedPrice.toLocaleString()}원
+                          </S.ItemDiscountPrice02>
+                          {!!products.discountRate && (
+                            <S.ItemOriginPrice03>
+                              {products.price.toLocaleString()}원
+                            </S.ItemOriginPrice03>
+                          )}
+                          <BasketButton01
+                            id={products.id}
+                            onClick={onClickToggleCartModal(products.id)}
+                          />
+                        </S.ItemPrices02>
+                      </S.DetailFooterLeft>
+                    </S.ItemDetailFooter>
+                  </IDS.ItemDetail>
+                </IDS.ItemDisplay03>
+              ))
+            : new Array(9).fill(1).map((_, index) => (
+                <IDS.ItemDisplay03 key={index}>
+                  <S.ItemImageBox01 style={{ backgroundColor: "white", border: "none" }}>
+                    <S.ItemImage03 />
+                  </S.ItemImageBox01>
+                  <IDS.ItemDetail>
+                    <TagsWrapper01>
+                      <VeganLevelTag01>미리보기</VeganLevelTag01>
+                    </TagsWrapper01>
+                    <S.ItemDetailFooter>
+                      <S.DetailFooterLeft>
+                        <S.ItemName03>미리보기</S.ItemName03>
+                        <S.ItemPrices02>
+                          <S.DiscountRate01>0%</S.DiscountRate01>
+                          <S.ItemDiscountPrice02>0원</S.ItemDiscountPrice02>
+                          <S.ItemOriginPrice03>0원</S.ItemOriginPrice03>
+                          <BasketButton01 />
+                        </S.ItemPrices02>
+                      </S.DetailFooterLeft>
+                    </S.ItemDetailFooter>
+                  </IDS.ItemDetail>
+                </IDS.ItemDisplay03>
+              ))}
           <S.PaginationSection>
-            <Pagination02
-              count={props.productsCount?.fetchProductsCount}
-              refetch={props.refetch}
-              startPage={props.startPage ?? 0}
-              activePage={props.activePage ?? 0}
-              setStartPage={props.setStartPage}
-              setActivePage={props.setActivePage}
-            />
+            {fetchProducts?.length !== 0 ? (
+              <Pagination02
+                count={Number(props.productsCount?.fetchProductsCount)}
+                refetch={props.refetch}
+                startPage={props.startPage ?? 0}
+                activePage={props.activePage ?? 0}
+                setStartPage={props.setStartPage}
+                setActivePage={props.setActivePage}
+              />
+            ) : (
+              <MS.DataNone>
+                <MS.WarningIcon />
+                연관된 상품이 없습니다.
+              </MS.DataNone>
+            )}
           </S.PaginationSection>
         </MS.ItemsWrapper01>
       </S.ListWrapper>

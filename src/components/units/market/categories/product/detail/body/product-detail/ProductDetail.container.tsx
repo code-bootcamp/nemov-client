@@ -1,13 +1,15 @@
+import React from "react";
 import * as S from "./ProductDetail.styles";
 import * as CS from "../MarketDetailBody.styles";
-import { IMarketDetailProps } from "../../../../../Market.types";
+import { IProductDetailProps } from "../../../../../Market.types";
 import Dompurify from "dompurify";
 
-export default function ProductDetail(props: IMarketDetailProps) {
+function ProductDetail(props: IProductDetailProps) {
+  // console.log("상품 상세 컴포넌트 랜더링");
+
   return (
     <CS.TabContentMain01>
       <S.ProductDetailSection>
-        <S.ProductDetailImg src="/images/product-detail-ex02.webp" alt="상품 상세 보기 예시" />
         {typeof window !== "undefined" ? (
           <S.ProductDescription
             dangerouslySetInnerHTML={{
@@ -21,3 +23,5 @@ export default function ProductDetail(props: IMarketDetailProps) {
     </CS.TabContentMain01>
   );
 }
+
+export default React.memo(ProductDetail);

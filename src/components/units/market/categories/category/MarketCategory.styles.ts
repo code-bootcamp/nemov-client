@@ -3,7 +3,7 @@ import { mobile } from "../../../../../commons/styles/breakPoints";
 
 export const CategoryWrapper = styled.section`
   @media ${mobile} {
-    width: 80%;
+    width: 100%;
     padding-top: 10vmax;
   }
   width: 60%;
@@ -32,6 +32,9 @@ export const CategoryTitle = styled.span`
   font-family: "SUIT-SemiBold";
   font-size: 1rem;
   margin-bottom: 1rem;
+  @media ${mobile} {
+    font-size: 2rem;
+  }
 `;
 
 export const StyledCategoryIcon = styled.img`

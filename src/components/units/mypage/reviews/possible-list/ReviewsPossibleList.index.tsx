@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
 import { getDate } from "../../../../../commons/libraries/utilies";
 import { isEditState, isOpenState } from "../../../../../commons/stores";
@@ -12,7 +12,11 @@ import Pagination from "../../../../commons/paginations/Pagination.index";
 import ReviewsWrite from "../write-modal/ReviewsWrite.index";
 import * as S from "./ReviewsPossibleList.styles";
 
-export default function ReviewsPossibleList() {
+interface IReviewsPossibleListProps {
+  setIsSelected: Dispatch<SetStateAction<boolean[]>>;
+}
+
+export default function ReviewsPossibleList(props: IReviewsPossibleListProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [, setIsEdit] = useRecoilState(isEditState);
 
@@ -45,7 +49,12 @@ export default function ReviewsPossibleList() {
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={800}>
-        <ReviewsWrite isEdit={false} data={reviewItemVal} modalOnCancel={modalOnCancel} />
+        <ReviewsWrite
+          isEdit={false}
+          data={reviewItemVal}
+          modalOnCancel={modalOnCancel}
+          setIsSelected={props.setIsSelected}
+        />
       </CommonModal01>
 
       <S.ReviewWrapper>

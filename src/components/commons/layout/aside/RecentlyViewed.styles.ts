@@ -4,9 +4,10 @@ import { tablet } from "../../../../commons/styles/breakPoints";
 export const SideBarWrap = styled.main`
   position: fixed;
   top: 40%;
-  right: 0;
+  right: 2%;
   width: 100px;
-  padding: 2%;
+  max-height: 400px;
+  padding: 1.5% 1%;
   background-color: #fff;
   outline: none;
   border: none;
@@ -25,16 +26,17 @@ export const SideBarWrap = styled.main`
 `;
 
 export const Title = styled.h1`
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 10px;
 `;
 
 export const Contents = styled.section`
-  article {
-    width: 90px;
-    height: 90px;
+  height: article {
+    width: 80px;
+    height: 80px;
     background-color: #999;
     margin-bottom: 3px;
+    object-fit: cover;
   }
 `;
 
@@ -57,5 +59,6 @@ export const Thumbnail = styled.div`
     left: 0;
     top: 0;
     height: 100%;
+    width: 100%;
   }
 `;

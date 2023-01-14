@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
+import { mobile } from "../../../../commons/styles/breakPoints";
 
 interface MypageLayoutProps {
   children: ReactNode;
@@ -28,5 +29,8 @@ export default function MypageLayout({ children }: MypageLayoutProps) {
 const MypageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 80px;
+  margin-top: 100px;
+  @media ${mobile} {
+    flex-direction: column;
+  }
 `;

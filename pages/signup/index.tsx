@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
-import { mobile } from "../../src/commons/styles/breakPoints";
+import { mobile, tablet } from "../../src/commons/styles/breakPoints";
 import { colorBase01 } from "../../src/commons/styles/colorBases";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -132,7 +132,7 @@ export default function SignupPage() {
 }
 
 const InnerWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 80px auto 0 auto;
   padding: 3rem 0;
   display: flex;
@@ -140,6 +140,10 @@ const InnerWrapper = styled.div`
   align-items: center;
 
   @media ${mobile} {
+    width: 100%;
+  }
+
+  @media ${tablet} {
     width: 100%;
   }
 `;
@@ -156,6 +160,9 @@ const Section = styled.section`
   padding: 3.75rem 7rem;
   display: flex;
   flex-direction: row;
+  @media (max-width: 570px) {
+    padding: 3.75rem 0;
+  }
 `;
 
 const Article = styled.article`
@@ -182,6 +189,9 @@ const TitleGeneral = styled.h3`
   border-right: 1px solid #1f3d31;
   padding: 10px 0;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const TitleSeller = styled.h3`
@@ -190,6 +200,9 @@ const TitleSeller = styled.h3`
   margin-bottom: 0;
   padding: 10px 0;
   cursor: pointer;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const Contents = styled.div`
@@ -204,18 +217,29 @@ const ContentsTitle = styled.h4`
   font-size: 1.25rem;
   margin-bottom: 0;
   font-weight: bold;
+  @media ${mobile} {
+    font-size: 1.6rem;
+  }
 `;
 
 const ContentsText = styled.p`
   font-size: 1rem;
   margin: 20px 0;
   text-decoration: underline;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const AccountIcon = styled(AccountCircleIcon)`
   font-size: 10rem;
   color: #ddd;
   margin: 3rem 0;
+  @media ${mobile} {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 12rem;
+  }
 `;
 
 const SellerNumsTitle = styled.h4`
@@ -238,4 +262,7 @@ const SignupBtn = styled.button`
   width: 150px;
   height: 46px;
   padding: 10px;
+  @media ${mobile} {
+    font-size: 1.6rem;
+  }
 `;

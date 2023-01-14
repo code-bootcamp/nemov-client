@@ -14,6 +14,7 @@ export const FETCH_PRODUCTS_I_PICKED = gql`
       veganLevel
       createdAt
       updatedAt
+      discountedPrice
     }
   }
 `;

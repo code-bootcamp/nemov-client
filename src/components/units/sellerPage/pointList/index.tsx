@@ -1,17 +1,18 @@
 import { getDate } from "../../../../commons/libraries/utilies";
 import { GlobalWrapper } from "../../../../commons/styles/globalStyles";
 import { UseQueryFetchPointTransactions } from "../../../commons/hooks/useQueries/point/UseQueryFetchPointTransactions";
+import Pagination from "../../../commons/paginations/Pagination.index";
 import * as S from "./pointList.style";
 
 export default function PointList() {
-  const { data } = UseQueryFetchPointTransactions({
+  const { data, refetch } = UseQueryFetchPointTransactions({
     page: 1,
   });
 
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
       <S.Title>판매자 포인트 관리 페이지</S.Title>
-      <section>
+      <section style={{ display: "flex", flexDirection: "column" }}>
         <S.Table>
           <S.Thead>
             <S.Tr>
@@ -32,6 +33,7 @@ export default function PointList() {
             ))}
           </S.Tbody>
         </S.Table>
+        <Pagination refetch={refetch} count={data?.fetchPointTransactions.length} />
       </section>
     </GlobalWrapper>
   );

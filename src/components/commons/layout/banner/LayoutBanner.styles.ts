@@ -9,26 +9,40 @@ export const Wrapper = styled.section`
   height: auto;
 `;
 
-// export const ArrowLeft = styled(ArrowBackIosNewIcon)`
-//   border: 1px solid red;
-//   width: 3.5rem;
-//   height: 3.5rem;
-//   color: red;
-//   z-index: 1;
-// `;
-
 export const StyleSlider = styled(Slider)`
   width: 100%;
   height: 100%;
   .slick-prev {
     left: 30px;
     z-index: 1;
+    background: url("/icons/banner_prev_btn.png") no-repeat;
+    width: 60px;
+    height: 60px;
+    color: "#555";
+    &::before {
+      display: none;
+    }
+    :hover {
+      color: #000;
+    }
   }
   .slick-prev:before {
     /* content: ""; */
   }
   .slick-next {
     right: 30px;
+    z-index: 0;
+    background: url("/icons/banner_next_btn.png") no-repeat;
+    width: 60px;
+    height: 60px;
+    color: "#555";
+    &::before {
+      color: #555;
+      display: none;
+    }
+    :hover {
+      color: #000;
+    }
   }
   .slick-next:before {
     /* content: ""; */
@@ -107,4 +121,24 @@ export const GlobalWrap = styled(GlobalWrapper)`
     padding: 8%;
     justify-content: flex-end;
   }
+`;
+
+export const NextArrowIcon = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  background: url("/icons/banner_next_btn.png");
+  width: 60px;
+  height: 60px;
+`;
+
+export const PrevArrowIcon = styled.button`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: url("/icons/banner_prev_btn.png");
+  width: 60px;
+  height: 60px;
 `;

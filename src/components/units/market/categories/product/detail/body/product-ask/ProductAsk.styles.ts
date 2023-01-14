@@ -2,8 +2,9 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+
 import { colorBase03, colorBase04 } from "../../../../../../../../commons/styles/colorBases";
 import {
   flexCenter,
@@ -79,16 +80,26 @@ export const QuestionInfoRight = styled.section`
   align-items: center;
 `;
 
-export const AnswerStatus = styled.span`
-  color: ${(props: IProductAskStylesProps) => (props.data !== null ? "#f7330e" : "black")};
+export const AnswerStatus = styled.div`
+  ${flexCenter}
+  color: ${(props: IProductAskStylesProps) => (props.data !== null ? `${amazon}` : "black")};
 `;
 
-export const OpenAnswerButton01 = styled(KeyboardArrowDownIcon)`
-  ${colorBase04}
-  width: 2rem;
-  height: 2rem;
-  margin: 0 1rem;
+const IconStyleSet02 = css`
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 0.4rem;
   cursor: pointer;
+`;
+
+export const AnswerCompleted = styled(CheckCircleOutlineRoundedIcon)`
+  ${IconStyleSet02}
+  color: ${amazon};
+`;
+
+export const AnswerWaiting = styled(AccessTimeRoundedIcon)`
+  ${IconStyleSet02}
+  color: "black";
 `;
 
 export const QNAContentsSection = styled.footer`

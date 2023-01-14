@@ -24,7 +24,7 @@ export type IAnswer = {
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  question: IQuestion;
+  question?: Maybe<IQuestion>;
   updatedAt: Scalars['DateTime'];
   user: IUser;
 };
@@ -42,7 +42,7 @@ export type ICreateProductCategoryInput = {
 };
 
 export type ICreateProductInput = {
-  /** 상품 상세설명 */
+  /** 상품 상세설명 (최대 2000자) */
   description: Scalars['String'];
   /** 상품 할인율, 0 ~ 100 */
   discountRate: Scalars['Int'];
@@ -151,6 +151,7 @@ export type IMutation = {
   updateUser: IUser;
   updateUserPassword: IUser;
   uploadFile: Scalars['String'];
+  uploadFile1: Scalars['String'];
 };
 
 
@@ -362,6 +363,11 @@ export type IMutationUploadFileArgs = {
   file: Scalars['Upload'];
 };
 
+
+export type IMutationUploadFile1Args = {
+  file: Scalars['Upload'];
+};
+
 /** 결제 상태에 대한 타입 */
 export enum IPoint_Transaction_Status_Enum {
   /** 상품 구매 완료 */
@@ -537,6 +543,12 @@ export type IQueryFetchPointTransactionsArgs = {
 };
 
 
+export type IQueryFetchPointTransactionsCountArgs = {
+  endDate?: InputMaybe<Scalars['DateTime']>;
+  startDate?: InputMaybe<Scalars['DateTime']>;
+};
+
+
 export type IQueryFetchProductArgs = {
   productId: Scalars['ID'];
 };
@@ -576,6 +588,7 @@ export type IQueryFetchProductOrdersWithoutReviewArgs = {
 export type IQueryFetchProductsArgs = {
   page: Scalars['Int'];
   productCategoryId: Scalars['ID'];
+  search: Scalars['String'];
   veganLevel: Scalars['Int'];
 };
 
@@ -587,6 +600,7 @@ export type IQueryFetchProductsBySellerArgs = {
 
 export type IQueryFetchProductsCountArgs = {
   productCategoryId: Scalars['ID'];
+  search: Scalars['String'];
   veganLevel: Scalars['Int'];
 };
 
@@ -667,18 +681,12 @@ export type IReview = {
   contents: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  images?: Maybe<Array<IReviewImage>>;
+  images?: Maybe<Array<Scalars['String']>>;
   product: IProduct;
   rating: Scalars['Int'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user: IUser;
-};
-
-export type IReviewImage = {
-  __typename?: 'ReviewImage';
-  id: Scalars['ID'];
-  url: Scalars['String'];
 };
 
 export type IUpdateProductCategoryInput = {
@@ -687,7 +695,7 @@ export type IUpdateProductCategoryInput = {
 };
 
 export type IUpdateProductInput = {
-  /** 상품 상세설명 */
+  /** 상품 상세설명 (최대 2000자) */
   description?: InputMaybe<Scalars['String']>;
   /** 상품 할인율, 0 ~ 100 */
   discountRate?: InputMaybe<Scalars['Int']>;

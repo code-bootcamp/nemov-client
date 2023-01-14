@@ -72,6 +72,27 @@ export const ItemImageBox01 = styled.div`
   }
 `;
 
+export const ItemDetailFooter = styled.footer`
+  ${GS.flexRow}
+  justify-content: space-between;
+  align-items: center;
+  @media ${mobile} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+export const ItemPrices02 = styled.div`
+  ${GS.flexRow}
+  align-items: center;
+  gap: 0.8rem;
+
+  @media ${mobile} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
 export const ItemDetailFooter02 = styled.footer`
   ${GS.flexRow}
   justify-content: space-between;
