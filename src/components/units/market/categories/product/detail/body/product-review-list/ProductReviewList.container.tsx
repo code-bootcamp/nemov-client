@@ -1,3 +1,4 @@
+import React from "react";
 import * as S from "./ProductReviewList.styles";
 import * as CS from "../MarketDetailBody.styles";
 import * as AS from "../product-ask/ProductAsk.styles";
@@ -5,8 +6,8 @@ import { IProductReviewListProps } from "../../../../../Market.types";
 import { getDate } from "../../../../../../../../commons/libraries/utilies";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
 
-export default function ProductReviewList(props: IProductReviewListProps) {
-  console.log(props.reviewsData);
+function ProductReviewList(props: IProductReviewListProps) {
+  // console.log("상품 리뷰 컴포넌트 랜더링");
 
   return (
     <CS.TabContentMain01>
@@ -32,21 +33,23 @@ export default function ProductReviewList(props: IProductReviewListProps) {
                   </CS.HeaderInfo01>
                   <CS.HeaderInfo02>
                     <CS.Info02Detail>
-                      {/* <span>{reviews.user.name}</span> */}
+                      <span>{reviews.user.name}</span>
                       <span>{getDate(reviews.updatedAt)}</span>
                     </CS.Info02Detail>
                   </CS.HeaderInfo02>
                 </CS.ContentListHeader01>
                 <CS.ContentDetail01>{reviews.contents}</CS.ContentDetail01>
                 <S.PRImages>
-                  {reviews.images?.map((image, index) => (
-                    <S.PRImage01
-                      width="10%"
-                      key={index}
-                      alt={`${reviews.title}의 이미지`}
-                      src={image}
-                    />
-                  ))}
+                  {reviews.images
+                    ?.filter((image) => image)
+                    .map((image, index) => (
+                      <S.PRImage01
+                        width="10%"
+                        key={index}
+                        alt={`${reviews.title}의 이미지`}
+                        src={image}
+                      />
+                    ))}
                 </S.PRImages>
               </CS.TabContentList01>
             ))}
@@ -65,3 +68,5 @@ export default function ProductReviewList(props: IProductReviewListProps) {
     </CS.TabContentMain01>
   );
 }
+
+export default React.memo(ProductReviewList);

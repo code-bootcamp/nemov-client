@@ -26,6 +26,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
         productCategoryId: click,
         veganLevel: 0,
         page: 1,
+        search: "",
       },
     });
     // console.log(data);

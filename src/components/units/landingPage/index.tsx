@@ -1,20 +1,31 @@
 import Link from "next/link";
 import * as S from "./landingPage.styles";
-import EastIcon from "@mui/icons-material/East";
+import { useApolloClient } from "@apollo/client";
+import { FETCH_PRODUCTS_OF_BEST_SELLING } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsOfBest";
+import { FETCH_PRODUCTS_OF_RECOMMEND } from "../../commons/hooks/useQueries/product/UseQueryFetchProductsOfRecommend";
 
 export default function LandingPage() {
+  const client = useApolloClient();
+
+  const prefetchData = async () => {
+    await client.query({
+      query: FETCH_PRODUCTS_OF_RECOMMEND,
+    });
+    await client.query({
+      query: FETCH_PRODUCTS_OF_BEST_SELLING,
+    });
+  };
+
   return (
     <S.Wrapper>
       <S.Section1>
         <S.Article>
           <S.Title>네가 찾는 모든 비건, 네모비</S.Title>
           <S.Sentence>
-            건강한 비건 생활을 위해, 건강한 나를 위해 비건을 실천하는 모든 사람들을 위한 네모비와
-            함께하세요.
+            건강한 생활, 그리고 지구를 위한 비거니즘(Veganism) 실천
+            <br />
+            네모비가 함께합니다.
           </S.Sentence>
-          <Link href="/market">
-            <S.Btn>네모비 베스트 상품 보러가기</S.Btn>
-          </Link>
         </S.Article>
         <S.Arrows>
           <S.Path1 d="M0 0 L30 32 L60 0"></S.Path1>
@@ -31,15 +42,13 @@ export default function LandingPage() {
             여기저기 돌아다니시나요?
           </S.Title>
           <S.Sentence2>
-            좀 더 편하고 즐거운 비건 생활을 도울 수 있는 방법을 찾아보다가 네모비를 만들었습니다.
-            <br />
-            네모비에서 원하는 비건 상품과 다른 비건인들의 선택을 보며 원하는 비건 상품을 구매하고
-            다른 회원들에게 솔직한 후기를 남겨주세요. 우리는 물건보다 경험을 팝니다.
+            과거 사람들은 비건을 완전한 채식주의자 정도의 의미로 이해하고 사용했으나, 최근에는
+            먹을거리 뿐만 아니라 ‘생활 전반에서 동물성 제품을 사용하지 않는 철학이자 삶의 방식을
+            실천하는 사람’이라는 조금 더 넓은 개념으로 이해하기 시작했습니다. 또한 비거니즘의 정의가
+            넓어지면서 비거니즘 유형 또한 다양해졌습니다. 우리는 이러한 변화에 맞게 비거니즘을
+            따르는 국내 소비자들이 자신의 일상에서 쉽게 비거니즘을 향유할 수 있도록 비거니즘 전용
+            E-Commerce 서비스를 기획했습니다.
           </S.Sentence2>
-          <S.Btn>
-            <Link href="/market">네모비 비건제품 구경하기</Link>
-            <EastIcon />
-          </S.Btn>
         </S.Article2>
         <S.Arrows>
           <S.Path1 d="M0 0 L30 32 L60 0"></S.Path1>
@@ -49,17 +58,18 @@ export default function LandingPage() {
       </S.Section2>
 
       <S.Section4>
-        <S.Article>
-          <S.Title>나와 같은 유형을 만나 취향을 공유하다</S.Title>
-          <S.Sentence>
-            비건도 다 같은 비건이 아니듯 유형에 따라 선호하는 식품과 물건이 다를 수 밖에요. <br />
-            네모비에서는 나와 같은 유형의 비건인들의 Pick을 알려드려요. 재밌고 편리한 비건 생활,
-            네모비가 함께할게요
-          </S.Sentence>
-          <Link href="/signup">
-            <S.Btn>네모비 회원가입</S.Btn>
-          </Link>
-        </S.Article>
+        <S.Article2>
+          <S.Title02>나와 같은 유형을 만나 취향을 공유하다</S.Title02>
+          <S.Sentence2>
+            여러분은 어느 유형의 비거니즘을 실천하는 사람인가요?
+            <br />
+            네모비에서 회원가입을 하고 당신의 비거니즘 유형을 알려주세요.
+            <br />
+            네모비에서는 나와 같은 유형의 비건인들의 선택을 알려드려요.
+            <br />
+            편리한 비건 생활, 네모비에서 경험하세요.
+          </S.Sentence2>
+        </S.Article2>
         <S.Arrows>
           <S.Path1 d="M0 0 L30 32 L60 0"></S.Path1>
           <S.Path2 d="M0 20 L30 52 L60 20"></S.Path2>
@@ -69,8 +79,11 @@ export default function LandingPage() {
 
       <S.Section3>
         <S.Article>
-          <S.Title>네가 찾는 모든 비건, 네모비에서 빠르고 편리하게</S.Title>
+          <S.Title02>당신이 일상에서 쉽게 비거니즘을 실천할 수 있도록 네모비로 편리하게</S.Title02>
           <S.Sentence></S.Sentence>
+          <Link href="/market">
+            <S.Btn onMouseOver={prefetchData}>네모비 베스트 상품 보러가기</S.Btn>
+          </Link>
         </S.Article>
       </S.Section3>
     </S.Wrapper>

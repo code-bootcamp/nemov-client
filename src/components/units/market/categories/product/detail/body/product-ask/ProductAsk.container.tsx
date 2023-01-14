@@ -1,4 +1,4 @@
-// import { ITabContentsProps } from "../product-review-list/ProductReviewList.container";
+import React from "react";
 import * as S from "./ProductAsk.styles";
 import * as CS from "../MarketDetailBody.styles";
 import OpenModalButton01 from "../../../../../../../commons/buttons/OpenModalButton01";
@@ -9,9 +9,8 @@ import ProductQuestionWrite from "./ProductQuestionWrite";
 import { IProductAskProps } from "../../../../../Market.types";
 import { Modal } from "antd";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
-// import { MouseEventHandler, useState } from "react";
 
-export default function ProductAsk(props: IProductAskProps) {
+function ProductAsk(props: IProductAskProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -65,12 +64,15 @@ export default function ProductAsk(props: IProductAskProps) {
                     </S.QuestionInfoLeft>
                     <S.QuestionInfoRight>
                       {!questions.answer ? (
-                        <S.AnswerStatus data={questions.answer}>답변대기</S.AnswerStatus>
+                        <S.AnswerStatus data={questions.answer}>
+                          답변대기 <S.AnswerWaiting />
+                        </S.AnswerStatus>
                       ) : (
-                        <S.AnswerStatus data={questions.answer}>답변완료</S.AnswerStatus>
+                        <S.AnswerStatus data={questions.answer}>
+                          답변완료
+                          <S.AnswerCompleted />
+                        </S.AnswerStatus>
                       )}
-
-                      <S.AnswerStatusIcon data={questions.answer} />
                     </S.QuestionInfoRight>
                   </CS.ContentListHeader02>
                   <S.QNAContentsSection>
@@ -97,3 +99,5 @@ export default function ProductAsk(props: IProductAskProps) {
     </>
   );
 }
+
+export default React.memo(ProductAsk);

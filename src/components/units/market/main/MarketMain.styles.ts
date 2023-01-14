@@ -5,6 +5,8 @@ import { colorBase03 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+
 const HeaderStyle = css`
   display: flex;
   justify-content: space-between;
@@ -146,4 +148,17 @@ export const ItemsWrapper02 = styled.section`
   }
   width: 100%;
   justify-content: center;
+`;
+
+export const DataNone = styled.section`
+  margin-top: 5%;
+  width: 100%;
+  ${GS.flexCenter}
+  flex-direction: column;
+  font-weight: 900;
+`;
+
+export const WarningIcon = styled(WarningRoundedIcon)`
+  font-size: 10rem;
+  color: ${amazon};
 `;

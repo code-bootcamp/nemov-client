@@ -6,15 +6,20 @@ import { IsSelectedState } from "../../../src/commons/stores";
 import { GlobalWrapper } from "../../../src/commons/styles/globalStyles";
 import { UseQueryFetchCategories } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchCategories";
 import { UseQueryFetchIsInCart } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchIsInCart";
-import { UseQueryFetchProducts } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProducts";
+import {
+  FETCH_PRODUCTS,
+  UseQueryFetchProducts,
+} from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProducts";
 import { UseQueryFetchProductsCount } from "../../../src/components/commons/hooks/useQueries/product/UseQueryFetchProductsCount";
 import { CategoryMain } from "../../../src/components/units/market/categories/list/MarketList.styles";
 import * as CS from "../../../src/components/units/market/categories/category/MarketCategory.styles";
 import MarketList from "../../../src/components/units/market/categories/list/MarketList";
 import { useState } from "react";
+import { useApolloClient } from "@apollo/client";
 
 export default function MarketCategoriesPage() {
   const router = useRouter();
+  const client = useApolloClient();
 
   const [category, setCategory] = useState("");
   const [value] = useRecoilState(IsSelectedState);
@@ -23,7 +28,8 @@ export default function MarketCategoriesPage() {
   const [startPage, setStartPage] = useState(1);
   const [activePage, setActivePage] = useState(1);
 
-  // console.log("라우터 쿼리 넘버", router.query);
+  const [search, setSearch] = useState("");
+
   const {
     data: productsData,
     fetchMore: productsFetchMore,
@@ -33,23 +39,32 @@ export default function MarketCategoriesPage() {
     productCategoryId: category,
     veganLevel: value,
     page: 1,
+    search,
   });
-
-  // console.log(productsData);
 
   const onClickMoveToCategory = (event: React.MouseEvent<HTMLDivElement>) => {
     const click = event.currentTarget.id;
-    // console.log(event.currentTarget.id);
     setCategory(click);
     setStartPage(1);
     setActivePage(1);
-    console.log("시작 페이지", startPage);
     void productsRefetch({ productCategoryId: click });
   };
 
-  const { data: productsCount } = UseQueryFetchProductsCount({
+  const prefetchProducts = (categoryId: string) => async () => {
+    await client.query({
+      query: FETCH_PRODUCTS,
+      variables: { productCategoryId: categoryId, veganLevel: value, page: 1, search: "" },
+    });
+  };
+
+  const onChangeSearch = (value: string) => {
+    setSearch(value);
+  };
+
+  const { data: productsCount, refetch: productsCountRefetch } = UseQueryFetchProductsCount({
     productCategoryId: category,
     veganLevel: 0,
+    search,
   });
 
   const { data: categoryData } = UseQueryFetchCategories();
@@ -82,6 +97,7 @@ export default function MarketCategoriesPage() {
                   <CS.Category
                     key={categories.id}
                     onClick={onClickMoveToCategory}
+                    onMouseEnter={prefetchProducts(categories.id)}
                     id={categories.id}
                   >
                     <CS.StyledCategoryIcon
@@ -112,6 +128,9 @@ export default function MarketCategoriesPage() {
             setActivePage={setActivePage}
             startPage={startPage}
             activePage={activePage}
+            setSearch={setSearch}
+            productsCountRefetch={productsCountRefetch}
+            onChangeSearch={onChangeSearch}
           />
         </CategoryMain>
       </GlobalWrapper>

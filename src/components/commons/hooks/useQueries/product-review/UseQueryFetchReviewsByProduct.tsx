@@ -15,9 +15,9 @@ export const FETCH_REVIEWS_BY_PRODUCT = gql`
       contents
       rating
       images
-      # user {
-      #   name
-      # }
+      user {
+        name
+      }
     }
   }
 `;
