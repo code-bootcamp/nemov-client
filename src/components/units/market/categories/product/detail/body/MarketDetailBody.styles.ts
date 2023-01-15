@@ -21,7 +21,7 @@ export const MarketDetailPageBody = styled.main`
 
 export const TabContentMain01 = styled.section`
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 3rem;
   padding: 1rem;
 `;
 

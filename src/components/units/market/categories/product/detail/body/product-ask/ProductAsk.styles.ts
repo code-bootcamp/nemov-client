@@ -36,7 +36,7 @@ export const ProductAskNone = styled.section`
 `;
 
 export const StyledQuestionIcon = styled(LiveHelpOutlinedIcon)`
-  font-size: 4rem;
+  font-size: 7rem;
   color: ${amazon};
 `;
 

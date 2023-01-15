@@ -4,7 +4,6 @@ import * as S from "./MarketDetailBody.styles";
 import MarketDetailNav from "./nav/ProductDetailNav";
 import ProductAsk from "./product-ask/ProductAsk.container";
 import ProductDetail from "./product-detail/ProductDetail.container";
-import ProductNoticeInfo from "./product-notice-info/ProductNoticeInfo";
 import ProductReviewList from "./product-review-list/ProductReviewList.container";
 
 function MarketDetailBody(props: IMarketDetailBodyProps) {
@@ -66,7 +65,6 @@ function MarketDetailBody(props: IMarketDetailBodyProps) {
           setActivePage={setActivePage}
         />
       )}
-      <ProductNoticeInfo data={props.data} />
     </S.MarketDetailPageBody>
   );
 }

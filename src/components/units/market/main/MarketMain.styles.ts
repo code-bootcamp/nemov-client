@@ -41,7 +41,7 @@ const HeaderStyle02 = css`
 `;
 
 export const MarketMainHeader01 = styled.header`
-  @media ${mobile} {
+  @media ${mobile2} {
     flex-direction: row;
     align-items: flex-end;
     gap: 0.2rem;
@@ -64,6 +64,7 @@ export const HeaderSpan = styled.span`
   color: ${amazon};
   ${GS.semiBold}
   font-weight: 900;
+  font-size: 2.5rem;
 `;
 
 export const HeaderDiv01 = styled.div`

@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import { flexColumn, flexRow } from "../../../../../../../../commons/styles/globalStyles";
 
+export const NoticeInfoSection = styled.section`
+  width: 100%;
+  margin-top: 3rem;
+`;
+
 export const NoticeInfoTable = styled.table`
   display: flex;
   flex-wrap: wrap;
