@@ -14,6 +14,9 @@ export const MarketDetailPageBody = styled.main`
   padding: 0 2rem 2rem 2rem;
   width: 100%;
   ${flexColumn}
+  @media ${mobile2} {
+    padding: 0;
+  }
 `;
 
 export const TabContentMain01 = styled.section`
