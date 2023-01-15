@@ -117,19 +117,6 @@ export const MainItemsWrapper = styled.section`
   margin-top: 10%;
 `;
 
-export const PageLine = styled.div`
-  position: absolute;
-  @media ${mobile} {
-  }
-  left: 0px;
-  z-index: -1;
-  width: 100%;
-  height: 46.875rem;
-  /* background-color: #d8e9c8; */
-  /* background: url(/images/bg-line.jpg) no-repeat center; */
-  background-size: cover;
-`;
-
 export const MainMarketSection01 = styled.section`
   width: 100%;
   height: 30rem;
@@ -201,4 +188,41 @@ export const WarningIcon = styled(WarningRoundedIcon)`
   @media ${mobile2} {
     font-size: 9rem;
   }
+`;
+
+// sub-banner 이미지
+export const SubBanner = styled.div`
+  width: 100%;
+  background-size: cover;
+  position: relative;
+  @media ${mobile2} {
+    display: none;
+  }
+`;
+
+export const SubBannerImg = styled.img`
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  object-position: 100% 80%;
+  border-radius: 15px;
+`;
+
+export const SubBannerWords = styled.span`
+  position: absolute;
+  top: 28%;
+  left: 5%;
+  color: white;
+  ${GS.flexColumn}
+  row-gap: 1rem;
+`;
+
+export const SubBannerWord01 = styled.span`
+  font-size: 2rem;
+  font-weight: 800;
+`;
+
+export const SubBannerWord02 = styled.span`
+  font-size: 1rem;
+  font-weight: 500;
 `;

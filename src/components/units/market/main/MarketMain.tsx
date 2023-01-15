@@ -19,6 +19,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/stores";
 import { FETCH_PRODUCTS } from "../../../commons/hooks/useQueries/product/UseQueryFetchProducts";
 import { FETCH_PRODUCT_CATEGORIES } from "../../../commons/hooks/useQueries/product/UseQueryFetchCategories";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 
 const NextArrow = ({ currentSlide, slideCount, ...props }: CustomArrowProps) => (
   <div {...props}>
@@ -144,6 +145,8 @@ function MarketMain() {
     [FETCH_PRODUCT]
   );
 
+  const { onClickMoveToPage } = useMoveToPage();
+
   return (
     <>
       <CommonModal01 isOpen={isOpen} onCancel={modalOnCancel} width={500}>
@@ -159,7 +162,6 @@ function MarketMain() {
       <GlobalWrapper>
         <S.MarketMainContainer>
           <S.MainItemsWrapper>
-            <S.PageLine />
             <S.RecommendItemSection01>
               <S.MarketMainHeader01>
                 <div>
@@ -196,6 +198,13 @@ function MarketMain() {
                 ))}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
+            <S.SubBanner onClick={onClickMoveToPage("/signup")}>
+              <S.SubBannerImg src="/images/banner/Sub_banner.webp" />
+              <S.SubBannerWords>
+                <S.SubBannerWord01>네모비 회원가입시 3000 포인트 증정</S.SubBannerWord01>
+                <S.SubBannerWord02>지금 네모비에 가입하세요</S.SubBannerWord02>
+              </S.SubBannerWords>
+            </S.SubBanner>
             <S.MainMarketSection01>
               <S.HeaderDiv04>베스트</S.HeaderDiv04>
               <S.MarketMainHeader02>
