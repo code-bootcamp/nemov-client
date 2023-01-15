@@ -79,7 +79,7 @@ function CartModal(props: ICartModalProps) {
         }
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error.message);
+          // console.log(error.message);
           Modal.error({ content: `${error.message}` });
         }
       }

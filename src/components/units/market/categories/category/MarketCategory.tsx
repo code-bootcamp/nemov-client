@@ -19,7 +19,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
 
   const onClickMoveToCategory = async (event: React.MouseEvent<HTMLDivElement>) => {
     const click = event.currentTarget.id;
-    console.log(event.currentTarget.id);
+    // console.log(event.currentTarget.id);
     await client.query({
       query: FETCH_PRODUCTS,
       variables: {
@@ -41,7 +41,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
     }
   });
 
-  console.log(currentData);
+  // console.log(currentData);
 
   return (
     <>

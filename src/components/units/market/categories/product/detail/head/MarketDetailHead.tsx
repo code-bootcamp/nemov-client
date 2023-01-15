@@ -72,7 +72,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
             count: quantity,
           },
         });
-        console.log(result);
+        // console.log(result);
         const status = result?.data?.toggleProductToCart;
         // console.log(status);
         if (status === true) {
@@ -90,7 +90,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
         }
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error);
+          // console.log(error);
           Modal.error({ content: `${error.message}` });
         }
       }
@@ -110,7 +110,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
         setIsPicked(status);
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error.message);
+          // console.log(error.message);
           Modal.error({ content: `${error.message}` });
         }
       }

@@ -322,4 +322,7 @@ export const ItemOriginPrice02 = styled.span`
   color: ${CP.gray};
   font-size: 0.8rem;
   text-decoration: line-through;
+  @media ${mobile2} {
+    font-size: 1.5rem;
+  }
 `;

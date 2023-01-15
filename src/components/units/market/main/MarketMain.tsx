@@ -161,6 +161,13 @@ function MarketMain() {
 
       <GlobalWrapper>
         <S.MarketMainContainer>
+          <S.SubBanner onClick={onClickMoveToPage("/signup")}>
+            <S.SubBannerImg src="/images/banner/Sub_banner.webp" />
+            <S.SubBannerWords>
+              <S.SubBannerWord01>네모비 회원가입시 3000 포인트 증정</S.SubBannerWord01>
+              <S.SubBannerWord02>지금 네모비에 가입하세요</S.SubBannerWord02>
+            </S.SubBannerWords>
+          </S.SubBanner>
           <S.MainItemsWrapper>
             <S.RecommendItemSection01>
               <S.MarketMainHeader01>
@@ -198,13 +205,7 @@ function MarketMain() {
                 ))}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
-            <S.SubBanner onClick={onClickMoveToPage("/signup")}>
-              <S.SubBannerImg src="/images/banner/Sub_banner.webp" />
-              <S.SubBannerWords>
-                <S.SubBannerWord01>네모비 회원가입시 3000 포인트 증정</S.SubBannerWord01>
-                <S.SubBannerWord02>지금 네모비에 가입하세요</S.SubBannerWord02>
-              </S.SubBannerWords>
-            </S.SubBanner>
+            <S.SubBanner02></S.SubBanner02>
             <S.MainMarketSection01>
               <S.HeaderDiv04>베스트</S.HeaderDiv04>
               <S.MarketMainHeader02>

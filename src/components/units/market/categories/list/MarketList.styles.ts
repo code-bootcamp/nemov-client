@@ -31,7 +31,7 @@ export const ListWrapper = styled.section`
 
 export const ListTitle = styled.h1`
   margin-top: 4.6rem;
-  ${GS.bold}
+  ${GS.semiBold}
   @media ${mobile} {
     font-size: xx-large;
   }

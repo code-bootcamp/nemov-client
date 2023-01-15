@@ -114,7 +114,7 @@ export const ToCategories = styled.div`
 export const MainItemsWrapper = styled.section`
   width: 100%;
   height: 100%;
-  margin-top: 10%;
+  margin-top: 5%;
 `;
 
 export const MainMarketSection01 = styled.section`
@@ -198,6 +198,7 @@ export const SubBanner = styled.div`
   @media ${mobile2} {
     display: none;
   }
+  margin-top: 5%;
 `;
 
 export const SubBannerImg = styled.img`
@@ -226,3 +227,27 @@ export const SubBannerWord02 = styled.span`
   font-size: 1rem;
   font-weight: 500;
 `;
+
+// sub-banner 두번째
+
+export const SubBanner02 = styled.section`
+  width: 100%;
+  display: flex;
+  @media ${mobile2} {
+    display: none;
+  }
+  margin-top: 5%;
+  justify-content: space-between;
+`;
+
+// export const SubBannerImg02 = styled.img`
+//   width: 40%;
+//   aspect-ratio: 1/1;
+//   border-radius: 15px;
+// `;
+
+// export const SubBannerImg03 = styled.img`
+//   width: 20%;
+//   aspect-ratio: 1/2;
+//   border-radius: 15px;
+// `;
