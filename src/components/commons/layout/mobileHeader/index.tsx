@@ -23,6 +23,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const { data: userInfo } = UseQueryFetchLoginUser();
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
   const [accessToken] = useRecoilState(accessTokenState);
+
   const {
     isOpen,
     data,
