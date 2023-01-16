@@ -45,20 +45,16 @@ export default function SellerManagementPage() {
         <S.Tabs>
           <S.Tab onClick={onClickProductList} isSelected={isSelected[0]}>
             등록한 상품
-            <S.Line isSelected={isSelected[0]}></S.Line>
           </S.Tab>
           {/* 배송완료 주문취소  */}
           <S.Tab onClick={onClickProductOrderList} isSelected={isSelected[1]}>
             주문 내역
-            <S.Line isSelected={isSelected[1]}></S.Line>
           </S.Tab>
           <S.Tab onClick={onClickQnAList} isSelected={isSelected[2]}>
             문의 내역
-            <S.Line isSelected={isSelected[2]}></S.Line>
           </S.Tab>
           <S.Tab onClick={onClickPointList} isSelected={isSelected[3]}>
             포인트 내역
-            <S.Line isSelected={isSelected[3]}></S.Line>
           </S.Tab>
         </S.Tabs>
       </S.TabWrapper>

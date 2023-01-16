@@ -5,7 +5,10 @@ import CommonModal01 from "../../modals/CommonModal01";
 import { useRecoilState } from "recoil";
 import { accessTokenState, isEditState } from "../../../../commons/stores";
 import PaymentPage from "../../../units/paymentModal/payment";
-import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
+import {
+  FETCH_LOGIN_USER,
+  UseQueryFetchLoginUser,
+} from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import LayoutMobileMenu from "../mobileHeader";
@@ -26,11 +29,12 @@ interface ILayoutHeaderProps {
 export default function LayoutHeader(props: ILayoutHeaderProps) {
   const router = useRouter();
   const { data } = UseQueryFetchLoginUser();
+  console.log(data);
   const { data: cartCountData } = UseQueryFetchCartCount();
   const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [logout] = useMutation(LOGOUT);
+  const [logout] = useMutation(LOGOUT, { refetchQueries: [FETCH_LOGIN_USER] });
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const onClickPayment = () => {
     setIsOpen((prev) => !prev);
@@ -44,11 +48,10 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
 
   const onClickLogout = async () => {
     try {
-      // setMenuOpen(false);
       await logout();
-      setAccessToken("");
       Modal.success({ content: "로그아웃이 완료되었습니다." });
       void router.push("/market");
+      setAccessToken("");
       setMenuOpen(false);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

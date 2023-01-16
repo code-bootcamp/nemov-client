@@ -14,6 +14,7 @@ import {
 import { IAnswer } from "../../../../../../../../commons/types/generated/types";
 import LiveHelpOutlinedIcon from "@mui/icons-material/LiveHelpOutlined";
 import { amazon } from "../../../../../../../../commons/styles/colorPalettes";
+import { mobile, mobile2 } from "../../../../../../../../commons/styles/breakPoints";
 
 interface IProductAskStylesProps {
   data?: IAnswer | null | undefined;
@@ -35,7 +36,7 @@ export const ProductAskNone = styled.section`
 `;
 
 export const StyledQuestionIcon = styled(LiveHelpOutlinedIcon)`
-  font-size: 4rem;
+  font-size: 7rem;
   color: ${amazon};
 `;
 
@@ -45,6 +46,9 @@ export const TitlesWrapper = styled.section`
 
 export const QuestionButtonWrapper = styled.div`
   width: 10%;
+  @media ${mobile} {
+    width: 8rem;
+  }
 `;
 
 export const QuestionInfoLeft = styled.section`
@@ -119,6 +123,9 @@ export const QuestionWriteInnerWrapper = styled.main`
   width: 100%;
   ${flexColumn}
   padding: 2rem;
+  @media ${mobile2} {
+    padding: 2rem 0;
+  }
 `;
 
 export const QuestionWriteHeader = styled.h2`
@@ -134,6 +141,9 @@ export const ProductName = styled.header`
   font-weight: 800;
   font-size: 1.2rem;
   padding-left: 0.4rem;
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 export const QuestionTitle = styled.input`

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile, tablet } from "../../../commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../../commons/styles/breakPoints";
 import { colorBase02 } from "../../../commons/styles/colorBases";
 
 export const Wrapper = styled.main`
@@ -67,32 +67,40 @@ const Section = styled.section`
 export const Section1 = styled(Section)`
   background: url(/images/landing/1.webp) no-repeat 50% 0 fixed;
   background-size: cover;
+  background-position-y: 40%;
 `;
 
 export const Section2 = styled(Section)`
-  background: url(/images/landing/2.webp) no-repeat 50% 0 fixed;
+  background: url(/images/landing/vegan-cosmetic01.webp) no-repeat 50% 0 fixed;
   background-size: cover;
-`;
-export const Section3 = styled(Section)`
-  background: url(/images/landing/3.webp) no-repeat 50% 0 fixed;
-  background-size: cover;
-  background-position-y: -600px;
+  background-position-y: 40%;
   @media ${tablet} {
-    background-position-y: -300px;
+    background-position-y: 30%;
   }
   @media ${mobile} {
     background-position-y: 0;
+  }
+`;
+export const Section3 = styled(Section)`
+  background: url(/images/landing/cart-in-the-forest.webp) no-repeat 50% 0 fixed;
+  background-size: cover;
+  background-position-y: 45%;
+  @media ${tablet} {
+    background-position-y: 40%;
+  }
+  @media ${mobile} {
+    background-position-y: 30%;
   }
 `;
 export const Section4 = styled(Section)`
-  background: url(/images/landing/4.webp) no-repeat 50% 0 fixed;
+  background: url(/images/landing/photo-table.webp) no-repeat 50% 0 fixed;
   background-size: cover;
-  background-position-y: -400px;
+  background-position-y: 45%;
   @media ${mobile} {
     background-position-y: 0;
   }
   @media ${tablet} {
-    background-position-y: 0;
+    background-position-y: 40%;
   }
 `;
 
@@ -102,13 +110,13 @@ export const Article = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 2rem;
   margin: 0 auto;
 `;
 
 export const Article2 = styled(Article)`
   width: 100%;
   max-width: 1300px;
-  padding: 0 2rem;
   align-items: flex-start;
 `;
 
@@ -123,10 +131,11 @@ export const Title = styled.h1`
   @media ${mobile} {
     font-size: 3.5vmax;
   }
+  word-break: keep-all;
 `;
 
 export const Title02 = styled.span`
-  text-align: center;
+  text-align: left;
   font-size: 3vmax;
   font-weight: 900;
   line-height: 1em;
@@ -135,9 +144,8 @@ export const Title02 = styled.span`
   line-height: 4vmax;
   text-shadow: rgba(0, 0, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   @media ${mobile} {
-    width: 100%;
-    padding: 0 1rem;
   }
+  word-break: keep-all;
 `;
 
 export const Sentence = styled.p`
@@ -148,6 +156,10 @@ export const Sentence = styled.p`
   @media ${mobile} {
     font-size: 2vmax;
   }
+  @media ${mobile2} {
+    text-align: left;
+  }
+  word-break: keep-all;
 `;
 
 export const Sentence2 = styled(Sentence)`
@@ -155,18 +167,22 @@ export const Sentence2 = styled(Sentence)`
   @media ${mobile} {
     font-size: 1.5vmax;
   }
+
+  word-break: keep-all;
 `;
 
 export const Btn = styled.button`
-  padding: 1.2% 1.4%;
+  padding: 1.2rem 1.4rem;
   ${colorBase02}
   border-radius: 0%;
   font-weight: 900;
   font-size: 1rem;
   display: flex;
   align-items: center;
+  @media ${tablet} {
+    padding: 1.4rem 1.5rem;
+    font-size: 1.5rem;
+  }
   @media ${mobile} {
-    padding: 2% 1.5%;
-    font-size: 1.3rem;
   }
 `;

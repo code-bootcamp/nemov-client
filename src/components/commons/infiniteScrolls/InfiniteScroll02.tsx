@@ -15,15 +15,12 @@ export default function InfiniteScroll02(props: IInfiniteScroll02Props) {
   const onLoadMore = () => {
     if (props.data?.fetchProducts === undefined) return;
     setLength(props.data.fetchProducts.length);
-    // console.log("fetchProducts 총 개수", props.data.fetchProducts.length);
-    // console.log("page:", Math.ceil(props.data.fetchProducts.length / 9) + 1);
-    // console.log("floor page:", Math.floor(props.data.fetchProducts.length / 9) + 1);
     void props.fetchMore({
       variables: {
         page: Math.ceil(props.data.fetchProducts.length / 9) + 1,
       },
       updateQuery: (prev: Pick<IQuery, "fetchProducts">, { fetchMoreResult }: any) => {
-        console.log("이전 페이지", prev, "새로운 페이지", fetchMoreResult.fetchProducts);
+        // console.log("이전 페이지", prev, "새로운 페이지", fetchMoreResult.fetchProducts);
         if (!fetchMoreResult?.fetchProducts) {
           return {
             fetchProducts: [...prev.fetchProducts],

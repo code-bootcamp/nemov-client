@@ -63,7 +63,7 @@ export default function ProductWrite(props: ProductWriteProps) {
   const [uploadFile] = UseMutationUploadFile();
   const { query } = UseQueryFetchProduct();
   const data = query.data?.fetchProduct;
-  
+
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
 
   const { register, handleSubmit, setValue, formState } = useForm<ProductInput>({
@@ -82,13 +82,12 @@ export default function ProductWrite(props: ProductWriteProps) {
       }
     };
   };
-  console.log(data);
 
   useEffect(() => {
     if (data) {
       setValue("name", data.name);
       setValue("description", data.description);
-      // setValue("productCategoryId", data.description);
+      setValue("productCategoryId", data.description);
       setValue("discountRate", data.discountRate);
       setValue("price", data.price);
       setValue("quantity", data.quantity);
@@ -219,48 +218,62 @@ export default function ProductWrite(props: ProductWriteProps) {
       <S.InnerWrap onSubmit={handleSubmit(isEdit ? onClickEdit : onClickSubmit)}>
         <S.Row>
           <S.SubTitle>상품이름</S.SubTitle>
-          <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
+          <S.InputWrap>
+            <S.InputBox type="text" placeholder="상품이름을 입력하세요" {...register("name")} />
+            <S.Error>{formState.errors.name?.message}</S.Error>
+          </S.InputWrap>
         </S.Row>
-        <div style={{ color: "red" }}>{formState.errors.name?.message}</div>
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
-          <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
+          <S.InputWrap>
+            <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
+            <S.Error>{formState.errors.price?.message}</S.Error>
+          </S.InputWrap>
         </S.Row>
         <S.Row>
           <S.SubTitle>할인율</S.SubTitle>
-          <S.InputBox
-            type="number"
-            placeholder="할인율을 입력하세요"
-            {...register("discountRate")}
-          />
+          <S.InputWrap>
+            <S.InputBox
+              type="number"
+              placeholder="할인율을 입력하세요"
+              {...register("discountRate")}
+            />
+            <S.Error>{formState.errors.discountRate?.message}</S.Error>
+          </S.InputWrap>
         </S.Row>
         <S.Row>
           <S.SubTitle>재고수량</S.SubTitle>{" "}
-          <S.InputBox
-            type="number"
-            placeholder="총 재고수량을 입력하세요"
-            {...register("quantity")}
-          />
+          <S.InputWrap>
+            <S.InputBox
+              type="number"
+              placeholder="총 재고수량을 입력하세요"
+              {...register("quantity")}
+            />
+            <S.Error>{formState.errors.quantity?.message}</S.Error>
+          </S.InputWrap>
         </S.Row>
         {!isEdit && (
           <S.Row>
             <S.SubTitle>상품 카테고리</S.SubTitle>
-            <S.Category>
-              {newCategory?.map((categories, index) => (
-                <S.Label key={categories.id}>
-                  <input
-                    type="radio"
-                    id={categories.id}
-                    name="category"
-                    onClick={onClickGetValue}
-                    value={data?.productCategory.id}
-                  />
-                  <S.Radio>
-                    {categories.name}({categoryArr[index]})
-                  </S.Radio>
-                </S.Label>
-              ))}
-            </S.Category>
+            <S.InputWrap>
+              <S.Category>
+                {newCategory?.map((categories, index) => (
+                  <S.Label key={categories.id}>
+                    <input
+                      type="radio"
+                      id={categories.id}
+                      name="category"
+                      onClick={onClickGetValue}
+                      value={data?.productCategory.id}
+                    />
+                    <S.Radio>
+                      {categories.name}({categoryArr[index]})
+                    </S.Radio>
+                  </S.Label>
+                ))}
+              </S.Category>
+              <S.Error>{formState.errors.productCategoryId?.message}</S.Error>
+            </S.InputWrap>
           </S.Row>
         )}
         <S.OptionsRow>
@@ -387,20 +400,23 @@ export default function ProductWrite(props: ProductWriteProps) {
         </S.OptionsRow>
         <S.Row>
           <S.SubTitle>비건 유형</S.SubTitle>
-          <S.Category>
-            {VeganLevels.map((el, index) => (
-              <S.Label key={index}>
-                <input
-                  type="radio"
-                  id={String(index + 1)}
-                  value={el}
-                  name="level"
-                  onClick={onClickRadio}
-                />
-                <S.Radio>{el}</S.Radio>
-              </S.Label>
-            ))}
-          </S.Category>
+          <S.InputWrap>
+            <S.Category>
+              {VeganLevels.map((el, index) => (
+                <S.Label key={index}>
+                  <input
+                    type="radio"
+                    id={String(index + 1)}
+                    value={el}
+                    name="level"
+                    onClick={onClickRadio}
+                  />
+                  <S.Radio>{el}</S.Radio>
+                </S.Label>
+              ))}
+            </S.Category>
+            <S.Error>{formState.errors.veganLevel?.message}</S.Error>
+          </S.InputWrap>
         </S.Row>
         <S.Row>
           <S.SubTitle>상품 대표 이미지</S.SubTitle>
@@ -411,6 +427,7 @@ export default function ProductWrite(props: ProductWriteProps) {
               placeholder="상품 대표 이미지를 등록하세요"
             />
             <S.ThumbnailImg src={imageUrl} />
+            <S.Error>{formState.errors.image?.message}</S.Error>
           </S.ThumbnailImgWrap>
         </S.Row>
         <S.Row>
@@ -421,6 +438,7 @@ export default function ProductWrite(props: ProductWriteProps) {
               onChangeContents={onChangeContents}
               initialValue={data?.description}
             />
+            <S.Error>{formState.errors.description?.message}</S.Error>
           </S.EditorWrap>
         </S.Row>
         <S.ButtonWrap>

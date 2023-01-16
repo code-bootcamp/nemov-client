@@ -11,7 +11,7 @@ export const useAuth02 = () => {
   // 로그인 체크
   useEffect(() => {
     void restoreToken.toPromise().then((newAccessToken) => {
-      console.log(newAccessToken);
+      // console.log(newAccessToken);
       if (!accessToken) {
         Modal.error({ content: "로그인 후 이용 가능한 서비스입니다." });
       }

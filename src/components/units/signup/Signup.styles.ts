@@ -187,7 +187,7 @@ export const PhoneBtn = styled.button`
 
 export const Select = styled.select`
   width: 75%;
-  height: 3.5rem;
+  height: 3rem;
   outline: none;
   background-color: white;
   @media ${tablet} {

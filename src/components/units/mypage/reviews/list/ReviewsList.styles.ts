@@ -24,6 +24,10 @@ export const ReviewLi = styled.li`
 export const ReviewImg = styled.img`
   width: 15%;
   aspect-ratio: 5/5;
+
+  @media ${mobile} {
+    width: 20%;
+  }
 `;
 
 export const ReviewCenterWrapper = styled.div`

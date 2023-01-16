@@ -23,6 +23,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const { data: userInfo } = UseQueryFetchLoginUser();
   const VeganLevels = ["플랙시테리언", "폴로", "페스코", "락토오보", "오보", "락토", "비건"];
   const [accessToken] = useRecoilState(accessTokenState);
+
   const {
     isOpen,
     data,
@@ -71,7 +72,7 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
         </S.LoginMenu>
         <S.SubTitle>MY</S.SubTitle>
         <S.User>
-          {props.data ? (
+          {accessToken && props.data ? (
             <>
               <S.UserName>
                 {data?.fetchLoginUser.role === "BUYER" && (
@@ -84,13 +85,13 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               <S.UserPoint>포인트 : {userInfo?.fetchLoginUser.point.toLocaleString()}P</S.UserPoint>
               {data?.fetchLoginUser.role === "BUYER" && (
                 <S.IconMenu>
-                  <S.HeaderIconItem>
+                  <S.HeaderIconItemFirst>
                     <S.Payment onClick={onClickPayment} />
                     <S.IconName onClick={onClickPayment}>충전하기</S.IconName>
                     <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                       <PaymentPage setIsOpen={setIsOpen} />
                     </CommonModal01>
-                  </S.HeaderIconItem>
+                  </S.HeaderIconItemFirst>
                   <Link href="/mypage/basket">
                     <S.HeaderIconItem
                       onClick={() => {
@@ -127,6 +128,9 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             >
               MARKET
             </S.Menu>
+          </Link>
+          <Link href={"/magazine"}>
+            <S.Menu>MAGAZINE</S.Menu>
           </Link>
         </S.NavWrapper>
       </S.HeaderMenu>

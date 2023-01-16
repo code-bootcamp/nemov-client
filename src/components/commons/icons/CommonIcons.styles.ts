@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { amazon, pastelGray, white } from "../../../commons/styles/colorPalettes";
 import { colorBase03, colorBase04 } from "../../../commons/styles/colorBases";
-import { mobile } from "../../../commons/styles/breakPoints";
+import { mobile, tablet } from "../../../commons/styles/breakPoints";
 
 interface ICommonBasketIconProps {
   isActive?: boolean;
@@ -22,8 +22,7 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
   position: absolute;
   bottom: 2%;
   right: 2%;
-  width: 2.6rem;
-  height: 2.6rem;
+  font-size: 3rem;
   padding: 7px;
   color: ${(props: ICommonBasketIconProps) => (!props.isActive ? `${amazon}` : `${white}`)};
   background-color: ${(props: ICommonBasketIconProps) =>
@@ -36,12 +35,14 @@ export const CommonBasketIcon02 = styled(ShoppingBagOutlinedIcon)`
   }
   cursor: pointer;
 
-  @media ${mobile} {
-    width: 4rem;
-    height: 4rem;
+  @media ${tablet} {
+    font-size: 3.5rem;
     position: absolute;
     bottom: 5%;
     right: 0%;
+  }
+  @media ${mobile} {
+    font-size: 4rem;
   }
 `;
 
@@ -57,7 +58,7 @@ export const CommonBasketIcon03 = styled(ShoppingBagOutlinedIcon)`
   cursor: pointer;
 
   @media ${mobile} {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 `;
 
@@ -71,30 +72,38 @@ export const CommonBasketIcon04 = styled(ShoppingBagOutlinedIcon)`
     ${colorBase03}
   }
   cursor: pointer;
-`;
-
-export const CommonHeartIcon02 = styled(FavoriteIcon)`
-  width: 2.8rem;
-  height: 2.8rem;
-  color: ${amazon};
-  border: 1px solid ${pastelGray};
-  border-radius: 10px;
-  padding: 7px;
-  cursor: pointer;
+  @media ${tablet} {
+    font-size: 3rem;
+  }
 `;
 
 // 찜하기 아이콘 공통 스타일
 export const CommonHeartIcon01 = styled(FavoriteBorderIcon)`
-  width: 2.8rem;
-  height: 2.8rem;
+  font-size: 3rem;
   color: ${amazon};
   border: 1px solid ${pastelGray};
   border-radius: 10px;
   padding: 7px;
   cursor: pointer;
-
+  @media ${tablet} {
+    font-size: 3.5rem;
+  }
   @media ${mobile} {
-    width: 4rem;
-    height: 4rem;
+    font-size: 5rem;
+  }
+`;
+
+export const CommonHeartIcon02 = styled(FavoriteIcon)`
+  font-size: 3rem;
+  color: ${amazon};
+  border: 1px solid ${pastelGray};
+  border-radius: 10px;
+  padding: 7px;
+  cursor: pointer;
+  @media ${tablet} {
+    font-size: 3.5rem;
+  }
+  @media ${mobile} {
+    font-size: 5rem;
   }
 `;

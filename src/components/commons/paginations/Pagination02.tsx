@@ -7,7 +7,6 @@ export default function Pagination02(props: IPagination07Props) {
 
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
     const activePage = Number(event.currentTarget.id);
-    // console.log("활성화된 페이지", activePage);
     props.setActivePage(activePage);
     void props.refetch({ page: activePage });
   };
@@ -29,7 +28,7 @@ export default function Pagination02(props: IPagination07Props) {
 
   return (
     <S.PageWrapper>
-      <S.PagePrevBtn onClick={onClickPrevPage}>&lt;</S.PagePrevBtn>
+      <S.PagePrevBtn onClick={onClickPrevPage}>&lt;&lt;</S.PagePrevBtn>
       {new Array(10).fill(1).map(
         (_, index) =>
           index + props.startPage <= lastPage && (
@@ -43,7 +42,7 @@ export default function Pagination02(props: IPagination07Props) {
             </S.PageLi>
           )
       )}
-      <S.PageNextBtn onClick={onClickNextPage}>&gt;</S.PageNextBtn>
+      <S.PageNextBtn onClick={onClickNextPage}>&gt;&gt;</S.PageNextBtn>
     </S.PageWrapper>
   );
 }

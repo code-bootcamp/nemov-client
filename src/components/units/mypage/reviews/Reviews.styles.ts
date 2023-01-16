@@ -59,7 +59,7 @@ export const Line = styled.div`
     margin-top: 21px;
   }
   @media ${mobile2} {
-    width: 173px;
+    width: 180px;
   }
 `;
 

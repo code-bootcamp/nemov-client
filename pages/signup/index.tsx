@@ -111,6 +111,7 @@ export default function SignupPage() {
                     type="text"
                     onChange={onChangeBusinessLN}
                     placeholder="사업자 등록번호를 입력해주세요. ( - 제외)"
+                    maxLength={10}
                   />
                 </>
               )}

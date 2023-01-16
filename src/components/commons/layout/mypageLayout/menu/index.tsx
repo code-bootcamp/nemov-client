@@ -103,7 +103,6 @@ export default function MypageLayoutMenu(props: IMypageLayoutMenuProps) {
               <S.ManageOptions>나의 문의내역</S.ManageOptions>
             </Link>
           </S.MyShoppingList>
-
           <S.MyInfo>
             <S.Options>내 정보 관리</S.Options>
             <Link href="/mypage/myinfo">

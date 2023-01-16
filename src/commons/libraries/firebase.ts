@@ -4,8 +4,8 @@ import { useEffect } from "react";
 export default function Firebase() {
   useEffect(() => {
     async function getMessageToken() {
-      const token = await getToken();
-      console.log(token);
+      await getToken();
+      // console.log(token);
     }
     void getMessageToken();
   }, []);

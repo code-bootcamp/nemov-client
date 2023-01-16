@@ -7,6 +7,9 @@ export const LoginSchema = yup.object({
     .required("아이디를 확인해주세요."),
   password: yup
     .string()
-    .matches(/^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,16}$/, "비밀번호를 확인해주세요.")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].{8,16}$/,
+      "비밀번호를 확인해주세요."
+    )
     .required("비밀번호를 입력해주세요."),
 });

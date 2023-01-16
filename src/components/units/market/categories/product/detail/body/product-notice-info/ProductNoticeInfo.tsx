@@ -7,7 +7,7 @@ export default function ProductNoticeInfo(props: IMarketDetail05Props) {
   // console.log(noticeData);
 
   return (
-    <CS.TabContentMain01>
+    <S.NoticeInfoSection>
       <CS.TabContentHeader01>
         <CS.TabContentTitle01>상품고시정보</CS.TabContentTitle01>
       </CS.TabContentHeader01>
@@ -66,6 +66,6 @@ export default function ProductNoticeInfo(props: IMarketDetail05Props) {
           </S.TableColumnSet>
         </S.TbWrapper>
       </S.NoticeInfoTable>
-    </CS.TabContentMain01>
+    </S.NoticeInfoSection>
   );
 }

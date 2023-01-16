@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../../commons/styles/breakPoints";
 import { colorBase01 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
+
+  @media ${mobile2} {
+    padding: 3% 1%;
+  }
 `;
 
 export const Title = styled.h2`
@@ -98,7 +102,7 @@ export const BtnWrapper = styled.div`
 
 export const EditBtn = styled.button`
   width: 70px;
-  padding: 12px 35px;
+  padding: 12px;
   font-size: 1rem;
   text-align: center;
   color: white;
@@ -115,7 +119,7 @@ export const EditBtn = styled.button`
 
 export const DeleteBtn = styled.button`
   width: 70px;
-  padding: 12px 35px;
+  padding: 12px;
   font-size: 1rem;
   background-color: #fff;
   border: 1px solid #ddd;

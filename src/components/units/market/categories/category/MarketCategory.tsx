@@ -19,7 +19,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
 
   const onClickMoveToCategory = async (event: React.MouseEvent<HTMLDivElement>) => {
     const click = event.currentTarget.id;
-    console.log(event.currentTarget.id);
+    // console.log(event.currentTarget.id);
     await client.query({
       query: FETCH_PRODUCTS,
       variables: {
@@ -41,19 +41,21 @@ export default function MarketCategory(props: IMarketCategoryProps) {
     }
   });
 
-  console.log(currentData);
+  // console.log(currentData);
 
   return (
     <>
       <S.CategoryWrapper>
-        <S.Category onClick={onClickMoveToCategory} id="">
-          <S.StyledCategoryIcon
-            src="/icons/all-icon-after-hover.png"
-            alt="전체 아이콘 이미지"
-            id=""
-          />
-          <S.CategoryTitle id="">전체</S.CategoryTitle>
-        </S.Category>
+        {currentData && (
+          <S.Category onClick={onClickMoveToCategory} id="">
+            <S.StyledCategoryIcon
+              src="/icons/all-icon-after-hover.png"
+              alt="전체 아이콘 이미지"
+              id=""
+            />
+            <S.CategoryTitle id="">전체</S.CategoryTitle>
+          </S.Category>
+        )}
         {currentData?.map((categories) => (
           <S.Category key={categories.id} onClick={onClickMoveToCategory} id={categories.id}>
             <S.StyledCategoryIcon src={categories.image} alt={categories.name} id={categories.id} />
