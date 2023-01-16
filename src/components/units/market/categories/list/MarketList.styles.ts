@@ -31,7 +31,7 @@ export const ListWrapper = styled.section`
 
 export const ListTitle = styled.h1`
   margin-top: 4.6rem;
-  ${GS.bold}
+  ${GS.semiBold}
   @media ${mobile} {
     font-size: xx-large;
   }
@@ -109,10 +109,7 @@ export const DetailFooterLeft = styled.div`
 
 export const ItemName03 = styled.span`
   font-weight: 600;
-  font-size: 1.25rem;
-  @media ${mobile} {
-    font-size: 1.5rem;
-  }
+  font-size: 1.5rem;
 `;
 
 export const ItemDescription = styled.span``;

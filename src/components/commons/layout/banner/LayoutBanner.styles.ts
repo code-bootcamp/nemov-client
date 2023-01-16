@@ -85,6 +85,7 @@ export const BannerImg1 = styled(BannerImg)`
   @media ${tablet} {
     background: url("/images/banner/11.webp") no-repeat center;
     background-size: cover;
+    background-position-y: 15%;
   }
 `;
 
@@ -93,6 +94,7 @@ export const BannerImg2 = styled(BannerImg)`
   @media ${tablet} {
     background: url("/images/banner/22.webp") no-repeat center;
     background-size: cover;
+    background-position-y: 15%;
   }
 `;
 
@@ -101,6 +103,7 @@ export const BannerImg3 = styled(BannerImg)`
   @media ${tablet} {
     background: url("/images/banner/33.webp") no-repeat center;
     background-size: cover;
+    background-position-y: 15%;
   }
 `;
 

@@ -34,12 +34,12 @@ const ItemDisPlay01 = (props: IItemDisPlay01Props) => {
         <S.ItemDetailFooter03>
           <S.BestItemName>{bestItemName?.replace(/(.{20})/g, "$1...")}</S.BestItemName>
           <S.ItemPrices>
-            <S.ItemDiscountPrice02>
-              {props.bestData?.discountedPrice.toLocaleString()}원
-            </S.ItemDiscountPrice02>
             {props.bestData?.discountRate !== 0 && (
               <S.DiscountRate03>{props.bestData?.discountRate}%</S.DiscountRate03>
             )}
+            <S.ItemDiscountPrice02>
+              {props.bestData?.discountedPrice.toLocaleString()}원
+            </S.ItemDiscountPrice02>
           </S.ItemPrices>
           <S.ItemOriginPrice02>{props.bestData?.price.toLocaleString()}원</S.ItemOriginPrice02>
         </S.ItemDetailFooter03>

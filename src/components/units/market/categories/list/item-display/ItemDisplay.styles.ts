@@ -19,8 +19,11 @@ const ItemStyleSet01 = css`
 
 export const FontStyle02 = css`
   ${GS.semiBold}
-  font-size: 1.5vmax;
+  font-size: 1.5rem;
   @media ${mobile} {
+    font-size: 2vmax;
+  }
+  @media ${mobile2} {
     font-size: 3vmax;
   }
 `;
@@ -28,6 +31,9 @@ export const FontStyle02 = css`
 export const FontStyle03 = css`
   ${GS.semiBold}
   font-size: 1.5vmax;
+  @media ${tablet} {
+    font-size: 2.5vmax;
+  }
   @media ${mobile} {
     font-size: 2vmax;
   }
@@ -150,7 +156,7 @@ export const PrevArrowIcon = styled(ArrowBackIosNewIcon)`
 // 추천 아이템 디스플레이 스타일
 
 export const ItemsWrapper03 = styled.section`
-  @media ${mobile} {
+  @media ${mobile2} {
     justify-content: center;
     gap: 9vmax;
   }
@@ -165,7 +171,7 @@ export const ItemsWrapper03 = styled.section`
 `;
 
 export const ItemDisplay = styled.div`
-  @media ${mobile} {
+  @media ${mobile2} {
     width: 80%;
   }
   ${ItemStyleSet01}
@@ -262,8 +268,11 @@ export const BestItemName = styled.span`
 `;
 
 export const ItemName = styled.span`
-  @media ${mobile} {
+  @media ${mobile2} {
     font-size: 3vmax;
+  }
+  @media ${mobile} {
+    font-size: 2vmax;
   }
   font-size: 1.3rem;
 `;
@@ -274,6 +283,8 @@ export const ItemPrices = styled.div`
   gap: 0.8rem;
 
   @media ${mobile} {
+    ${GS.flexColumn}
+    align-items: flex-start;
   }
 `;
 
@@ -311,4 +322,7 @@ export const ItemOriginPrice02 = styled.span`
   color: ${CP.gray};
   font-size: 0.8rem;
   text-decoration: line-through;
+  @media ${mobile2} {
+    font-size: 1.5rem;
+  }
 `;

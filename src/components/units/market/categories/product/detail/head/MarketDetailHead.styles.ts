@@ -14,9 +14,7 @@ export const MarketDetailPageHead = styled.section`
   width: 100%;
   ${flexRow}
   justify-content: space-evenly;
-  padding-bottom: 6.25rem;
   margin-bottom: 3.25rem;
-  border-bottom: 2px solid #e6e0e0;
   @media ${mobile} {
     ${flexColumn}
     align-items: center;

@@ -7,7 +7,6 @@ export default function Pagination02(props: IPagination07Props) {
 
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
     const activePage = Number(event.currentTarget.id);
-    // console.log("활성화된 페이지", activePage);
     props.setActivePage(activePage);
     void props.refetch({ page: activePage });
   };

@@ -8,7 +8,9 @@ export const FETCH_CART_COUNT = gql`
 `;
 
 export const UseQueryFetchCartCount = () => {
-  const query = useQuery<Pick<IQuery, "fetchCartCount">>(FETCH_CART_COUNT);
+  const query = useQuery<Pick<IQuery, "fetchCartCount">>(FETCH_CART_COUNT, {
+    fetchPolicy: "cache-and-network",
+  });
 
   return query;
 };

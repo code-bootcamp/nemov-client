@@ -14,11 +14,14 @@ export const MarketDetailPageBody = styled.main`
   padding: 0 2rem 2rem 2rem;
   width: 100%;
   ${flexColumn}
+  @media ${mobile2} {
+    padding: 0;
+  }
 `;
 
 export const TabContentMain01 = styled.section`
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 3rem;
   padding: 1rem;
 `;
 

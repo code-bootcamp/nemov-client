@@ -1,28 +1,44 @@
 import styled from "@emotion/styled";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import { keyframes } from "@emotion/react";
+import { tablet } from "../../../../commons/styles/breakPoints";
 
 interface ILayoutMobileMenuStyleProps {
   isOpen: boolean;
 }
 
+const SlideLeft = keyframes`
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px);
+  }
+`;
+
 export const HeaderMenu = styled.section`
-  width: 80%;
-  height: 100vh;
-  padding: 10vmax 0 0 5vmax;
-  border-top-left-radius: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  background-color: #648d2a;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 11;
-  overflow-y: scroll;
-  transform: ${(props: ILayoutMobileMenuStyleProps) => !props.isOpen ?? "translateX(800px);"};
-  transition: transform 1s ease-in-out;
+  display: none;
+  @media ${tablet} {
+    width: 80%;
+    height: 100vh;
+    padding: 10vmax 0 0 5vmax;
+    border-top-left-radius: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #648d2a;
+    position: fixed;
+    top: 0;
+    right: -100px;
+    z-index: 11;
+    overflow-y: scroll;
+    transform: ${(props: ILayoutMobileMenuStyleProps) => !props.isOpen ?? "translateX(800px);"};
+    animation: ${SlideLeft} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
 `;
 
 export const LoginMenu = styled.div`
