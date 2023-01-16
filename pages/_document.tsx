@@ -4,9 +4,10 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <title>nemo-v</title>
         <link rel="manifest" href="/manifest.json" />
-        <link href="images/favicons/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link href="images/favicons/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+        <link href="/favicon.ico" rel="icon" type="image/png" sizes="16x16" />
+        <link href="/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="images/icons/icon-192x192.png"></link>
         <link
           rel="apple-touch-startup-image"

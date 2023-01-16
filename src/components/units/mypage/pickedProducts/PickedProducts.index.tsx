@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { getDate, getVeganName } from "../../../../commons/libraries/utilies";
 import { IProduct } from "../../../../commons/types/generated/types";
-import { UseMutationToggleProductPick } from "../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick";
+import { UseMutationToggleProductPick02 } from "../../../commons/hooks/useMutations/toggleProduct/\bUseMutationToggleProductPick02";
 import {
   UseQueryFetchProductsIPicked,
   UseQueryFetchProductsIPickedCount,
@@ -24,15 +24,10 @@ export default function MypagePicked() {
   });
 
   const { data: dataCount } = UseQueryFetchProductsIPickedCount();
-  const { productPick } = UseMutationToggleProductPick();
+  const { productPick } = UseMutationToggleProductPick02();
 
   const onClickDeletePick = (productId: string) => async (e: React.MouseEvent) => {
-    try {
-      await productPick(productId);
-      Modal.success({ content: "찜한 상품에서 삭제되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-    }
+    void productPick(productId);
   };
 
   const onClickToggleCartModal = (id: string) => async (e: React.MouseEvent) => {

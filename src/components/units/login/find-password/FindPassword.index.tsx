@@ -23,7 +23,6 @@ export default function FindPassword() {
     setToken(e.currentTarget.value);
   };
 
-  // 인증번호 받기 / 확인
   const { getTokenForPasswordFunction, checkValidTokenForPasswordFunction, time } =
     UseMutationGetTokenForPassword();
 
@@ -38,7 +37,6 @@ export default function FindPassword() {
     void checkValidTokenForPasswordFunction(data);
   };
 
-  // Form
   const { findPasswordSubmit } = UseMutationFindPassword();
 
   const { register, handleSubmit, formState, getValues, setValue, watch } =
@@ -52,7 +50,6 @@ export default function FindPassword() {
     void findPasswordSubmit(value);
   };
 
-  // 휴대폰 번호 형식 변환
   useEffect(() => {
     if (watch("phone").length === 11 && !watch("phone").includes("-")) {
       const Number = watch("phone");

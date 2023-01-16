@@ -1,52 +1,21 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal } from "antd";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/stores";
 import { IMutationLoginArgs } from "../../../commons/types/generated/types";
 import { UseMutationLogin } from "../../commons/hooks/useMutations/login/UseMutationLogin";
 import * as S from "./Login.styles";
-// import { IFormLoginData } from "./Login.types";
 import { LoginSchema } from "./Login.validation";
 
 export default function Login() {
-  const router = useRouter();
+  const { onSubmitLogin } = UseMutationLogin();
 
-  const [login] = UseMutationLogin();
-  const [, setAccessToken] = useRecoilState(accessTokenState);
-
-  // Form
   const { register, handleSubmit, formState } = useForm<IMutationLoginArgs>({
     resolver: yupResolver(LoginSchema),
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onSubmitForm = async (data: IMutationLoginArgs) => {
-    try {
-      const result = await login({
-        variables: {
-          email: data.email,
-          password: data.password,
-        },
-      });
-
-      const accessToken = result.data?.login;
-
-      if (accessToken === undefined) {
-        Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요." });
-        return;
-      }
-
-      setAccessToken(accessToken);
-
-      Modal.success({ content: `로그인에 성공했습니다.` });
-      void router.push("/market");
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-      Modal.error({ content: "로그인에 실패했습니다. 다시 시도해주세요." });
-    }
+    void onSubmitLogin(data);
   };
 
   return (

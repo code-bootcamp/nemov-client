@@ -19,7 +19,6 @@ export default function Signup(props: ISignupProps) {
   const [token, setToken] = useState("");
   const bln = props.bln;
 
-  // 인증번호 받기 / 확인
   const { getTokenForSignupFunction, checkValidTokenForSignUpFunction, time } =
     UseMutationGetTokenForSignup();
 
@@ -38,13 +37,11 @@ export default function Signup(props: ISignupProps) {
     void checkValidTokenForSignUpFunction(value);
   };
 
-  // 이메일 중복확인
   const { checkEmail } = UseMutationCheckEmailExist();
   const onClickConfirmEmail = () => {
     void checkEmail(getValues("email"));
   };
 
-  // Form
   const { register, handleSubmit, formState, setValue, trigger, getValues, watch } =
     useForm<IFormSignupData>({
       resolver: yupResolver(SignupSchema),
@@ -58,7 +55,6 @@ export default function Signup(props: ISignupProps) {
     void createUserSubmit(value);
   };
 
-  // 휴대폰 번호 형식 변환
   useEffect(() => {
     if (watch("phone").length === 11 && !watch("phone").includes("-")) {
       const Number = watch("phone");
@@ -66,7 +62,6 @@ export default function Signup(props: ISignupProps) {
     }
   }, [watch("phone")]);
 
-  // 주소 모달
   const onToggleModal = () => {
     setIsOpen((prev) => !prev);
   };
@@ -79,7 +74,6 @@ export default function Signup(props: ISignupProps) {
     void trigger(["zipCode", "address"]);
   };
 
-  // 체크박스 확인
   const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
     setValue("checkbox", e.target.checked);
   };
@@ -155,6 +149,7 @@ export default function Signup(props: ISignupProps) {
                   type="tel"
                   placeholder="휴대폰 번호를 입력해주세요. ( - 제외)"
                   {...register("phone")}
+                  maxLength={11}
                 />
                 <S.PhoneBtn type="button" onClick={onClickGetToken}>
                   인증요청

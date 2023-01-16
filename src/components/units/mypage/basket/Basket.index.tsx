@@ -23,19 +23,16 @@ export default function MypageBasket() {
     }
   }, [data?.fetchCart]);
 
+  console.log(data?.fetchCart);
+
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
   const { buyProduct, buyProducts } = UseMutationCreateProductOrders();
 
   // 찜하기
-  const onClickPick = (productId: string) => async (e: React.MouseEvent) => {
-    try {
-      if (productId === undefined) return;
-      await productPick(productId);
-      Modal.success({ content: "찜한 상품에 추가되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
-    }
+  const onClickPick = (productId: string) => (e: React.MouseEvent) => {
+    if (productId === undefined) return;
+    void productPick(productId);
   };
 
   // 장바구니 삭제
@@ -62,7 +59,6 @@ export default function MypageBasket() {
       }
     });
     if (Item === undefined) return;
-    console.log(Item[0]);
 
     let amount = Item[0].product.discountedPrice * Item[0].count;
     if (amount < 50000) {
@@ -176,31 +172,33 @@ export default function MypageBasket() {
             <>
               {product?.map((cart, index) => (
                 <S.ItemWrapper key={index}>
-                  <S.ItemImg src={cart.product.image} />
-                  <S.ItemName>{cart.product.name}</S.ItemName>
-                  <S.QuantityWrapper>
-                    <S.MinusBtn
-                      id={cart.product.id}
-                      onClick={onClickCountDown(cart.product.id, cart.count)}
-                    >
-                      -
-                    </S.MinusBtn>
-                    <S.Quantity id={cart.product.id}>{cart.count}</S.Quantity>
-                    <S.PlusBtn
-                      id={cart.product.id}
-                      onClick={onClickCountUp(cart.product.id, cart.count)}
-                    >
-                      +
-                    </S.PlusBtn>
-                  </S.QuantityWrapper>
-                  <S.PriceWrap>
-                    <S.ItemPrice>
-                      {(cart.product.price * cart.count).toLocaleString()} <span>원</span>
-                    </S.ItemPrice>
-                    <S.DiscountPrice>
-                      {(cart.product.discountedPrice * cart.count).toLocaleString()} 원
-                    </S.DiscountPrice>
-                  </S.PriceWrap>
+                  <S.MobileItemWrap>
+                    <S.ItemImg src={cart.product.image} />
+                    <S.ItemName>{cart.product.name}</S.ItemName>
+                    <S.QuantityWrapper>
+                      <S.MinusBtn
+                        id={cart.product.id}
+                        onClick={onClickCountDown(cart.product.id, cart.count)}
+                      >
+                        -
+                      </S.MinusBtn>
+                      <S.Quantity id={cart.product.id}>{cart.count}</S.Quantity>
+                      <S.PlusBtn
+                        id={cart.product.id}
+                        onClick={onClickCountUp(cart.product.id, cart.count)}
+                      >
+                        +
+                      </S.PlusBtn>
+                    </S.QuantityWrapper>
+                    <S.PriceWrap>
+                      <S.ItemPrice>
+                        {(cart.product.price * cart.count).toLocaleString()} <span>원</span>
+                      </S.ItemPrice>
+                      <S.DiscountPrice>
+                        {(cart.product.discountedPrice * cart.count).toLocaleString()} 원
+                      </S.DiscountPrice>
+                    </S.PriceWrap>
+                  </S.MobileItemWrap>
                   <S.BtnWrapper>
                     <S.CancelBtn
                       id={cart.product.id}
@@ -208,10 +206,12 @@ export default function MypageBasket() {
                     >
                       <S.CancelIcon></S.CancelIcon>
                     </S.CancelBtn>
-                    <S.PickBtn onClick={onClickPick(cart.product.id)}>찜하기</S.PickBtn>
-                    <S.BasketBtn id={cart.product.id} onClick={onClickBuyProduct}>
-                      구매하기
-                    </S.BasketBtn>
+                    <S.MobileBtnWrap>
+                      <S.PickBtn onClick={onClickPick(cart.product.id)}>찜하기</S.PickBtn>
+                      <S.BasketBtn id={cart.product.id} onClick={onClickBuyProduct}>
+                        구매하기
+                      </S.BasketBtn>
+                    </S.MobileBtnWrap>
                   </S.BtnWrapper>
                 </S.ItemWrapper>
               ))}
