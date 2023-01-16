@@ -221,6 +221,7 @@ export const SubBannerWords = styled.span`
 export const SubBannerWord01 = styled.span`
   font-size: 2rem;
   font-weight: 800;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
 `;
 
 export const SubBannerWord02 = styled.span`
@@ -238,16 +239,42 @@ export const SubBanner02 = styled.section`
   }
   margin-top: 5%;
   justify-content: space-between;
+  position: relative;
 `;
 
-// export const SubBannerImg02 = styled.img`
-//   width: 40%;
-//   aspect-ratio: 1/1;
-//   border-radius: 15px;
-// `;
+export const SubBannerImg02 = styled.img`
+  width: 49%;
+  object-fit: cover;
+  /* aspect-ratio: 21/9; */
+  border-radius: 15px;
+`;
 
-// export const SubBannerImg03 = styled.img`
-//   width: 20%;
-//   aspect-ratio: 1/2;
-//   border-radius: 15px;
-// `;
+export const SubBannerWords02 = styled(SubBannerWords)`
+  top: 25%;
+  left: 4%;
+  @media (max-width: 540px) {
+    top: 18%;
+  }
+`;
+
+export const SubBannerWord03 = styled.span`
+  font-size: 2rem;
+  font-weight: 800;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+  @media ${mobile} {
+    font-size: 1.5rem;
+  }
+`;
+
+export const SubBannerWords03 = styled(SubBannerWords)`
+  width: 45%;
+  top: 25%;
+  left: 50%;
+  color: white;
+  text-align: right;
+  word-break: keep-all;
+  @media (max-width: 540px) {
+    top: 18%;
+    left: 52%;
+  }
+`;

@@ -99,14 +99,11 @@ export default function MarketList(props: IMarketListProps) {
       return undefined;
     }
   });
-  // console.log("타이틀", listTitle);
 
   const modalOnCancel = () => {
     setIsOpen((prev) => !prev);
     setQuantity(1);
   };
-
-  // console.log(props.productsCount?.fetchProductsCount);
 
   return (
     <>

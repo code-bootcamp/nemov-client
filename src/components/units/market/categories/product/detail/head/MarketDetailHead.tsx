@@ -58,6 +58,8 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
     [quantity]
   );
 
+  console.log(quantity);
+
   // 장바구니 담기 기능
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
@@ -72,7 +74,7 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
             count: quantity,
           },
         });
-        // console.log(result);
+        console.log(quantity);
         const status = result?.data?.toggleProductToCart;
         // console.log(status);
         if (status === true) {

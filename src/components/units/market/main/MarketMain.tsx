@@ -205,7 +205,18 @@ function MarketMain() {
                 ))}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
-            <S.SubBanner02></S.SubBanner02>
+            <S.SubBanner02>
+              <S.SubBannerWords02>
+                <S.SubBannerWord03>육류 식단 넘보는 콩고기 진격?</S.SubBannerWord03>
+                <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+              </S.SubBannerWords02>
+              <S.SubBannerImg02 src="/images/banner/sub-banner02.webp" />
+              <S.SubBannerWords03>
+                <S.SubBannerWord03>실험용으로 태어난 동물은 없다</S.SubBannerWord03>
+                <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+              </S.SubBannerWords03>
+              <S.SubBannerImg02 src="/images/banner/sub-banner03.webp" />
+            </S.SubBanner02>
             <S.MainMarketSection01>
               <S.HeaderDiv04>베스트</S.HeaderDiv04>
               <S.MarketMainHeader02>
