@@ -36,3 +36,13 @@ export const Td = styled.td`
   padding: 0.75rem 0;
   text-align: center;
 `;
+
+export const Btn = styled.button`
+  width: 4vmax;
+  height: 2vmax;
+  font-size: 0.9rem;
+  :hover {
+    background-color: #999;
+    color: #fff;
+  }
+`;

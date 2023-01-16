@@ -83,11 +83,13 @@ export const Wrapper02 = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
+  padding-left: 0;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   background: #fff;
+
   ${Menu}, ${Basket}, ${Payment} {
     color: #000;
   }

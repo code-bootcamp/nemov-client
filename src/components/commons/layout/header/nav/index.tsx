@@ -34,6 +34,9 @@ export default function LayoutNav() {
       <Link href={"/market/categories"}>
         <Menu>MARKET</Menu>
       </Link>
+      <Link href={"/magazine"}>
+        <Menu>MAGAZINE</Menu>
+      </Link>
     </NavWrapper>
   );
 }
