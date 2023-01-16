@@ -3,10 +3,7 @@ import React, { useCallback, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/stores";
 import { IProduct } from "../../../../../commons/types/generated/types";
-import {
-  StyledCommonButton01,
-  //   StyledCommonButton02,
-} from "../../../../commons/buttons/CommonButtons.styles";
+import { StyledCommonButton01 } from "../../../../commons/buttons/CommonButtons.styles";
 import { CountDownBtn, CountUpBtn } from "../../../../commons/buttons/CountDownUpButtons";
 import { UseMutationToggleProductToCart } from "../../../../commons/hooks/useMutations/toggleProduct/UseMutationToggleProductToCart";
 import * as MS from "../product/detail/head/MarketDetailHead.styles";
@@ -51,12 +48,12 @@ function CartModal(props: ICartModalProps) {
     },
     [props.quantity]
   );
-  console.log(props.quantity);
 
   const onClickToggleProductToCart = useCallback(
     (productId: string) => async (event: React.MouseEvent) => {
       event?.stopPropagation();
       try {
+        props.setIsOpen(false);
         const result = await toggleProductToCart({
           variables: {
             productId,
@@ -71,18 +68,15 @@ function CartModal(props: ICartModalProps) {
             content: "상품을 장바구니에 담았습니다.",
             duration: 5,
           });
-          props.setIsOpen(false);
         } else if (status === false && accessToken) {
           void messageApi.open({
             type: "error",
             content: "상품이 장바구니에서 삭제되었습니다.",
             duration: 5,
           });
-          props.setIsOpen(false);
         }
       } catch (error) {
         if (error instanceof Error) {
-          // console.log(error.message);
           Modal.error({ content: `${error.message}` });
         }
       }
