@@ -20,5 +20,6 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
   },
 };

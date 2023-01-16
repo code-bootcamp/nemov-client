@@ -24,7 +24,6 @@ export default function MypageMyinfoModify() {
     void router.push("/mypage/orderlist");
   };
 
-  // 주소 모달
   const onToggleModal = () => {
     setIsOpen((prev) => !prev);
   };

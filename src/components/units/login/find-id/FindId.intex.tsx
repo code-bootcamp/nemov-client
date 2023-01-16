@@ -17,7 +17,6 @@ export default function FindId() {
     setToken(e.currentTarget.value);
   };
 
-  // 인증번호 받기 / 확인
   const { getTokenForEmailFunction, checkValidTokenForEmailFunction, time } =
     UseMutationGetTokenForEmail();
 
@@ -32,7 +31,6 @@ export default function FindId() {
     void checkValidTokenForEmailFunction(value);
   };
 
-  // Form
   const { findEmailSubmit } = UseMutationFindEmail();
 
   const { register, handleSubmit, formState, getValues, setValue, watch } =
@@ -45,7 +43,6 @@ export default function FindId() {
     await findEmailSubmit(data);
   };
 
-  // 휴대폰 번호 형식 변환
   useEffect(() => {
     if (watch("phone").length === 11 && !watch("phone").includes("-")) {
       const Number = watch("phone");

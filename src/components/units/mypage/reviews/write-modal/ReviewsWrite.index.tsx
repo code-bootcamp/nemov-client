@@ -57,8 +57,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
 
     if (props.setIsSelected === undefined) return;
     props.setIsSelected([true, false]);
-
-    // reset({ ...data });
   };
 
   useEffect(() => {

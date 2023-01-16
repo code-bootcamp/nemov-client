@@ -40,7 +40,17 @@ export const AllCheckbox = styled.input`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
-  margin-right: 20px;
+  margin-right: 15px;
+  appearance: none;
+
+  &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #1f3d31;
+  }
 `;
 
 export const ItemWrapper = styled.li`
@@ -49,16 +59,34 @@ export const ItemWrapper = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 20px 0;
+  padding: 30px 0;
 
-  @media ${mobile} {
-    padding: 30px 0;
+  @media ${mobile2} {
+    flex-direction: column;
+  }
+`;
+
+export const MobileItemWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+export const MobileBtnWrap = styled.div`
+  @media ${mobile2} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
   }
 `;
 
 export const PickBtn = styled.button`
   width: 130px;
-  padding: 10px 35px;
+  padding: 12px 35px;
   font-size: 1rem;
   text-align: center;
   background-color: #fff;
@@ -70,18 +98,18 @@ export const PickBtn = styled.button`
     padding: 5px;
   }
   @media ${tablet} {
-    width: 100px;
-    padding: 2px;
+    width: 75px;
+    padding: 5px;
   }
   @media ${mobile2} {
-    width: 50px;
-    padding: 5px;
+    width: 40%;
+    padding: 8px 5px;
   }
 `;
 
 export const BasketBtn = styled.button`
   width: 130px;
-  padding: 10px 35px;
+  padding: 12px 35px;
   font-size: 1rem;
   ${colorBase01}
   border: 1px solid #ddd;
@@ -91,24 +119,35 @@ export const BasketBtn = styled.button`
 
   @media ${mobile} {
     width: 80px;
-    padding: 5px;
+    padding: 5px 10px;
   }
   @media ${tablet} {
-    width: 100px;
-    padding: 2px;
+    width: 75px;
+    padding: 5px;
   }
   @media ${mobile2} {
-    width: 50px;
-    padding: 5px;
+    width: 40%;
+    padding: 8px 5px;
+    margin-top: 0;
   }
 `;
 
 export const ItemCheckbox = styled.input`
-  height: 20px;
   width: 20px;
+  height: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
+  appearance: none;
+
+  &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #1f3d31;
+  }
 `;
 
 export const ItemImg = styled.img`
@@ -119,15 +158,11 @@ export const ItemImg = styled.img`
 `;
 
 export const ItemName = styled.p`
-  width: 35%;
+  width: 45%;
   font-size: 1.3rem;
   color: #3a3939;
   font-weight: bold;
   margin-bottom: 0;
-
-  @media ${mobile} {
-    width: 25%;
-  }
 `;
 
 export const PriceWrap = styled.div`
@@ -167,17 +202,21 @@ export const BtnWrapper = styled.div`
   flex-direction: column;
   align-items: flex-end;
   position: relative;
+
+  @media ${mobile2} {
+    width: 100%;
+  }
 `;
 
 export const QuantityWrapper = styled.div`
   width: 15%;
-  padding: 1.7rem;
+  padding: 0.7rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  @media ${mobile} {
+  @media ${mobile2} {
     width: 25%;
   }
 `;
@@ -222,13 +261,17 @@ export const NumWrapper = styled.article`
   @media ${mobile} {
     margin: 40px 0;
     flex-direction: column;
-    align-items: flex-end;
   }
 `;
 
 export const PriceSection = styled.section`
   @media ${mobile} {
+    width: 100%;
     margin: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 
@@ -301,7 +344,11 @@ export const TotalBtn = styled.button`
   border-radius: 50px;
 
   @media ${mobile} {
+    width: 98%;
+  }
+  @media ${mobile2} {
     padding: 14px;
+    width: 95%;
   }
 `;
 
@@ -365,11 +412,15 @@ export const CancelBtn = styled.button`
   padding: 5px 8px;
   background-color: transparent;
   position: absolute;
-  right: -8px;
-  top: -33px;
+  right: -6px;
+  top: -32px;
 
   @media ${mobile} {
     right: -3px;
+  }
+  @media ${mobile2} {
+    top: -76px;
+    right: 0px;
   }
 `;
 export const CancelIcon = styled(CloseIcon)`

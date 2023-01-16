@@ -39,14 +39,14 @@ export const UseMutationGetTokenForSignup = () => {
         setTimeout(() => {
           setTime(false);
         }, 180000);
-
-        console.log(result.data?.getTokenForSignUp);
+        Modal.info({ content: `인증번호: ${result.data?.getTokenForSignUp}` });
       } catch (error) {
-        if (error instanceof Error) Modal.error({ content: "휴대폰 번호를 확인해주세요." });
+        if (error instanceof Error) console.log(error.message);
+        Modal.error({ content: "이미 인증에 성공하였습니다. 나중에 다시 요청해주세요." });
       }
     } else {
       Modal.error({
-        content: "이미 인증번호 받기를 누르셨습니다. 휴대폰을 확인해주세요.",
+        content: "이미 인증번호 받기를 누르셨습니다. 인증번호를 확인해주세요.",
       });
     }
   };

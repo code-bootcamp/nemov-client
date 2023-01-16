@@ -22,7 +22,6 @@ export default function MypageQna() {
   const { data: dataCount } = UseQueryFetchQuestionsCountByBuyer();
   const { deleteQuestionFunction } = UseMutationDeleteQuestion();
 
-  // 문의 내역 수정
   const [questionItemVal, setQuestionItemVal] = useState<IQuestion>();
 
   const onClickEditQuestion = (questionId: string) => (e: React.MouseEvent) => {
@@ -44,7 +43,6 @@ export default function MypageQna() {
     setIsOpen((prev) => !prev);
   };
 
-  // 문의 내역 삭제
   const onClickDeleteQuestion = (questionId: string) => () => {
     void deleteQuestionFunction(questionId);
   };
