@@ -19,8 +19,15 @@ export const InnerWrap = styled.form`
   padding: 0 10%;
 `;
 
-export const InputBox = styled.input`
+export const InputWrap = styled.div`
   width: 80%;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const InputBox = styled.input`
+  width: 100%;
   height: 2.5rem;
 `;
 
@@ -28,17 +35,18 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 `;
 
 export const SubTitle = styled.span`
   font-size: 1rem;
+  margin-top: 1rem;
 `;
 
 export const Category = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
 `;
@@ -130,4 +138,10 @@ export const Btn2 = styled.button`
 
 export const EditorWrap = styled.div`
   width: 80%;
+`;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 0.7rem;
+  margin: 5px 0 0 5px;
 `;

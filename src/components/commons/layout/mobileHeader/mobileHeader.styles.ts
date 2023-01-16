@@ -151,7 +151,7 @@ export const NavWrapper = styled.nav`
 
 export const Menu = styled.span`
   font-size: 1.8rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 3rem;
   margin-right: 1.2rem;
   cursor: pointer;
   color: #fff;

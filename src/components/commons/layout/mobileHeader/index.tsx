@@ -129,6 +129,9 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               MARKET
             </S.Menu>
           </Link>
+          <Link href={"/magazine"}>
+            <S.Menu>MAGAZINE</S.Menu>
+          </Link>
         </S.NavWrapper>
       </S.HeaderMenu>
     </>

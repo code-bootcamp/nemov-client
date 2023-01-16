@@ -66,9 +66,9 @@ export default function QnAList() {
                 <S.Td>{el.title}</S.Td>
                 <S.Td>{el.answer?.contents ? "답변완료" : "미답변"}</S.Td>
                 <S.Td>
-                  <button onClick={onClickWrite(el.id)} id={el.id}>
+                  <S.Btn onClick={onClickWrite(el.id)} id={el.id}>
                     {el.answer?.contents ? "수정" : "등록"}
-                  </button>
+                  </S.Btn>
                 </S.Td>
               </S.Tr>
             ))}

@@ -10,6 +10,7 @@ import {
 } from "../../../../../commons/types/generated/types";
 import { UseMutationDeleteAnswer } from "../../../../commons/hooks/useMutations/answer/UseMutationDeleteAnswer";
 import WriteAnswer from "./write";
+import * as S from "./styles";
 
 interface IWriteProps {
   data: IQuestion | undefined;
@@ -82,12 +83,12 @@ export default function WriteModal(props: IWriteProps) {
                 </main>
               ) : (
                 <>
-                  <div>
-                    <button onClick={onClickEdit}>수정</button>
-                    <button onClick={onClickDelete}>삭제</button>
-                  </div>
-                  <section style={{ borderTop: "1px solid #999", paddingTop: "5%" }}>
+                  <section>
                     {questionData?.fetchQuestion.answer?.contents}
+                    <div style={{ textAlign: "right" }}>
+                      <S.Btn onClick={onClickEdit}>수정</S.Btn>
+                      <S.Btn onClick={onClickDelete}>삭제</S.Btn>
+                    </div>
                   </section>
                 </>
               )}
