@@ -37,8 +37,6 @@ function MarketMain() {
   const router = useRouter();
   const client = useApolloClient();
 
-  // console.log("마켓 메인 페이지가 랜더링 됩니다.");
-
   const prefetchData = async () => {
     await client.query({
       query: FETCH_PRODUCTS,
@@ -135,7 +133,6 @@ function MarketMain() {
         query: FETCH_PRODUCT,
         variables: { productId },
       });
-      // console.log(result.data.fetchProduct.isOutOfStock);
       if (result.data.fetchProduct.isOutOfStock !== true) {
         void router.push(`/market/product/${productId}`);
       } else {
@@ -161,13 +158,6 @@ function MarketMain() {
 
       <GlobalWrapper>
         <S.MarketMainContainer>
-          <S.SubBanner onClick={onClickMoveToPage("/signup")}>
-            <S.SubBannerImg src="/images/banner/Sub_banner.webp" />
-            <S.SubBannerWords>
-              <S.SubBannerWord01>네모비 회원가입시 3000 포인트 증정</S.SubBannerWord01>
-              <S.SubBannerWord02>지금 네모비에 가입하세요</S.SubBannerWord02>
-            </S.SubBannerWords>
-          </S.SubBanner>
           <S.MainItemsWrapper>
             <S.RecommendItemSection01>
               <S.MarketMainHeader01>
@@ -205,18 +195,14 @@ function MarketMain() {
                 ))}
               </IDS.ItemsWrapper03>
             </S.RecommendItemSection01>
-            <S.SubBanner02>
-              <S.SubBannerWords02>
-                <S.SubBannerWord03>육류 식단 넘보는 콩고기 진격?</S.SubBannerWord03>
-                <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
-              </S.SubBannerWords02>
-              <S.SubBannerImg02 src="/images/banner/sub-banner02.webp" />
-              <S.SubBannerWords03>
-                <S.SubBannerWord03>실험용으로 태어난 동물은 없다</S.SubBannerWord03>
-                <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
-              </S.SubBannerWords03>
-              <S.SubBannerImg02 src="/images/banner/sub-banner03.webp" />
-            </S.SubBanner02>
+            <S.SubBanner onClick={onClickMoveToPage("/signup")}>
+              <S.SubBannerImg src="/images/banner/Sub_banner.webp" />
+              <S.SubBannerWords>
+                <S.SubBannerWord01>네모비 회원가입시 3000 포인트 증정</S.SubBannerWord01>
+                <S.SubBannerWord02>지금 네모비에 가입하세요</S.SubBannerWord02>
+              </S.SubBannerWords>
+            </S.SubBanner>
+
             <S.MainMarketSection01>
               <S.HeaderDiv04>베스트</S.HeaderDiv04>
               <S.MarketMainHeader02>
@@ -249,6 +235,19 @@ function MarketMain() {
             </S.MainMarketSection01>
           </S.MainItemsWrapper>
         </S.MarketMainContainer>
+
+        <S.SubBanner02>
+          <S.SubBannerWords02 onClick={onClickMoveToPage("/magazine/03")}>
+            <S.SubBannerWord03>육류 식단 넘보는 콩고기 진격?</S.SubBannerWord03>
+            <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+          </S.SubBannerWords02>
+          <S.SubBannerImg02 src="/images/banner/sub-banner02.webp" />
+          <S.SubBannerWords03 onClick={onClickMoveToPage("/magazine/02")}>
+            <S.SubBannerWord03>실험용으로 태어난 동물은 없다</S.SubBannerWord03>
+            <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+          </S.SubBannerWords03>
+          <S.SubBannerImg02 src="/images/banner/sub-banner03.webp" />
+        </S.SubBanner02>
       </GlobalWrapper>
     </>
   );
