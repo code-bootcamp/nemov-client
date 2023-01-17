@@ -163,7 +163,7 @@ function MarketMain() {
               <S.MarketMainHeader01>
                 <div>
                   <S.HeaderDiv03>추천상품</S.HeaderDiv03>
-                  {loginUserData && (
+                  {accessToken && (
                     <S.HeaderSpan>
                       {!loginUserData ? `` : `${loginUserData.fetchLoginUser.name}님,`}
                     </S.HeaderSpan>
@@ -234,20 +234,19 @@ function MarketMain() {
               </S.ItemsWrapper02>
             </S.MainMarketSection01>
           </S.MainItemsWrapper>
+          <S.SubBanner02>
+            <S.SubBannerWords02 onClick={onClickMoveToPage("/magazine/03")}>
+              <S.SubBannerWord03>육류 식단 넘보는 콩고기 진격?</S.SubBannerWord03>
+              <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+            </S.SubBannerWords02>
+            <S.SubBannerImg02 src="/images/banner/sub-banner02.webp" />
+            <S.SubBannerWords03 onClick={onClickMoveToPage("/magazine/02")}>
+              <S.SubBannerWord03>실험용으로 태어난 동물은 없다</S.SubBannerWord03>
+              <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
+            </S.SubBannerWords03>
+            <S.SubBannerImg02 src="/images/banner/sub-banner03.webp" />
+          </S.SubBanner02>
         </S.MarketMainContainer>
-
-        <S.SubBanner02>
-          <S.SubBannerWords02 onClick={onClickMoveToPage("/magazine/03")}>
-            <S.SubBannerWord03>육류 식단 넘보는 콩고기 진격?</S.SubBannerWord03>
-            <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
-          </S.SubBannerWords02>
-          <S.SubBannerImg02 src="/images/banner/sub-banner02.webp" />
-          <S.SubBannerWords03 onClick={onClickMoveToPage("/magazine/02")}>
-            <S.SubBannerWord03>실험용으로 태어난 동물은 없다</S.SubBannerWord03>
-            <S.SubBannerWord02>자세한 내용 보러가기</S.SubBannerWord02>
-          </S.SubBannerWords03>
-          <S.SubBannerImg02 src="/images/banner/sub-banner03.webp" />
-        </S.SubBanner02>
       </GlobalWrapper>
     </>
   );

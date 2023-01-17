@@ -51,10 +51,24 @@ export const ReviewDate = styled.p`
   margin-bottom: 0.4rem;
 `;
 
+export const ReivewTitle = styled.h4`
+  font-size: 1.1rem;
+  margin-bottom: 0px;
+  margin: 2px 0;
+
+  @media ${mobile} {
+    font-size: 1.3rem;
+  }
+`;
+
 export const ReviewContent = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 0;
   margin: 2px 0;
+
+  @media ${mobile} {
+    font-size: 1.2rem;
+  }
 `;
 
 export const ReviewBtnWrapper = styled.div`

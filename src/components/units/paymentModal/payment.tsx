@@ -23,16 +23,13 @@ export default function PaymentPage(props: PaymentProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const onClickPayment = () => {
-    const IMP = window.IMP; // 생략 가능
-    IMP.init("imp26362375"); // Example: imp00000000
+    const IMP = window.IMP;
+    IMP.init("imp26362375");
 
-    // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay(
       {
-        // param
         pg: "nice",
-        pay_method: "card", // card, vbank 등
-        // merchant_uid: "ORD20180131-0000011", // 중복될 시, 결제 안됨!
+        pay_method: "card",
         name: "네모비 포인트 충전",
         amount: point,
         buyer_email: props.data?.fetchLoginUser.email,
@@ -40,7 +37,7 @@ export default function PaymentPage(props: PaymentProps) {
         buyer_tel: props.data?.fetchLoginUser.phone,
         buyer_addr: props.data?.fetchLoginUser.address,
         buyer_postcode: props.data?.fetchLoginUser.zipCode,
-        m_redirect_url: "http://localhost:3000/mypage/", // 모바일에서는 결제시, 결제페이지로 사이트가 이동됨
+        m_redirect_url: "http://localhost:3000/mypage/",
       },
       (rsp: any) => {
         if (rsp.success) {
@@ -80,7 +77,6 @@ export default function PaymentPage(props: PaymentProps) {
   };
 
   const onclickGetValue = (event: any) => {
-    // console.log(event.target.id);
     setPoint(Number(event.target.id));
   };
 
@@ -91,7 +87,7 @@ export default function PaymentPage(props: PaymentProps) {
 
   return (
     <S.Wrapper>
-      <h1>네모비 포인트 충전하기</h1>
+      <h1 style={{ wordBreak: "keep-all" }}>네모비 포인트 충전하기</h1>
       <Head>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script

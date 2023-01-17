@@ -9,8 +9,10 @@ import ProductQuestionWrite from "./ProductQuestionWrite";
 import { IProductAskProps } from "../../../../../Market.types";
 import { Modal } from "antd";
 import Pagination02 from "../../../../../../../commons/paginations/Pagination02";
+import { UseQueryFetchLoginUser } from "../../../../../../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 
 function ProductAsk(props: IProductAskProps) {
+  const { data: loginData } = UseQueryFetchLoginUser();
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [accessToken] = useRecoilState(accessTokenState);
 
@@ -40,7 +42,9 @@ function ProductAsk(props: IProductAskProps) {
               해당 상품에 대한 문의 내용을 확인할 수 있습니다.
             </CS.TabContentSubTitle01>
           </S.TitlesWrapper>
-          <OpenModalButton01 onClick={onClickQuestionWrite} title="문의하기"></OpenModalButton01>
+          {loginData?.fetchLoginUser.role === "BUYER" && (
+            <OpenModalButton01 onClick={onClickQuestionWrite} title="문의하기"></OpenModalButton01>
+          )}
         </CS.TabContentHeader02>
         <CS.TabContentInnerWrapper>
           {props.questionsData?.fetchQuestionsByProduct.length === 0 ? (

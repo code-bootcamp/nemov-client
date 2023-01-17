@@ -6,6 +6,7 @@ import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { SlideBottom } from "../../../../commons/styles/keyframes";
 
 const HeaderStyle = css`
   display: flex;
@@ -28,6 +29,7 @@ export const MarketMainContainer = styled.main`
   justify-content: center;
   align-items: center;
   margin: 0 0 3% 0;
+  animation: ${SlideBottom} 0.7s ease-in-out both;
 `;
 
 // 추천, 베스트 상품 좌측 아이콘 스타일
@@ -275,6 +277,8 @@ export const SubBannerWords03 = styled(SubBannerWords)`
   color: white;
   text-align: right;
   word-break: keep-all;
+  cursor: pointer;
+
   @media (max-width: 540px) {
     top: 18%;
     left: 52%;

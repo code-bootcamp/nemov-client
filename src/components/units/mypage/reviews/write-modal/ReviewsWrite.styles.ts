@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile, mobile2 } from "../../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../../commons/styles/colorBases";
 
 export const Form = styled.form`
@@ -24,6 +25,10 @@ export const ReviewLi = styled.li`
 export const ReviewImg = styled.img`
   width: 10%;
   aspect-ratio: 5/5;
+
+  @media ${mobile} {
+    width: 20%;
+  }
 `;
 
 export const ReviewCenterWrapper = styled.div`
@@ -58,6 +63,13 @@ export const ModalContentWrapper = styled.div`
 export const ModalLabel = styled.label`
   width: 10%;
   margin-bottom: 8px;
+
+  @media ${mobile} {
+    width: 15%;
+  }
+  @media ${mobile2} {
+    width: 25%;
+  }
 `;
 
 export const ModalContentInnerWrap = styled.div`
@@ -118,6 +130,13 @@ export const UploadBtnWrapper = styled.div`
   height: 70px;
   position: relative;
   margin-right: 10px;
+
+  @media ${mobile} {
+    width: 20%;
+  }
+  @media ${mobile2} {
+    width: 30%;
+  }
 `;
 
 export const UploadImage = styled.img`

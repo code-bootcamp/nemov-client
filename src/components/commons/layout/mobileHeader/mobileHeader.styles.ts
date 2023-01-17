@@ -1,12 +1,26 @@
 import styled from "@emotion/styled";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import { tablet } from "../../../../commons/styles/breakPoints";
 
 interface ILayoutMobileMenuStyleProps {
   isOpen: boolean;
 }
+
+const hover = css`
+  &:hover {
+    &::after {
+      content: ">";
+      color: #fff;
+      position: absolute;
+      top: 0;
+      right: -20px;
+    }
+    font-weight: 500;
+    cursor: pointer;
+  }
+`;
 
 const SlideLeft = keyframes`
   0% {
@@ -63,6 +77,13 @@ export const LoginMenuItem = styled.p`
 
 export const LoginMenuItemFirst = styled(LoginMenuItem)`
   border-right: none;
+`;
+
+export const Text = styled.h1`
+  color: #fff;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+  ${hover}
 `;
 
 export const SubTitle = styled.h2`

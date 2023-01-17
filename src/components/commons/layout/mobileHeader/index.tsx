@@ -106,7 +106,15 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               )}
             </>
           ) : (
-            <h1>로그인해주세요</h1>
+            <Link href="/login">
+              <S.Text
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                로그인해주세요
+              </S.Text>
+            </Link>
           )}
         </S.User>
         <S.SubTitle>CATEGORY</S.SubTitle>
@@ -130,7 +138,13 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
             </S.Menu>
           </Link>
           <Link href={"/magazine"}>
-            <S.Menu>MAGAZINE</S.Menu>
+            <S.Menu
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+            >
+              MAGAZINE
+            </S.Menu>
           </Link>
         </S.NavWrapper>
       </S.HeaderMenu>

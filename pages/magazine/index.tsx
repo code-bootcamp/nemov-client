@@ -1,23 +1,23 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { mobile2, tablet } from "../../src/commons/styles/breakPoints";
+import { mobile, mobile2, tablet } from "../../src/commons/styles/breakPoints";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
-import { SlideRight } from "../../src/commons/styles/keyframes";
+import { SlideBottom } from "../../src/commons/styles/keyframes";
 
 const GWrapper = styled(GlobalWrapper)`
-  padding: 0;
   margin: 200px 0;
-  animation: ${SlideRight} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: ${SlideBottom} 0.8s ease-in-out both;
   @media ${tablet} {
     padding: 0 3%;
+    margin-bottom: 0;
   }
 `;
 
 const Title = styled.h1`
-  width: 20%;
+  width: calc(100% - 70% - 3rem);
   font-size: 2.5rem;
   font-family: "Arita-Thin";
-  border: 1px solid #ddd;
+  border: 6px solid #555;
   color: #000;
   padding: 3%;
   margin: 0;
@@ -29,6 +29,12 @@ const Title = styled.h1`
     border: none;
     border-bottom: 4px solid #000;
   }
+  p {
+    margin-top: 1.2rem;
+    font-size: 0.8rem;
+    word-break: keep-all;
+    color: #999;
+  }
 `;
 
 const MagazinesWrap = styled.section`
@@ -39,18 +45,23 @@ const MagazinesWrap = styled.section`
   gap: 3rem;
   @media ${tablet} {
     gap: 4rem;
+    justify-content: space-between;
   }
   @media ${mobile2} {
-    column-gap: 2.2rem;
+    gap: 2.2rem;
   }
 `;
 
 const Template = styled.article`
   cursor: pointer;
   overflow: hidden;
-  width: calc(100% / 2 - 1.5rem);
+  width: calc(100% / 3 - 2rem);
+  border-top-right-radius: 45px;
+  border-bottom-left-radius: 45px;
   @media ${tablet} {
     width: calc(100% / 2 - 2rem);
+  }
+  @media ${mobile} {
   }
   @media ${mobile2} {
     width: 100%;
@@ -61,6 +72,8 @@ const Template1 = styled(Template)`
   width: 70%;
   @media ${tablet} {
     width: 100%;
+  }
+  @media ${mobile} {
   }
 `;
 
@@ -83,26 +96,29 @@ export default function MagazinePage() {
   return (
     <GWrapper>
       <MagazinesWrap>
-        <Title>Magazine</Title>
-        <Template1 onClick={onClickRouter("02")} style={{ width: "70%" }}>
+        <Title>
+          <b>M</b>agazine
+          <p>좋은 것을 보면 혼자 아끼기 보다 함께 나누고 싶은 네모비 에디터가 소개합니다.</p>
+        </Title>
+        <Template1 onClick={onClickRouter("02")}>
           <Thumbnail src="/images/magazine/02/magazine22.webp" />
         </Template1>
-        <Template onClick={onClickRouter("05")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("05")}>
           <Thumbnail src="/images/magazine/05/magazine5.webp" />
         </Template>
-        <Template onClick={onClickRouter("06")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("06")}>
           <Thumbnail src="/images/magazine/06/magazine6.webp" />
         </Template>
-        <Template onClick={onClickRouter("07")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("07")}>
           <Thumbnail src="/images/magazine/07/magazine7.webp" />
         </Template>
-        <Template onClick={onClickRouter("01")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("01")}>
           <Thumbnail src="/images/magazine/01/magazine1.png" />
         </Template>
-        <Template onClick={onClickRouter("04")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("04")}>
           <Thumbnail src="/images/magazine/04/magazine4.webp" />
         </Template>
-        <Template onClick={onClickRouter("03")} style={{ width: "30%" }}>
+        <Template onClick={onClickRouter("03")}>
           <Thumbnail src="/images/magazine/03/magazine3.webp" />
         </Template>
       </MagazinesWrap>

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-// import { UseQueryFetchCategories } from "../../../hooks/useQueries/product/UseQueryFetchCategories";
 
 export const NavWrapper = styled.nav`
   width: 100%;
@@ -22,10 +21,7 @@ export const Menu = styled.span`
   color: #fff;
 `;
 
-// const categoryArr = ["ALL", "FOOD", "DRINK", "BEAUTY", "LIFE"];
-
 export default function LayoutNav() {
-  // const { data } = UseQueryFetchCategories();
   return (
     <NavWrapper>
       <Link href={"/"}>

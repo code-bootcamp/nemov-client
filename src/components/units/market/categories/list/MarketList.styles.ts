@@ -6,6 +6,7 @@ import { mobile, mobile2 } from "../../../../../commons/styles/breakPoints";
 import * as GS from "../../../../../commons/styles/globalStyles";
 // import * as S from "../../main/MarketMain.styles";
 import { FontStyle03, FontStyle04 } from "./item-display/ItemDisplay.styles";
+import { SlideBottom } from "../../../../../commons/styles/keyframes";
 
 export const CategoryMain = styled.main`
   ${GS.flexColumn}
@@ -27,6 +28,7 @@ export const ListWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  animation: ${SlideBottom} 0.7s ease-in-out both;
 `;
 
 export const ListTitle = styled.h1`

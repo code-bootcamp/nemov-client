@@ -8,7 +8,6 @@ import * as S from "./ReviewsWrite.styles";
 import { IFormData, IReviewsWriteProps } from "./ReviewsWrite.types";
 
 export default function ReviewsWrite(props: IReviewsWriteProps) {
-  // 이미지 업로드
   const [imageUrls, setImageUrls] = useState<string[]>(["", "", ""]);
 
   const [uploadFile1] = UseMutationUploadFile1();
@@ -26,7 +25,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
     }
   };
 
-  // 리뷰 Form
   const { createReviewSubmit } = UseMutationCreateReview();
   const { updateReviewSubmit } = UseMutationUpdateReview();
 
@@ -102,7 +100,9 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
             <S.ModalLabel>제목</S.ModalLabel>
             <S.ModalContentTitle
               type="text"
-              {...register("title")}
+              {...register("title", {
+                required: "제목을 입력해주세요.",
+              })}
               defaultValue={props.review?.title}
             />
           </S.InputWrap>
@@ -124,30 +124,6 @@ export default function ReviewsWrite(props: IReviewsWriteProps) {
           <S.ModalLabel>사진 첨부</S.ModalLabel>
           <S.ModalImgWrapper>
             <S.ModalImgUploadWrapper>
-              {/* <S.UploadBtnWrapper>
-                <S.UploadFileHidden type="file" onChange={onChangeFile(0)} />
-                {imageUrls[0] ? (
-                  <S.UploadImage src={imageUrls[0]} alt="후기 이미지01" />
-                ) : (
-                  <S.ImageDiv></S.ImageDiv>
-                )}
-              </S.UploadBtnWrapper>
-              <S.UploadBtnWrapper>
-                <S.UploadFileHidden type="file" onChange={onChangeFile(1)} />
-                {imageUrls[1] ? (
-                  <S.UploadImage src={imageUrls[1]} alt="후기 이미지02" />
-                ) : (
-                  <S.ImageDiv></S.ImageDiv>
-                )}
-              </S.UploadBtnWrapper>
-              <S.UploadBtnWrapper>
-                <S.UploadFileHidden type="file" onChange={onChangeFile(2)} />
-                {imageUrls[2] ? (
-                  <S.UploadImage src={imageUrls[2]} alt="후기 이미지03" />
-                ) : (
-                  <S.ImageDiv></S.ImageDiv>
-                )}
-              </S.UploadBtnWrapper> */}
               <S.UploadBtnWrapper>
                 {imageUrls[0] ? (
                   <S.UploadImage src={imageUrls[0]} alt="후기 이미지01" />

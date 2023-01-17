@@ -75,7 +75,7 @@ export default function ReviewsList() {
                     <S.ReviewDate>
                       {reviews.updatedAt ? getDate(reviews.updatedAt) : getDate(reviews.createdAt)}
                     </S.ReviewDate>
-                    <S.ReviewContent>{reviews.title}</S.ReviewContent>
+                    <S.ReivewTitle>{reviews.title}</S.ReivewTitle>
                     <S.ReviewContent>{reviews.contents}</S.ReviewContent>
                   </S.ReviewCenterWrapper>
                   <S.ReviewBtnWrapper>

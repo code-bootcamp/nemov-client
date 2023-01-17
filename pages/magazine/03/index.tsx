@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import { tablet } from "../../../src/commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../src/commons/styles/globalStyles";
+import { SlideBottom } from "../../../src/commons/styles/keyframes";
 import BackArrow from "../../../src/components/commons/arrow";
 
 const Wrapper = styled(GlobalWrapper)`
-  margin: 100px 0;
+  margin-top: 100px;
   text-align: center;
-
+  animation: ${SlideBottom} 0.7s ease-in-out both;
   @media ${tablet} {
     width: 90%;
   }

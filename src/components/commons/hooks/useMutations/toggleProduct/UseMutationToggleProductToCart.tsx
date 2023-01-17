@@ -20,19 +20,6 @@ export const UseMutationToggleProductToCart = () => {
     refetchQueries: [{ query: FETCH_CART_COUNT }, { query: FETCH_CART }],
   });
 
-  // const productToCart = async (productId: string) => {
-  //   try {
-  //     return await toggleProductToCart({
-  //       variables: {
-  //         productId,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     if (error instanceof Error) console.log(error.message);
-  //     Modal.error({ content: "로그인이 필요한 서비스입니다." });
-  //   }
-  // };
-
   return {
     toggleProductToCart,
   };

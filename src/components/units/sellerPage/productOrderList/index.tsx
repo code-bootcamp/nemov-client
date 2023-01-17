@@ -41,7 +41,12 @@ export default function ProductOrderList() {
             ))}
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={productOrdersCount?.fetchProductOrdersCountBySeller} />
+        {productOrdersCount?.fetchProductOrdersCountBySeller !== 0 && (
+          <Pagination
+            refetch={refetch}
+            count={productOrdersCount?.fetchProductOrdersCountBySeller}
+          />
+        )}
       </section>
     </GlobalWrapper>
   );

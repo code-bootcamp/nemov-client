@@ -150,13 +150,17 @@ function MarketDetailHead(props: IMarketDetailHeadProps) {
           </S.ProductDetailLevelSection>
           <S.ProductPriceDetail01>
             <S.PriceDetailSection01>
-              <S.ProductDiscount01>
-                {props.data?.data?.fetchProduct.discountRate}%
-              </S.ProductDiscount01>
+              {props.data?.data?.fetchProduct.discountRate !== 0 && (
+                <S.ProductDiscount01>
+                  {props.data?.data?.fetchProduct.discountRate}%
+                </S.ProductDiscount01>
+              )}
               <span>{props.data?.data?.fetchProduct.discountedPrice.toLocaleString()}원</span>
-              <S.ProductOriginalPrice01>
-                {props.data?.data?.fetchProduct.price.toLocaleString()}원
-              </S.ProductOriginalPrice01>
+              {!!props.data?.data?.fetchProduct.discountRate && (
+                <S.ProductOriginalPrice01>
+                  {props.data?.data?.fetchProduct.price.toLocaleString()}원
+                </S.ProductOriginalPrice01>
+              )}
             </S.PriceDetailSection01>
             <S.PriceDetailSection01>
               <S.DeliveryFeeTitle>배송비</S.DeliveryFeeTitle>

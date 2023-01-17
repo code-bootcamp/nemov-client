@@ -19,6 +19,7 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   @media ${mobile} {
     margin-top: 10%;
   }

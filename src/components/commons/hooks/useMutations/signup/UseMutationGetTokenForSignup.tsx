@@ -39,10 +39,10 @@ export const UseMutationGetTokenForSignup = () => {
         setTimeout(() => {
           setTime(false);
         }, 180000);
-        Modal.info({ content: `인증번호: ${result.data?.getTokenForSignUp}` });
+        console.log(result.data?.getTokenForSignUp);
       } catch (error) {
         if (error instanceof Error) console.log(error.message);
-        Modal.error({ content: "이미 인증에 성공하였습니다. 나중에 다시 요청해주세요." });
+        Modal.error({ content: "번호를 잘못 입력하셨습니다. 다시 시도해주세요." });
       }
     } else {
       Modal.error({
