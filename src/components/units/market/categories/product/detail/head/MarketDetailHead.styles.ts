@@ -118,6 +118,7 @@ export const DetailInfoTitle01 = styled.span`
   font-size: 1.1rem;
   font-weight: 800;
   width: 50%;
+  word-break: keep-all;
   @media ${mobile} {
     font-size: 1.7rem;
   }

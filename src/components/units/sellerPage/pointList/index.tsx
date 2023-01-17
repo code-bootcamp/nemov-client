@@ -37,7 +37,9 @@ export default function PointList() {
             ))}
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={countPoint?.fetchPointTransactionsCount} />
+        {countPoint?.fetchPointTransactionsCount !== 0 && (
+          <Pagination refetch={refetch} count={countPoint?.fetchPointTransactionsCount} />
+        )}
       </section>
     </GlobalWrapper>
   );

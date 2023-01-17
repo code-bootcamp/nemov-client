@@ -78,7 +78,9 @@ export default function QnAList() {
             </CommonModal01>
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={questionsCount?.fetchQuestionsCountBySeller} />
+        {questionsCount?.fetchQuestionsCountBySeller !== 0 && (
+          <Pagination refetch={refetch} count={questionsCount?.fetchQuestionsCountBySeller} />
+        )}
       </section>
     </GlobalWrapper>
   );
