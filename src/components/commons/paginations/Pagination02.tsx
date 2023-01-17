@@ -3,7 +3,6 @@ import * as S from "./Paginations.styles";
 import { IPagination07Props } from "./Paginations.types";
 
 export default function Pagination02(props: IPagination07Props) {
-  console.log(props.count);
   const lastPage = props.count !== null ? Math.ceil(Number(props.count) / 9) : 0;
 
   const onClickPage = (event: MouseEvent<HTMLDivElement>) => {
