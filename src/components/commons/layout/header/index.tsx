@@ -49,7 +49,6 @@ export default function LayoutHeader(props: ILayoutHeaderProps) {
   const onClickLogout = async () => {
     try {
       await logout();
-      Modal.success({ content: "로그아웃이 완료되었습니다." });
       void router.push("/market");
       setAccessToken("");
       setMenuOpen(false);

@@ -34,7 +34,7 @@ export default function MarketCategory(props: IMarketCategoryProps) {
   };
 
   const currentData = props.categoryData?.fetchProductCategories.filter((cur) => {
-    if (cur.id === "cc714ff0-8fd3-4f3a-9287-c921d950b45f") {
+    if (cur.name === "전체") {
       return cur.id[0] === "";
     } else {
       return "안된다";
