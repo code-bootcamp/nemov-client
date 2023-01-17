@@ -3,7 +3,8 @@ import {
   IMutation,
   IMutationCreatePointChargeArgs,
 } from "../../../../../commons/types/generated/types";
-import { FETCH_LOGIN_USER } from "../../useQueries/user/UseQueryFetchLoginUser";
+import { FETCH_POINT_TRANSACTIONS } from "../../useQueries/point/UseQueryFetchPointTransactions";
+import { FETCH_USER_POINT } from "../../useQueries/point/UseQueryFetchUserPoint";
 
 export const CREATE_POINT_CHARGE = gql`
   mutation createPointCharge($impUid: ID!, $amount: Int!) {
@@ -24,7 +25,10 @@ export const UseMutationCreatePointCharge = () => {
     Pick<IMutation, "createPointCharge">,
     IMutationCreatePointChargeArgs
   >(CREATE_POINT_CHARGE, {
-    refetchQueries: [{ query: FETCH_LOGIN_USER }],
+    refetchQueries: [
+      { query: FETCH_USER_POINT },
+      { query: FETCH_POINT_TRANSACTIONS, variables: { page: 1 } },
+    ],
   });
 
   return mutation;
