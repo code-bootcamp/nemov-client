@@ -8,10 +8,10 @@ import Pagination from "../../../commons/paginations/Pagination.index";
 import * as S from "./pointList.style";
 
 export default function PointList() {
-  const { data: countPoint } = UseQueryFetchPointTransactionsCount();
   const { data, refetch } = UseQueryFetchPointTransactions({
     page: 1,
   });
+  const { data: countPoint } = UseQueryFetchPointTransactionsCount();
 
   return (
     <GlobalWrapper style={{ margin: "60px auto" }}>
