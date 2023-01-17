@@ -52,7 +52,6 @@ export default function SellerManagementPage() {
           <S.Tab onClick={onClickProductList} isSelected={isSelected[0]}>
             등록한 상품
           </S.Tab>
-          {/* 배송완료 주문취소  */}
           <S.Tab onClick={onClickProductOrderList} isSelected={isSelected[1]}>
             주문 내역
           </S.Tab>
