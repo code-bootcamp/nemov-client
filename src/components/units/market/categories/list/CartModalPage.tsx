@@ -24,6 +24,8 @@ function CartModal(props: ICartModalProps) {
   const [messageApi, contextHolder] = message.useMessage();
   const sum = (props.curProductData?.discountedPrice ?? 0) * props.quantity;
 
+  console.log(props.quantity);
+
   const onClickQuantityDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
@@ -49,40 +51,39 @@ function CartModal(props: ICartModalProps) {
     [props.quantity]
   );
 
-  const onClickToggleProductToCart = useCallback(
-    (productId: string) => async (event: React.MouseEvent) => {
-      event?.stopPropagation();
-      try {
-        props.setIsOpen(false);
-        const result = await toggleProductToCart({
-          variables: {
-            productId,
-            count: props.quantity,
-          },
-        });
-        const status = result?.data?.toggleProductToCart;
+  const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
+    event?.stopPropagation();
+    try {
+      console.log(props.quantity);
+      props.setIsOpen(false);
+      const result = await toggleProductToCart({
+        variables: {
+          productId,
+          count: props.quantity,
+        },
+      });
+      const status = result?.data?.toggleProductToCart;
 
-        if (status === true && accessToken) {
-          void messageApi.open({
-            type: "success",
-            content: "상품을 장바구니에 담았습니다.",
-            duration: 5,
-          });
-        } else if (status === false && accessToken) {
-          void messageApi.open({
-            type: "error",
-            content: "상품이 장바구니에서 삭제되었습니다.",
-            duration: 5,
-          });
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          Modal.error({ content: `${error.message}` });
-        }
+      if (status === true && accessToken) {
+        void messageApi.open({
+          type: "success",
+          content: "상품을 장바구니에 담았습니다.",
+          duration: 5,
+        });
+        console.log(props.quantity);
+      } else if (status === false && accessToken) {
+        void messageApi.open({
+          type: "error",
+          content: "상품이 장바구니에서 삭제되었습니다.",
+          duration: 5,
+        });
       }
-    },
-    [props.curProductData]
-  );
+    } catch (error) {
+      if (error instanceof Error) {
+        Modal.error({ content: `${error.message}` });
+      }
+    }
+  };
 
   return (
     <>

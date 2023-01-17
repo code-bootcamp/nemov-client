@@ -22,7 +22,7 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 45%;
+  width: 50%;
   padding: 1%;
   margin: 130px auto 80px auto;
   display: flex;
@@ -202,7 +202,6 @@ export const AddWrapper = styled.div`
 `;
 
 export const ZipcodeWrapper = styled.div`
-  /* width: 100%; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -222,14 +221,12 @@ export const Zipcode = styled.input`
 `;
 
 export const AddBtn = styled.button`
-  /* width: 130px; */
   border: none;
   padding: 1rem;
   font-weight: 500;
   border-radius: 10px;
   color: white;
   background-color: #1f3d31;
-  cursor: pointer;
   @media ${mobile} {
     font-size: 1.4rem;
   }

@@ -3,6 +3,7 @@ import {
   IMutation,
   IMutationCreateProductArgs,
 } from "../../../../../commons/types/generated/types";
+import { FETCH_PRODUCTS_COUNT_BY_SELLER } from "../../useQueries/product/UseQueryFetchProductsBySeller";
 
 export const CREATE_PRODUCT = gql`
   mutation createProduct(
@@ -20,7 +21,8 @@ export const CREATE_PRODUCT = gql`
 
 export const UseMutationCreateProduct = () => {
   const mutation = useMutation<Pick<IMutation, "createProduct">, IMutationCreateProductArgs>(
-    CREATE_PRODUCT
+    CREATE_PRODUCT,
+    { refetchQueries: [FETCH_PRODUCTS_COUNT_BY_SELLER] }
   );
   return mutation;
 };

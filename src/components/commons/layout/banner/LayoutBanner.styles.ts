@@ -118,6 +118,7 @@ export const GlobalWrap = styled(GlobalWrapper)`
     font-size: 2rem;
     font-weight: 600;
     line-height: 3rem;
+    margin-bottom: 0.5rem;
     @media ${mobile} {
       font-size: 2.5rem;
     }

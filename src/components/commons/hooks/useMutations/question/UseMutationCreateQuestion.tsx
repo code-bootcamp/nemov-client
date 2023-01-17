@@ -6,7 +6,10 @@ import {
   IMutation,
   IMutationCreateQuestionArgs,
 } from "../../../../../commons/types/generated/types";
-import { FETCH_QUESTIONS_BY_PRODUCT } from "../../useQueries/questions/UseQueryFetchQuestionsByProduct";
+import {
+  FETCH_QUESTIONS_BY_PRODUCT,
+  FETCH_QUESTIONS_COUNT_BY_PRODUCT,
+} from "../../useQueries/questions/UseQueryFetchQuestionsByProduct";
 
 export const CREATE_QUESTION = gql`
   mutation createQuestion($createQuestionInput: CreateQuestionInput!, $productId: String!) {
@@ -30,7 +33,7 @@ export const UseMutationCreateQuestion = () => {
   const [createQuestion] = useMutation<
     Pick<IMutation, "createQuestion">,
     IMutationCreateQuestionArgs
-  >(CREATE_QUESTION, { refetchQueries: [{ query: FETCH_QUESTIONS_BY_PRODUCT }] });
+  >(CREATE_QUESTION);
 
   const createQuestionSubmit = async (data: IFormQuestionData) => {
     try {
@@ -47,6 +50,12 @@ export const UseMutationCreateQuestion = () => {
             variables: {
               productId: router.query.productId,
               page: 1,
+            },
+          },
+          {
+            query: FETCH_QUESTIONS_COUNT_BY_PRODUCT,
+            variables: {
+              productId: router.query.productId,
             },
           },
         ],

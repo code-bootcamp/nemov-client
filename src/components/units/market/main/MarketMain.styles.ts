@@ -124,6 +124,7 @@ export const MainMarketSection01 = styled.section`
   flex-direction: column;
   gap: 20px;
   margin: 15% 0 10% 0;
+  margin-bottom: 50px;
   @media ${mobile2} {
     height: 15rem;
     gap: 0px;
@@ -237,7 +238,7 @@ export const SubBanner02 = styled.section`
   @media ${mobile2} {
     display: none;
   }
-  margin-top: 5%;
+  margin: 10% 0;
   justify-content: space-between;
   position: relative;
 `;
@@ -252,6 +253,7 @@ export const SubBannerImg02 = styled.img`
 export const SubBannerWords02 = styled(SubBannerWords)`
   top: 25%;
   left: 4%;
+  cursor: pointer;
   @media (max-width: 540px) {
     top: 18%;
   }

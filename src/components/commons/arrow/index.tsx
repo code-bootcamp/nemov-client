@@ -1,22 +1,21 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { colorBase01 } from "../../../commons/styles/colorBases";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 
-const Back = styled.button`
-  border-radius: 15px;
-  ${colorBase01}
-  width: 15rem;
-  height: 50px;
-  padding: 0 1rem;
-  display: block;
+const Back = styled.h1`
+  width: 30%;
   margin: 100px auto;
-  font-size: 1.5rem;
-  font-family: "Arita-Medium";
+  font-size: 2.5rem;
+  font-family: "Arita-light";
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  :hover {
+    transform: scale(1.08);
+  }
 `;
 
 export default function BackButton() {

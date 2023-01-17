@@ -41,6 +41,7 @@ export const TabContentHeader02 = styled.header`
 
 export const TabContentTitle01 = styled.h2`
   ${FontStyle01}
+  margin-bottom: 1rem;
   font-size: 2rem;
   @media ${mobile} {
     font-size: 2.5rem;
@@ -103,8 +104,8 @@ export const HeaderInfo01 = styled.section`
 export const ContentTitle = styled.h3`
   ${FontStyle01}
   font-size: 1.2rem;
+  margin-bottom: 1rem;
   @media ${mobile} {
-    margin-bottom: 0;
     font-size: 1.6rem;
   }
 `;
