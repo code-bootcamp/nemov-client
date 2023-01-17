@@ -167,8 +167,12 @@ export const ConfirmTime = styled.span`
   color: #436f59;
   font-weight: bold;
   position: absolute;
-  top: 10px;
-  right: 130px;
+  top: 12px;
+  right: 170px;
+
+  @media ${mobile} {
+    right: 105px;
+  }
 `;
 
 export const PhoneBtn = styled.button`
