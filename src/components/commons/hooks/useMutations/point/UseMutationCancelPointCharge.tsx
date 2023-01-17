@@ -4,6 +4,7 @@ import {
   IMutationCancelPointChargeArgs,
 } from "../../../../../commons/types/generated/types";
 import { FETCH_POINT_TRANSACTIONS } from "../../useQueries/point/UseQueryFetchPointTransactions";
+import { FETCH_USER_POINT } from "../../useQueries/point/UseQueryFetchUserPoint";
 
 export const CANCEL_POINT_CHARGE = gql`
   mutation cancelPointCharge($impUid: ID!) {
@@ -25,6 +26,7 @@ export const UseMutationCancelPointCharge = () => {
           page: 1,
         },
       },
+      { query: FETCH_USER_POINT },
     ],
   });
 

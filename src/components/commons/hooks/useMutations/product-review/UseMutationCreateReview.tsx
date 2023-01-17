@@ -6,6 +6,7 @@ import {
   FETCH_PRODUCT_ORDERS_COUNT_WITHOUT_REVIEW,
   FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW,
 } from "../../useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
+import { FETCH_REVIEWS_BY_PRODUCT } from "../../useQueries/product-review/UseQueryFetchReviewsByProduct";
 
 export const CREATE_REVIEW = gql`
   mutation createReview($productOrderId: ID!, $createReviewInput: CreateReviewInput!) {
@@ -40,6 +41,7 @@ export const UseMutationCreateReview = () => {
             },
           },
           { query: FETCH_PRODUCT_ORDERS_COUNT_WITHOUT_REVIEW },
+          { query: FETCH_REVIEWS_BY_PRODUCT },
         ],
       });
       Modal.success({ content: "상품 후기가 등록되었습니다." });
