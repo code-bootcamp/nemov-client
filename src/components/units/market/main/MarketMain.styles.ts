@@ -6,6 +6,7 @@ import { amazon } from "../../../../commons/styles/colorPalettes";
 import * as GS from "../../../../commons/styles/globalStyles";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { SlideBottom } from "../../../../commons/styles/keyframes";
 
 const HeaderStyle = css`
   display: flex;
@@ -115,6 +116,7 @@ export const MainItemsWrapper = styled.section`
   width: 100%;
   height: 100%;
   margin-top: 5%;
+  animation: ${SlideBottom} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
 `;
 
 export const MainMarketSection01 = styled.section`
@@ -275,6 +277,8 @@ export const SubBannerWords03 = styled(SubBannerWords)`
   color: white;
   text-align: right;
   word-break: keep-all;
+  cursor: pointer;
+
   @media (max-width: 540px) {
     top: 18%;
     left: 52%;

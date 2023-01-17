@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { mobile } from "../../../../../../commons/styles/breakPoints";
 import { GlobalWrapper } from "../../../../../../commons/styles/globalStyles";
+import { SlideBottom } from "../../../../../../commons/styles/keyframes";
 import {
   UseQueryFetchReviewsByProduct,
   UseQueryFetchReviewsCountByProduct,
@@ -19,6 +20,8 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: ${SlideBottom} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+
   @media ${mobile} {
     margin-top: 10%;
   }
