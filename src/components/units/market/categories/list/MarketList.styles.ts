@@ -28,7 +28,7 @@ export const ListWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  animation: ${SlideBottom} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+  animation: ${SlideBottom} 0.7s ease-in-out both;
 `;
 
 export const ListTitle = styled.h1`

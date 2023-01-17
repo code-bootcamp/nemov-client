@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../commons/styles/breakPoints";
 import { colorBase03 } from "../../../commons/styles/colorBases";
 import { ButtonStyleSet03 } from "../../commons/buttons/CommonButtons.styles";
 
@@ -10,6 +10,9 @@ export const Wrapper = styled.section`
   align-items: center;
   @media ${mobile} {
     padding: 3rem 3.2rem 2rem 3.2rem;
+  }
+  @media ${mobile2} {
+    padding: 3rem 0;
   }
 `;
 

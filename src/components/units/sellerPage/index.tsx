@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
+import { UseQueryFetchLoginUser } from "../../commons/hooks/useQueries/user/UseQueryFetchLoginUser";
 import PointList from "./pointList";
 import ProductList from "./product/list";
 import ProductOrderList from "./productOrderList";
@@ -12,11 +13,16 @@ import * as S from "./Seller.styles";
 export default function SellerManagementPage() {
   const router = useRouter();
   const accessToken = useRecoilValue(accessTokenState);
+  const { data } = UseQueryFetchLoginUser();
 
   useEffect(() => {
     if (accessToken === undefined) {
       Modal.error({ content: "로그인이 필요한 서비스입니다." });
       void router.push("/login");
+    }
+    if (data?.fetchLoginUser.role === "BUYER") {
+      Modal.error({ content: "권한이 없는 페이지입니다." });
+      void router.push("/market");
     }
   });
 
