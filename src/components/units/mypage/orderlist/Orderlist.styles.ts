@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile } from "../../../../commons/styles/breakPoints";
+import { mobile, mobile2 } from "../../../../commons/styles/breakPoints";
 import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 import { amazon } from "../../../../commons/styles/colorPalettes";
 
@@ -45,11 +45,17 @@ export const ShoppingLookup = styled.article`
   .ant-picker-active-bar {
     background: ${amazon};
   }
-  .ant-space-vertical {
-    width: 50%;
-  }
   @media ${mobile} {
     width: 100%;
+
+    .ant-space-vertical {
+      width: 90%;
+    }
+  }
+  @media ${mobile2} {
+    .ant-space-vertical {
+      width: 80%;
+    }
   }
 `;
 
@@ -62,7 +68,10 @@ export const ManageBtn = styled.button`
   font-size: 0.9rem;
 
   @media ${mobile} {
-    padding: 1rem 1.5rem;
+    padding: 0.8rem;
+  }
+  @media ${mobile2} {
+    padding: 0.7rem;
   }
 `;
 

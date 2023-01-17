@@ -19,14 +19,14 @@ export default function LayoutBanner() {
           <S.GlobalWrap>
             <div>
               <h1>
-                최대 50%
+                네모비
                 <br />
-                설날 선물세트 단독 특가
+                회원가입 시 3000 포인트 증정
               </h1>
               <p>
-                이번 설날 네모비 선물세트와 함께
+                지금 회원가입 시 3000 포인트를 증정해드립니다.
                 <br />
-                몸과 마음이 건강한 설을 선물하세요!
+                네모비와 함께 하세요!
               </p>
             </div>
           </S.GlobalWrap>
@@ -35,14 +35,14 @@ export default function LayoutBanner() {
           <S.GlobalWrap>
             <div>
               <h1>
-                최대 50%
+                네모비
                 <br />
-                설날 선물세트 단독 특가
+                회원가입 시 3000 포인트 증정
               </h1>
               <p>
-                이번 설날 네모비 선물세트와 함께
+                지금 회원가입 시 3000 포인트를 증정해드립니다.
                 <br />
-                몸과 마음이 건강한 설을 선물하세요!
+                네모비와 함께 하세요!
               </p>
             </div>
           </S.GlobalWrap>
@@ -51,14 +51,14 @@ export default function LayoutBanner() {
           <S.GlobalWrap>
             <div>
               <h1>
-                최대 50%
+                네모비
                 <br />
-                설날 선물세트 단독 특가
+                회원가입 시 3000 포인트 증정
               </h1>
               <p>
-                이번 설날 네모비 선물세트와 함께
+                지금 회원가입 시 3000 포인트를 증정해드립니다.
                 <br />
-                몸과 마음이 건강한 설을 선물하세요!
+                네모비와 함께 하세요!
               </p>
             </div>
           </S.GlobalWrap>

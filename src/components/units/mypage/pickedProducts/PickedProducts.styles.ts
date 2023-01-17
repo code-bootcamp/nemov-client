@@ -136,13 +136,15 @@ export const BasketBtn = styled.button`
 
   @media ${mobile} {
     width: 80px;
+    padding: 8px;
+    margin-right: 10px;
   }
   @media ${tablet} {
     width: 80px;
   }
   @media ${mobile2} {
     width: 60px;
-    margin-right: 10px;
+    margin-right: 20px;
     padding: 8px;
   }
 `;
@@ -173,13 +175,7 @@ export const CancelBtn = styled.button`
   right: -4px;
   top: -40px;
 
-  @media ${mobile} {
-    top: -25px;
-  }
   @media ${tablet} {
-    top: -30px;
-  }
-  @media ${mobile2} {
     top: -25px;
   }
 `;
