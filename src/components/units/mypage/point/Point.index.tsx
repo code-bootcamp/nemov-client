@@ -1,5 +1,5 @@
 import { DatePicker, Modal, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getDate } from "../../../../commons/libraries/utilies";
 import { UseMutationCancelPointCharge } from "../../../commons/hooks/useMutations/point/UseMutationCancelPointCharge";
 import {
@@ -25,10 +25,6 @@ export default function MypagePoint() {
     endDate,
     page: 1,
   });
-
-  useEffect(() => {
-    console.log("111");
-  }, [data]);
 
   const { data: dataCount, refetch: refetchCount } = UseQueryFetchPointTransactionsCount();
 
