@@ -1,9 +1,6 @@
-// import { useState } from "react";
-// import { getVeganName } from "../../../../../commons/libraries/utilies";
 import { ApolloQueryResult } from "@apollo/client";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
-import _ from "lodash";
 import { getVeganName } from "../../../../../commons/libraries/utilies";
 import { IsSelectedState } from "../../../../../commons/stores/index";
 import {
@@ -33,22 +30,27 @@ interface IListSearchProps {
 
 export default function ListSearch(props: IListSearchProps) {
   const [isSelected] = useRecoilState(IsSelectedState);
+  const [search, setSearch] = useState("");
 
-  const getDebounce = _.debounce((value: string) => {
-    void props.productsCountRefetch({ search: value });
-    void props.refetch({ search: value, veganLevel: 0 });
-    props.onChangeSearch(value);
-  }, 1000);
+  const onClickSearch = () => {
+    void props.productsCountRefetch({ search });
+    void props.refetch({ search, veganLevel: 0 });
+    props.onChangeSearch(search);
+  };
 
   const onChangeSearchBar = (event: ChangeEvent<HTMLInputElement>) => {
-    getDebounce(event.target.value);
+    setSearch(event.target.value);
   };
 
   return (
     <ListSearchSection>
       <SearchSection>
-        <SearchInputBox onChange={onChangeSearchBar} />
-        <StyledSearchIcon />
+        <SearchInputBox
+          onChange={onChangeSearchBar}
+          onKeyPress={onClickSearch}
+          placeholder="상품명을 입력해주세요."
+        />
+        <StyledSearchIcon onClick={onClickSearch} />
       </SearchSection>
       <SelectBox
         onChange={props.prefetchByLevel}
@@ -70,15 +72,6 @@ export default function ListSearch(props: IListSearchProps) {
         ]}
         value={getVeganName(isSelected)}
       ></SelectBox>
-      {/* <select onChange={prefetchByLevel(selected)}>
-        <option value={1}>{getVeganName(1)}</option>
-        <option value={2}>{getVeganName(2)}</option>
-        <option value={3}>{getVeganName(3)}</option>
-        <option value={4}>{getVeganName(4)}</option>
-        <option value={5}>{getVeganName(5)}</option>
-        <option value={6}>{getVeganName(6)}</option>
-        <option value={7}>{getVeganName(7)}</option>
-      </select> */}
     </ListSearchSection>
   );
 }

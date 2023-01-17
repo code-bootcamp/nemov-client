@@ -232,7 +232,7 @@ export default function ProductWrite(props: ProductWriteProps) {
         <S.Row>
           <S.SubTitle>가격</S.SubTitle>
           <S.InputWrap>
-            <S.InputBox type="number" placeholder="상품기격을 입력하세요" {...register("price")} />
+            <S.InputBox type="text" placeholder="상품가격을 입력하세요" {...register("price")} />
             <S.Error>{formState.errors.price?.message}</S.Error>
           </S.InputWrap>
         </S.Row>
@@ -240,7 +240,7 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>할인율</S.SubTitle>
           <S.InputWrap>
             <S.InputBox
-              type="number"
+              type="text"
               placeholder="할인율을 입력하세요"
               {...register("discountRate")}
             />
@@ -251,7 +251,7 @@ export default function ProductWrite(props: ProductWriteProps) {
           <S.SubTitle>재고수량</S.SubTitle>{" "}
           <S.InputWrap>
             <S.InputBox
-              type="number"
+              type="text"
               placeholder="총 재고수량을 입력하세요"
               {...register("quantity")}
             />
