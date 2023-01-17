@@ -32,7 +32,6 @@ export default function ProductQuestionWrite(props: IProductQuestionWriteProps) 
       watch(["title", "contents"]);
 
       await createQuestionSubmit(data);
-      // console.log(result);
       props.setIsOpen((prev) => !prev);
       reset({ contents: "", title: "" });
       Modal.success({ content: "문의 등록이 완료되었습니다." });

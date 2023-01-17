@@ -20,7 +20,6 @@ export default function InfiniteScroll02(props: IInfiniteScroll02Props) {
         page: Math.ceil(props.data.fetchProducts.length / 9) + 1,
       },
       updateQuery: (prev: Pick<IQuery, "fetchProducts">, { fetchMoreResult }: any) => {
-        // console.log("이전 페이지", prev, "새로운 페이지", fetchMoreResult.fetchProducts);
         if (!fetchMoreResult?.fetchProducts) {
           return {
             fetchProducts: [...prev.fetchProducts],

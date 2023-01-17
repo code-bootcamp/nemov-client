@@ -34,10 +34,6 @@ export default function LayoutRecentlyViewed() {
     };
   }, []);
 
-  const onClickProduct = (e: any) => {
-    console.log("타겟", e.target.id);
-  };
-
   return (
     <>
       {showAside && (
@@ -47,7 +43,7 @@ export default function LayoutRecentlyViewed() {
               <S.Title>최근 본 상품</S.Title>
               <S.Contents>
                 {recentlyLists?.map((cur) => (
-                  <S.Thumbnail key={cur.id} onClick={onClickProduct}>
+                  <S.Thumbnail key={cur.id}>
                     <Link href={`/market/product/${cur.id}`}>
                       <a>
                         <img src={`${cur.image}`} />

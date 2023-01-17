@@ -139,7 +139,6 @@ export default function ProductWrite(props: ProductWriteProps) {
   };
 
   const onClickSubmit = async (data: ProductInput) => {
-    console.log(data.description);
     const resultFile = await uploadFile({ variables: { file: files } });
     const url = resultFile.data?.uploadFile;
     if (!url) return;
