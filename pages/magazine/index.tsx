@@ -29,6 +29,12 @@ const Title = styled.h1`
     border: none;
     border-bottom: 4px solid #000;
   }
+  p {
+    margin-top: 1.2rem;
+    font-size: 0.8rem;
+    word-break: keep-all;
+    color: #999;
+  }
 `;
 
 const MagazinesWrap = styled.section`
@@ -92,6 +98,7 @@ export default function MagazinePage() {
       <MagazinesWrap>
         <Title>
           <b>M</b>agazine
+          <p>좋은 것을 보면 혼자 아끼기 보다 함께 나누고 싶은 네모비 에디터가 소개합니다.</p>
         </Title>
         <Template1 onClick={onClickRouter("02")}>
           <Thumbnail src="/images/magazine/02/magazine22.webp" />

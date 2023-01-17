@@ -97,7 +97,9 @@ export default function ProductList() {
             ))}
           </S.Tbody>
         </S.Table>
-        <Pagination refetch={refetch} count={productsCount?.fetchProductsCountBySeller} />
+        {productsCount?.fetchProductsCountBySeller !== 0 && (
+          <Pagination refetch={refetch} count={productsCount?.fetchProductsCountBySeller} />
+        )}
         <S.Btn2 onClick={onClickMoveToPage("/seller/new")}>상품 등록하기</S.Btn2>
       </section>
     </GlobalWrapper>

@@ -22,7 +22,7 @@ export const CREATE_PRODUCT = gql`
 export const UseMutationCreateProduct = () => {
   const mutation = useMutation<Pick<IMutation, "createProduct">, IMutationCreateProductArgs>(
     CREATE_PRODUCT,
-    { refetchQueries: [FETCH_PRODUCTS_COUNT_BY_SELLER] }
+    { refetchQueries: [{ query: FETCH_PRODUCTS_COUNT_BY_SELLER }] }
   );
   return mutation;
 };
