@@ -16,8 +16,6 @@ export const WriteProductSchema = yup.object({
   discountRate: yup
     .number()
     .required("할인율을 입력하세요")
-    .positive("정의 되지 않는 값입니다.")
-    .integer("정의 되지 않는 값입니다.")
     .transform((value) => (isNaN(value) ? undefined : value))
     .nullable(),
   quantity: yup
