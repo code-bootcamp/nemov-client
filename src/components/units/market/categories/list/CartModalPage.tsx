@@ -24,8 +24,6 @@ function CartModal(props: ICartModalProps) {
   const [messageApi, contextHolder] = message.useMessage();
   const sum = (props.curProductData?.discountedPrice ?? 0) * props.quantity;
 
-  console.log(props.quantity);
-
   const onClickQuantityDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
@@ -54,7 +52,6 @@ function CartModal(props: ICartModalProps) {
   const onClickToggleProductToCart = (productId: string) => async (event: React.MouseEvent) => {
     event?.stopPropagation();
     try {
-      console.log(props.quantity);
       props.setIsOpen(false);
       const result = await toggleProductToCart({
         variables: {
@@ -70,7 +67,6 @@ function CartModal(props: ICartModalProps) {
           content: "상품을 장바구니에 담았습니다.",
           duration: 5,
         });
-        console.log(props.quantity);
       } else if (status === false && accessToken) {
         void messageApi.open({
           type: "error",

@@ -26,10 +26,7 @@ export interface IFormQuestionData {
 
 export const UseMutationCreateQuestion = () => {
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!router.isReady) return;
-  //   console.log(router.query, "콘솔에 쿼리 찍힘");
-  // }, [router.isReady]);
+
   const [createQuestion] = useMutation<
     Pick<IMutation, "createQuestion">,
     IMutationCreateQuestionArgs

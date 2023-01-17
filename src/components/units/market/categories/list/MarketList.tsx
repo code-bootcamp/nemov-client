@@ -47,7 +47,6 @@ export default function MarketList(props: IMarketListProps) {
     props.setStartPage(1);
     props.setActivePage(1);
     setFetchProducts(result?.data.fetchProducts);
-    // console.log(fetchProducts);
   };
 
   useEffect(() => {
@@ -83,7 +82,6 @@ export default function MarketList(props: IMarketListProps) {
       query: FETCH_PRODUCT,
       variables: { productId },
     });
-    // console.log(result.data.fetchProduct.isOutOfStock);
     if (result.data.fetchProduct.isOutOfStock !== true) {
       void router.push(`/market/product/${productId}`);
     } else {
