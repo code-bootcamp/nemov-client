@@ -91,7 +91,7 @@ export default function PaymentPage(props: PaymentProps) {
 
   return (
     <S.Wrapper>
-      <h1>네모비 포인트 충전하기</h1>
+      <h1 style={{ wordBreak: "keep-all" }}>네모비 포인트 충전하기</h1>
       <Head>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script

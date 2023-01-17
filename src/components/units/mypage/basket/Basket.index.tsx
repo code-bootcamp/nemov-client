@@ -23,8 +23,6 @@ export default function MypageBasket() {
     }
   }, [data?.fetchCart]);
 
-  console.log(data?.fetchCart);
-
   const { productPick } = UseMutationToggleProductPick02();
   const { toggleProductToCart } = UseMutationToggleProductToCart();
   const { buyProduct, buyProducts } = UseMutationCreateProductOrders();

@@ -29,6 +29,7 @@ export const MarketMainContainer = styled.main`
   justify-content: center;
   align-items: center;
   margin: 0 0 3% 0;
+  animation: ${SlideBottom} 0.7s ease-in-out both;
 `;
 
 // 추천, 베스트 상품 좌측 아이콘 스타일
@@ -116,7 +117,6 @@ export const MainItemsWrapper = styled.section`
   width: 100%;
   height: 100%;
   margin-top: 5%;
-  animation: ${SlideBottom} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
 `;
 
 export const MainMarketSection01 = styled.section`

@@ -6,6 +6,7 @@ import {
 } from "../../../../../commons/types/generated/types";
 import { FETCH_CART } from "../../useQueries/product/UseQueryFetchCart";
 import { FETCH_CART_COUNT } from "../../useQueries/product/UseQueryFetchCartCount";
+import { FETCH_PRODUCT_ORDERS_COUNT_BY_BUYER } from "../../useQueries/product/UseQueryFetchProductOrdersByBuyer";
 
 export const CREATE_PRODUCT_ORDERS = gql`
   mutation createProductOrders($productOrders: [CreateProductOrderInput!]!, $amount: Int!) {
@@ -18,7 +19,11 @@ export const UseMutationCreateProductOrders = () => {
     Pick<IMutation, "createProductOrders">,
     IMutationCreateProductOrdersArgs
   >(CREATE_PRODUCT_ORDERS, {
-    refetchQueries: [{ query: FETCH_CART }, { query: FETCH_CART_COUNT }],
+    refetchQueries: [
+      { query: FETCH_CART },
+      { query: FETCH_CART_COUNT },
+      { query: FETCH_PRODUCT_ORDERS_COUNT_BY_BUYER },
+    ],
   });
 
   const buyProduct = async (value: any, amount: number) => {

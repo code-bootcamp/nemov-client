@@ -79,8 +79,8 @@ export default function MypagePoint() {
                     (point.status === "BOUGHT" && "구매") ||
                     (point.status === "REFUNDED" && "구매취소")}
                 </S.TableBottomContent>
-                <S.TableBottomLi>{point.amount} 원</S.TableBottomLi>
-                <S.TableBottomLi>{point.balance} 원</S.TableBottomLi>
+                <S.TableBottomLi>{point.amount.toLocaleString()} 원</S.TableBottomLi>
+                <S.TableBottomLi>{point.balance.toLocaleString()} 원</S.TableBottomLi>
                 {point.status === "PAID" ? (
                   <S.RefundBtn id={point.impUid ?? undefined} onClick={onClickCancelCharge}>
                     환불

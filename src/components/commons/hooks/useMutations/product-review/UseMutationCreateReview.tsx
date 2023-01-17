@@ -2,7 +2,10 @@ import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { IMutation, IMutationCreateReviewArgs } from "../../../../../commons/types/generated/types";
 import { IFormData } from "../../../../units/mypage/reviews/write-modal/ReviewsWrite.types";
-import { FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW } from "../../useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
+import {
+  FETCH_PRODUCT_ORDERS_COUNT_WITHOUT_REVIEW,
+  FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW,
+} from "../../useQueries/product-review/UseQueryFetchProductOrdersWithoutReview";
 
 export const CREATE_REVIEW = gql`
   mutation createReview($productOrderId: ID!, $createReviewInput: CreateReviewInput!) {
@@ -36,6 +39,7 @@ export const UseMutationCreateReview = () => {
               page: 1,
             },
           },
+          { query: FETCH_PRODUCT_ORDERS_COUNT_WITHOUT_REVIEW },
         ],
       });
       Modal.success({ content: "상품 후기가 등록되었습니다." });

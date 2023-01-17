@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { mobile, mobile2, tablet } from "../../src/commons/styles/breakPoints";
 import { GlobalWrapper } from "../../src/commons/styles/globalStyles";
-import { SlideTop } from "../../src/commons/styles/keyframes";
+import { SlideBottom } from "../../src/commons/styles/keyframes";
 
 const GWrapper = styled(GlobalWrapper)`
   margin: 200px 0;
-  animation: ${SlideTop} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: ${SlideBottom} 0.8s ease-in-out both;
   @media ${tablet} {
     padding: 0 3%;
     margin-bottom: 0;
@@ -59,7 +59,6 @@ const Template = styled.article`
   }
   @media ${mobile2} {
     width: 100%;
-    /* border-radius: 20%; */
   }
 `;
 
