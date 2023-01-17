@@ -147,9 +147,9 @@ export default function Signup(props: ISignupProps) {
               <S.InputBtnWrapper>
                 <S.PhoneInput
                   type="tel"
-                  placeholder="휴대폰 번호를 입력해주세요. ( - 제외)"
+                  placeholder="휴대폰 번호를 입력해주세요. ( - 포함)"
                   {...register("phone")}
-                  maxLength={11}
+                  maxLength={13}
                 />
                 <S.PhoneBtn type="button" onClick={onClickGetToken}>
                   인증요청
