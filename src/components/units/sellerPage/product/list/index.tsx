@@ -19,7 +19,6 @@ export default function ProductList() {
   const { data, refetch } = UseQueryFetchProductsBySeller({
     page: 1,
   });
-  console.log(productsCount?.fetchProductsCountBySeller);
 
   const [deleteProduct] = UseMutationDeleteProduct();
 

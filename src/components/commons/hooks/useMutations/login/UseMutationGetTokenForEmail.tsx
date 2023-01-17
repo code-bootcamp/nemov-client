@@ -65,8 +65,6 @@ export const UseMutationGetTokenForEmail = () => {
         },
       });
 
-      console.log(result.data?.checkValidTokenForEmail);
-
       if (result.data?.checkValidTokenForEmail) {
         setTime(false);
         Modal.success({ content: "인증에 성공하였습니다." });

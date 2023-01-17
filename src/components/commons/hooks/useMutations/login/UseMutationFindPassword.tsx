@@ -18,12 +18,11 @@ export const UseMutationFindPassword = () => {
 
   const findPasswordSubmit = async (data: IMutationFindPasswordArgs) => {
     try {
-      const result = await findPassword({
+      await findPassword({
         variables: {
           ...data,
         },
       });
-      console.log(result.data?.findPassword);
       Modal.success({ content: "비밀번호 변경이 완료되었습니다." });
       void router.push("/login");
     } catch (error) {

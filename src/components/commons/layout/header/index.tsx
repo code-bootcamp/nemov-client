@@ -29,7 +29,6 @@ interface ILayoutHeaderProps {
 export default function LayoutHeader(props: ILayoutHeaderProps) {
   const router = useRouter();
   const { data } = UseQueryFetchLoginUser();
-  console.log(data);
   const { data: cartCountData } = UseQueryFetchCartCount();
   const [, setIsEdit] = useRecoilState(isEditState);
   const [isOpen, setIsOpen] = useState(false);

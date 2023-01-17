@@ -37,11 +37,10 @@ export default function PaymentPage(props: PaymentProps) {
         buyer_tel: props.data?.fetchLoginUser.phone,
         buyer_addr: props.data?.fetchLoginUser.address,
         buyer_postcode: props.data?.fetchLoginUser.zipCode,
-        m_redirect_url: "http://localhost:3000/mypage/",
+        m_redirect_url: "https://nemov.store/mypage/orderlist",
       },
       (rsp: any) => {
         if (rsp.success) {
-          console.log(rsp.imp_uid, rsp);
           try {
             void createPointCharge({
               variables: {
@@ -82,7 +81,6 @@ export default function PaymentPage(props: PaymentProps) {
 
   const onChangePoint = (event: ChangeEvent<HTMLInputElement>) => {
     setPoint(Number(event.currentTarget.value));
-    console.log(event.currentTarget.value);
   };
 
   return (

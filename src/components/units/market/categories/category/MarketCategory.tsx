@@ -19,7 +19,6 @@ export default function MarketCategory(props: IMarketCategoryProps) {
 
   const onClickMoveToCategory = async (event: React.MouseEvent<HTMLDivElement>) => {
     const click = event.currentTarget.id;
-    // console.log(event.currentTarget.id);
     await client.query({
       query: FETCH_PRODUCTS,
       variables: {
@@ -29,7 +28,6 @@ export default function MarketCategory(props: IMarketCategoryProps) {
         search: "",
       },
     });
-    // console.log(data);
     void router.push(`/market/categories`);
   };
 
@@ -40,8 +38,6 @@ export default function MarketCategory(props: IMarketCategoryProps) {
       return "안된다";
     }
   });
-
-  // console.log(currentData);
 
   return (
     <>
