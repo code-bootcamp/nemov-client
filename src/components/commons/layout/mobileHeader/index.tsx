@@ -1,8 +1,8 @@
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import { IQuery } from "../../../../commons/types/generated/types";
 import Link from "next/link";
-import PaymentPage from "../../../units/paymentModal/payment";
-import CommonModal01 from "../../modals/CommonModal01";
+// import PaymentPage from "../../../units/paymentModal/payment";
+// import CommonModal01 from "../../modals/CommonModal01";
 import * as S from "./mobileHeader.styles";
 import { UseQueryFetchLoginUser } from "../../hooks/useQueries/user/UseQueryFetchLoginUser";
 import { Dispatch, SetStateAction } from "react";
@@ -27,10 +27,10 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
   const {
     isOpen,
     data,
-    onClickPayment,
+    // onClickPayment,
     onClickLogout,
-    setIsOpen,
-    paymentPage,
+    // setIsOpen,
+    // paymentPage,
     setMenuOpen,
     onClickSignup,
   } = props;
@@ -85,13 +85,13 @@ export default function LayoutMobileMenu(props: ILayoutMobileMenuProps) {
               <S.UserPoint>포인트 : {userInfo?.fetchLoginUser.point.toLocaleString()}P</S.UserPoint>
               {data?.fetchLoginUser.role === "BUYER" && (
                 <S.IconMenu>
-                  <S.HeaderIconItemFirst>
+                  {/* <S.HeaderIconItemFirst>
                     <S.Payment onClick={onClickPayment} />
                     <S.IconName onClick={onClickPayment}>충전하기</S.IconName>
                     <CommonModal01 isOpen={isOpen} onCancel={paymentPage} width={450}>
                       <PaymentPage setIsOpen={setIsOpen} />
                     </CommonModal01>
-                  </S.HeaderIconItemFirst>
+                  </S.HeaderIconItemFirst> */}
                   <Link href="/mypage/basket">
                     <S.HeaderIconItem
                       onClick={() => {

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { colorBase01, colorBase02 } from "../../../../commons/styles/colorBases";
 import CloseIcon from "@mui/icons-material/Close";
 import { mobile, mobile2, tablet } from "../../../../commons/styles/breakPoints";
+import * as GS from "../../../../commons/styles/globalStyles";
 
 export const ContentsMain = styled.section`
   padding: 3% 0;
@@ -71,6 +72,25 @@ export const MobileItemWrap = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  position: relative;
+`;
+
+export const SoldOut = styled.span``;
+
+export const ItemSoldOutDisPlay = styled.div`
+  width: 13%;
+  left: 20px;
+  ${GS.flexCenter}
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  color: white;
+  :hover ${SoldOut} {
+    display: block;
+  }
 `;
 
 export const MobileBtnWrap = styled.div`
@@ -150,11 +170,20 @@ export const ItemCheckbox = styled.input`
   }
 `;
 
-export const ItemImg = styled.img`
+export const CartA = styled.a`
   width: 13%;
   aspect-ratio: 5/5;
   margin: 0 20px;
-  margin-left: 20px;
+  cursor: pointer;
+
+  @media ${mobile2} {
+    width: 20%;
+  }
+`;
+
+export const ItemImg = styled.img`
+  width: 100%;
+  aspect-ratio: 5/5;
 `;
 
 export const ItemName = styled.p`

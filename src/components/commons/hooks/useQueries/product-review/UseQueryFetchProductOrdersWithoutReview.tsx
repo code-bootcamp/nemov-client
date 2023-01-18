@@ -11,6 +11,7 @@ export const FETCH_PRODUCT_ORDERS_WITHOUT_REVIEW = gql`
       product {
         name
         image
+        id
       }
       seller {
         name

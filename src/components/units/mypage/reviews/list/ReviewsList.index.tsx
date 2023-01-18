@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { IReview } from "../../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import Pagination from "../../../../commons/paginations/Pagination.index";
+import Link from "next/link";
 
 export default function ReviewsList() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
@@ -69,7 +70,11 @@ export default function ReviewsList() {
             <>
               {data?.fetchReviewsByBuyer?.map((reviews, index) => (
                 <S.ReviewLi key={index}>
-                  <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
+                  <Link href={`/market/product/${reviews.product.id}`}>
+                    <S.ReviewA>
+                      <S.ReviewImg src={reviews.product.image} alt="상품 이미지" />
+                    </S.ReviewA>
+                  </Link>
                   <S.ReviewCenterWrapper>
                     <S.ReviewItemName>{reviews.product.name}</S.ReviewItemName>
                     <S.ReviewDate>
