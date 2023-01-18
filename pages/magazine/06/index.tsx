@@ -5,9 +5,9 @@ import { SlideTop } from "../../../src/commons/styles/keyframes";
 import BackArrow from "../../../src/components/commons/arrow";
 
 const Wrapper = styled(GlobalWrapper)`
-  margin-top: 200px;
+  margin-top: 100px;
   text-align: center;
-  animation: ${SlideTop} 0.8s ease-in-out both;
+  animation: ${SlideTop} 0.7s ease-in-out both;
   @media ${tablet} {
     width: 90%;
   }

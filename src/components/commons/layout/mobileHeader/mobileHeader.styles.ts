@@ -128,7 +128,7 @@ export const UserPoint = styled.p`
 export const IconMenu = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   cursor: pointer;
   width: 100%;
 `;

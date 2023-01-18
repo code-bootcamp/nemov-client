@@ -72,7 +72,11 @@ export default function MypageOrderlist() {
                   {order.updatedAt ? getDate(order.updatedAt) : getDate(order.createdAt)}
                 </S.Date>
                 <S.OrderInfo>
-                  <S.ItemImg src={order.product.image} alt="상품 이미지" />
+                  <Link href={`/market/product/${order.product.id}`}>
+                    <S.OrderlistA>
+                      <S.ItemImg src={order.product.image} alt="상품 이미지" />
+                    </S.OrderlistA>
+                  </Link>
                   <S.ItemName>{order.product.name}</S.ItemName>
                   <S.ItemInfo>
                     {(order.product.discountedPrice * order.quantity).toLocaleString()} 원

@@ -171,7 +171,16 @@ export default function MypageBasket() {
               {product?.map((cart, index) => (
                 <S.ItemWrapper key={index}>
                   <S.MobileItemWrap>
-                    <S.ItemImg src={cart.product.image} />
+                    {cart.product.isOutOfStock && (
+                      <S.ItemSoldOutDisPlay>
+                        <S.SoldOut>SOLD OUT</S.SoldOut>
+                      </S.ItemSoldOutDisPlay>
+                    )}
+                    <Link href={`/market/product/${cart.product.id}`}>
+                      <S.CartA>
+                        <S.ItemImg src={cart.product.image} />
+                      </S.CartA>
+                    </Link>
                     <S.ItemName>{cart.product.name}</S.ItemName>
                     <S.QuantityWrapper>
                       <S.MinusBtn

@@ -21,8 +21,6 @@ export const WriteProductSchema = yup.object({
   quantity: yup
     .number()
     .required("재고수량을 입력하세요")
-    .positive("정의 되지 않는 값입니다.")
-    .integer("정의 되지 않는 값입니다.")
     .transform((value) => (isNaN(value) ? undefined : value))
     .nullable(),
   productCategoryId: yup.string().required("카테고리를 선택하세요"),

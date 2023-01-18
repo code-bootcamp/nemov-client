@@ -22,13 +22,19 @@ export const ReviewLi = styled.li`
   align-items: center;
 `;
 
-export const ReviewImg = styled.img`
+export const ReviewA = styled.a`
   width: 15%;
   aspect-ratio: 5/5;
+  cursor: pointer;
 
-  @media ${mobile} {
+  @media ${mobile2} {
     width: 20%;
   }
+`;
+
+export const ReviewImg = styled.img`
+  width: 100%;
+  aspect-ratio: 5/5;
 `;
 
 export const ReviewCenterWrapper = styled.div`

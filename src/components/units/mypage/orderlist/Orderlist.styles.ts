@@ -118,8 +118,18 @@ export const OrderInfo = styled.div`
   justify-content: space-between;
 `;
 
-export const ItemImg = styled.img`
+export const OrderlistA = styled.a`
   width: 15%;
+  aspect-ratio: 5/5;
+  cursor: pointer;
+
+  @media ${mobile2} {
+    width: 20%;
+  }
+`;
+
+export const ItemImg = styled.img`
+  width: 100%;
   aspect-ratio: 5/5;
 `;
 
