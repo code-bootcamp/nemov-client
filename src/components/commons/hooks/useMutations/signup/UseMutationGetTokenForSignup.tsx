@@ -30,7 +30,7 @@ export const UseMutationGetTokenForSignup = () => {
   const getTokenForSignupFunction = async (phone: string) => {
     if (!time) {
       try {
-        const result = await getTokenForSignUp({
+        await getTokenForSignUp({
           variables: {
             phone,
           },
@@ -39,7 +39,6 @@ export const UseMutationGetTokenForSignup = () => {
         setTimeout(() => {
           setTime(false);
         }, 180000);
-        console.log(result.data?.getTokenForSignUp);
       } catch (error) {
         if (error instanceof Error) console.log(error.message);
         Modal.error({ content: "번호를 잘못 입력하셨습니다. 다시 시도해주세요." });
