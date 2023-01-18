@@ -7,7 +7,7 @@ import BackArrow from "../../../src/components/commons/arrow";
 const Wrapper = styled(GlobalWrapper)`
   margin-top: 100px;
   text-align: center;
-  animation: ${SlideTop} 0.8s ease-in-out both;
+  animation: ${SlideTop} 0.7s ease-in-out both;
   @media ${tablet} {
     width: 90%;
   }
@@ -22,7 +22,6 @@ const Title = styled.h1`
 
 const Img = styled.img`
   width: 100%;
-  margin-top: 80px;
 
   transition: all 0.5s 0.2s;
 `;

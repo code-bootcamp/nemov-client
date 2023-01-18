@@ -9,7 +9,7 @@ const GWrapper = styled(GlobalWrapper)`
   animation: ${SlideBottom} 0.8s ease-in-out both;
   @media ${tablet} {
     padding: 0 3%;
-    margin-bottom: 0;
+    margin: 100px 0;
   }
 `;
 
