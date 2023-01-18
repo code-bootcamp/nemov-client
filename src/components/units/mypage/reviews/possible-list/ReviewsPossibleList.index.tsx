@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
 import { getDate } from "../../../../../commons/libraries/utilies";
@@ -63,7 +64,11 @@ export default function ReviewsPossibleList(props: IReviewsPossibleListProps) {
             <>
               {data?.fetchProductOrdersWithoutReview.map((review, index) => (
                 <S.ReviewLi key={index}>
-                  <S.ReviewImg src={review.product.image} alt="상품 이미지" />
+                  <Link href={`/market/product/${review.product.id}`}>
+                    <S.ReviewA>
+                      <S.ReviewImg src={review.product.image} alt="상품 이미지" />
+                    </S.ReviewA>
+                  </Link>
                   <S.ReviewCenterWrapper>
                     <S.ReviewItemName>{review.product.name}</S.ReviewItemName>
                     <S.ReviewDate>{getDate(review.createdAt)}</S.ReviewDate>

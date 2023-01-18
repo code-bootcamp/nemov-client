@@ -12,6 +12,7 @@ export const FETCH_CART = gql`
         discountRate
         discountedPrice
         quantity
+        isOutOfStock
       }
       count
     }
