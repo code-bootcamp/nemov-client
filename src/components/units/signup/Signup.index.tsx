@@ -17,6 +17,7 @@ import { UseMutationGetTokenForSignup } from "../../commons/hooks/useMutations/s
 export default function Signup(props: ISignupProps) {
   const [isOpen, setIsOpen] = useRecoilState(isOpenState);
   const [token, setToken] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const bln = props.bln;
 
   const { getTokenForSignupFunction, checkValidTokenForSignUpFunction, time } =
@@ -25,6 +26,7 @@ export default function Signup(props: ISignupProps) {
   const onClickGetToken = () => {
     const phone = getValues("phone");
     void getTokenForSignupFunction(phone);
+    setIsDisabled(false);
   };
 
   const onChangeTokenInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +37,7 @@ export default function Signup(props: ISignupProps) {
     const phone = getValues("phone");
     const value = { phone, token };
     void checkValidTokenForSignUpFunction(value);
+    setIsDisabled(true);
   };
 
   const { checkEmail } = UseMutationCheckEmailExist();
@@ -160,7 +163,7 @@ export default function Signup(props: ISignupProps) {
                 <S.PhoneInput type="text" placeholder="인증번호" onChange={onChangeTokenInput} />
                 <S.ConfirmTime>{time && <CountDown min={3} sec={0} />}</S.ConfirmTime>
 
-                <S.PhoneBtn type="button" onClick={onClickConfirmToken}>
+                <S.PhoneBtn type="button" onClick={onClickConfirmToken} disabled={isDisabled}>
                   인증확인
                 </S.PhoneBtn>
               </S.ConfirmWrapper>
@@ -205,6 +208,7 @@ export default function Signup(props: ISignupProps) {
                   type="text"
                   placeholder="주소를 검색해주세요."
                   {...register("address")}
+                  readOnly
                 />
                 <S.AddInput
                   type="text"
