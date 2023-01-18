@@ -46,6 +46,7 @@ export default function MypagePoint() {
         },
       });
       Modal.success({ content: "포인트 환불이 완료되었습니다." });
+      location.reload();
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
     }
