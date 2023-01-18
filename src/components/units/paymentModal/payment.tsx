@@ -53,6 +53,7 @@ export default function PaymentPage(props: PaymentProps) {
               content: "결제가 완료되었습니다.",
               duration: 5,
             });
+            location.reload();
           } catch (error) {
             if (error instanceof Error) {
               void messageApi.open({
