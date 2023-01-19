@@ -1,174 +1,111 @@
-<!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+#네모비
+***
 
-First, run the development server:
+> 최근 환경 보호와 동물 복지에 대한 경각심이 커지면서 동물착취를 반대하는 비거니즘 열풍이 일고 있습니다. 가치를 구매하는 MZ세대 소비트렌드, 미닝아웃(Meaning Out) 트렌드가 자리잡으며 비건족이 늘어나고 있습니다. 
 
-```bash
-npm run dev
+> 유통업계에서는 이러한 트랜드에 발맞춰 늘어나는 비건족을 공략하는 다양한 비건 인증 제품을 연이어 출시해 그 인기를 실감할 수 있습니다. 특히 비건을 하는 사람들은 건강 뿐만 아니라 동물권과 환경을 생각합니다.
 
-yarn dev
-```
+> 과거 사람들은 비건을 완전한 채식주의자 정도의 의미로 이해하고 사용했으나, 최근에는 먹을거리뿐만 아니라 ‘생활 전반에서 동물성 제품을 사용하지 않는 철학이자 삶의 방식을 실천하는 사람’이라는 조금 더 넓은 개념으로 이해하기 시작했습니다. 또한 비거니즘의 정의가 넓어지면서 비거니즘 유형 또한 다양해졌습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> 우리는 이러한 변화에 맞게 비거니즘을 따르는 국내 소비자들이 자신의 일상에서 쉽게 비거니즘을 향유할 수 있도록 E-Commerce를 기획했습니다. 우리의 서비스는 같은 비거니즘 유형의 사람들이 어떤 상품을 구매하는지 확인하며 그 상품을 구매할 수 있고 구매한 상품에 대해 서로 공유하며 나와 같은 유형의 비건이 어떤 후기를 남겼는지 제공합니다.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+> 비건을 시작하려는 여러분, 지금 바로 네모비와 함께하세요!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#🔗 배포 주소
+---
+🌿 네모비 https://nemov.store
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
-
-# 네모비 프론트엔드 README
-
+#🔧 기술 스택
 ---
 
-## 네모비 프론트엔드 반응형 웹 css 가이드
 
+# FrontEnd 팀원 역할
+***
+
+##이세나
+---
+📧
+🖥️
+👾
+
+##안범
+---
+📧 horang296@gmail.com 
+🖥️ https://www.notion.so/log-cf31550e7ee64682904bc11b2a09ed8a
+👾 https://github.com/mibu119
+- 마켓 페이지(베스트/추천 아이템 조회, 장바구니, 찜하기, 상품 문의 등록), 공통 컴포넌트 제작
+- 배포 
+- 노션 제작 및 관리
+- 회의록 작성
+
+##남예지
+---
+📧
+🖥️
+👾
+
+
+#📈 Flow Chart
+---
+![Flowchart (1)](https://user-images.githubusercontent.com/114740795/213332612-12073458-ed40-4885-84f5-45c688f1c39c.png)
+
+#👩🏻‍💻 서비스 시연
+***
+
+##랜딩 페이지
+---
+![_________________-web (1)](https://user-images.githubusercontent.com/114740795/213335472-2755ae23-9865-4b15-85c0-034be05eb2c4.gif)
+
+
+
+##메인 페이지
 ---
 
-반응형 웹을 위해서는 기존에 자주 사용하던 단위인 px 대신에 **상대 단위**를 사용해야 합니다.
 
-상대 단위는 **%, em, rem, vh, vw, vmin, vmax, ex, ch 등** 매우 다양하게 있습니다.
-
-코드에서 이 모든 상대 단위를 뒤섞어서 쓸 경우에는 반응형 담당자가 breakpoints를 잡기 어려워지므로
-
-네모비 프론트엔드 팀에서 반응형을 위해 사용할 상대 단위를 정리합니다.
-
+##회원가입 페이지
 ---
 
-### 네모비 프론트엔드가 사용할 상대 단위
 
-**{%, rem, em}**
-
-1. %: 전체 globalWrapper의 padding, width, 그리고 각각 개별 태그(div, section 등)의 넓이에서 주로 사용됩니다.
-2. rem: padding, margin, font-size, height(특별한 경우)에서 사용됩니다.
-3. em: 부모 태그 넓이의 영향을 받을 width에 사용합니다.
-
+##로그인 페이지
 ---
 
-### css property별 써야할 상대 단위 우선순위
 
-1. width: % > auto > rem > em 순으로 우선 적용하여 사용합니다.
-2. height: 높이는 되도록이면 전체 글로벌 스타일 외에 적용하지 않는 것이 좋습니다.
-
-그러나 만약에 태그와 같이 작은 component 부품처럼 규격이 필요한 경우에는 height에 rem을 쓰는 것을 권장합니다.
-
-3. padding, margin: % 또는 rem을 사용합니다. (rem이 px에서 계산이 편하므로 되도록이면 rem을 권장합니다.)
-4. font-size: rem을 사용합니다.
-5. img 태그: width를 100% 하고, property aspect-ratio 사용을 권장합니다.
-
+##마켓 리스트 페이지
 ---
 
-#### css 예시
 
-<!-- prettier-ignore -->
-`
-    // css example
-    export const Example = styled.div`
-        width: 30% || auto || 19rem || em 
-        height: (되도록이면 쓰지 않음) || rem 
-        padding: 1rem
-        margin: 1rem 
-        font-size: 1rem
-    `
-
-    export const ImgExample = styled.img`
-        width: 100%
-        aspect-ratio: 1/1 // ex) 16/9, 9/16, ...
-    `
-
-`
-
-#### px에서 rem으로 계산해주는 사이트: <https://nekocalc.com/px-to-rem-converter>
-
+##마켓 상세 페이지
 ---
 
-## 프론트엔드 src-styles 내 공통 css 이용 가이드
 
+##찜하기, 장바구니 기능
 ---
 
-## 1) globalStyles.ts 가이드
 
+##마이 페이지
 ---
 
-### display flex 공통 css
 
-1. 변수 flexRow: css의 {display: "flex"} 속성과 {flex-direction: "row"} 속성 두 가지를 함께 사용할 수 있습니다.
-   <!-- prettier-ignore -->
-   `
-    // 예)
-        export const Example = styled.div`
-            ${flexRow}
-            // {display: flex; flex-direction: row;}를 넣은 것과 같음
-            // 추가로 justify-content, align-item property를 넣어서 방향 조절도 가능함. 
-        `
-    `
-
-2. 변수 flexColumn: css의 {display: "flex"} 속성과 {flex-direction: "column"} 속성 두 가지를 함께 사용할 수 있습니다.
-
-위의 flexRow 사용 방식이 같습니다.
-
-3. 변수 flexCenter: css의 { display: flex; justify-content: center; align-items: center;} 속성을 함께 사용할 수 있습니다.
-   <!-- prettier-ignore -->
-   `
-   // 예)
-        export const Example = styled.div`
-            ${flexCenter}
-        `
-    `
-
+##구매 기능
 ---
 
-## 2) colorPalettes.ts 가이드
 
+##충전 내역 조회
 ---
 
-네모비 디자인 컬러팔레트의 색깔을 공통 변수로 export한 파일입니다.
 
+##내가 찜한 상품
 ---
 
-### 사용 예시
 
-<!-- prettier-ignore -->
-    ` 
-        export const Example = styled.button`
-            background-color: ${deepGreen} // #1f3d31 입력
-            color: ${white} // #fff 입력
-        ` 
-    `
-
+##판매자 페이지
 ---
 
-## 3) colorBases.ts 가이드
 
----
 
-전체 디자인에서 가장 흔하게 사용되는 컬러 조합을 모아놓은 파일입니다.
 
----
 
-### 사용 예시
 
-<!-- prettier-ignore -->
-    ` 
-        export const Example = styled.button`
-            ${colorBase04}
-            // color: ${amazon}; <= from colorPalettes.ts 
-            // background-color: white; 
-        ` 
-    `
