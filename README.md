@@ -27,11 +27,11 @@
 
 ## 이세나
 ---
-📧
+📧 lsenaa3838@gmail.com
 
-🖥️
+🖥️ https://velog.io/@bie38
 
-👾
+👾 https://github.com/lsenaa
 
 
 ## 안범
