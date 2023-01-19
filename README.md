@@ -74,7 +74,6 @@
 ![_________________-web (1)](https://user-images.githubusercontent.com/114740795/213335472-2755ae23-9865-4b15-85c0-034be05eb2c4.gif)
 
 
-
 ## 메인 페이지
 ---
 ![____________________________-web (1)](https://user-images.githubusercontent.com/114740795/213340943-dad85ed0-070e-4dd3-8712-f112599cfeab.gif)
@@ -85,51 +84,62 @@
 ![최근본상품시연-web](https://user-images.githubusercontent.com/114740795/213341396-086fe9bf-3739-41f6-86d9-335e576069a4.gif)
 
 
-
 ## 회원가입 페이지
 ---
 ![판매자회원가입시연01-web](https://user-images.githubusercontent.com/114740795/213338019-cf787a79-363b-4d39-978b-03e62886f3ea.gif)
-
 
 
 ## 로그인 페이지
 ---
 
 
-
 ## 마켓 리스트 페이지
 ---
-
+![__________________________-web](https://user-images.githubusercontent.com/114740795/213343324-7fbec137-69d0-46ae-8be4-eef731eb173e.gif)
 
 
 ## 마켓 상세 페이지
 ---
+![_______________________-web](https://user-images.githubusercontent.com/114740795/213345684-d37fcb17-6add-45b5-a883-8b8dae62dc88.gif)
 
+
+## 문의 등록
+---
 
 
 ## 찜하기, 장바구니 기능
 ---
-
+![찜하기기능시연-web](https://user-images.githubusercontent.com/114740795/213345867-9a244f8d-4c7b-4421-a055-b482a1f41089.gif)
+![마켓메인장바구니담기-web](https://user-images.githubusercontent.com/114740795/213345879-16af4751-42f1-4621-a5f7-d2043eb72710.gif)
 
 
 ## 마이 페이지
 ---
-
+![마이페이지들어가기시연-web](https://user-images.githubusercontent.com/114740795/213346073-e54b3dad-24a7-4d4b-be00-b5cdda600119.gif)
 
 
 ## 구매 기능
 ---
+![장바구니결제시연-web](https://user-images.githubusercontent.com/114740795/213345901-4fa0e5a7-b395-4016-a240-b852e724c224.gif)
 
 
-
-## 충전 내역 조회
+## 포인트 충전/환불 및 충전 내역 조회
 ---
+![포인트충전시연02-web](https://user-images.githubusercontent.com/114740795/213345936-99f13368-80b5-4a17-8a1d-3869c5ef2686.gif)
+![포인트내역조회시연-web](https://user-images.githubusercontent.com/114740795/213346014-1b1a630b-5a3b-42a2-b896-e844cf60de48.gif)
+![포인트환불시연-web](https://user-images.githubusercontent.com/114740795/213346020-65909b79-0486-4bb5-9250-4dd55a3e7228.gif)
 
 
-
-## 내가 찜한 상품
+## 상품 문의 수정/삭제
 ---
+![문의수정:삭제-web](https://user-images.githubusercontent.com/114740795/213346519-cb407fa3-f6f9-4f14-b9ee-7593966bda5e.gif)
 
+
+
+## 상품 리뷰 등록/수정/삭제
+---
+![후기작성시연-web](https://user-images.githubusercontent.com/114740795/213346625-5e4b92b3-60b2-4b1b-bdc3-fc5d750887be.gif)
+![후기수정:삭제시연-web](https://user-images.githubusercontent.com/114740795/213346639-81faf81e-279f-4f61-a194-7ea88f2cd23c.gif)
 
 
 ## 판매자 페이지
